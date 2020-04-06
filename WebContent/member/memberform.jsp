@@ -33,6 +33,7 @@
 		display: inline-block;
 		padding-top: 45px;
 		font-size: 13px;
+		left:-10px;
 		font-weight: bold;
 		line-height: 16px;
 		color: gray;
@@ -91,6 +92,9 @@
 		background: mediumseagreen
 	}
 	
+	}
+	.status-bar{
+		 width:1200px;
 	}
 </style>
 <body>
