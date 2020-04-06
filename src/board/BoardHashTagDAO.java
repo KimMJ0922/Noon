@@ -39,7 +39,7 @@ public class BoardHashTagDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select hashtag from boardhashtagtb where num = ?";
+		String sql = "select hashtag from boardhashtagtb where num = ? order by hashtag";
 		conn = db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class BoardHashTagDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("오류 : "+e.getMessage());
+			System.out.println("�삤瑜� : "+e.getMessage());
 		}finally {
 			db.dbClose(rs, pstmt, conn);
 		}
