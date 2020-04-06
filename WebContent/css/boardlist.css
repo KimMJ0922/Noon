@@ -51,12 +51,14 @@ img{
 pre{
 	border:none;
 	background:none;
+	overflow:hidden;
+}
+.content{
+	border:none;
+	background:none;
 	white-space: pre-wrap;
-	  display:-webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-    text-overflow:ellipsis;
+	margin:0;
+	padding:0;
 }
 .likey{
 	width:20px;
@@ -88,4 +90,20 @@ pre{
 /*해시태그 요소*/
 .hashtag{
 	margin:5px 10px 5px 10px;
+}
+
+/*해시태그 더보기 버튼*/
+.hashtagmore{
+	border:none;
+	background: none;
+	padding:0;
+	margin:0;
+}
+
+.hashtagmore:hover{
+	border:none;
+	background: none;
+	text-decoration: underline;
+	padding:0;
+	margin:0;
 }
