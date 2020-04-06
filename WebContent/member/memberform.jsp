@@ -11,7 +11,7 @@
 <%
 	String url = request.getContextPath();
 %>
-<script src="member/progress-bar.js"></script>
+<script src="progress-bar2.js"></script>
 <style>
 	.form{
 		width: 70%;
@@ -99,9 +99,6 @@
 		<img alt="#" src="<%=url%>/image/a02.png">
 	</marquee>
 	<div class="form">
-		<h3 id="headline">이름을 입력해주세요</h1>
-		
-		
 		<div class="custom-progress-bar-wrapper">
 			<div class="status-bar" style="width: 78.5%;">
 				<div class="current-status"
