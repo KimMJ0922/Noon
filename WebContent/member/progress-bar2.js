@@ -14,6 +14,38 @@ $(function(){
 			$("#hp3").focus();
 	});
 	
+	//처음 브라우저 크기
+	var windowWidth = window.innerWidth;
+	var width = 1920 - windowWidth;
+	var csswidth =$(".status-bar").css("width");
+	$(".status-bar").css("width",csswidth-width);
+	if(windowWidth<660){
+		$("li.section").css("left",-15);
+		$(".section").css("width","15.2%");
+	}else if(windowWidth<750){
+		$(".section").css("width","15.2%");
+		$("li.section").css("left",-10);
+	}else{
+		$("li.section").css("left",-10);
+		$(".section").css("width","16%");
+	}
+	//브라우저 사이즈가 바뀌면 실행될 것
+	$(window).resize(function(){
+		var windowWidth = window.innerWidth;
+		var width = 1920 - windowWidth;
+		var csswidth =$(".status-bar").css("width");
+		$(".status-bar").css("width",csswidth-width);
+		if(windowWidth<660){
+			$("li.section").css("left",-15);
+		}else if(windowWidth<750){
+			$(".section").css("width","15.2%");
+			$("li.section").css("left",-10);
+		}else{
+			$("li.section").css("left",-10);
+			$(".section").css("width","16%");
+		}
+	}); 
+	
 	$(".next").click(function(){
 		//이전 폼 숨기기 다음 폼 출력
 		$(".top .form-group").eq(cnt).attr("hidden","true");

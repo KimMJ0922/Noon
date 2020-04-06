@@ -97,7 +97,7 @@ $(function(){
 function deletePreviewFolder(){
 	$.ajax({
 		type: "post", 
-		url: "deletepreviewfolder.jsp",
+		url: "img/deletepreviewfolder.jsp",
 		dataType: "html",
 		success:function(data){
 		}
@@ -128,7 +128,7 @@ function getImgFile(num){
 	//이미지 파일
 	$.ajax({
 		type: "post", 
-		url: "updateboardimgfilelist.jsp",
+		url: "img/updateboardimgfilelist.jsp",
 		data:{
 			"num":num
 		},
@@ -153,7 +153,7 @@ function getImgFile(num){
 function imgUpload(){
 	$("#fileform").ajaxForm({
 		type: "post", 
-		url: "imguploadaction.jsp",
+		url: "img/imguploadaction.jsp",
 		processData: false,
 		contentType: false,
 		cache: false,
@@ -187,7 +187,7 @@ $(document).on("click",".delBtn",function(){
 	
 	$.ajax({
 		type: "post", 
-		url: "deleteimg.jsp", 
+		url: "img/deleteimg.jsp", 
 		data:{
 			"imgName":id
 		},
@@ -204,7 +204,7 @@ function getHashList(num){
 	var cnt = 0;
 	$.ajax({
 		type: "post", 
-		url: "getnumhashtag.jsp",
+		url: "hashtag/getnumhashtag.jsp",
 		data:{
 			"num":num
 		},

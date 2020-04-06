@@ -1,6 +1,7 @@
 $(function(){
 	var minrow = 0;
-	var maxrow = 10;
+	var maxrow = parseInt($.trim(getMaxrowCookie()));
+	deleteMaxrowCookie();
 	var endcheck = true;
 	deletePreviewFolder();
 	//이미지 불러오기
@@ -54,6 +55,17 @@ $(function(){
 	$(document).on("click",".delbtn",function(){
 		$("frm").submit();		
 	});
+	
+	
+	//글 리스트에서 페이지 이동할 때 반드시 쿠키 만들 것
+	//페이지 이동시 쿠키 만들기
+	$(document).on("click",".move",function(){
+		var scroll = $(window).scrollTop();
+		createMaxrowCookie(maxrow);
+		
+	});
+	
+	
 	//좋아요
 	$(document).on("click",".likey",function(){
 		var num = $(this).parents(".listform").attr("id");
@@ -68,7 +80,7 @@ $(function(){
 		}
 		$.ajax({
 			type: "post", 
-			url: "updatelike.jsp",
+			url: "likes/updatelike.jsp",
 			dataType: "html",
 			data:{
 				"num":num,
@@ -169,7 +181,7 @@ function listform(data,img,hashtag){
 					
 				//
 				str += "<div class='btnlist'>";
-					str +="<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'></button>"
+					str +="<button class='btn btn-primary dropdown-toggle'></button>"
 					//수정 삭제 버튼
 					str += "<div class='dropdown-menu'>";
 						str += "<form id='frm' method='post' action='updateboard.jsp'>";
@@ -223,7 +235,7 @@ function getImgList(minrow,maxrow){
 	var imglist ="";
 	$.ajax({
 		type: "post", 
-		url: "getimglist.jsp", 
+		url: "img/getimglist.jsp", 
 		dataType: "json",
 		data:{
 			"minrow":minrow,
@@ -256,7 +268,7 @@ function getHashTag(minrow,maxrow){
 	var hashtag ="";
 	$.ajax({
 		type: "post", 
-		url: "gethashtag.jsp", 
+		url: "hashtag/gethashtag.jsp", 
 		dataType: "json",
 		data:{
 			"minrow":minrow,
@@ -291,7 +303,7 @@ function getNumHashTag(num){
 	var hashtag ="";
 	$.ajax({
 		type: "post", 
-		url: "getnumhashtag.jsp", 
+		url: "hashtag/getnumhashtag.jsp", 
 		dataType: "json",
 		data:{
 			"num":num
@@ -322,4 +334,59 @@ function getNumContent(num){
 	});
 	
 	return content;
+}
+
+
+
+
+////////////////////////////////////////////
+//쿠키 관련
+////////////////////////////////////////////
+//페이지 이동 시 현재 maxrow를 쿠키에 저장
+function createMaxrowCookie(maxrow){
+
+	$.ajax({
+		type: "post", 
+		url: "cookie/createmaxrowcookie.jsp", 
+		dataType: "html",
+		data:{
+			"maxrow":maxrow
+		},
+		async: false,
+		success:function(con){
+			
+		}
+	});
+}
+
+//쿠키에 저장된 maxrow 가져오기
+function getMaxrowCookie(){
+	var row=0;
+	$.ajax({
+		type: "post", 
+		url: "cookie/getmaxrowcookie.jsp", 
+		dataType: "html",
+		async: false,
+		success:function(maxrow){
+			row = maxrow;
+		}
+	});
+	
+	return row;
+}
+
+//일회용으로 쓴 쿠키 삭제
+function deleteMaxrowCookie(){
+	var scrollTop=0;
+	$.ajax({
+		type: "post", 
+		url: "cookie/deletemaxrowcookie.jsp", 
+		dataType: "html",
+		async: false,
+		success:function(scroll){
+			
+		}
+	});
+	
+	return scrollTop;
 }
