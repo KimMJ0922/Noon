@@ -97,7 +97,7 @@ public class BoardHashTagDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("�삤瑜� : "+e.getMessage());
+			System.out.println("오류 : "+e.getMessage());
 		}finally {
 			db.dbClose(rs, pstmt, conn);
 		}

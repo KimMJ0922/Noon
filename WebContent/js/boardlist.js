@@ -17,7 +17,7 @@ $(function(){
 		if($(window).scrollTop() == $(document).height() - $(window).height()){
 			//화면에 보여줄 리스트가 있을 경우
 			if(endcheck==true){
-				minrow = minrow+5;
+				minrow = maxrow;
 				maxrow = maxrow+5;
 				img = getImgList(minrow,maxrow);
 				hashtag = getHashTag(minrow,maxrow);
@@ -96,6 +96,17 @@ $(function(){
 		}
 	});
 	
+	//내용 더보기 버튼
+	$(document).on("click",".conmorebtn",function(){
+		
+		var num = $(this).attr("idx");
+		//해당 번호의 해시태그 가져오기
+		var content = getNumContent(num);
+		var str ="<pre class='content'>"+content+"</pre>";
+		$(this).parent(".con").html(str);
+	});
+	
+	
 	//해시태그 더보기 버튼
 	$(document).on("click",".hashtagmore",function(){
 		var str = "";
@@ -150,7 +161,6 @@ function listform(data,img,hashtag){
 			var num =item.num;
 			
 			str += "<div id='"+item.num+"' class='listform'>";
-				
 				//아이디
 				str += "<div class='id'>";
 					str +="<font style='text-align:left;'>"+item.nickname+"</font>"
@@ -173,7 +183,19 @@ function listform(data,img,hashtag){
 					str += imgTag(num,img);
 				//내용
 				str += "<div class='con'>";
-					str +="<pre class='content'>"+item.content+"</pre>"
+					var con = item.content;
+					if($.trim(con.substring(0,1))==""){
+						str +="...";
+						str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
+					}else{
+						if(con.length>10){
+							str +=$.trim(con).substring(0,10)+"...";
+							str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
+						}else{
+							str +="<pre>"+item.content+"</pre>"
+						}	
+					}
+					
 				str += "</div>";//내용 끝
 					
 				//좋아요, 댓글 수 
@@ -281,4 +303,23 @@ function getNumHashTag(num){
 	});
 	
 	return hashtag;
+}
+
+//번호 내용 가져오기
+function getNumContent(num){
+	var content ="";
+	$.ajax({
+		type: "post", 
+		url: "getnumcontent.jsp", 
+		dataType: "html",
+		data:{
+			"num":num
+		},
+		async: false,
+		success:function(con){
+			content = con;
+		}
+	});
+	
+	return content;
 }

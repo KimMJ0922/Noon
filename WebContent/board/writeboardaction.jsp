@@ -49,13 +49,15 @@
 			}
 		}
 		//해시태그 넣기
-		String[] tag = hash.split(",");
-		for(String hashtag : tag){
-			if(!hashtag.equals("")||hashtag!=null){
-				System.out.println(hashtag);
-				hstgdto.setNum(num);
-				hstgdto.setHashtag(hashtag);
-				hstgdao.insertHashTag(hstgdto);
+		if(!hash.equals("")||hash!=null){
+			String[] tag = hash.split(",");
+			for(String hashtag : tag){
+				if(!hashtag.equals("")||hashtag!=null){
+					System.out.println(hashtag);
+					hstgdto.setNum(num);
+					hstgdto.setHashtag(hashtag);
+					hstgdao.insertHashTag(hstgdto);
+				}
 			}
 		}
 		
