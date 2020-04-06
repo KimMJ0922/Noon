@@ -178,8 +178,8 @@ function listform(data,img,hashtag){
 					str +="<font style='text-align:left;'>"+item.nickname+"</font>"
 					str +="<font style='text-align:rigth;'>"+item.writeday+"</font>"
 				str += "</div>";//아이디 끝
-					
-				//
+
+				
 				str += "<div class='btnlist'>";
 					str +="<button class='btn btn-primary dropdown-toggle'></button>"
 					//수정 삭제 버튼
