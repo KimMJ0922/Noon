@@ -9,8 +9,9 @@
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
 	BoardHashTagDAO htdao = new BoardHashTagDAO();
-	JSONArray arr = new JSONArray();
+	
 	List<BoardHashTagDTO> list = htdao.getHashTags(minrow,maxrow);
+	JSONArray arr = new JSONArray();
 	if(list.size()!=0){
 		for(BoardHashTagDTO htdto : list){
 			JSONObject ob=new JSONObject();

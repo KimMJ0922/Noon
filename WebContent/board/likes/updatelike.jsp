@@ -8,11 +8,13 @@
 	int likes = Integer.parseInt(request.getParameter("likes"));
 	BoardDAO dao = new BoardDAO();
 	int likecnt = dao.updateLikes(num,likes);
-	String id="aaa";
+	String id = (String)session.getAttribute("id");
+	System.out.println(id);
+	
 	BoardLikesDTO bldto = new BoardLikesDTO();
 	BoardLikesDAO bldao = new BoardLikesDAO();
 	bldto.setId(id);
 	bldto.setNum(num);
-	bldao.insertLike(bldto);
+	bldao.insertLike(bldto,likes);
 %>
 <%=likecnt%>

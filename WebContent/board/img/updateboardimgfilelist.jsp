@@ -10,7 +10,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String num = request.getParameter("num");
-	String id = "aaa";
+	String id = (String)session.getAttribute("id");
 	//임시 폴더 경로
 	String previewFolderPath = getServletContext().getRealPath("/preview/"+id);
 	String userFolderPath = getServletContext().getRealPath("/save/"+id);

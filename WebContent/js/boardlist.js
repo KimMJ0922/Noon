@@ -29,7 +29,25 @@ $(function(){
 			}
 		}
 	});
-
+	
+	//임시 로그아웃 버튼
+	$("#logout").click(function(){
+		$.ajax({
+			type: "post", 
+			url: "../login/logout.jsp", 
+			dataType: "html",
+			async: false,
+			success:function(data){
+				alert("로그아웃");
+				var leng = window.history.length;
+				for(var i =0; i<leng;i++){
+					history.replaceState({page: i+1}, "", "");
+				}
+				location.replace("../login/noon_main.jsp");
+			}
+		});
+	});
+	
 	//삭제 버튼
 	$(document).on("click",".delbtn",function(){
 		var num = $(this).attr("num");
@@ -52,8 +70,8 @@ $(function(){
 		}
 	}); 
 	//수정 버튼
-	$(document).on("click",".delbtn",function(){
-		$("frm").submit();		
+	$(document).on("click",".updatebtn",function(){
+		$("updatefrm").submit();		
 	});
 	
 	
@@ -130,6 +148,25 @@ $(function(){
 		});
 		$(this).parent(".hashtags").html(str);
 	});
+	
+	
+	//임시 알림 보이기
+	$(document).on("click","#hsbtn",function(){
+		$.ajax({
+			type: "post", 
+			url: "../history/get.jsp", 
+			dataType:"json",
+			success:function(data){
+				var str = "<ul>";
+				$.each(data,function(i,item){
+					str+="<li>"+item.fromid+"님이 회원님의 게시물에 "+item.action+"</li>";
+				});
+				str += "</ul>";
+				
+				$("#history").html(str);
+			}
+		});
+	});
 });//$(function) 끝
 
 
@@ -139,7 +176,7 @@ $(function(){
 function deletePreviewFolder(){
 	$.ajax({
 		type: "post", 
-		url: "deletepreviewfolder.jsp",
+		url: "img/deletepreviewfolder.jsp",
 		dataType: "html",
 		success:function(data){
 		}
@@ -184,7 +221,7 @@ function listform(data,img,hashtag){
 					str +="<button class='btn btn-primary dropdown-toggle'></button>"
 					//수정 삭제 버튼
 					str += "<div class='dropdown-menu'>";
-						str += "<form id='frm' method='post' action='updateboard.jsp'>";
+						str += "<form class='updatefrm' method='post' action='updateboard.jsp'>";
 							str += "<button type='submit' class='updatebtn btn btn-primary'>수정</button>";
 							str += "<input type='hidden' name='num' value='"+item.num+"'>";
 						str += "</form>";

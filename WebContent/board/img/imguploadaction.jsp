@@ -11,8 +11,8 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String f = "aaa";
-	String createFolderPath = getServletContext().getRealPath("/preview/"+f); //폴더 경로
+	String id = (String)session.getAttribute("id");
+	String createFolderPath = getServletContext().getRealPath("/preview/"+id); //폴더 경로
 	//임시 폴더 안에 폴더 생성
 	ImgFolderCreate fc = new ImgFolderCreate();
 	//폴더 생성 후 검색
@@ -33,7 +33,7 @@
 		//임시 폴더 안에 저장된 파일을 json 형식으로 리턴
 		for(String img : list){
 			JSONObject ob=new JSONObject();
-			ob.put("imgURL",url+"/preview/"+f+"\\\\"+img);
+			ob.put("imgURL",url+"/preview/"+id+"\\\\"+img);
 			ob.put("img",img);
 			arr.add(ob);
 		}
