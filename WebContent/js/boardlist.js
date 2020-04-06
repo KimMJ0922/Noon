@@ -240,7 +240,12 @@ function hashTag(num,hashtag){
 	var str = "";
 	$.each(hashtag,function(i,item){
 		if(num==item.num){
-			str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
+			if(i==4){
+				str+="...";
+			}else if(i<4){
+				str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
+			}
+			
 		}
 	});
 	
