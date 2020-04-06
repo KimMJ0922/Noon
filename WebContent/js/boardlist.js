@@ -95,6 +95,18 @@ $(function(){
 			$(this).siblings(".btns").css("display","none");
 		}
 	});
+	
+	//해시태그 더보기 버튼
+	$(document).on("click",".hashtagmore",function(){
+		var str = "";
+		var num = $(this).attr("idx");
+		//해당 번호의 해시태그 가져오기
+		var hash = getNumHashTag(num);
+		$.each(hash,function(i,item){
+			str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
+		});
+		$(this).parent(".hashtags").html(str);
+	});
 });//$(function) 끝
 
 
@@ -240,9 +252,33 @@ function hashTag(num,hashtag){
 	var str = "";
 	$.each(hashtag,function(i,item){
 		if(num==item.num){
-			str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
+			if(i==4){
+				str+="...<button type='button' class='hashtagmore' idx='"+item.num+"'>더보기</button>";
+			}else if(i<4){
+				str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
+			}
+			
 		}
 	});
 	
 	return str;
+}
+
+//번호 해시태그 가져오기
+function getNumHashTag(num){
+	var hashtag ="";
+	$.ajax({
+		type: "post", 
+		url: "getnumhashtag.jsp", 
+		dataType: "json",
+		data:{
+			"num":num
+		},
+		async: false,
+		success:function(hash){
+			hashtag = hash;
+		}
+	});
+	
+	return hashtag;
 }
