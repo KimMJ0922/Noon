@@ -11,14 +11,27 @@
 <%
 	String url = request.getContextPath();
 %>
-<script src="progress-bar2.js"></script>
+<script src="progress-bar.js"></script>
 <style>
+	body{
+		background-image: url("background.jpg");
+	}
 	.form{
-		width: 70%;
-		margin-left: 15%;
+		width: 50%;
+		height: 500px;
+		margin: 10% auto;
+		padding: 10px;
+		border: 1px solid gray;
+		box-shadow: 3px 3px 3px 3px gray;
+		border-radius: 30px; 
+		background-color: white;
 	}
 	.top{
 		height: 125px;
+	}
+	
+	.next,.prev{
+		margin-top: 20px;
 	}
 	
 	ul.progress-bar {
@@ -59,7 +72,7 @@
 	}
 	
 	.status-bar {
-		height: 5px;
+		height: 2px;
 		background: gray;
 		position: relative;
 		top: 20px;
@@ -67,7 +80,7 @@
 	}
 	
 	.current-status {
-		height: 5px;
+		height: 2px;
 		width: 0;
 		border-radius: 1px;
 		background: mediumseagreen;
@@ -94,11 +107,15 @@
 	}
 </style>
 <body>
-	<marquee direction="left" width="100%" behavior="scroll"
+	<%-- <marquee direction="left" width="100%" behavior="scroll"
 		scrollamount="10">
 		<img alt="#" src="<%=url%>/image/a02.png">
-	</marquee>
+	</marquee> --%>
 	<div class="form">
+		<div class="logo" align="center" style="margin-bottom: 20px;">
+			<img alt="#" src="logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;">
+			<h3>NOON</h3>
+		</div>
 		<div class="custom-progress-bar-wrapper">
 			<div class="status-bar" style="width: 78.5%;">
 				<div class="current-status"

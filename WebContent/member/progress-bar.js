@@ -1,16 +1,10 @@
 $(function(){
 	var cnt = 0;
-	var headline = [
-		"이름을 입력해주세요",
-		"아이디를 입력해주세요",
-		"비밀번호를 입력해주세요",
-		"핸드폰번호를 입력해주세요",
-		"이메일을 입력해주세요",
-		"주소를 입력해주세요",
-		"완료하셨습니다"
-	];
 	
+	//첫번째 폼에서 이전버튼 숨김
 	$(".prev").hide();
+	
+	//포커스 자동 넘김
 	$("#email3").change(function(){
 		$("#email2").val($(this).val());
 	});
@@ -19,15 +13,45 @@ $(function(){
 		if($(this).val().length==4)
 			$("#hp3").focus();
 	});
+	
+	//처음 브라우저 크기
+	var windowWidth = window.innerWidth;
+	var width = 1920 - windowWidth;
+	var csswidth =$(".status-bar").css("width");
+	$(".status-bar").css("width",csswidth-width);
+	if(windowWidth<660){
+		$("li.section").css("left",-15);
+		$(".section").css("width","15.2%");
+	}else if(windowWidth<750){
+		$(".section").css("width","15.2%");
+		$("li.section").css("left",-10);
+	}else{
+		$("li.section").css("left",-10);
+		$(".section").css("width","16%");
+	}
+	//브라우저 사이즈가 바뀌면 실행될 것
+	$(window).resize(function(){
+		var windowWidth = window.innerWidth;
+		var width = 1920 - windowWidth;
+		var csswidth =$(".status-bar").css("width");
+		$(".status-bar").css("width",csswidth-width);
+		if(windowWidth<660){
+			$("li.section").css("left",-15);
+		}else if(windowWidth<750){
+			$(".section").css("width","15.2%");
+			$("li.section").css("left",-10);
+		}else{
+			$("li.section").css("left",-10);
+			$(".section").css("width","16%");
+		}
+	}); 
+	
 	$(".next").click(function(){
 		//이전 폼 숨기기 다음 폼 출력
-		console.log("다음 버튼 : "+cnt);
 		$(".top .form-group").eq(cnt).attr("hidden","true");
 		cnt++;
 		$(".top .form-group").eq(cnt).removeAttr("hidden");
-		console.log(cnt);
 		
-		$("#headline").text(headline[cnt]);
 		/*$(".progress-bar").attr("aria-valuenow",cnt*20);
 		$(".progress-bar").css("width",""+cnt*2+"0%");*/
 		
@@ -47,7 +71,7 @@ $(function(){
 		if(cnt==6){
 			$(".section").eq(cnt).addClass("visited");
 			$(".section").eq(cnt-2).removeClass("current");
-			$(".bottom").hide();
+			$(".next").hide();
 		}else if(cnt==0){
 			$(".prev").hide();
 		}else{
@@ -56,18 +80,19 @@ $(function(){
 		}
 	});
 	$(".prev").click(function(){
-		console.log("이전 버튼 : "+cnt);
 		$(".top .form-group").eq(cnt).attr("hidden","true");
 		cnt--;
 		$(".top .form-group").eq(cnt).removeAttr("hidden");
-		console.log(cnt);
-		$("#headline").text(headline[cnt]);
 		/*$(".progress-bar").attr("aria-valuenow",cnt*20);
 		$(".progress-bar").css("width",""+cnt*2+"0%");*/
 		
 		//프로그레스 바 이벤트
 		if(cnt==1){
 			$(".section").eq(cnt-1).addClass("visited current");
+			$(".section").eq(cnt).removeClass("visited current");
+			$(".current-status").css("width",(cnt-1)*20+"%");
+		}
+		else if(cnt==0){
 			$(".section").eq(cnt).removeClass("visited current");
 			$(".current-status").css("width",(cnt-1)*20+"%");
 		}
@@ -78,12 +103,13 @@ $(function(){
 		}
 		
 		if(cnt==6){
-			$(".bottom").hide();
+			$(".next").hide();
 		}else if(cnt==0){
 			$(".prev").hide();
 		}else{
 			$(".bottom").show();
 			$(".prev").show();
+			$(".next").show();
 		}
 	});
 	
@@ -91,19 +117,4 @@ $(function(){
 		location.reload();
 	});
 	
-	$("#btnid").click(function(){
-		window.open("member/idsearch.jsp","","width=371px,height=151px,left=800px,top=100px");			
-	});
-	
-	$("#btnaddr").click(function(){
-		window.open("member/postsearch.jsp","","width=500px,height=600px,left=800px,top=100px");			
-	});
-	
-	$("#frm").keyup(function(e){
-		if(e.keyCode==13){
-			e.preventDefault();
-			$(".next").click();
-		}
-	});
-		
 });
