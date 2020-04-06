@@ -45,7 +45,7 @@ $(function(){
 		
 		$.ajax({
 			type: "post",
-			url: "deleteimg.jsp", 
+			url: "img/deleteimg.jsp", 
 			data:{
 				"imgName":id
 			},
@@ -111,7 +111,7 @@ $(function(){
 function imgUpload(){
 	$("#fileform").ajaxForm({
 		type: "post", 
-		url: "imguploadaction.jsp",
+		url: "img/imguploadaction.jsp",
 		processData: false,
 		contentType: false,
 		cache: false,
@@ -146,7 +146,7 @@ function imglist(data){
 function deletePreviewFolder(){
 	$.ajax({
 		type: "post", 
-		url: "deletepreviewfolder.jsp",
+		url: "img/deletepreviewfolder.jsp",
 		dataType: "html",
 		success:function(data){
 		}
