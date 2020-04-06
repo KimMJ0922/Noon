@@ -88,7 +88,7 @@
 	
 	li.section.visited:before {
 		content: '\2714';
-		animation: changeBackground .5s linear;
+		animation: changeBackground .2s linear;
 		animation-fill-mode: forwards;
 	}
 	
@@ -119,7 +119,7 @@
 		<div class="custom-progress-bar-wrapper">
 			<div class="status-bar" style="width: 78.5%;">
 				<div class="current-status"
-					style="width: 0%; transition: width 500ms linear 0s;"></div>
+					style="width: 0%; transition: width 200ms linear 0s;"></div>
 			</div>
 			<ul class="custom-progress-bar">
 				<li class="section" style="width: 16%;">이름 입력</li>

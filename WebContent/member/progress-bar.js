@@ -48,9 +48,9 @@ $(function(){
 	
 	$(".next").click(function(){
 		//이전 폼 숨기기 다음 폼 출력
-		$(".top .form-group").eq(cnt).attr("hidden","true");
+		$(".top .form-group").eq(cnt).hide();
 		cnt++;
-		$(".top .form-group").eq(cnt).removeAttr("hidden");
+		$(".top .form-group").eq(cnt).fadeIn("fast");
 		
 		/*$(".progress-bar").attr("aria-valuenow",cnt*20);
 		$(".progress-bar").css("width",""+cnt*2+"0%");*/
@@ -59,7 +59,7 @@ $(function(){
 		var timeout = setTimeout(function(){
 			$(".section").eq(cnt-1).addClass("visited current");
 			$(".section").eq(cnt-2).removeClass("current");
-		},600);
+		},300);
 		if(cnt==1)
 			$(".section").eq(cnt-1).addClass("visited current");
 		else{
@@ -80,9 +80,9 @@ $(function(){
 		}
 	});
 	$(".prev").click(function(){
-		$(".top .form-group").eq(cnt).attr("hidden","true");
+		$(".top .form-group").eq(cnt).hide();
 		cnt--;
-		$(".top .form-group").eq(cnt).removeAttr("hidden");
+		$(".top .form-group").eq(cnt).fadeIn("fast");
 		/*$(".progress-bar").attr("aria-valuenow",cnt*20);
 		$(".progress-bar").css("width",""+cnt*2+"0%");*/
 		
