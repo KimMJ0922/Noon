@@ -14,6 +14,17 @@ $(function(){
 			$("#hp3").focus();
 	});
 	
+	$("#confirmPass").keyup(function(){
+		if($("#pass").val()!=$(this).val()){
+			$(this).addClass("has-error");
+			$("label").eq(3).text("현재 비밀번호와 일치시켜주세요");
+		}
+		else{
+			$(this).removeClass("has-error");
+			$("label").eq(3).text("비밀번호 확인:");
+		}
+	});
+	
 	//처음 브라우저 크기
 	var windowWidth = window.innerWidth;
 	var width = 1920 - windowWidth;
@@ -46,14 +57,19 @@ $(function(){
 		}
 	}); 
 	
-	$(".next").click(function(){
+	$(".next").click(function(e){
+		if($(this).attr("bool")=="false"){
+			var str = $(this).attr("str");
+			$(".top .form-group input").eq(cnt).addClass("has-error");
+			$("label").eq(cnt).text(str);
+			return;
+		}
+		
 		//이전 폼 숨기기 다음 폼 출력
 		$(".top .form-group").eq(cnt).hide();
 		cnt++;
 		$(".top .form-group").eq(cnt).fadeIn("fast");
-		
-		/*$(".progress-bar").attr("aria-valuenow",cnt*20);
-		$(".progress-bar").css("width",""+cnt*2+"0%");*/
+		$(this).attr("cnt",cnt);
 		
 		//프로그레스 바 이벤트
 		var timeout = setTimeout(function(){
@@ -80,9 +96,11 @@ $(function(){
 		}
 	});
 	$(".prev").click(function(){
+		$(".top .form-group input").eq(cnt-1).removeClass("has-error");
 		$(".top .form-group").eq(cnt).hide();
 		cnt--;
 		$(".top .form-group").eq(cnt).fadeIn("fast");
+		$(".next").attr("cnt",cnt);
 		/*$(".progress-bar").attr("aria-valuenow",cnt*20);
 		$(".progress-bar").css("width",""+cnt*2+"0%");*/
 		
@@ -118,3 +136,71 @@ $(function(){
 	});
 	
 });
+
+function validate(e){
+	var cnt = $(".next").attr("cnt");
+	var bool = true;
+	var str = "";
+
+	switch(cnt){
+	case '0' : 
+		if($("#name").val() == ""){
+			$(".next").attr("bool",false);
+			str = "이름을 양식에 맞게 입력 해주세요";
+			$(".next").attr("str",str);
+		}else{
+			$(".next").attr("bool",true);
+		}
+		break;
+
+	case '1' : 
+		if($("#myid").val() == ""){
+			$(".next").attr("bool",false);
+			str = "아이디를 양식에 맞게 입력 해주세요";
+			$(".next").attr("str",str);
+		}else{
+			$(".next").attr("bool",true);
+		}
+		break;
+
+	case '2' : 
+		if($("#pass").val() == ""){
+			$(".next").attr("bool",false);
+			str = "비밀번호를 양식에 맞게 입력 해주세요";
+			$(".next").attr("str",str);
+		}else{
+			$(".next").attr("bool",true);
+		}
+		break;
+
+	case '3' :
+		if($("#hp2").val() == ""){
+			$(".next").attr("bool",false);
+			str = "휴대폰 번호를 양식에 맞게 입력 해주세요";
+			$(".next").attr("str",str);
+		}else{
+			$(".next").attr("bool",true);
+		}
+		break;
+
+	case '4' : 
+		if($("#email1").val() == ""){
+			$(".next").attr("bool",false);
+			str = "이메일을 양식에 맞게 입력 해주세요";
+			$(".next").attr("str",str);
+		}else{
+			$(".next").attr("bool",true);
+		}
+		break;
+
+	case '5' : 
+		if($("#addr1").val() == ""){
+			$(".next").attr("bool",false);
+			str = "주소를 양식에 맞게 입력 해주세요";
+			$(".next").attr("str",str);
+		}else{
+			$(".next").attr("bool",true);
+		}
+		break;
+	}
+}

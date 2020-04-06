@@ -97,6 +97,10 @@
 		box-shadow: 0 0 0 2px mediumseagreen;
 	}
 	
+	.has-error{
+		border: 1px solid red;
+	}
+	
 	@keyframes changeBackground {
 		from {background: gray
 	}
@@ -211,16 +215,16 @@
 				</div>
 				<div class="form-group" hidden align="center">
 					<b>완료하셨습니다 가입하시겠습니까?</b><br>
-					<button type="submit" class="btn btn-default">Submit</button>
-					<button type="reset" class="btn btn-default">Reset</button>
+					<button type="submit" class="btn btn-default">회원가입</button>
+					<button type="reset" class="btn btn-default">다시작성</button>
 				</div>
 			</div>
 			<div class="bottom">
 				<div style="float: left;">
-					<button type="button" class="btn btn-default prev">이전</button>
+					<button type="button" class="btn btn-default prev btn-lg">이전</button>
 				</div>
 				<div style="float: right;">
-					<button type="button" class="btn btn-default next">다음</button>
+					<button type="button" class="btn btn-primary next btn-lg" onclick="validate()" cnt="0" bool="">다음</button>
 				</div>
 			</div>
 		</form>
