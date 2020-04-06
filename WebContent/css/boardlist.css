@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/*게시글 폼*/
+.listform{
+	width:500px;
+	heigth:500px;
+	border: 1px solid gary;
+	background-color: #ffdee9;
+	margin:30px 0 30px 0;
+	box-shadow: 2px 2px 10px 2px gray;
+}
+
+div.id{
+	height:50px;
+	border: 1px solid red;
+	line-height: 50px;
+	width:450px;
+	float:left;
+}
+div.btnlist{
+	float:left;
+	border: 1px solid #dd3321;
+	height:50px;
+	width: 50px;
+	padding: 13px;
+}
+div.con{
+	width:500px;
+	border: 1px solid blue;
+}
+
+div.btns{
+	display:none;
+	width:80px;
+	background-color:white;
+	position: absolute;
+	box-shadow: 2px 2px 10px 2px gray;
+	border-radius: 5px;
+}
+.btn{
+	width:100%;
+	background-color: none;
+}
+.menubtn{
+	border:none;
+	background-color: #ffdee9;
+}
+img{
+	max-width: 500px;
+	max-height: 500px;
+}
+pre{
+	border:none;
+	background:none;
+	white-space: pre-wrap;
+	  display:-webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.likey{
+	width:20px;
+	height:20px;
+	cursor:pointer;
+}
+#cnt{
+	width:100px;
+	height:100px;
+	font-size: 39px;
+    display: inline-block;
+    text-align: center;
+	
+}
+
+.imgs:ntn-child(4n){	
+	
+}
+.btn{
+	float:right;
+}
+/*해시태그를 감싸고 있는 div*/
+.hashtags{
+	border: 1px solid green;
+	white-space: pre-wrap;
+	word-break: break-all;
+	word-wrap:break-word;
+}
+/*해시태그 요소*/
+.hashtag{
+	margin:5px 10px 5px 10px;
+}
