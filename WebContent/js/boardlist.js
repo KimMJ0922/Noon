@@ -11,7 +11,7 @@ $(function(){
 	boardList(minrow,maxrow,img,hashtag);
 	//글쓰는 페이지 이동
 	$("#writebtn").click(function(){
-		location.href="writeboard.jsp";
+		location.href="board/writeboard.jsp";
 	});
 	//스크롤 내리면 자동으로 항목 불러오기
 	$(window).on("scroll",function(){
@@ -55,7 +55,7 @@ $(function(){
 		if(ch==true){
 			$.ajax({
 				type: "post", 
-				url: "deleteboard.jsp", 
+				url: "board/deleteboard.jsp", 
 				dataType: "html",
 				async: false,
 				data:{
@@ -98,7 +98,7 @@ $(function(){
 		}
 		$.ajax({
 			type: "post", 
-			url: "likes/updatelike.jsp",
+			url: "board/likes/updatelike.jsp",
 			dataType: "html",
 			data:{
 				"num":num,
@@ -187,7 +187,7 @@ function boardList(minrow,maxrow,img,hashtag){
 	var endcheck = true;
 	$.ajax({
 		type: "post", 
-		url: "getboardlist.jsp",
+		url: "board/getboardlist.jsp",
 		data:{
 			"minrow":minrow,
 			"maxrow":maxrow
@@ -272,7 +272,7 @@ function getImgList(minrow,maxrow){
 	var imglist ="";
 	$.ajax({
 		type: "post", 
-		url: "img/getimglist.jsp", 
+		url: "board/img/getimglist.jsp", 
 		dataType: "json",
 		data:{
 			"minrow":minrow,
@@ -305,7 +305,7 @@ function getHashTag(minrow,maxrow){
 	var hashtag ="";
 	$.ajax({
 		type: "post", 
-		url: "hashtag/gethashtag.jsp", 
+		url: "board/hashtag/gethashtag.jsp", 
 		dataType: "json",
 		data:{
 			"minrow":minrow,
@@ -340,7 +340,7 @@ function getNumHashTag(num){
 	var hashtag ="";
 	$.ajax({
 		type: "post", 
-		url: "hashtag/getnumhashtag.jsp", 
+		url: "board/hashtag/getnumhashtag.jsp", 
 		dataType: "json",
 		data:{
 			"num":num
@@ -359,7 +359,7 @@ function getNumContent(num){
 	var content ="";
 	$.ajax({
 		type: "post", 
-		url: "getnumcontent.jsp", 
+		url: "board/getnumcontent.jsp", 
 		dataType: "html",
 		data:{
 			"num":num
@@ -384,7 +384,7 @@ function createMaxrowCookie(maxrow){
 
 	$.ajax({
 		type: "post", 
-		url: "cookie/createmaxrowcookie.jsp", 
+		url: "board/cookie/createmaxrowcookie.jsp", 
 		dataType: "html",
 		data:{
 			"maxrow":maxrow
@@ -401,7 +401,7 @@ function getMaxrowCookie(){
 	var row=0;
 	$.ajax({
 		type: "post", 
-		url: "cookie/getmaxrowcookie.jsp", 
+		url: "board/cookie/getmaxrowcookie.jsp", 
 		dataType: "html",
 		async: false,
 		success:function(maxrow){
@@ -417,7 +417,7 @@ function deleteMaxrowCookie(){
 	var scrollTop=0;
 	$.ajax({
 		type: "post", 
-		url: "cookie/deletemaxrowcookie.jsp", 
+		url: "board/cookie/deletemaxrowcookie.jsp", 
 		dataType: "html",
 		async: false,
 		success:function(scroll){
