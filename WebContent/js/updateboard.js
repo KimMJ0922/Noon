@@ -128,7 +128,7 @@ function getImgFile(num){
 	//이미지 파일
 	$.ajax({
 		type: "post", 
-		url: "img/updateboardimgfilelist.jsp",
+		url: "zimg/updateboardimgfilelist.jsp",
 		data:{
 			"num":num
 		},
