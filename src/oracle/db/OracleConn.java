@@ -23,7 +23,7 @@ public class OracleConn {
 	public Connection getConnection() {
 		Connection conn =null;
 		try {
-			conn = DriverManager.getConnection(url,"angel","1234");
+			conn = DriverManager.getConnection(url,"angel","a1234");
 			
 //			System.out.println("계정 연결 성공");
 		} catch (SQLException e) {
