@@ -63,12 +63,18 @@ $(function(){
 	});
 	
 	$("#write").click(function(){
-		var form = $("form")[0];
-		$("#hashtagtext").val("");
-		$("#taghidden").val(hashlist);
-		form.submit();
-		$(window).off("beforeunload");
-		return true;
+		var text = $.trim($("#content").val());
+		if(text==null||text==""){
+			alert("내용을 입력해주세요");
+			return false;
+		}else{
+			var form = $("form")[0];
+			$("#hashtagtext").val("");
+			$("#taghidden").val(hashlist);
+			form.submit();
+			$(window).off("beforeunload");
+			return true;
+		}
 	});
 	
 	//텍스트에서 엔터 눌렀을 때 submit 막기

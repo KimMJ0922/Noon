@@ -177,6 +177,9 @@ $(function(){
          }
       });
    });
+   
+   
+  
 });//$(function) 끝
 
 
@@ -299,15 +302,29 @@ function getImgList(minrow,maxrow){
 
 //리스트에 넣을 이미지 태그 만들기
 function imgTag(num,img){
-   var str = "<div class='imgs' style='width:500px; height:500px;'>";
-   $.each(img,function(i,item){
-      if(num==item.num){
-         str+="<img src='"+item.file+"' >";
-      }
-   });
-   str += "</div>";
-   
-   return str;
+	var cnt = 0;
+	var imgcnt = 0;
+	var lastfile = "";
+	var str = "<div class='imgs' style='width:500px; height:500px;position:relative;'>";
+	$.each(img,function(i,item){
+		if(num==item.num){
+			
+			if(cnt<=2){
+				str += "<img src='"+item.file+"'>";
+			}else if(cnt==3){
+				str += "<img src='"+item.file+"'>";
+			}else{
+				imgcnt++;
+			}
+			cnt++;
+		}
+	});
+	if(cnt>=4){
+		str += "<div class='moreimg'>+"+imgcnt+"</div>";
+	}
+	str += "</div>";
+	   
+	return str;
 }
 
 //해시태그 가져오기
