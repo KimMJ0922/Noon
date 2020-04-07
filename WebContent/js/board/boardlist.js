@@ -1,18 +1,32 @@
 $(function(){
+	//루트 경로
+	var root = $("#root").val();
+	
+	//초기에 화면에 보여질 글 갯수
 	var minrow = 0;
 	var maxrow = parseInt($.trim(getMaxrowCookie()));
+	
+	//쿠키 삭제
 	deleteMaxrowCookie();
+	
+	//테이블의 값이 끝이 아니면 true 끝이면 false
 	var endcheck = true;
+	
+	//임시폴더에 아이디 폴더 삭제
 	deletePreviewFolder();
+	
 	//이미지 불러오기
 	var img = getImgList(minrow,maxrow);
+	
 	//해시태그 불러오기
 	var hashtag = getHashTag(minrow,maxrow);
 	boardList(minrow,maxrow,img,hashtag);
+	
 	//글쓰는 페이지 이동
 	$("#writebtn").click(function(){
-		location.href="board/writeboard.jsp";
+		location.href="main.jsp?view=board/writeboard.jsp";
 	});
+	
 	//스크롤 내리면 자동으로 항목 불러오기
 	$(window).on("scroll",function(){
 		if($(window).scrollTop() == $(document).height() - $(window).height()){
@@ -34,16 +48,12 @@ $(function(){
 	$("#logout").click(function(){
 		$.ajax({
 			type: "post", 
-			url: "../login/logout.jsp", 
+			url: "login/logout.jsp", 
 			dataType: "html",
 			async: false,
 			success:function(data){
 				alert("로그아웃");
-				var leng = window.history.length;
-				for(var i =0; i<leng;i++){
-					history.replaceState({page: i+1}, "", "");
-				}
-				location.replace("../login/noon_main.jsp");
+				location.replace("login/noonlogin.jsp");
 			}
 		});
 	});
@@ -90,10 +100,10 @@ $(function(){
 		var src = $(this).attr("src");
 		var cnt = 0;
 		if(src=="../img/heart-full.png"){
-			$(this).attr("src","../img/heart-empty.png");
+			$(this).attr("src","img/heart-empty.png");
 			cnt = -1;
 		}else{
-			$(this).attr("src","../img/heart-full.png");
+			$(this).attr("src","img/heart-full.png");
 			cnt = +1;
 		}
 		$.ajax({
@@ -154,7 +164,7 @@ $(function(){
 	$(document).on("click","#hsbtn",function(){
 		$.ajax({
 			type: "post", 
-			url: "../history/get.jsp", 
+			url: "history/get.jsp", 
 			dataType:"json",
 			success:function(data){
 				var str = "<ul>";
@@ -176,7 +186,7 @@ $(function(){
 function deletePreviewFolder(){
 	$.ajax({
 		type: "post", 
-		url: "img/deletepreviewfolder.jsp",
+		url: "board/img/deletepreviewfolder.jsp",
 		dataType: "html",
 		success:function(data){
 		}

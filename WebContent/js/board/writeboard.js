@@ -4,15 +4,8 @@ $(function(){
 	$(window).on('beforeunload', function(e) {
 		return "변경사항이 저장되지 않을 수 있습니다.";
 	});
+
 	deletePreviewFolder();
-	var num = $("#num").val();
-	//내용 가져오기
-	getData(num);
-	//이미지 가져오기
-	var str = getImgFile(num);
-	//해시태그 목록 가져오기
-	hashlist = getHashList(num);
-	cnt = hashlist.length;
 	
 	//파일 업로드 바꼈을 때
 	$("#photo").change(function(){
@@ -43,17 +36,47 @@ $(function(){
 		}
 		imgFileNames = imgFileNames.substring(0,imgFileNames.length-1)
 
-		imgUpload(str);
+		imgUpload();
 	});
+
+	//삭제
+	$(document).on("click",".delBtn",function(){
+		var id = $(this).attr("id");
+		
+		$.ajax({
+			type: "post",
+			url: "board/img/deleteimg.jsp", 
+			data:{
+				"imgName":id
+			},
+			dataType: "json",
+			success:function(data){
+				imglist(data);
+			}
+		});
+	});
+	$(window).on("keydown","submit",function(e){
+		if(e.keyCode==13){
+			$(window).off("submit");
+			return false;
+		}
+	});
+	
 	$("#write").click(function(){
 		var form = $("form")[0];
 		$("#hashtagtext").val("");
 		$("#taghidden").val(hashlist);
 		form.submit();
-		 $(window).off("beforeunload");
-		 return true;
+		$(window).off("beforeunload");
+		return true;
 	});
 	
+	//텍스트에서 엔터 눌렀을 때 submit 막기
+	$('input[type="text"]').keydown(function() {
+	  if (event.keyCode === 13) {
+	    event.preventDefault();
+	  };
+	});
 	
 	//해시태그
 	$("#hashtagtext").keydown(function(e){
@@ -83,84 +106,22 @@ $(function(){
 		hashlist[idx]=null;
 		$(this).parent().remove();
 	});
-	
-	//텍스트에서 엔터 눌렀을 때 submit 막기
-	$('input[type="text"]').keydown(function() {
-	  if (event.keyCode === 13) {
-	    event.preventDefault();
-	  };
-	});
-	
-});//$(function)끝
-
-//해당 로그인 된 아이디의 임시 폴더 삭제
-function deletePreviewFolder(){
-	$.ajax({
-		type: "post", 
-		url: "img/deletepreviewfolder.jsp",
-		dataType: "html",
-		success:function(data){
-		}
-	});
-}
-
-function getData(num){
-	//내용
-	$.ajax({
-		type: "post", 
-		url: "updateboarddata.jsp",
-		data:{
-			"num":num
-		},
-		async:false,
-		dataType: "json",
-		success:function(data){
-			$.each(data,function(i,item){
-				$("#content").html(item.content);
-			});
-		}
-	});
-}
-
-function getImgFile(num){
-	var str = "";
-	var str2 = "";
-	//이미지 파일
-	$.ajax({
-		type: "post", 
-		url: "zimg/updateboardimgfilelist.jsp",
-		data:{
-			"num":num
-		},
-		async: false,
-		dataType: "json",
-		success:function(data){
-			
-			$.each(data,function(i,item){
-				str += "<div class='imgSample' style='background-image:url("+item.file+"); background-size:cover;' >";
-					str += "<div class='delBtn' id='"+item.img+"'>"
-						str += "<span class='glyphicon glyphicon-remove removebtn'></span>"
-					str += "</div>";
-				str+="</div>";
-			});
-			$("#imglist").html(str); 
-			
-		}
-	});
-	return str;
-}
+});	
 
 function imgUpload(){
 	$("#fileform").ajaxForm({
 		type: "post", 
-		url: "img/imguploadaction.jsp",
+		url: "board/img/imguploadaction.jsp",
 		processData: false,
 		contentType: false,
 		cache: false,
-		async: false,
+		async: false,	
 		dataType: "json",
 		success:function(data){
 			imglist(data);
+		},
+		error:function(request,status,error){
+			alert("이미지 용량이 너무 큽니다.");
 		}
 	});
 	
@@ -181,43 +142,13 @@ function imglist(data){
 
 }
 
-//이미지 삭제
-$(document).on("click",".delBtn",function(){
-	var id = $(this).attr("id");
-	
+//해당 로그인 된 아이디의 임시 폴더 삭제
+function deletePreviewFolder(){
 	$.ajax({
 		type: "post", 
-		url: "img/deleteimg.jsp", 
-		data:{
-			"imgName":id
-		},
-		dataType: "json",
+		url: "board/img/deletepreviewfolder.jsp",
+		dataType: "html",
 		success:function(data){
-			imglist(data);
 		}
 	});
-});
-
-//해시태그 목록
-function getHashList(num){
-	var list = new Array();
-	var cnt = 0;
-	$.ajax({
-		type: "post", 
-		url: "hashtag/getnumhashtag.jsp",
-		data:{
-			"num":num
-		},
-		async:false,
-		dataType: "json",
-		success:function(data){
-			$.each(data,function(i,item){
-				list[cnt] = item.hashtag;
-				$("#taglist").append("<div class='tag'>#"+item.hashtag+"<span class='glyphicon glyphicon-remove delhashbtn' idx='"+cnt+"'></span></div>");
-				cnt++;
-			});
-		}
-	});
-	
-	return list;
 }

@@ -7,18 +7,18 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="../js/noonmain.js"></script>
+
 <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<script type="text/javascript" src="../main_js/jquery.tubular.1.0.js"></script>
-<script type="text/javascript" src="../main_js/modernizr.js"></script>
+<script type="text/javascript" src="../js/login/jquery.tubular.1.0.js"></script>
+<script type="text/javascript" src="../js/login/modernizr.js"></script>
+<script type="text/javascript" src="../js/login/noonlogin.js"></script>
 
 
-
-<link rel="stylesheet" href="../main_css/reset.css" media="screen" />
-<link rel="stylesheet" href="../main_css/style.css" media="screen" />
-<link rel="stylesheet" href="../main_css/css3_3d.css" media="screen" />
+<link rel="stylesheet" href="../css/login/reset.css" media="screen" />
+<link rel="stylesheet" href="../css/login/noonlogin.css" media="screen" />
+<link rel="stylesheet" href="../css/login/css3_3d.css" media="screen" />
 
 <meta charset="UTF-8">
 <style>
@@ -95,17 +95,18 @@ $(function(){
 		<div class="row">
 		  <div class="col-md-12 col-sm-12 col-xs-12">
 		  	<div class="login_main">
-		  	<p class="main_simbol">NOON</p>
-		  	<input class="main_input" id="id" type="text" placeholder="아이디"><br>
-			<input class="main_input" id="password" type="password" placeholder="비밀번호"><br>
-			<input class="main_submit" type="button" value="로그인"><br>
-			
-			<p class="main_serc"><a href="#"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
-			<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;"> 아이디 저장</p>
+			  	<p class="main_simbol">NOON</p>
+			  	<input class="main_input" id="id" type="text" placeholder="아이디"><br>
+				<input class="main_input" id="password" type="password" placeholder="비밀번호"><br>
+				<input class="main_submit" type="button" value="로그인"><br>
+				
+				<p class="main_serc"><a href="../member/memberform.jsp"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
+				<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;"> 아이디 저장</p>
 			</div>
 		  </div>
 		</div>
 	</div>
 </div>
 </body>
+<script type="text/javascript" src="../js/noonmain.js"></script>
 </html>

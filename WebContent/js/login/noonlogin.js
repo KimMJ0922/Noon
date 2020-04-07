@@ -10,8 +10,7 @@ $(function(){
 				"id":id
 			},
 			success:function(data){
-				
-				location.replace("../board/boardlist.jsp");
+				location.replace("../main.jsp");
 			}
 		});
 	});

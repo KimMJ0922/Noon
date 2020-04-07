@@ -12,14 +12,19 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String id = (String)session.getAttribute("id");
-	String createFolderPath = getServletContext().getRealPath("/preview/"+id); //폴더 경로
-	//임시 폴더 안에 폴더 생성
 	ImgFolderCreate fc = new ImgFolderCreate();
+	String createpreviewFolderPath = getServletContext().getRealPath("/preview");
+	//임시 폴더 없으면 생성
+	fc.createFolder(createpreviewFolderPath);
+	//임시 폴더 안에 폴더 생성
+	
 	//폴더 생성 후 검색
 	ImgFolderInSearch fis = new ImgFolderInSearch();
 	String url=request.getContextPath();
 	System.out.println(url);
-	fc.createFolder(createFolderPath);
+	//폴더 경로
+	String createUserFolderPath = getServletContext().getRealPath("/preview/"+id);
+	fc.createFolder(createUserFolderPath);
 	
 	int uploadSize = 1024*1024*5;
 	String imgName = "";
@@ -27,8 +32,8 @@
 	JSONArray arr = new JSONArray();
 	try{
 		//임시파일로 저장
-		multi = new MultipartRequest(request, createFolderPath, uploadSize,"utf-8", new DefaultFileRenamePolicy());
-		List<String> list = fis.searchFolder(createFolderPath);
+		multi = new MultipartRequest(request, createUserFolderPath, uploadSize,"utf-8", new DefaultFileRenamePolicy());
+		List<String> list = fis.searchFolder(createUserFolderPath);
 		
 		//임시 폴더 안에 저장된 파일을 json 형식으로 리턴
 		for(String img : list){

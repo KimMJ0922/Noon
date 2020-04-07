@@ -5,21 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/board/jquery.form.js"></script>
+<script src="js/board/updateboard.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="../js/jquery.form.js"></script>
-<script src="../js/updateboard.js"></script>
-<link rel= "stylesheet" type="text/css" href="../css/writeboard.css">
-<script type="text/javascript">
+<link rel= "stylesheet" type="text/css" href="css/board/writeboard.css">
 
-</script>
 </head>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -28,7 +19,7 @@
 <body>
 	
 	<form name="fileform" id="fileform" method="post"
-		  action="updateboardaciton.jsp" enctype="multipart/form-data">
+		  action="board/updateboardaciton.jsp" enctype="multipart/form-data">
 		<input type="hidden" name="num" id="num" value="<%=num%>">
 		<div>
 			<textarea id="content" name="content" cols="50" rows="10"></textarea>
