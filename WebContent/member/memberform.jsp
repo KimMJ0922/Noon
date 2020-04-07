@@ -26,7 +26,7 @@
 	</marquee> --%>
 	<div class="form">
 		<div class="logo" align="center" style="margin-bottom: 20px;">
-			<img alt="#" src="logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;">
+			<img alt="#" src="../img/member/logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;">
 			<h3>NOON</h3>
 		</div>
 		<div class="custom-progress-bar-wrapper">
