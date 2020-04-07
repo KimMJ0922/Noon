@@ -31,18 +31,6 @@ public class OracleConn {
 		return conn;
 	}
 	
-	public Connection getConnection2() {
-		Connection conn =null;
-		String url = "jdbc:oracle:thin:@192.168.0.3:1521:xe";
-		try {
-			conn = DriverManager.getConnection(url,"angel","a1234");
-//			System.out.println("계정 연결 성공");
-		} catch (SQLException e) {
-			System.out.println("계정 연결 실패 : "+e.getMessage());
-		}
-		return conn;
-	}
-	
 	//sql 자원들을 닫는 메서드
 		public void dbClose(PreparedStatement pstmt,Connection conn)
 		{
