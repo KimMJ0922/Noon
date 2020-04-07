@@ -15,7 +15,6 @@
 		<button type="button" id="logout">로그아웃</button>
 		<button type="button" id="writebtn">글쓰기</button>
 		<button type="button" id="hsbtn">알림</button>
-		<input type="text" id="searchtext" name="searchtext">
 	</div>
 	<div id="history">
 	

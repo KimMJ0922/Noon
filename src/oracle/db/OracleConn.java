@@ -24,6 +24,7 @@ public class OracleConn {
 		Connection conn =null;
 		try {
 			conn = DriverManager.getConnection(url,"angel","1234");
+			
 //			System.out.println("계정 연결 성공");
 		} catch (SQLException e) {
 			System.out.println("계정 연결 실패 : "+e.getMessage());

@@ -44,9 +44,9 @@ div.btns{
 	border:none;
 	background-color: #ffdee9;
 }
-img{
-	max-width: 500px;
-	max-height: 500px;
+.imgs>img{
+	width: 200px;
+	height: 200px;
 }
 pre{
 	border:none;

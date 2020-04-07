@@ -1,7 +1,35 @@
 @charset "UTF-8";
-.top{
-	
-	
-	
-	
+.topcontent>p{
+	font-family: 'Montserrat Subrayada', sans-serif;
+}
+.searchtag{
+    text-align: center;
+    border-radius: 23px;
+    width: 144px;
+    position: relative;
+    top: 24px;
+    border-style: solid;
+    transition: 0.4s;	
+}
+.searchtag:hover{
+	text-align: center;
+    font-size: 21px;
+    height: 50px;
+    width: 500px;
+}
+.topcontent{
+	height: 120px;
+	text-align: center;
+}
+.myinfo>img{
+	style="border-radius: 52px;
+	max-width: 100px;
+	margin-top: 11px;
+}
+.subtopcontent{
+	height:50px;
+	border: 1px solid black;
+}
+.myinfo{
+	margin:0;
 }

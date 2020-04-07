@@ -131,7 +131,7 @@ function imgUpload(){
 function imglist(data){
 	var str="";
 	$.each(data,function(i,item){
-		str += "<div class='imgSample' style='background-image:url("+item.imgURL+"); background-size:cover;' >";
+		str += "<div class='imgSample' style='background-image:url("+item.imgURL+"); max-width:150px; background-size:150px 150px;' >";
 			str += "<div class='delBtn' id='"+item.img+"'>"
 				str += "<span class='glyphicon glyphicon-remove removebtn'></span>"
 			str += "</div>";
