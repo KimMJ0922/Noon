@@ -13,7 +13,7 @@
 	ImgFileDelete ifd = new ImgFileDelete();
 	
 	List<String> list = imgdao.getNumImglist(num);
-	String id="aaa";
+	String id = (String)session.getAttribute("id");
 	
 	String folderPath = getServletContext().getRealPath("/save/"+id); //폴더 경로
 	//삭제하는 글에 이미지 파일이 있는 경우

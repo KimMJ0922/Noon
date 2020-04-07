@@ -6,15 +6,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="js/jquery.form.js"></script>
-<script src="js/boardlist.js"></script>
-<link rel= "stylesheet" type="text/css" href="../css/boardlist.css">
+<link rel= "stylesheet" type="text/css" href="css/board/boardlist.css">
+<script type="text/javascript" src="js/board/onhashchange.js"></script>
+<script type="text/javascript" src="js/board/boardlist.js"></script>
 </head>
 <body>
 	<div>
+		<button type="button" id="logout">로그아웃</button>
 		<button type="button" id="writebtn">글쓰기</button>
+		<button type="button" id="hsbtn">알림</button>
 		<input type="text" id="searchtext" name="searchtext">
+	</div>
+	<div id="history">
+	
 	</div>
 	<div id="list"></div>
 </body>

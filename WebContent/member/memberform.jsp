@@ -5,110 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script type="text/javascript" src="../js/member/progress-bar.js"></script>
+<script type="text/javascript" src="../js/member/progress-bar2.js"></script>
+<script type="text/javascript" src="../js/member/signupValidate.js"></script>
+
+<link rel="stylesheet" href="../css/member/memberform.css"/>
 </head>
 <%
 	String url = request.getContextPath();
 %>
-<script src="progress-bar.js"></script>
 <style>
-	body{
-		background-image: url("background.jpg");
-	}
-	.form{
-		width: 50%;
-		height: 500px;
-		margin: 10% auto;
-		padding: 10px;
-		border: 1px solid gray;
-		box-shadow: 3px 3px 3px 3px gray;
-		border-radius: 30px; 
-		background-color: white;
-	}
-	.top{
-		height: 125px;
-	}
 	
-	.next,.prev{
-		margin-top: 20px;
-	}
-	
-	ul.progress-bar {
-		width: 100%;
-		margin: 0;
-		padding: 0;
-		font-size: 0;
-		list-style: none;
-	}
-	
-	li.section {
-		display: inline-block;
-		padding-top: 45px;
-		font-size: 13px;
-		left:-10px;
-		font-weight: bold;
-		line-height: 16px;
-		color: gray;
-		vertical-align: top;
-		position: relative;
-		text-align: center;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	
-	li.section:before {
-		content: 'x';
-		position: absolute;
-		top: 2px;
-		left: calc(50% - 15px);
-		z-index: 1;
-		width: 30px;
-		height: 30px;
-		color: white;
-		border: 2px solid white;
-		border-radius: 17px;
-		line-height: 30px;
-		background: gray;
-	}
-	
-	.status-bar {
-		height: 2px;
-		background: gray;
-		position: relative;
-		top: 20px;
-		margin: 0 auto;
-	}
-	
-	.current-status {
-		height: 2px;
-		width: 0;
-		border-radius: 1px;
-		background: mediumseagreen;
-	}
-	
-	li.section.visited:before {
-		content: '\2714';
-		animation: changeBackground .2s linear;
-		animation-fill-mode: forwards;
-	}
-	
-	li.section.visited.current:before {
-		box-shadow: 0 0 0 2px mediumseagreen;
-	}
-	
-	@keyframes changeBackground {
-		from {background: gray
-	}
-	
-	to {
-		background: mediumseagreen
-	}
-	
-	}
-	.status-bar{
-		 width:1200px;
-	}
 </style>
 <body>
 	<%-- <marquee direction="left" width="100%" behavior="scroll"
@@ -117,7 +26,7 @@
 	</marquee> --%>
 	<div class="form">
 		<div class="logo" align="center" style="margin-bottom: 20px;">
-			<img alt="#" src="logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;">
+			<img alt="#" src="../img/member/logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;">
 			<h3>NOON</h3>
 		</div>
 		<div class="custom-progress-bar-wrapper">
@@ -211,16 +120,16 @@
 				</div>
 				<div class="form-group" hidden align="center">
 					<b>완료하셨습니다 가입하시겠습니까?</b><br>
-					<button type="submit" class="btn btn-default">Submit</button>
-					<button type="reset" class="btn btn-default">Reset</button>
+					<button type="submit" class="btn btn-default">회원가입</button>
+					<button type="reset" class="btn btn-default">다시작성</button>
 				</div>
 			</div>
 			<div class="bottom">
 				<div style="float: left;">
-					<button type="button" class="btn btn-default prev">이전</button>
+					<button type="button" class="btn btn-default prev btn-lg">이전</button>
 				</div>
 				<div style="float: right;">
-					<button type="button" class="btn btn-default next">다음</button>
+					<button type="button" class="btn btn-primary next btn-lg" onclick="validate()" cnt="0" bool="">다음</button>
 				</div>
 			</div>
 		</form>

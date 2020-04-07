@@ -22,8 +22,8 @@ public class BoardDAO {
 		try {
 			//boardtb에 insert
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "testid");
-			pstmt.setString(2, "testnickname");
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getContent());
 			pstmt.execute();
 			

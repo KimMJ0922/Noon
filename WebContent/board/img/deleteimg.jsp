@@ -15,7 +15,7 @@
 	
 	String imgName = request.getParameter("imgName");
 	//세션으로 가져올 아이디
-	String id = "aaa";
+	String id = (String)session.getAttribute("id");
 	String deleteImgFolderPath = getServletContext().getRealPath("/preview/"+id);
 	
 	ifd.imgDelete(deleteImgFolderPath, imgName);
