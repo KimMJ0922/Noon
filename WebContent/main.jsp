@@ -24,8 +24,6 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- js폴더 안에 있는 파일 목록 -->
-
-
 <!-- css폴더 안에 있는 파일 목록 -->
 <link rel= "stylesheet" type="text/css" href="css/topmenu.css">
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">

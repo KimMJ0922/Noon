@@ -16,7 +16,7 @@ public class HistoryDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from history where toid like ? order by actionday desc";
+		String sql = "select * from history where toid = ? order by actionday desc";
 		String con = "";
 		conn = db.getConnection();
 		try {
@@ -66,5 +66,30 @@ public class HistoryDAO {
 			db.dbClose(pstmt, conn);
 		}
 		
+	}
+	
+	public int getHistoryCount(String id){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from history where toid = ?";
+		conn = db.getConnection();
+		int cnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return cnt;
 	}
 }

@@ -1,7 +1,4 @@
 $(function(){
-	//루트 경로
-	var root = $("#root").val();
-	
 	//초기에 화면에 보여질 글 갯수
 	var minrow = 0;
 	var maxrow = parseInt($.trim(getMaxrowCookie()));
@@ -164,7 +161,7 @@ $(function(){
 	$(document).on("click","#hsbtn",function(){
 		$.ajax({
 			type: "post", 
-			url: "history/get.jsp", 
+			url: "history/gethistory.jsp", 
 			dataType:"json",
 			success:function(data){
 				var str = "<ul>";
@@ -177,6 +174,10 @@ $(function(){
 			}
 		});
 	});
+	
+	var webworker;
+
+	
 });//$(function) 끝
 
 
