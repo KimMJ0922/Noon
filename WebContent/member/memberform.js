@@ -101,8 +101,6 @@ $(function(){
 		cnt--;
 		$(".top .form-group").eq(cnt).fadeIn("fast");
 		$(".next").attr("cnt",cnt);
-		/*$(".progress-bar").attr("aria-valuenow",cnt*20);
-		$(".progress-bar").css("width",""+cnt*2+"0%");*/
 		
 		//프로그레스 바 이벤트
 		if(cnt==1){
@@ -135,72 +133,38 @@ $(function(){
 		location.reload();
 	});
 	
+	$("#checkid").keyup(function(e){
+		idchk();
+		
+	});
+	$(".com").click(function(){
+		var chk = $(this).attr("chk");
+		if(chk=="no"){
+			return false;
+		}else{
+			$("#id").val($("#checkid").val());
+		}
+	});
 });
 
-function validate(e){
-	var cnt = $(".next").attr("cnt");
-	var bool = true;
-	var str = "";
-
-	switch(cnt){
-	case '0' : 
-		if($("#name").val() == ""){
-			$(".next").attr("bool",false);
-			str = "이름을 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
-		}else{
-			$(".next").attr("bool",true);
+function idchk(){
+	var id = $("#checkid").val();
+	$.ajax({
+		type: "post",
+		dataType: "html",
+		data: {
+			"id":id
+		},
+		url: "idcheck.jsp",
+		success: function(data){
+			$("#idchkResult").text(data);
+			console.log(data);
+			var tt = $.trim(data);
+			if(tt=="사용 가능한 아이디 입니다.")
+				$(".com").attr("chk","yes");
+			else
+				$(".com").attr("chk","no");
 		}
-		break;
-
-	case '1' : 
-		if($("#myid").val() == ""){
-			$(".next").attr("bool",false);
-			str = "아이디를 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
-		}else{
-			$(".next").attr("bool",true);
-		}
-		break;
-
-	case '2' : 
-		if($("#pass").val() == ""){
-			$(".next").attr("bool",false);
-			str = "비밀번호를 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
-		}else{
-			$(".next").attr("bool",true);
-		}
-		break;
-
-	case '3' :
-		if($("#hp2").val() == ""){
-			$(".next").attr("bool",false);
-			str = "휴대폰 번호를 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
-		}else{
-			$(".next").attr("bool",true);
-		}
-		break;
-
-	case '4' : 
-		if($("#email1").val() == ""){
-			$(".next").attr("bool",false);
-			str = "이메일을 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
-		}else{
-			$(".next").attr("bool",true);
-		}
-		break;
-
-	case '5' : 
-		if($("#addr1").val() == ""){
-			$(".next").attr("bool",false);
-			str = "주소를 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
-		}else{
-			$(".next").attr("bool",true);
-		}
-		break;
-	}
+	});
 }
+
