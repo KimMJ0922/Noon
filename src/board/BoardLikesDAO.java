@@ -38,7 +38,7 @@ public class BoardLikesDAO {
 			HistoryDAO hdao = new HistoryDAO();
 			if(!id.equals(dto.getId()) && likes != -1) {
 				String action = "like";
-				hdao.insertHistory(id,dto.getId(),action);
+				hdao.insertHistory(dto.getId(),id,action);
 			}
 			
 			
