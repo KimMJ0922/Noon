@@ -1,4 +1,4 @@
-function validate(e){
+function validate(){
 	var cnt = $(".next").attr("cnt");
 	var bool = true;
 	var str = "";

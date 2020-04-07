@@ -144,7 +144,7 @@
 		<!-- <div class="progress">
 	  		<div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 		</div> -->
-		<form action="member/memberAdd.jsp" method="post" id="frm" name="frm">
+		<form action="memberaction.jsp" method="post" id="frm" name="frm">
 			<div class="top">
 				<div class="form-group">
 					<label for="name">이름:</label> 
@@ -153,7 +153,7 @@
 				<div class="form-group" hidden>
 					<label for="myid">아이디:</label>
 					<div class="input-group">
-					   <input type="text" class="form-control" id="myid" name="myid">
+					   <input type="text" class="form-control" id="id" name="id">
 					   <span class="input-group-btn">
 					        <input type="button" class="btn btn-default" id="btnid" value="중복체크">
 					   </span>

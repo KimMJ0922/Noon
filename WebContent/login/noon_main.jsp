@@ -85,10 +85,25 @@ $(function(){
 	
 	
 	$("#wrapper").tubular(options);
+	
 });
 </script>
 <titlea>메인 로그인 페이지</title>
 </head>
+<%
+	String loginok = (String)session.getAttribute("loginok");
+	if(loginok.equals("ok")){%>
+		<script>
+			location.href='main.jsp';
+		</script>
+	<%}
+	String idcheck = (String)session.getAttribute("idcheck");
+	String myid = "";
+	if(id!=null && idcheck.equals("yes")){
+		String id = (String)session.getAttribute("id");
+		myid = id;
+	}
+%>
 <body>
 <div id="wrapper">
 	<div class="container">
@@ -96,12 +111,15 @@ $(function(){
 		  <div class="col-md-12 col-sm-12 col-xs-12">
 		  	<div class="login_main">
 		  	<p class="main_simbol">NOON</p>
-		  	<input class="main_input" id="id" type="text" placeholder="아이디"><br>
-			<input class="main_input" id="password" type="password" placeholder="비밀번호"><br>
-			<input class="main_submit" type="button" value="로그인"><br>
+		  	<form action="loginaction.jsp" method="post">
+			  	<input class="main_input" id="id" name="id" type="text" 
+			  	placeholder="아이디" value="<%=myid %>"><br>
+				<input class="main_input" id="password" name="pass" type="password" placeholder="비밀번호"><br>
+				<input class="main_submit" type="submit" value="로그인"><br>
 			
-			<p class="main_serc"><a href="#"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
-			<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;"> 아이디 저장</p>
+				<p class="main_serc"><a href="#"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
+				<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;" <%=(idcheck!=null?"checked":"")%>> 아이디 저장</p>
+		  	</form>
 			</div>
 		  </div>
 		</div>
