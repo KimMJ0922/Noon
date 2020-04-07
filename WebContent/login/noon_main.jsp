@@ -92,15 +92,15 @@ $(function(){
 </head>
 <%
 	String loginok = (String)session.getAttribute("loginok");
-	if(loginok.equals("ok")){%>
+	if(loginok!=null && loginok.equals("ok")){%>
 		<script>
 			location.href='main.jsp';
 		</script>
 	<%}
 	String idcheck = (String)session.getAttribute("idcheck");
 	String myid = "";
+	String id = (String)session.getAttribute("id");
 	if(id!=null && idcheck.equals("yes")){
-		String id = (String)session.getAttribute("id");
 		myid = id;
 	}
 %>
@@ -117,7 +117,7 @@ $(function(){
 				<input class="main_input" id="password" name="pass" type="password" placeholder="비밀번호"><br>
 				<input class="main_submit" type="submit" value="로그인"><br>
 			
-				<p class="main_serc"><a href="#"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
+				<p class="main_serc"><a href="../member/memberform.jsp"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
 				<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;" <%=(idcheck!=null?"checked":"")%>> 아이디 저장</p>
 		  	</form>
 			</div>

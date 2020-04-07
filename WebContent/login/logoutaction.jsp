@@ -4,5 +4,5 @@
 	session.removeAttribute("idcheck");
 	session.removeAttribute("loginok");
 	
-	response.sendRedirect(location);
+	response.sendRedirect("noon_main.jsp");
 %>

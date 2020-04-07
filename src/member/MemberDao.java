@@ -64,4 +64,29 @@ public class MemberDao {
 		
 		return success;
 	}
+	
+	public boolean isEqualID(String id) {
+		boolean isEqual=false;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from membertb where id=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				System.out.println("rs : "+rs.getInt(1));
+				if(rs.getInt(1)==1) {
+					isEqual=true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return isEqual;
+	}
 }
