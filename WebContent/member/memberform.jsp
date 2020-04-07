@@ -169,10 +169,10 @@
 							</select>
 						</div>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="hp2" name="hp2" size="4" required="required">
+							<input type="text" class="form-control" id="hp2" name="hp2" size="4" maxlength="4" required="required">
 						</div>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="hp3" name="hp3" size="4" required="required">
+							<input type="text" class="form-control" id="hp3" name="hp3" size="4" maxlength="4" required="required">
 						</div>
 					</div>
 				</div>
@@ -242,6 +242,27 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default com" chk="no" data-dismiss="modal">완료</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<div id="chkModal" class="modal fade" role="dialog" style="top: 38%;">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">에러</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="form-group">
+	      		<p id="msg"></p>
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">완료</button>
 	      </div>
 	    </div>
 	  </div>

@@ -76,7 +76,6 @@ public class MemberDao {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				System.out.println("rs : "+rs.getInt(1));
 				if(rs.getInt(1)==1) {
 					isEqual=true;
 				}

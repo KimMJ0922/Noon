@@ -59,9 +59,6 @@ $(function(){
 	
 	$(".next").click(function(e){
 		if($(this).attr("bool")=="false"){
-			var str = $(this).attr("str");
-			$(".top .form-group input").eq(cnt).addClass("has-error");
-			$("label").eq(cnt).text(str);
 			return;
 		}
 		

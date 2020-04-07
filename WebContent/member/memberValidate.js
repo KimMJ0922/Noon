@@ -8,9 +8,10 @@ function validate(){
 		if($("#name").val() == ""){
 			$(".next").attr("bool",false);
 			str = "이름을 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
+			$("#name").addClass("has-error");
 		}else{
 			$(".next").attr("bool",true);
+			$("#name").removeClass("has-error");
 		}
 		break;
 
@@ -18,10 +19,10 @@ function validate(){
 		if($("#id").val() == ""){
 			$(".next").attr("bool",false);
 			str = "아이디를 입력 하거나 중복체크 해주세요";
-			$(".next").attr("str",str);
-			
+			$("#id").addClass("has-error");
 		}else{
 			$(".next").attr("bool",true);
+			$("#id").removeClass("has-error");
 		}
 		break;
 
@@ -29,9 +30,10 @@ function validate(){
 		if($("#pass").val() == ""){
 			$(".next").attr("bool",false);
 			str = "비밀번호를 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
+			$("#pass").addClass("has-error");
 		}else{
 			$(".next").attr("bool",true);
+			$("#pass").removeClass("has-error");
 		}
 		break;
 
@@ -39,30 +41,43 @@ function validate(){
 		if($("#hp2").val() == ""){
 			$(".next").attr("bool",false);
 			str = "휴대폰 번호를 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
+			$("#hp2").addClass("has-error");
+			$("#hp3").addClass("has-error");
 		}else{
 			$(".next").attr("bool",true);
+			$("#hp2").removeClass("has-error");
+			$("#hp3").removeClass("has-error");
 		}
 		break;
 
 	case '4' : 
-		if($("#email1").val() == ""){
+		if($("#email1").val() == "" && $("#email2").val() == ""){
 			$(".next").attr("bool",false);
 			str = "이메일을 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
+			$("#email1").addClass("has-error");
+			$("#email2").addClass("has-error");
 		}else{
 			$(".next").attr("bool",true);
+			$("#email1").removeClass("has-error");
+			$("#email2").removeClass("has-error");
 		}
 		break;
 
 	case '5' : 
-		if($("#addr1").val() == ""){
+		if($("#addr1").val() == "" && $("#addr2").val() == ""){
 			$(".next").attr("bool",false);
 			str = "주소를 양식에 맞게 입력 해주세요";
-			$(".next").attr("str",str);
+			$("#addr1").addClass("has-error");
+			$("#addr2").addClass("has-error");
 		}else{
 			$(".next").attr("bool",true);
+			$("#addr1").removeClass("has-error");
+			$("#addr2").removeClass("has-error");
 		}
 		break;
+	}
+	if(str!=""){
+		$("#msg").text(str);
+		$("#chkModal").modal('show');
 	}
 }
