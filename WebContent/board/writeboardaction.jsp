@@ -63,7 +63,7 @@
 		
 %>
 		<script type="text/javascript">
-			location.replace("boardlist.jsp");
+			location.replace("../main.jsp?main=board/boardlist.jsp");
 		</script>
 <%
 	}catch(Exception e){
