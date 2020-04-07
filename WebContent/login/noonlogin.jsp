@@ -71,18 +71,11 @@ text-align: center;
 }
 
 .check_id{
-
 	margin:0 auto;
 	margin-top:10px;
 	width:330px;
 	text-align: left;
 }
-.footer{
-	width:100%;
-	position: absolute;
-	z-index: 99;
-}
-
 </style>
 <script type="text/javascript">
 $(function(){
@@ -103,7 +96,6 @@ $(function(){
 		<div class="row">
 		  <div class="col-md-12 col-sm-12 col-xs-12">
 		  	<div class="login_main">
-<<<<<<< HEAD:WebContent/login/noonlogin.jsp
 			  	<p class="main_simbol">NOON</p>
 			  	<input class="main_input" id="id" type="text" placeholder="아이디"><br>
 				<input class="main_input" id="password" type="password" placeholder="비밀번호"><br>
@@ -111,21 +103,11 @@ $(function(){
 				
 				<p class="main_serc"><a href="../member/memberform.jsp"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
 				<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;"> 아이디 저장</p>
-=======
-		  	<p class="main_simbol">NOON</p>
-		  	<input class="main_input" type="text" placeholder="아이디"><br>
-			<input class="main_input" type="text" placeholder="비밀번호"><br>
-			<input class="main_submit" type="submit" value="로그인"><br>
-			<p class="main_serc"><a href="#"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
-			<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;"> 아이디 저장</p>
->>>>>>> JEJ:WebContent/noon_main.jsp
 			</div>
 		  </div>
 		</div>
 	</div>
 </div>
-
-
 </body>
 <script type="text/javascript" src="../js/noonmain.js"></script>
 </html>
