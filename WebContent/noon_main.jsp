@@ -63,11 +63,18 @@ text-align: center;
 }
 
 .check_id{
+
 	margin:0 auto;
 	margin-top:10px;
 	width:330px;
 	text-align: left;
 }
+.footer{
+	width:100%;
+	position: absolute;
+	z-index: 99;
+}
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -92,7 +99,6 @@ $(function(){
 		  	<input class="main_input" type="text" placeholder="아이디"><br>
 			<input class="main_input" type="text" placeholder="비밀번호"><br>
 			<input class="main_submit" type="submit" value="로그인"><br>
-			
 			<p class="main_serc"><a href="#"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
 			<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;"> 아이디 저장</p>
 			</div>
@@ -100,5 +106,7 @@ $(function(){
 		</div>
 	</div>
 </div>
+
+
 </body>
 </html>
