@@ -1815,7 +1815,106 @@ pre code {
 	margin-right: auto;
 	margin-left: auto
 }
+/* 성은이의 틈새CSS 시작 따란- */
 
+
+
+
+
+
+@media ( min-width :320px) {
+	.topcontent>p{
+		font-size: 2em;
+    	line-height: 4.1em;
+	    margin: 0;
+	    padding: 0;
+	}
+	.myinfo>img{
+		border-radius: 50px;
+	    max-width: 58px;
+	    margin-top: 23px;
+	}
+	.topmain{
+		height: 30px;
+	}
+	.topcontent{
+		height: 30px;
+	}
+}
+
+@media ( min-width :768px) {
+	.topcontent>p{
+		line-height: 2.0em;
+    	font-size: 4em;
+	    margin: 0;
+	    padding: 0;
+	}
+	.myinfo>img{
+		border-radius: 50px;
+	    max-width: 58px;
+	    margin-top: 23px;
+	}
+	.topmain{
+		height: 30px;
+	}
+	.topcontent{
+		height: 30px;
+	}
+}
+
+
+@media ( min-width :992px) {
+	.topcontent>p{
+	    line-height: 2.0em;
+    	font-size: 4em;
+	    margin: 0;
+	    padding: 0;
+	}
+	.myinfo>img{
+		position: relative;
+	    left: -50px;
+	    border-radius: 50px;
+	    max-width: 83px;
+	    margin-top: 6px;
+	}
+	.topmain{
+	    height: 120px;
+	}
+	.topcontent{
+	    height: 120px;
+	}
+}
+
+
+@media ( min-width :1200px) {
+	.topcontent>p{
+	    text-align: left;
+		line-height: 1.7em;
+	    font-size: 5em;
+	    margin: 0;
+	    padding: 0;
+	}
+	.myinfo>img{
+	    position: unset;
+		border-radius: 50px;
+	    max-width: 100px;
+	    margin-top: 6px;
+	}
+	.topmain{
+	    height: 120px;
+	}
+	.topcontent{
+	    height: 120px;
+	}
+}
+
+
+
+
+
+
+
+/* 성은이의 틈새CSS 끝 따란- */
 @media ( min-width :768px) {
 	.container {
 		width: 750px
