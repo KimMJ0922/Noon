@@ -9,5 +9,7 @@
 <jsp:setProperty property="*" name="dto"/>
 <%
 	db.insertMember(dto);
-	response.sendRedirect("../login/noon_main.jsp");
 %>
+<script>
+	location.replace("../login/noonlogin.jsp");
+</script>

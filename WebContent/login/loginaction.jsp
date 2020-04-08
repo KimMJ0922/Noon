@@ -16,7 +16,7 @@
 		if(idcheck!=null)
 			session.setAttribute("idcheck", "yes");
 		session.setMaxInactiveInterval(60*60*24);
-		response.sendRedirect("../board/boardlist.jsp");
+		response.sendRedirect("../main.jsp");
 	}else{%>
 		<script>
 			alert("일치하는 회원 정보가 없습니다.");

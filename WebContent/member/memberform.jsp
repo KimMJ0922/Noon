@@ -5,17 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/member/memberform.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <%
 	String url = request.getContextPath();
 %>
-<script src="memberform.js"></script>
-<script src="memberValidate.js"></script>
+<script src="../js/member/memberform.js"></script>
+<script src="../js/member/memberValidate.js"></script>
 <style>
 	body{
-		background-image: url("background.jpg");
+		background-image: url("../img/member/background.jpg");
 	}
 	.form{
 		width: 50%;
@@ -35,7 +37,7 @@
 <body>
 	<div class="form">
 		<div class="logo" align="center" style="margin-bottom: 20px;">
-			<a href="#"><img alt="#" src="logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;"></a>
+			<a href="#"><img alt="#" src="../img/member/logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;"></a>
 			<h3>NOON</h3>
 		</div>
 		<div class="custom-progress-bar-wrapper">
