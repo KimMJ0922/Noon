@@ -119,7 +119,7 @@
 <body>
 	<div class="form">
 		<div class="logo" align="center" style="margin-bottom: 20px;">
-			<img alt="#" src="logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;">
+			<a href="#"><img alt="#" src="logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;"></a>
 			<h3>NOON</h3>
 		</div>
 		<div class="custom-progress-bar-wrapper">

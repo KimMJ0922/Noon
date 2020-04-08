@@ -14,7 +14,7 @@ public class MemberDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "INSERT INTO membertb VALUES (seq_signup.nextval, ?,?,?,?,?,?,?,sysdate,?)";
+		String sql = "INSERT INTO membertb VALUES (seq_signup.nextval, ?,?,?,?,?,?,?,sysdate,?,null)";
 		String type = "일반회원";
 		
 		try {
@@ -47,10 +47,8 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pass);
-			System.out.println(pass);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				System.out.println(rs.getInt(1));
 				if(rs.getInt(1)==1) {
 					success=true;
 				}
