@@ -175,7 +175,7 @@ margin-left:10px;
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
 				<div class="detail_content">
-					<p>1,2,3</p><!--  아이콘 자리 -->
+					<p>이미지 넣으면됨</p><!--  아이콘 자리 -->
 					<p><b>좋아요 0개</b></p>
 					<!-- 글 내용 -->
 					<b><%=dto.getContent()%></b>
