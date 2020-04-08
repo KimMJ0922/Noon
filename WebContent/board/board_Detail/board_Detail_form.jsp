@@ -25,7 +25,6 @@
 	}
 	
 .reboard{
-background:red;
 height:600px;
 }
 .detail_content{
@@ -40,16 +39,17 @@ height:600px;
 	background: black;
 }
 .img_none_box{
-width: 670px;
+width: 475px;
 height:600px;
 /* background:rgba(128,128,128,0.2); */
 }
-.img_none{
 
-width: 670px;
+.img_none{
+width: 475px;
 height:70px;
 color:white;
 padding-top:10px;
+line-height: 3;
 }
 .img_none span{
 margin-left:10px;
@@ -60,6 +60,24 @@ height:50px;
 border-radius: 30px;
 margin-left:10px;
 }
+
+.img_on{
+width:475px;
+height:50px;
+color:white;
+padding-top:10px;
+line-height: 3;
+}
+.img_on span{
+margin-left:10px;
+}
+.img_on>img{
+width: 50px;
+height:50px;
+border-radius: 30px;
+margin-left:10px;
+}
+
   </style>
 </head>
 <%	
@@ -164,7 +182,14 @@ margin-left:10px;
 			</div><!-- class="col-md-7 col-sm-7" 끝 -->
 			<div class="col-md-5 col-sm-5" style="padding:0;"><!-- 댓글창 -->
 				<div class="reboard">
-				
+					<div class="img_on">
+					<img src="<%=url %>/save/ddd/iu.jpg" style="float:left">
+					<span style="margin-top:10px;"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
+					</div>
+					<hr>
+					<input type="text" name="re_board"
+					 style="width:475px; border:none;border-top:1px solid gray;
+					 right:0px;bottom:0px;position: absolute;height: 70px;" placeholder="  댓글을 입력하세요">
 				</div>
 			</div><!-- class="col-md-5 col-sm-5"끝 -->
 		</div><!-- class="row" 끝 -->
