@@ -20,8 +20,10 @@ $(function(){
    
    //해시태그 불러오기
    var hashtag = getHashTag(minrow,maxrow);
-   boardList(minrow,maxrow,img,hashtag);
-   
+  
+   //좋아요 불러오기
+   var likes = getLikeList(minrow,maxrow);
+   boardList(minrow,maxrow,img,hashtag,likes);
    //글쓰는 페이지 이동
    $("#writebtn").click(function(){
       location.href="main.jsp?view=board/writeboard.jsp";
@@ -36,7 +38,8 @@ $(function(){
             maxrow = maxrow+5;
             img = getImgList(minrow,maxrow);
             hashtag = getHashTag(minrow,maxrow);
-            endcheck = boardList(minrow,maxrow,img,hashtag);
+            likes = getLikeList(minrow,maxrow);
+            endcheck = boardList(minrow,maxrow,img,hashtag,likes);
          }else{
             endcheck = false;
             return false;
@@ -99,11 +102,11 @@ $(function(){
       var num = $(this).parents(".listform").attr("id");
       var src = $(this).attr("src");
       var cnt = 0;
-      if(src=="../img/heart-full.png"){
-         $(this).attr("src","img/heart-empty.png");
+      if(src=="img/like/heart-full.png"){
+         $(this).attr("src","img/like/heart-empty.png");
          cnt = -1;
       }else{
-         $(this).attr("src","img/heart-full.png");
+         $(this).attr("src","img/like/heart-full.png");
          cnt = +1;
       }
       $.ajax({
@@ -177,6 +180,9 @@ $(function(){
          }
       });
    });
+   
+   
+  
 });//$(function) 끝
 
 
@@ -193,7 +199,7 @@ function deletePreviewFolder(){
    });
 }
 //글 목록
-function boardList(minrow,maxrow,img,hashtag){
+function boardList(minrow,maxrow,img,hashtag,likes){
    var endcheck = true;
    $.ajax({
       type: "post", 
@@ -205,13 +211,178 @@ function boardList(minrow,maxrow,img,hashtag){
       dataType: "json",
       async: false,
       success:function(data){
-         endcheck = listform(data,img,hashtag);
+         endcheck = listform(data,img,hashtag,likes);
       }
    });
    return endcheck;
 }
+
+
+//이미지 가져오기
+function getImgList(minrow,maxrow){
+   var imglist ="";
+   $.ajax({
+      type: "post", 
+      url: "board/img/getimglist.jsp", 
+      dataType: "json",
+      data:{
+         "minrow":minrow,
+         "maxrow":maxrow
+      },
+      async: false,
+      success:function(img){
+         imglist = img;
+      }
+   });
+   
+   return imglist;
+}
+
+
+//해시태그 가져오기
+function getHashTag(minrow,maxrow){
+   var hashtag ="";
+   $.ajax({
+      type: "post", 
+      url: "board/hashtag/gethashtag.jsp", 
+      dataType: "json",
+      data:{
+         "minrow":minrow,
+         "maxrow":maxrow
+      },
+      async: false,
+      success:function(hash){
+         hashtag = hash;
+      }
+   });
+   
+   return hashtag;
+}
+
+
+//좋아요 가져오기
+function getLikeList(minrow,maxrow){
+   var likelist ="";
+   $.ajax({
+      type: "post", 
+      url: "board/likes/getlikelist.jsp", 
+      dataType: "json",
+      data:{
+         "minrow":minrow,
+         "maxrow":maxrow
+      },
+      async: false,
+      success:function(likes){
+    	  
+    	  likelist = likes;
+      }
+   });
+   return likelist;
+}
+
+//번호 해시태그 가져오기
+function getNumHashTag(num){
+   var hashtag ="";
+   $.ajax({
+      type: "post", 
+      url: "board/hashtag/getnumhashtag.jsp", 
+      dataType: "json",
+      data:{
+         "num":num
+      },
+      async: false,
+      success:function(hash){
+         hashtag = hash;
+      }
+   });
+   
+   return hashtag;
+}
+
+//번호 내용 가져오기
+function getNumContent(num){
+   var content ="";
+   $.ajax({
+      type: "post", 
+      url: "board/getnumcontent.jsp", 
+      dataType: "html",
+      data:{
+         "num":num
+      },
+      async: false,
+      success:function(con){
+         content = con;
+      }
+   });
+   
+   return content;
+}
+
+
+////////////////////////////////////////////
+//태그 만들기
+////////////////////////////////////////////
+//해시태그 태그 만들기
+function hashTag(num,hashtag){
+   var str = "";
+   $.each(hashtag,function(i,item){
+      if(num==item.num){
+         if(i==4){
+            str+="...<button type='button' class='hashtagmore' idx='"+item.num+"'>더보기</button>";
+         }else if(i<4){
+            str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
+         }
+         
+      }
+   });
+   
+   return str;
+}
+
+//리스트에 넣을 이미지 태그 만들기
+function imgTag(num,img){
+	var cnt = 0;
+	var imgcnt = 0;
+	var lastfile = "";
+	var str = "<div class='imgs' style='width:500px; height:500px;position:relative;'>";
+	$.each(img,function(i,item){
+		if(num==item.num){
+			
+			if(cnt<=2){
+				str += "<img src='"+item.file+"'>";
+			}else if(cnt==3){
+				str += "<img src='"+item.file+"'>";
+			}else{
+				imgcnt++;
+			}
+			cnt++;
+		}
+	});
+	if(cnt>=4){
+		str += "<div class='moreimg'>+"+imgcnt+"</div>";
+	}
+	str += "</div>";
+	   
+	return str;
+}
+
+//좋아요 초기 상태 태그 만들기
+function likeTag(num,likes,likecnt){
+	var str ="<img class='likey' src='img/like/heart-empty.png'/><span>"+likecnt+"</span>";
+	if(likes.length==0){
+		str ="<img class='likey' src='img/like/heart-empty.png'/><span>"+likecnt+"</span>";
+	}else{
+		$.each(likes,function(i,item){
+			if(item.num==num){
+				str ="<img class='likey' src='img/like/heart-full.png'/><span>"+likecnt+"</span>";
+			}
+		});
+	}
+	return str;
+}
+
 //글 리스트 태그 만들기
-function listform(data,img,hashtag){
+function listform(data,img,hashtag,likes){
    var endcheck = true;
    var str="";
    //db에서 가져온 테이블이 존재 할 경우
@@ -259,8 +430,8 @@ function listform(data,img,hashtag){
                
             //좋아요, 댓글 수 
             str += "<div class='likes'>";
-               str +="<img class='likey' src='../img/heart-empty.png'/><span>"+item.likes+"</span>";
-               str +="<span>댓글 : "+item.reply+"</span>";
+            	str += likeTag(num,likes,item.likes);
+            	str +="<span>댓글 : "+item.reply+"</span>";
             str += "</div>";//좋아요, 댓글 수 끝
             
             //해쉬태그 
@@ -276,115 +447,6 @@ function listform(data,img,hashtag){
    }
    return endcheck;
 }
-
-//이미지 가져오기
-function getImgList(minrow,maxrow){
-   var imglist ="";
-   $.ajax({
-      type: "post", 
-      url: "board/img/getimglist.jsp", 
-      dataType: "json",
-      data:{
-         "minrow":minrow,
-         "maxrow":maxrow
-      },
-      async: false,
-      success:function(img){
-         imglist = img;
-      }
-   });
-   
-   return imglist;
-}
-
-//리스트에 넣을 이미지 태그 만들기
-function imgTag(num,img){
-   var str = "<div class='imgs' style='width:500px; height:500px;'>";
-   $.each(img,function(i,item){
-      if(num==item.num){
-         str+="<img src='"+item.file+"' >";
-      }
-   });
-   str += "</div>";
-   
-   return str;
-}
-
-//해시태그 가져오기
-function getHashTag(minrow,maxrow){
-   var hashtag ="";
-   $.ajax({
-      type: "post", 
-      url: "board/hashtag/gethashtag.jsp", 
-      dataType: "json",
-      data:{
-         "minrow":minrow,
-         "maxrow":maxrow
-      },
-      async: false,
-      success:function(hash){
-         hashtag = hash;
-      }
-   });
-   
-   return hashtag;
-}
-function hashTag(num,hashtag){
-   var str = "";
-   $.each(hashtag,function(i,item){
-      if(num==item.num){
-         if(i==4){
-            str+="...<button type='button' class='hashtagmore' idx='"+item.num+"'>더보기</button>";
-         }else if(i<4){
-            str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
-         }
-         
-      }
-   });
-   
-   return str;
-}
-
-//번호 해시태그 가져오기
-function getNumHashTag(num){
-   var hashtag ="";
-   $.ajax({
-      type: "post", 
-      url: "board/hashtag/getnumhashtag.jsp", 
-      dataType: "json",
-      data:{
-         "num":num
-      },
-      async: false,
-      success:function(hash){
-         hashtag = hash;
-      }
-   });
-   
-   return hashtag;
-}
-
-//번호 내용 가져오기
-function getNumContent(num){
-   var content ="";
-   $.ajax({
-      type: "post", 
-      url: "board/getnumcontent.jsp", 
-      dataType: "html",
-      data:{
-         "num":num
-      },
-      async: false,
-      success:function(con){
-         content = con;
-      }
-   });
-   
-   return content;
-}
-
-
-
 
 ////////////////////////////////////////////
 //쿠키 관련

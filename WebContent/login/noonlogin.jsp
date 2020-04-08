@@ -5,12 +5,13 @@
 <head>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="../js/login/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/login/bootstrap.min.css">
 
+<!--  -->
 <script type="text/javascript" src="../js/login/jquery.tubular.1.0.js"></script>
 <script type="text/javascript" src="../js/login/modernizr.js"></script>
 <script type="text/javascript" src="../js/login/noonlogin.js"></script>
@@ -108,5 +109,5 @@ $(function(){
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="../js/noonmain.js"></script>
+<script type="text/javascript" src="../js/login/noonlogin.js"></script>
 </html>

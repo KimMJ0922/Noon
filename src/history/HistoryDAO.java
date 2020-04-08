@@ -16,7 +16,7 @@ public class HistoryDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from history where toid like ? order by actionday desc";
+		String sql = "select * from history where toid = ? order by actionday desc";
 		String con = "";
 		conn = db.getConnection();
 		try {
@@ -25,6 +25,7 @@ public class HistoryDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				HistoryDTO dto = new HistoryDTO();
+				dto.setNum(rs.getString("num"));
 				dto.setFormid(rs.getString("fromid"));
 				dto.setAction(rs.getString("action"));
 				dto.setActionday(rs.getTimestamp("actionday"));
@@ -41,7 +42,7 @@ public class HistoryDAO {
 		return list;
 	}
 	
-	public void insertHistory(String fromid, String toid, String action) {
+	public void insertHistory(String num, String fromid, String toid, String action) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -49,15 +50,16 @@ public class HistoryDAO {
 			action = "좋아요를 눌렀습니다.";
 		}
 		
-		String sql = "insert into history values(?,?,?,sysdate)";
+		String sql = "insert into history values(?,?,?,?,sysdate)";
 		
 		conn = db.getConnection();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, fromid);
-			pstmt.setString(2, toid);
-			pstmt.setString(3, action);
+			pstmt.setString(1, num);
+			pstmt.setString(2, fromid);
+			pstmt.setString(3, toid);
+			pstmt.setString(4, action);
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -66,5 +68,58 @@ public class HistoryDAO {
 			db.dbClose(pstmt, conn);
 		}
 		
+	}
+	
+	public int getHistoryCount(String id){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from history where toid = ?";
+		conn = db.getConnection();
+		int cnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return cnt;
+	}
+	
+	public void deleteHistory(String num, String fromid, String toid, String action) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		if(action.equals("like")) {
+			action = "좋아요를 눌렀습니다.";
+		}
+		
+		String sql = "delete from history where num=? and fromid = ? and toid = ? and action = ?";
+		
+		conn = db.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.setString(2, fromid);
+			pstmt.setString(3, toid);
+			pstmt.setString(4, action);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }

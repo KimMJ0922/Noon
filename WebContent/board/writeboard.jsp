@@ -15,7 +15,7 @@
 	<form name="fileform" id="fileform" method="post"
 		  action="board/writeboardaction.jsp" enctype="multipart/form-data">
 		<div>
-			<textarea id="content" name="content" cols="50" rows="10"></textarea>
+			<textarea id="content" name="content" cols="50" rows="10" required="required"></textarea>
 		</div>
 		<div class="filebox">
 			<label for="photo">업로드</label>

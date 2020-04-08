@@ -107,3 +107,19 @@ pre{
 	padding:0;
 	margin:0;
 }
+
+/*성은이형 필독*/
+/*추가 이미지 갯수*/
+.moreimg{
+	background-color:black;
+	background:rgba(0,0,0,0.7);
+	width:200px;
+	height:200px;
+	position:absolute;
+	top: 250px;
+    left: 200px;
+    text-align: center;
+    line-height: 200px;
+    font-size: 70pt;
+    color:white;
+}
