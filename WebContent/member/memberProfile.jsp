@@ -35,7 +35,7 @@
 		</script>
 	<%}
 	MemberDao db = new MemberDao();
-	List<MemberDto> list = db.getdata(id);
+	MemberDto dto = db.getdata(id);
 %>
 <body>
 	<div class="topmain" style="padding:0; margin:0;">
@@ -63,8 +63,6 @@
 				</tr>
 			</thead>
 			<tbody>
-			<%for(MemberDto dto : list){
-				%>
 				<tr>
 					<td><%=dto.getNum() %></td>
 					<td><%=dto.getName() %></td>
@@ -76,9 +74,8 @@
 					<td><%=dto.getAddr2() %></td>
 					<td><%=dto.getSignupday() %></td>
 					<td><%=dto.getType() %></td>
-					<td><%=dto.getSignupday() %></td>
+					<td><%=dto.getPic() %></td>
 				</tr>
-			<%}%>
 			</tbody>
 		</table>
 	</div>
