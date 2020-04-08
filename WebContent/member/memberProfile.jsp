@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 수정 폼</title>
 <link rel= "stylesheet" type="text/css" href="../css/topmenu.css">
 <link rel= "stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
