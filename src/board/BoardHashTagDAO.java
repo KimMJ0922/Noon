@@ -39,7 +39,7 @@ public class BoardHashTagDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select hashtag from boardhashtagtb where num = ?";
+		String sql = "select hashtag from boardhashtagtb where num = ? order by hashtag";
 		conn = db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);

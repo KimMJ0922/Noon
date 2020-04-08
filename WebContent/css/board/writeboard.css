@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+.imgSample{
+	float:left;
+	position:relative;
+	width:150px;
+	height:150px;
+	border: 2px solid #dddddd;
+	margin:3px 5px 3px 5px;
+}
+.imgSample .delBtn{
+	cursor:pointer;
+	position:absolute;
+	top:0;
+	left:0;
+	width:20px;
+	height:20px;
+	z-index:100;
+}
+
+.filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #fff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #5cb85c;
+  cursor: pointer;
+  border: 1px solid #4cae4c;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #6ed36e;
+}
+
+.filebox label:active {
+  background-color: #367c36;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+#imglist{
+	background-color:#eeeeee;
+	width: 460px;
+	height:200px;
+	overflow:auto;
+}
+#taglist{
+	border:1px solid gary;
+	box-sizing:border-box;
+	width: 700px;
+	height: 100px;
+	overflow:auto;
+}
+.delhashbtn{
+	cursor:pointer;
+}
+.tag{
+	display:inline-block;
+	background-color: #9de4ff;
+	font-size:12pt;
+	padding: 4px 8px;
+	margin: 5px 8px 5px 8px;
+	border-radius: 20px;
+}

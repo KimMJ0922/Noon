@@ -5,26 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 no-cache">
 
+<script type="text/javascript" src="js/board/writeboard.js"></script>
+<script src="js/board/jquery.form.js"></script>
+
+<link rel= "stylesheet" type="text/css" href="css/board/writeboard.css">
 <title>Insert title here</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="../js/jquery.form.js"></script>
-<script src="../js/writeboard.js"></script>
-<script type="text/javascript" src="../js/onhashchange.js"></script>
-<link rel= "stylesheet" type="text/css" href="../css/writeboard.css">
 </head>
 <body>
 	<form name="fileform" id="fileform" method="post"
-		  action="writeboardaction.jsp" enctype="multipart/form-data">
+		  action="board/writeboardaction.jsp" enctype="multipart/form-data">
 		<div>
-			<textarea id="content" name="content" cols="50" rows="10"></textarea>
+			<textarea id="content" name="content" cols="50" rows="10" required="required"></textarea>
 		</div>
 		<div class="filebox">
 			<label for="photo">업로드</label>

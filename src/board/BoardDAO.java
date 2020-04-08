@@ -22,8 +22,8 @@ public class BoardDAO {
 		try {
 			//boardtb에 insert
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "testid");
-			pstmt.setString(2, "testnickname");
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getContent());
 			pstmt.execute();
 			
@@ -177,5 +177,29 @@ public class BoardDAO {
 		}
 		
 		return likecnt;
+	}
+	
+	public String getNumContent(String num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select content from boardtb where num = ?";
+		String con = "";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				con = rs.getString("content");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return con;
 	}
 }
