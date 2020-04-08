@@ -15,7 +15,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = "INSERT INTO membertb VALUES (seq_signup.nextval, ?,?,?,?,?,?,?,sysdate,?,null)";
-		String type = "ì¼ë°˜íšŒì›";
+		String type = "ÀÏ¹İÈ¸¿ø";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);

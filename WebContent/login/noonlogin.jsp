@@ -100,9 +100,11 @@ $(function(){
 	String idcheck = (String)session.getAttribute("idcheck");
 	String myid = "";
 	String id = (String)session.getAttribute("id");
-	if(idcheck!=null && idcheck.equals("yes")){
+	
+	if(id!=null && idcheck!=null && idcheck.equals("yes")){
 		myid = id;
 	}
+	session.removeAttribute("id");
 %>
 <body>
 <div id="wrapper">
@@ -126,5 +128,4 @@ $(function(){
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="../js/login/noonlogin.js"></script>
 </html>
