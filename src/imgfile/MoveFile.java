@@ -10,6 +10,7 @@ import java.util.Vector;
 
 public class MoveFile {
 	public List<String> previewToUserFolder(String prviewFolderPath,String userFolderPath) {
+		sameFileNameDelete(prviewFolderPath,userFolderPath);
 		//이름 중복 체크
 		fileNameChack(prviewFolderPath,userFolderPath);
 		File previewFolder = new File(prviewFolderPath);
@@ -24,10 +25,6 @@ public class MoveFile {
 			//db에 저장할 아이디/파일명
 			fileNames.add(fileName);
 		}
-		
-		//임시 폴더 삭제
-		previewFolderDelete(prviewFolderPath);
-		
 		return fileNames;
 	}
 	
@@ -165,8 +162,24 @@ public class MoveFile {
 		}
 	}
 	
-	
-	
+	public void sameFileNameDelete(String prviewFolderPath,String userFolderPath) {
+		File previewFolder = new File(prviewFolderPath);
+		File[] previewFileList = previewFolder.listFiles();
+		
+		File userFolder = new File(userFolderPath);
+		File[] userFileList = userFolder.listFiles();
+		
+		for(int i=0;i<previewFileList.length;i++) {
+			String previewFileName = previewFileList[i].getName();
+			for(int j=0;j<userFileList.length;j++) {
+				String userFileName = userFileList[j].getName();
+				if(previewFileName.equals(userFileName)) {
+					userFileList[j].delete();
+				}
+			}
+			
+		}
+	}
 	
 	
 }

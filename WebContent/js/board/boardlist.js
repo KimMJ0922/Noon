@@ -99,7 +99,7 @@ $(function(){
    
    //좋아요
    $(document).on("click",".likey",function(){
-      var num = $(this).parents(".listform").attr("id");
+      var num = $(this).attr("num");
       var src = $(this).attr("src");
       var cnt = 0;
       if(src=="img/like/heart-full.png"){
@@ -374,13 +374,13 @@ function imgTag(num,img){
 
 //좋아요 초기 상태 태그 만들기
 function likeTag(num,likes,likecnt){
-	var str ="<img class='likey' src='img/like/heart-empty.png'/><span>"+likecnt+"</span>";
+	var str ="<img class='likey' src='img/like/heart-empty.png' num='"+num+"'/><span>"+likecnt+"</span>";
 	if(likes.length==0){
-		str ="<img class='likey' src='img/like/heart-empty.png'/><span>"+likecnt+"</span>";
+		str ="<img class='likey' src='img/like/heart-empty.png' num='"+num+"'/><span>"+likecnt+"</span>";
 	}else{
 		$.each(likes,function(i,item){
 			if(item.num==num){
-				str ="<img class='likey' src='img/like/heart-full.png'/><span>"+likecnt+"</span>";
+				str ="<img class='likey' src='img/like/heart-full.png' num='"+num+"'/><span>"+likecnt+"</span>";
 			}
 		});
 	}
@@ -398,7 +398,7 @@ function updateBtn(boardid,num){
 			str +="</button>";
 			//수정 삭제 버튼
 		    str += "<div class='btns'>";
-		       str += "<form class='updatefrm' method='post' action='updateboard.jsp'>";
+		       str += "<form class='updatefrm' method='post' action='main.jsp?view=board/updateboard.jsp'>";
 		          str += "<button type='submit' class='updatebtn'>수정</button>";
 		          str += "<input type='hidden' name='num' value='"+num+"'>";
 		       str += "</form>";
