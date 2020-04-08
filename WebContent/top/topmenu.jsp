@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+	String id = (String)session.getAttribute("id");
+%>
 <body>
 	<div class="container" style="width: 100%;">
 		<div class="row">
