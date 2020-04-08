@@ -344,7 +344,8 @@ function imgTag(num,img){
 	var cnt = 0;
 	var imgcnt = 0;
 	var lastfile = "";
-	var str = "<div class='imgs' style='width:500px; height:500px;position:relative;'>";
+	var str = "<div class='imgs' style='width:500px; height:500px;position:relative;' >";
+	str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
 	$.each(img,function(i,item){
 		if(num==item.num){
 			
@@ -361,6 +362,7 @@ function imgTag(num,img){
 	if(cnt>=4){
 		str += "<div class='moreimg'>+"+imgcnt+"</div>";
 	}
+	str+= "</a>"
 	str += "</div>";
 	   
 	return str;
