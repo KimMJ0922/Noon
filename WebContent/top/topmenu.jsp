@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada&display=swap" rel="stylesheet">
+<link rel= "stylesheet" type="text/css" href="css/top/topmenu.css">
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -28,7 +28,10 @@
 					</div>
 					<div class="col-md-9 col-sm-8 col-xs-6 myinfo">
 								<!--	아이디	 -->
-						<div class="col-md-12 col-sm-12 col-xs-12 myinfolist myinfolistid">Kim_seo1943</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 myinfolist myinfolistid" id="loginid">
+							<%=id %>
+<!-- 								<a href="#" id="logout" class="toplogout">로그아웃</a> -->
+						</div>
 								<!--	좋아요 게시글 팔로워	 -->
 						<div class="col-md-12 col-sm-12 hidden-xs myinfolist myinfolist">
 							<span> 좋아요 </span><div class = "vertical"></div>

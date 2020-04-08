@@ -344,7 +344,7 @@ function imgTag(num,img){
 	var cnt = 0;
 	var imgcnt = 0;
 	var lastfile = "";
-	var str = "<div class='imgs' style='width:500px; height:500px;position:relative;' >";
+	var str = "<div class='imgs' style='position:relative;' >";
 	str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
 	$.each(img,function(i,item){
 		if(num==item.num){
@@ -390,7 +390,7 @@ function likeTag(num,likes,likecnt){
 //로그인한 계정과 글을 쓴 계정이 일치하면 수정 삭제 버튼 보이기
 function updateBtn(boardid,num){
 	var str = "";
-	var loginid = $("#loginid").children("b").text();
+	var loginid = $.trim($("#loginid").text());
 	if(boardid==loginid){
 		str += "<div class='col-md-2 col-sm-2 col-xs-2 menu' style='text-align:center;'>";
 			str +="<button type='button' class='menubtn' style='border:none; background:none;'>";
