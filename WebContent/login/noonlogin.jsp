@@ -24,16 +24,16 @@
 <meta charset="UTF-8">
 <style>
 #wrapper{
-width:100%;
+	width:100%;
 
 }
 .login_main{
-width:750px;
-height:600px; 
-background-color:rgba(255,255,255,0.7);
-margin:0 auto;
-margin-top:150px; 
-text-align: center;
+	width:750px;
+	height:600px; 
+	background-color:rgba(255,255,255,0.7);
+	margin:0 auto;
+	margin-top:150px; 
+	text-align: center;
 }
 
 .main_input{
