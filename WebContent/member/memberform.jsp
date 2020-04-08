@@ -22,7 +22,7 @@
 		width: 50%;
 		height: 500px;
 		margin: 10% auto;
-		padding: 10px;
+		padding: 30px;
 		border: 1px solid gray;
 		box-shadow: 3px 3px 3px 3px gray;
 		border-radius: 30px; 
@@ -237,7 +237,7 @@
 	      	<div class="form-group">
 	      		<label for="checkid">아이디:</label>
 	      		<input type="text" class="form-control" id="checkid">
-	      		<p id="idchkResult"></p>
+	      		<p id="idchkResult" style="margin-top: 5px;"></p>
 	      	</div>
 	      </div>
 	      <div class="modal-footer">

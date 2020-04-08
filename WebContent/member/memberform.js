@@ -4,27 +4,6 @@ $(function(){
 	//첫번째 폼에서 이전버튼 숨김
 	$(".prev").hide();
 	
-	//포커스 자동 넘김
-	$("#email3").change(function(){
-		$("#email2").val($(this).val());
-	});
-	
-	$("#hp2").keyup(function(){
-		if($(this).val().length==4)
-			$("#hp3").focus();
-	});
-	
-	$("#confirmPass").keyup(function(){
-		if($("#pass").val()!=$(this).val()){
-			$(this).addClass("has-error");
-			$("label").eq(3).text("현재 비밀번호와 일치시켜주세요");
-		}
-		else{
-			$(this).removeClass("has-error");
-			$("label").eq(3).text("비밀번호 확인:");
-		}
-	});
-	
 	//처음 브라우저 크기
 	var windowWidth = window.innerWidth;
 	var width = 1920 - windowWidth;
@@ -142,10 +121,34 @@ $(function(){
 			$("#id").val($("#checkid").val());
 		}
 	});
+	
+	//포커스 자동 넘김
+	$("#email3").change(function(){
+		$("#email2").val($(this).val());
+	});
+	
+	$("#hp2").keyup(function(){
+		if($(this).val().length==4)
+			$("#hp3").focus();
+	});
+	
+	$("#confirmPass").keyup(function(){
+		if($("#pass").val()!=$(this).val()){
+			$(this).addClass("has-error");
+			$("label").eq(3).text("현재 비밀번호와 일치시켜주세요");
+			$(".next").attr("bool",false);
+		}
+		else{
+			$(this).removeClass("has-error");
+			$("label").eq(3).text("현재 비밀번호와 일치합니다.");
+			$(".next").attr("chk",true);
+		}
+	});
 });
 
 function idchk(){
 	var id = $("#checkid").val();
+	var userIdCheck = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
 	$.ajax({
 		type: "post",
 		dataType: "html",
@@ -154,13 +157,18 @@ function idchk(){
 		},
 		url: "idcheck.jsp",
 		success: function(data){
-			$("#idchkResult").text(data);
-			console.log(data);
-			var tt = $.trim(data);
-			if(tt=="사용 가능한 아이디 입니다.")
-				$(".com").attr("chk","yes");
-			else
+			if(!userIdCheck.test($('#checkid').val())){
+				$("#idchkResult").html("아이디 양식에 맞춰 주세요<br>영문 대.소문자, 숫자 _,-만 입력 가능하고 5에서 20자리를 입력가능 합니다.");
 				$(".com").attr("chk","no");
+			}else{
+				$("#idchkResult").text(data);
+				console.log(data);
+				var tt = $.trim(data);
+				if(tt=="사용 가능한 아이디 입니다." && userIdCheck.test($('#checkid').val()))
+					$(".com").attr("chk","yes");
+				else
+					$(".com").attr("chk","no");
+			}
 		}
 	});
 }
