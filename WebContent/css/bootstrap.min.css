@@ -1904,9 +1904,9 @@ pre code {
 	}
 }
 
-
 @media ( min-width :1200px) {
 	.topcontent>p{
+	    margin-left: 39px;
 	    text-align: left;
 		line-height: 1.7em;
 	    font-size: 5em;
