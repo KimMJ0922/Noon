@@ -6,6 +6,7 @@
 	String id = request.getParameter("id");
 	String pass = request.getParameter("pass");
 	String idcheck[] = request.getParameterValues("idcheck");
+	System.out.println("idcheck : "+idcheck);
 	//테이블 검색
 	MemberDao db = new MemberDao();
 	boolean success = db.login(id, pass);
@@ -15,6 +16,8 @@
 		session.setAttribute("loginok", "ok");
 		if(idcheck!=null)
 			session.setAttribute("idcheck", "yes");
+		else
+			session.setAttribute("idcheck", "no");
 		session.setMaxInactiveInterval(60*60*24);
 		response.sendRedirect("../main.jsp");
 	}else{%>

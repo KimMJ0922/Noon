@@ -15,30 +15,11 @@
 %>
 <script src="../js/member/memberform.js"></script>
 <script src="../js/member/memberValidate.js"></script>
-<style>
-	body{
-		background-image: url("../img/member/background.jpg");
-	}
-	.form{
-		width: 50%;
-		height: 500px;
-		margin: 10% auto;
-		padding: 30px;
-		border: 1px solid gray;
-		box-shadow: 3px 3px 3px 3px gray;
-		border-radius: 30px; 
-		background-color: white;
-	}
-	.top{
-		height: 125px;
-	}
-	
-</style>
 <body>
 	<div class="form">
 		<div class="logo" align="center" style="margin-bottom: 20px;">
-			<a href="#"><img alt="#" src="../img/member/logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;"></a>
-			<h3>NOON</h3>
+			<a href="../main.jsp"><img alt="#" src="../img/member/logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;"></a>
+			<a href="../main.jsp" style="color: black; text-decoration: none;"><h3>NOON</h3></a>
 		</div>
 		<div class="custom-progress-bar-wrapper">
 			<div class="status-bar" style="width: 78.5%;">

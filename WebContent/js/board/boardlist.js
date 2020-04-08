@@ -51,7 +51,7 @@ $(function(){
    $("#logout").click(function(){
       $.ajax({
          type: "post", 
-         url: "login/logout.jsp", 
+         url: "login/logoutaction.jsp", 
          dataType: "html",
          async: false,
          success:function(data){
