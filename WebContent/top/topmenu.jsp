@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+	String id = (String)session.getAttribute("id");
+%>
 <body>
 	<div class="container" style="width: 100%;">
 		<div class="row">
@@ -23,8 +26,8 @@
 					<div class="col-md-4 col-sm-4 col-xs-6 myinfo">
 						<img src="img/member/logo.jpg" alt="프로필 사진">
 					</div>
-					<div class="col-md-8 col-sm-4 col-xs-6 myinfo">
-						<b>King_Se_1332</b><br>
+					<div class="col-md-8 col-sm-4 col-xs-6 myinfo" id="loginid">
+						<b><%=id %></b><br>
 						<span>Like</span> <span>visit</span>
 					</div>
 					

@@ -381,66 +381,89 @@ function likeTag(num,likes,likecnt){
 	return str;
 }
 
+//로그인한 계정과 글을 쓴 계정이 일치하면 수정 삭제 버튼 보이기
+function updateBtn(boardid,num){
+	var str = "";
+	var loginid = $("#loginid").children("b").text();
+	if(boardid==loginid){
+		str += "<div class='col-md-2 col-sm-2 col-xs-2' style='text-align:center;'>";
+			str +="<button type='button' style='border:none; background:none;'>";
+				str +="<img src='img/icon/menu_icon.png' id='menubtn' style='width:25px; height:25px;'>";
+			str +="</button>";
+		    //수정 삭제 버튼
+		    str += "<div class='btns'>";
+		       str += "<form class='updatefrm' method='post' action='updateboard.jsp'>";
+		          str += "<button type='submit' class='updatebtn btn btn-primary'>수정</button>";
+		          str += "<input type='hidden' name='num' value='"+num+"'>";
+		       str += "</form>";
+		       str += "<button type='button' class='delbtn btn btn-primary' num='"+num+"'>삭제</button>";
+		    str += "</div>";//수정 삭제 버튼 끝
+		str += "</div>";
+	}
+ //btnlist 끝
+ return str;
+}
+
 //글 리스트 태그 만들기
 function listform(data,img,hashtag,likes){
-   var endcheck = true;
-   var str="";
-   //db에서 가져온 테이블이 존재 할 경우
-   if(data.length!=0){
-      $.each(data,function(i,item){
-         var num =item.num;
-         
-         str += "<div id='"+item.num+"' class='listform'>";
-            //아이디
-            str += "<div class='id'>";
-               str +="<font style='text-align:left;'>"+item.nickname+"</font>"
-               str +="<font style='text-align:rigth;'>"+item.writeday+"</font>"
-            str += "</div>";//아이디 끝
+	var endcheck = true;
+	var str="";
+	//db에서 가져온 테이블이 존재 할 경우
+	if(data.length!=0){
+		$.each(data,function(i,item){
+			var num =item.num;
+			str +="<div id='"+item.num+"' class='container' style='border:1px solid black; width:900px'>"
+				str += "<div class='row'>"
+					var updateBtnStr = updateBtn(item.id, item.num);
+					
+					//로그인한 아이디와 글쓴 아이디가 다를 때
+					if(updateBtnStr==""){
+						str += "<div class='col-md-12 col-sm-12 col-xs-12'>";
+							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
+							str +="<font style='text-align:rigth;'>"+item.writeday+"</font>"
+						str += "</div>";//아이디 끝
+					}else{
+						str += "<div class='col-md-10 col-sm-10 col-xs-10'>";
+							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
+							str +="<font style='text-align:rigth;'>"+item.writeday+"</font>"
+						str += "</div>";//아이디 끝
+						str += updateBtnStr;
+					}
+            
+					str += imgTag(num,img);
+					//내용
+					str += "<div class='col-md-12 col-sm-12 col-xs-12'>";
+					var con = item.content;
+					
+					if($.trim(con.substring(0,1))==""){
+						str +="...";
+						str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
+					}else{
+						if(con.length>10){
+							str +=$.trim(con).substring(0,10)+"...";
+							str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
+						}else{
+							str +="<pre>"+item.content+"</pre>"
+						}   
+					}
+   
+					str += "</div>";//내용 끝
+               
+					//좋아요, 댓글 수 
+					str += "<div class='col-md-12 col-sm-12 col-xs-12'>";
+						str += likeTag(num,likes,item.likes);
+						str +="<span>댓글 : "+item.reply+"</span>";
+					str += "</div>";//좋아요, 댓글 수 끝
 
-            
-            str += "<div class='btnlist'>";
-               str +="<button class='btn btn-primary dropdown-toggle'></button>"
-               //수정 삭제 버튼
-               str += "<div class='dropdown-menu'>";
-                  str += "<form class='updatefrm' method='post' action='updateboard.jsp'>";
-                     str += "<button type='submit' class='updatebtn btn btn-primary'>수정</button>";
-                     str += "<input type='hidden' name='num' value='"+item.num+"'>";
-                  str += "</form>";
-                  str += "<button type='button' class='delbtn btn btn-primary' num='"+item.num+"'>삭제</button>";
-                  
-               str += "</div>";//수정 삭제 버튼 끝
-            str += "</div>";
-               str += imgTag(num,img);
-            //내용
-            str += "<div class='con'>";
-               var con = item.content;
-               if($.trim(con.substring(0,1))==""){
-                  str +="...";
-                  str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
-               }else{
-                  if(con.length>10){
-                     str +=$.trim(con).substring(0,10)+"...";
-                     str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
-                  }else{
-                     str +="<pre>"+item.content+"</pre>"
-                  }   
-               }
-               
-            str += "</div>";//내용 끝
-               
-            //좋아요, 댓글 수 
-            str += "<div class='likes'>";
-            	str += likeTag(num,likes,item.likes);
-            	str +="<span>댓글 : "+item.reply+"</span>";
-            str += "</div>";//좋아요, 댓글 수 끝
-            
-            //해쉬태그 
-            str += "<div class='hashtags'>";
-               str += hashTag(num,hashtag);
-            str += "</div>";//해쉬태그 끝
-            
-         str += "</div>";
+					//해쉬태그 
+					str += "<div class='col-md-12 col-sm-12 col-xs-12'>";
+						str += hashTag(num,hashtag);
+					str += "</div>";//해쉬태그 끝
+
+				str += "</div>"//row 끝
+			str += "</div>";//container 끝
       });
+     
       $("#list").append(str);
    }else{
       endcheck = false;
@@ -453,7 +476,6 @@ function listform(data,img,hashtag,likes){
 ////////////////////////////////////////////
 //페이지 이동 시 현재 maxrow를 쿠키에 저장
 function createMaxrowCookie(maxrow){
-
    $.ajax({
       type: "post", 
       url: "board/cookie/createmaxrowcookie.jsp", 
