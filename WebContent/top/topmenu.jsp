@@ -30,7 +30,7 @@
 								<!--	아이디	 -->
 						<div class="col-md-12 col-sm-12 col-xs-12 myinfolist myinfolistid" id="loginid">
 							<%=id %>
-<!-- 								<a href="#" id="logout" class="toplogout">로그아웃</a> -->
+								<a href="#" id="logout" class="toplogout">로그아웃</a>
 						</div>
 								<!--	좋아요 게시글 팔로워	 -->
 						<div class="col-md-12 col-sm-12 hidden-xs myinfolist myinfolist">
