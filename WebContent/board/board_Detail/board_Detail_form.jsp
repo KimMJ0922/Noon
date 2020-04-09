@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -77,8 +78,20 @@ height:50px;
 border-radius: 30px;
 margin-left:10px;
 }
-
   </style>
+  <script type="text/javascript">
+  $(function(){
+	  $("#re_send").click(function(){
+		  var num = $("#re_board_text").attr("num");
+		  var content = $("#re_board_text").val();		  
+		  $.ajax({
+			  type:"post",
+			  url:"",
+		  });
+	  });
+  });
+ 
+  </script>
 </head>
 <%	
 	String num=request.getParameter("num");
@@ -187,9 +200,11 @@ margin-left:10px;
 					<span style="margin-top:10px;"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
 					</div>
 					<hr>
-					<input type="text" name="re_board"
+					<input type="text" name="re_board_text" id="re_board_text" num="<%=num %>"
 					 style="width:475px; border:none;border-top:1px solid gray;
 					 right:0px;bottom:0px;position: absolute;height: 70px;" placeholder="  댓글을 입력하세요">
+					 <input type="button" name="re_send" id="re_send" value="전송">
+					 
 				</div>
 			</div><!-- class="col-md-5 col-sm-5"끝 -->
 		</div><!-- class="row" 끝 -->
