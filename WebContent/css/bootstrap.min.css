@@ -1826,7 +1826,7 @@ pre code {
 	.topcontent>p{
 		font-size: 2em;
 	    line-height: 1.1em;
-	    margin-left: -3.9em;
+	    margin-left: -5.9em;
 	    padding: 0;
 	}
 	.myinfo>img{
@@ -1841,6 +1841,11 @@ pre code {
 	.topcontent{
 		height: 30px;
 	}
+	.myinfolistid{
+		font-size: 14px;
+	    margin-left: -15px;
+	    line-height: 29px;	
+	}
 }
 
 @media ( min-width :768px) {
@@ -1854,10 +1859,10 @@ pre code {
 		display:none;
 	}
 	.myinfo>img{
-	    margin-left: 3em;
-		border-radius: 50px;
-	    max-width: 58px;
-	    margin-top: 23px;
+	    margin-left: 6em;
+	    border-radius: 50px;
+	    max-width: 85px;
+	    margin-top: 5px;
 	}
 	.topmain{
 		height: 100px;
@@ -1865,6 +1870,7 @@ pre code {
 	.topcontent{
 		height: 100px;
 	}
+
 }
 
 
@@ -1876,12 +1882,12 @@ pre code {
 	    padding: 0;
 	}
 	.myinfo>img{
-		margin-left: 0;
+		margin-left: 42px;
 		position: relative;
 	    left: -50px;
 	    border-radius: 50px;
 	    max-width: 83px;
-	    margin-top: 6px;
+	    margin-top: 18px;
 	}
 	.topmain{
 	    height: 120px;
@@ -1893,33 +1899,36 @@ pre code {
 		display:inline-block;
 		text-align: center;
 	    font-size: 21px;
-	    height: 40px;
-	    width: 400px;
+	    height: 30px;
+	    width: 300px;
 	}
 	.searchtag:hover{
 		text-align: center;
 	    font-size: 21px;
-	    height: 50px;
-	    width: 500px;
+	    height: 40px;
+	   width: 350px;
+	}
+	.myinfolist>span{
+		font-size: 9px;
+	    display: inline-block;
+	    width: 37px;
 	}
 }
 
 @media ( min-width :1200px) {
 	.topcontent>p{
-	    margin-left: 39px;
-	    text-align: left;
 		line-height: 1.7em;
 	    font-size: 5em;
 	    margin: 0;
 	    padding: 0;
 	}
 	.myinfo>img{
-	    margin-left: -3.5em;
+        margin-left: 5.5em;
 		display:inline-block;
 	    position: unset;
 		border-radius: 50px;
 	    max-width: 100px;
-	    margin-top: 6px;
+	    margin-top: 8px;
 	}
 	.topmain{
 	    height: 120px;
@@ -1939,6 +1948,15 @@ pre code {
 	    height: 50px;
 	    width: 600px;
 	}
+	.myinfolistid{
+	font-size: 20px;	
+	}
+	.myinfolist>span{
+	font-size: 14px;
+    display: inline-block;
+    width: 57px;
+	}
+
 }
 
 
