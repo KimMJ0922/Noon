@@ -30,8 +30,8 @@ div.btnlist{
 	padding: 13px;
 }
 div.boardcontent{
-	border-top: 1px solid gray;
 	width:500px;
+	border-bottom: 1px solid gray;
 	min-height:50px;
 }
 
@@ -49,13 +49,21 @@ div.imglist{
 	height:400px;
 	margin-top:10px;
 	margin-bottom:10px;
-	
+	border-bottom: 1px solid gray;
 }
+
+div.noimglist{
+	width:500px;
+	padding:0;
+	margin:0;
+}
+
+
 div.imgs{
 	text-align: center;
 }
 div.boardlike_reply{
-	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 	height:50px;
 	line-height: 50px;
 }
@@ -115,7 +123,6 @@ pre{
 .hashtags{
 	min-height:50px;
 	line-height:40px;
-	border-top: 1px solid gray;
 	white-space: pre-wrap;
 	word-break: break-all;
 	word-wrap:break-word;
@@ -167,4 +174,8 @@ img.imgone{
 div.imgtwo{
 	text-align: center;
 	line-height: 380px;
+}
+/**/
+img.detail{
+	cursor:pointer;	
 }
