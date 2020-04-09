@@ -30,9 +30,10 @@ div.btnlist{
 	padding: 13px;
 }
 div.boardcontent{
-	width:500px;
+	width:499px;
 	border-bottom: 1px solid gray;
 	min-height:50px;
+	line-height: 47px;
 }
 
 div.btns{
@@ -45,10 +46,9 @@ div.btns{
 	
 }
 div.imglist{
-	width:500px;
-	height:400px;
-	margin-top:10px;
-	margin-bottom:10px;
+	padding: 0;
+	width:499px;
+	height:500px;
 	border-bottom: 1px solid gray;
 }
 
@@ -56,11 +56,6 @@ div.noimglist{
 	width:500px;
 	padding:0;
 	margin:0;
-}
-
-
-div.imgs{
-	text-align: center;
 }
 div.boardlike_reply{
 	border-bottom: 1px solid gray;
@@ -76,8 +71,8 @@ div.boardlike_reply{
 	background-color: #ffdee9;
 }
 #boardimg{
-	width: 200px;
-	height: 200px;
+	width: 248px;
+    height: 249px;
 }
 pre{
 	border:none;
@@ -92,9 +87,10 @@ pre{
 	padding:0;
 }
 .likey{
-	width:20px;
-	height:20px;
-	cursor:pointer;
+	width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 10px;
 }
 #cnt{
 	width:100px;
@@ -109,14 +105,16 @@ pre{
 	background: none;
 	padding:0;
 	margin:0;
+	color: #3179c3;
 }
 
 .conmorebtn:hover{
-	border:none;
-	background: none;
-	text-decoration: underline;
-	padding:0;
-	margin:0;
+	border: none;
+    background: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    color: #3179c3;
 }
 
 /*해시태그를 감싸고 있는 div*/
@@ -154,21 +152,35 @@ pre{
 .moreimg{
 	background-color: black;
     background: rgba(0,0,0,0.7);
-    width: 200px;
-    height: 200px;
+    width: 248px;
+    height: 249px;
     position: absolute;
-    top: 200px;
-    left: 235px;
+    top: 248px;
+    left: 249px;
     text-align: center;
     line-height: 200px;
     font-size: 70pt;
     color: white;
 }
-
+/* 보드 프로필 이미지 */
+.boardwriter>img{
+	margin: 12px;
+    margin-right: 14px;
+    border-radius: 50px;
+    max-height: 55px;
+    max-width: 55px;
+}
+.boardwriter>.boardwriteday{
+	    line-height: 76px;
+    margin-left: 42px;
+}
+.boardwriter:nth-child(2){
+	border-right: 1px solid #DBDBDB;
+}
 /*이미지가 하나일 경우*/
 img.imgone{
-	width:400px;
-	height:400px;
+    width: 498px;
+    height: 499px;
 }
 
 div.imgtwo{

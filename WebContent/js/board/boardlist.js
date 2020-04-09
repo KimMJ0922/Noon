@@ -102,11 +102,11 @@ $(function(){
       var num = $(this).attr("num");
       var src = $(this).attr("src");
       var cnt = 0;
-      if(src=="img/like/heart-full.png"){
-         $(this).attr("src","img/like/heart-empty.png");
+      if(src=="img/like/like02.png"){
+         $(this).attr("src","img/like/like01.png");
          cnt = -1;
       }else{
-         $(this).attr("src","img/like/heart-full.png");
+         $(this).attr("src","img/like/like02.png");
          cnt = +1;
       }
       $.ajax({
@@ -344,7 +344,7 @@ function imgTag(num,img){
 	var cnt = 0;
 	var imgcnt = 0;
 	var lastfile = "";
-	var str = "<div class='imgs' style='position:relative;' >";
+	var str = "<div class='imgs' >";
 		str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
 	$.each(img,function(i,item){
 		if(num==item.num){
@@ -377,13 +377,13 @@ function imgTag(num,img){
 
 //좋아요 초기 상태 태그 만들기
 function likeTag(num,likes,likecnt){
-	var str ="<img class='likey' src='img/like/heart-empty.png' num='"+num+"'/><span>"+likecnt+"</span>";
+	var str ="<img class='likey' src='img/like/like01.png' num='"+num+"'/><span>"+likecnt+"</span>";
 	if(likes.length==0){
-		str ="<img class='likey' src='img/like/heart-empty.png' num='"+num+"'/><span>"+likecnt+"</span>";
+		str ="<img class='likey' src='img/like/like01.png' num='"+num+"'/><span>"+likecnt+"</span>";
 	}else{
 		$.each(likes,function(i,item){
 			if(item.num==num){
-				str ="<img class='likey' src='img/like/heart-full.png' num='"+num+"'/><span>"+likecnt+"</span>";
+				str ="<img class='likey' src='img/like/like02.png' num='"+num+"'/><span>"+likecnt+"</span>";
 			}
 		});
 	}
@@ -428,15 +428,21 @@ function listform(data,img,hashtag,likes){
 					
 					//로그인한 아이디와 글쓴 아이디가 다를 때
 					if(updateBtnStr==""){
-						str += "<div class='col-md-12 col-sm-12 col-xs-12 boardwriter'>";
+						str += "<div class='col-md-8 col-sm-8 col-xs-8 boardwriter'>";
+							str +="<img src='img/member/logo.jpg' alt='프로필사진' class='boardprofile'>"
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
-							str +="<font style='text-align:rigth;'>"+item.writeday+"</font>"
+						str += "</div>";
+							str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
+							str +="<span class='boardwriteday'>"+item.writeday+"</span>"
 						str += "</div>";//아이디 끝
 					}else{
-						str += "<div class='col-md-10 col-sm-10 col-xs-10 boardwriter'>";
+						str += "<div class='col-md-6 col-sm-6 col-xs-6 boardwriter'>";
+							str +="<img src='img/member/logo.jpg' alt='프로필사진' class='boardprofile'>"
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
-							str +="<font style='text-align:rigth;'>"+item.writeday+"</font>"
-						str += "</div>";//아이디 끝
+					str += "</div>";
+						str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
+							str +="<span class='boardwriteday'>"+item.writeday+"</span>"
+							str += "</div>";//아이디 끝
 						str += updateBtnStr;
 					}
 					
