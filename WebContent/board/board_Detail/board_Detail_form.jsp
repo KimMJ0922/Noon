@@ -78,19 +78,168 @@ height:50px;
 border-radius: 30px;
 margin-left:10px;
 }
+#reply_content{
+	width:470px;
+	height:420px;
+	margin-left:10px;
+	overflow: auto;
+	border-bottom: 1px solid rgba(128,128,128,0.5);
+}
+.reply_content_re{
+	width:410px;
+	height:100px;
+	margin-left:10px;
+	margin-top:20px;
+	margin-bottom:20px;	
+}
+
+.reply_content_re>img{
+	width:40px;
+	height:40px;
+	border-radius: 30px;
+}
+.reply_content_re>a{
+	color:black;
+}
+
+.reply_content_re_writer{
+	width:410px;
+	height:100px;
+	margin-right:10px;
+	margin-top:20px;
+	float:right;
+	margin-bottom:20px;	
+}
+.reply_content_re_writer>img{
+	width:40px;
+	height:40px;
+	border-radius: 30px;
+	float:right;
+}
+.reply_content_re_writer>a{
+	color:black;
+	float:right;
+}
+#re_board_text{
+	width:390px;
+	border:none;
+	border:1px solid rgba(128,128,128,0.5);
+	right:85px;
+	bottom:0px;
+	position: absolute;
+	height: 70px;
+	resize: none;
+}
+#re_send{
+	right:7px;
+	bottom:0px;
+	position: absolute;
+	width:80px;
+	height: 70px;
+}
+.p_reply{
+	border-radius:5px;
+	width:350px;
+	margin-left:50px;
+	padding-left:5px;
+	min-height:45px;
+	background: #f7f7f7;
+}
+.p_reply_writer{
+	border-radius:5px;
+	width:350px;
+	margin-right:15px;
+	margin-top:10px;
+	min-height:45px;
+	background: #f7f7f7;
+	float:right;
+}
+.p_rebtn{
+border:none;
+background:none;
+float:right;
+font-size:12px;
+}
+.p_rebtn_writer{
+border:none;
+background:none;
+float:left;
+font-size:12px;
+
+}
+.p_rebtn_s{
+border:none;
+background:none;
+font-size:12px;
+}
+.p_rebtn_s_writer{
+border:none;
+background:none;
+font-size:12px;
+float:right;
+}
   </style>
-  <script type="text/javascript">
-  $(function(){
-	  $("#re_send").click(function(){
-		  var num = $("#re_board_text").attr("num");
-		  var content = $("#re_board_text").val();		  
-		  $.ajax({
-			  type:"post",
-			  url:"",
-		  });
-	  });
-  });
- 
+<script type="text/javascript">
+$(function(){
+	var boardnum = $("#re_board_text").attr("num");
+	getReply(boardnum);
+	$("#re_send").click(function(){
+		var content = $("#re_board_text").val();		  
+		$.ajax({
+			type:"post",
+			dataType:"html",
+			url:"board/board_Detail/board_Detail_reply_add.jsp",
+			data:{
+				"boardnum":boardnum,
+				"content":content
+			},
+			async: false,
+			success:function(data){
+				 $("#re_board_text").val("");
+				getReply(boardnum); 
+			}
+		});
+	});
+});
+
+function getReply(boardnum){
+	$.ajax({
+        type:"post", 
+        url:"board/board_Detail/bo.jsp", 
+        dataType:"json",
+        data:{
+        	"boardnum":boardnum
+        },
+        async: false,
+        success:function(data){
+        	var str="";
+        	var writernik = $(".writernik").children("b").text();
+			$.each(data,function(i,item){
+				if(item.name==writernik){
+					str+="<div class='reply_content_re_writer' replynum='"+item.replynum+"'>"
+					str+="<img src='save/ddd/iu.jpg'>";
+					str+="<a href='#' style='margin-left:10px;'>"+" "+item.writeday+" "+item.name+"</a>";
+					str+="<input class='p_rebtn_s_writer' type='button' value='삭제'>";
+					str+="<input class='p_rebtn_s_writer' type='button' value='수정'>";
+					str+="<p class='p_reply_writer'>"+item.content+"</p>"
+					str+="<p ><input class='p_rebtn_writer' type='button' value='답글'></p>";
+				str+="</div>";
+				}else{
+					str+="<div class='reply_content_re' replynum='"+item.replynum+"'>"
+						str+="<img src='save/ddd/iu.jpg'>";
+						str+="<a href='#' style='margin-right:10px;'>"+" "+item.name+" "+item.writeday+"</a>";
+						str+="<input class='p_rebtn_s' type='button' value='수정'>";
+						str+="<input class='p_rebtn_s' type='button' value='삭제'>";
+						str+="<p class='p_reply'>"+item.content+"</p>"
+						str+="<p ><input class='p_rebtn' type='button' value='답글'></p>";
+					str+="</div>";
+				}
+			});
+			$("#reply_content").html(str);
+        }
+     });
+}
+
   </script>
 </head>
 <%	
@@ -185,8 +334,8 @@ margin-left:10px;
 					</div>
 					
 					<pre style="border:none; background: none;white-space: pre-wrap;
-   word-break: break-all;
-   word-wrap:break-word;"><%=dto.getContent() %></pre>
+  						 word-break: break-all;word-wrap:break-word;">
+  						 <%=dto.getContent() %></pre>
 					
 					</div>
 <%
@@ -197,12 +346,15 @@ margin-left:10px;
 				<div class="reboard">
 					<div class="img_on">
 					<img src="<%=url %>/save/ddd/iu.jpg" style="float:left">
-					<span style="margin-top:10px;"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
+					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
 					</div>
 					<hr>
-					<input type="text" name="re_board_text" id="re_board_text" num="<%=num %>"
-					 style="width:475px; border:none;border-top:1px solid gray;
-					 right:0px;bottom:0px;position: absolute;height: 70px;" placeholder="  댓글을 입력하세요">
+					<div id="reply_content">
+					
+					
+					</div>
+					<textarea name="re_board_text" id="re_board_text" num="<%=num %>"
+					 style="" placeholder="  댓글을 입력하세요"></textarea>
 					 <input type="button" name="re_send" id="re_send" value="전송">
 					 
 				</div>
