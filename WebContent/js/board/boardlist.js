@@ -345,7 +345,7 @@ function imgTag(num,img){
 	var imgcnt = 0;
 	var lastfile = "";
 	var str = "<div class='imgs' style='position:relative;' >";
-	str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
+		str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
 	$.each(img,function(i,item){
 		if(num==item.num){
 			if(cnt<=2){
@@ -366,9 +366,12 @@ function imgTag(num,img){
 	if(cnt>=4){
 		str += "<div class='moreimg'>+"+imgcnt+"</div>";
 	}
-	str+= "</a>"
+	str += "</a>"
 	str += "</div>";
-	   
+	//사진이 없으면 초기화
+	if(cnt==0){
+		str="";
+	}
 	return str;
 }
 
@@ -436,9 +439,18 @@ function listform(data,img,hashtag,likes){
 						str += "</div>";//아이디 끝
 						str += updateBtnStr;
 					}
-					str += "<div class='col-md-12 col-sm-12 col-xs-12 imglist'>";
-						str += imgTag(num,img);
-					str += "</div>";
+					
+					var imgstr = imgTag(num,img);
+					if($.trim(imgstr)==""){
+						str += "<div class='col-md-12 col-sm-12 col-xs-12 noimglist'>";
+										
+						str += "</div>";
+					}else{
+						str += "<div class='col-md-12 col-sm-12 col-xs-12 imglist'>";
+							str += imgstr;
+						str += "</div>";
+					}
+					
 					//내용
 					str += "<div class='col-md-12 col-sm-12 col-xs-12 boardcontent'>";
 					var con = item.content;
