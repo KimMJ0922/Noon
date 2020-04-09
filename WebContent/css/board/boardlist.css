@@ -182,9 +182,10 @@ pre{
 }
 /*이미지가 하나일 경우*/
 img.imgone{
-    margin-left: 1px;
+   margin-left: 1px;
     text-align: center;
     width: 453px;
+    min-width: 496px;
     min-height: 499px;
     max-height: 600px;
 }
