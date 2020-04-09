@@ -15,10 +15,10 @@
 </head>
 <body>
 	<!-- 링크에 showProfile 클래스 입력시 UserProfile.js의 함수가 실행됨 -->
-	<a class="showProfile">testId</a>
-	<a class="showProfile">qweqwe</a>
-	<a class="showProfile">123</a>
-	<a class="showProfile">admin</a>
+	<a class="showProfile" style="cursor: pointer;">testId</a>
+	<a class="showProfile" style="cursor: pointer;">qweqwe</a>
+	<a class="showProfile" style="cursor: pointer;">123</a>
+	<a class="showProfile" style="cursor: pointer;">admin</a>
 	<!-- 모달창이 들어갈 div -->
 	<div class="profileModal"></div>
 </body>

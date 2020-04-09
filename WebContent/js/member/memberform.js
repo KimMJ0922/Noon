@@ -1,5 +1,6 @@
 $(function(){
 	
+	//눈배경 이펙트
 	var canvas = document.querySelector('.snow'),
     	ctx = canvas.getContext('2d'),
     	windowW = window.innerWidth,

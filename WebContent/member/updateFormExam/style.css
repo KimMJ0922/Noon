@@ -1,9 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto");
-body {
-  background: linear-gradient(to right, #3FB6A8, #7ED386);
-}
 
-.container {
+.custom-cotainer {
   background: #FFFFFF;
   width: 540px;
   height: 420px;
@@ -17,7 +14,7 @@ body {
   float: right;
   margin-right: 12px;
   margin-top: 12px;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #3DBB3D;
   font-weight: 900;
   font-size: 1.5em;
@@ -38,7 +35,7 @@ body {
   transition: all .5s ease-in-out;
   cursor: pointer;
 }
-.CTA h1 {
+.CTA .font1 {
   color: #FFFFFF;
   margin-top: 10px;
   margin-left: 9px;
@@ -59,7 +56,7 @@ body {
   box-shadow: 3px 3px 10px rgba(119, 119, 119, 0.5);
 }
 
-nav a {
+.custom-nav a {
   list-style: none;
   padding: 35px;
   color: #FFFFFF;
@@ -67,12 +64,12 @@ nav a {
   display: block;
   transition: all .3s ease-in-out;
 }
-nav a:hover {
+.custom-nav a:hover {
   color: #3FB6A8;
   transform: scale(1.2);
   cursor: pointer;
 }
-nav a:first-child {
+.custom-nav a:first-child {
   margin-top: 7px;
 }
 
@@ -92,7 +89,7 @@ nav a:first-child {
   width: 70%;
 }
 
-h1 {
+.font1 {
   font-family: "Montserrat", sans-serif;
   color: #7ED386;
   font-size: 1em;
@@ -100,7 +97,7 @@ h1 {
   margin-bottom: 35px;
 }
 
-h2 {
+.font2 {
   color: #777777;
   font-family: "Roboto", sans-serif;
   width: 80%;
@@ -110,7 +107,7 @@ h2 {
   margin-left: 2px;
 }
 
-p {
+.custom-p {
   border-width: 1px;
   border-style: solid;
   border-image: linear-gradient(to right, #3FB6A8, rgba(126, 211, 134, 0.5)) 1 0%;
@@ -122,12 +119,12 @@ p {
   color: #070707;
 }
 
-span {
+.custom-span {
   font-size: .5em;
   color: #777777;
 }
 
-.btn {
+.custom-btn {
   float: right;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -136,49 +133,26 @@ span {
   color: #3FB6A8;
 }
 
-.btn:hover {
+.custom-btn:hover {
   text-decoration: underline;
   font-weight: 900;
 }
 
-input {
+.custom-input {
   border: 1px solid #dddddd;
   font-family: "Roboto", sans-serif;
   padding: 2px;
   margin: 0;
 }
 
-.privacy h2 {
+.privacy .font2 {
   margin-top: 25px;
 }
 
-.settings h2 {
+.settings .font2 {
   margin-top: 25px;
 }
 
 .noshow {
   opacity: 0;
-}
-
-footer {
-  position: absolute;
-  width: 20%;
-  bottom: 0;
-  right: -20px;
-  text-align: right;
-  font-size: 0.8em;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: "Roboto", sans-serif;
-}
-footer p {
-  border: none;
-  padding: 0;
-}
-footer a {
-  color: #ffffff;
-  text-decoration: none;
-}
-footer a:hover {
-  color: #7d7d7d;
 }
