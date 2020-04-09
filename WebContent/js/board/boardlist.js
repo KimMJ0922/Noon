@@ -422,7 +422,7 @@ function listform(data,img,hashtag,likes){
 	if(data.length!=0){
 		$.each(data,function(i,item){
 			var num =item.num;
-			str +="<div id='"+item.num+"' class='container' style='width:900px'>"
+			str +="<div id='"+item.num+"' class='container bordercontainer'>"
 				str += "<div class='row board'>"
 					var updateBtnStr = updateBtn(item.id, item.num);
 					

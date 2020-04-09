@@ -1826,7 +1826,7 @@ pre code {
 	.topcontent>p{
 		font-size: 2em;
 	    line-height: 1.1em;
-	    margin-left: -5.9em;
+	    margin-left: -3.9em;
 	    padding: 0;
 	}
 	.myinfo>img{
@@ -1849,6 +1849,84 @@ pre code {
 	.toplogout{
 		display: none;
 	}
+	.bordercontainer{
+		width: 500px;
+		padding: 0;
+		margin: 0;	
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 40px;
+	}
+	.addwrite{
+	 	height: 50px;
+	 	width: 500px;
+	 	resize: none;
+	}
+	.remocon {
+		bottom: unset;
+	    bottom: 0;
+	    position: fixed;
+	    display: inline-block;
+	    width: 500px;
+	    height: auto;
+	    z-index: 1;
+        background-color: rgba(204,204,204,0.7);
+	}
+	.remoconlist{
+	    background-size: cover;
+	    width: 50px;
+	    margin: 10px 23px;
+	    height: 50px;
+	    float: left;
+    }
+	.showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+	
 }
 
 @media ( min-width :768px) {
@@ -1876,6 +1954,80 @@ pre code {
 	.toplogout{
 		margin-left: 12px;
 	    font-size: 13px;
+	}
+	.bordercontainer{
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
+	}
+	.remocon{
+		position: fixed;
+	    display: inline-block;
+	    right: 7%;
+	    width: 100px;
+	    height: auto;
+	    bottom: inherit;
+	    background-color: unset;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+	    width: 50px;
+	    height: 50px;
+	    float: none;
+    }
+    .showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
 	}
 
 }
@@ -1924,7 +2076,81 @@ pre code {
 		margin-left: 12px;
 	    font-size: 13px;
 	}
-	
+	.bordercontainer{
+		width: 500px;
+		padding: 0;
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
+	}
+	.remocon{
+		position: fixed;
+	    display: inline-block;
+	    right: 28%;
+	    width: 100px;
+	    height: auto;
+	    background-color:unset;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+	    width: 50px;
+	    height: 50px;
+	    float: none;
+    }
+    .showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
 }
 
 @media ( min-width :1200px) {
@@ -2022,18 +2248,36 @@ pre code {
 		font-size: 17px;
 	}
 	.remocon{
+	    bottom: unset;
 		position: fixed;
 	    display: inline-block;
 	    right: 28%;
 	    width: 100px;
 	    height: auto;
+	    background-color:unset;
     }
     .remoconlist{
 	    margin: 10px auto;
 	    background-size: cover;
-        width: 50px;
-   		height: 50px;
+	    width: 50px;
+	    height: 50px;
+	    float: none;
     }
+    .bordercontainer{
+		width: 900px;
+		padding: 0;
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
+	}
 
 }
 
