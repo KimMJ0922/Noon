@@ -5,8 +5,8 @@
 	heigth:500px;
 	border: 1px solid gary;
 	background-color: #ffffff;
-	margin:30px 0 30px 0;
-	box-shadow: 2px 2px 10px 2px gray;
+	margin :3px auto;
+	border: 1px solid #DBDBDB;
 }
 
 div.boardwriter{
@@ -30,9 +30,10 @@ div.btnlist{
 	padding: 13px;
 }
 div.boardcontent{
-	border-top: 1px solid gray;
-	width:500px;
+	width:499px;
+	border-bottom: 1px solid gray;
 	min-height:50px;
+	line-height: 47px;
 }
 
 div.btns{
@@ -45,17 +46,19 @@ div.btns{
 	
 }
 div.imglist{
-	width:500px;
-	height:400px;
-	margin-top:10px;
-	margin-bottom:10px;
-	
+	padding: 0;
+	width:499px;
+	height:500px;
+	border-bottom: 1px solid gray;
 }
-div.imgs{
-	text-align: center;
+
+div.noimglist{
+	width:500px;
+	padding:0;
+	margin:0;
 }
 div.boardlike_reply{
-	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 	height:50px;
 	line-height: 50px;
 }
@@ -68,8 +71,8 @@ div.boardlike_reply{
 	background-color: #ffdee9;
 }
 #boardimg{
-	width: 200px;
-	height: 200px;
+	width: 248px;
+    height: 249px;
 }
 pre{
 	border:none;
@@ -102,21 +105,22 @@ pre{
 	background: none;
 	padding:0;
 	margin:0;
+	color: #3179c3;
 }
 
 .conmorebtn:hover{
-	border:none;
-	background: none;
-	text-decoration: underline;
-	padding:0;
-	margin:0;
+	border: none;
+    background: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    color: #3179c3;
 }
 
 /*해시태그를 감싸고 있는 div*/
 .hashtags{
 	min-height:50px;
 	line-height:40px;
-	border-top: 1px solid gray;
 	white-space: pre-wrap;
 	word-break: break-all;
 	word-wrap:break-word;
@@ -148,24 +152,42 @@ pre{
 .moreimg{
 	background-color: black;
     background: rgba(0,0,0,0.7);
-    width: 200px;
-    height: 200px;
+    width: 248px;
+    height: 249px;
     position: absolute;
-    top: 200px;
-    left: 235px;
+    top: 248px;
+    left: 249px;
     text-align: center;
     line-height: 200px;
     font-size: 70pt;
     color: white;
 }
-
+/* 보드 프로필 이미지 */
+.boardwriter>img{
+	margin: 12px;
+    margin-right: 14px;
+    border-radius: 50px;
+    max-height: 55px;
+    max-width: 55px;
+}
+.boardwriter>.boardwriteday{
+	    line-height: 76px;
+    margin-left: 42px;
+}
+.boardwriter:nth-child(2){
+	border-right: 1px solid #DBDBDB;
+}
 /*이미지가 하나일 경우*/
 img.imgone{
-	width:400px;
-	height:400px;
+    width: 498px;
+    height: 499px;
 }
 
 div.imgtwo{
 	text-align: center;
 	line-height: 380px;
+}
+/**/
+img.detail{
+	cursor:pointer;	
 }
