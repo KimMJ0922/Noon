@@ -363,7 +363,7 @@ function imgTag(num,img){
 	}else if(cnt==2){
 		str = str.replace("class='imgs'","class='imgtwo'");
 	}
-	if(cnt>=4){
+	if(cnt>4){
 		str += "<div class='moreimg'>+"+imgcnt+"</div>";
 	}
 	str += "</a>"

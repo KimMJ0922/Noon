@@ -7,11 +7,11 @@
 	String pass = request.getParameter("pass");
 	String idcheck[] = request.getParameterValues("idcheck");
 	System.out.println("idcheck : "+idcheck);
-	//테이블 검색
+	//searchTable
 	MemberDao db = new MemberDao();
 	boolean success = db.login(id, pass);
 	if(success==true){
-		//성공시 세션 부여
+		//if success grant session 
 		session.setAttribute("id", id);
 		session.setAttribute("loginok", "ok");
 		if(idcheck!=null)
