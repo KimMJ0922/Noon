@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/member/memberform.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -63,7 +64,7 @@
 	<div class="form">
 		<div class="logo" align="center" style="margin-bottom: 20px;">
 			<img alt="#" src="../img/member/logo.jpg" style="width: 120px;height: 120px; border-radius: 30px;">
-			<h3>NOON</h3>
+			<h3 style="font-family: 'Montserrat Subrayada';">NOON</h3>
 		</div>
 		<div class="custom-progress-bar-wrapper">
 			<div class="status-bar" style="width: 78.5%;">
