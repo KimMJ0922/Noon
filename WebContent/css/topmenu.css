@@ -33,3 +33,21 @@
 .myinfo{
 	margin:0;
 }
+.myinfolist{
+	height: 40px;
+}
+.myinfolistid{
+	font-size: 20px;
+    line-height: 38px;
+}
+.myinfolist>span{
+	display: inline-block;
+    width: 50px;
+}
+.vertical { 
+    display: inline-block;
+    border-left: 1px solid #DBDBDB;
+    height: 47px;
+    top: 6px;
+    position: absolute; 
+}

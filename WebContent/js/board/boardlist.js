@@ -51,7 +51,7 @@ $(function(){
    $("#logout").click(function(){
       $.ajax({
          type: "post", 
-         url: "login/logout.jsp", 
+         url: "login/logoutaction.jsp", 
          dataType: "html",
          async: false,
          success:function(data){
@@ -99,14 +99,14 @@ $(function(){
    
    //좋아요
    $(document).on("click",".likey",function(){
-      var num = $(this).parents(".listform").attr("id");
+      var num = $(this).attr("num");
       var src = $(this).attr("src");
       var cnt = 0;
-      if(src=="img/like/heart-full.png"){
-         $(this).attr("src","img/like/heart-empty.png");
+      if(src=="img/like/like02.png"){
+         $(this).attr("src","img/like/like01.png");
          cnt = -1;
       }else{
-         $(this).attr("src","img/like/heart-full.png");
+         $(this).attr("src","img/like/like02.png");
          cnt = +1;
       }
       $.ajax({
@@ -128,25 +128,24 @@ $(function(){
    //메뉴 버튼
    $(document).on("click",".menubtn",function(){
       var css = $(this).siblings(".btns").css("display");
-      var posX = $(this).offset().left;
-      var posY = $(this).offset().top;
+      var posX = $(".menubtn").offset().left;
+      var posY = $(".menubtn").offset().top;
       if(css=="none"){
-         $(this).siblings(".btns").css("display","block");
-         $(this).siblings(".btns").css("top",posY+20);
-         $(this).siblings(".btns").css("left",posX-30);
+    	 $(this).siblings(".btns").css("display","block");
+    	 $(this).siblings(".btns").css("top",posY);
+    	 $(this).siblings(".btns").css("left",posX-100);
       }else{
-         $(this).siblings(".btns").css("display","none");
+    	  $(this).siblings(".btns").css("display","none");
       }
    });
    
    //내용 더보기 버튼
    $(document).on("click",".conmorebtn",function(){
-      
       var num = $(this).attr("idx");
       //해당 번호의 해시태그 가져오기
       var content = getNumContent(num);
       var str ="<pre class='content'>"+content+"</pre>";
-      $(this).parent(".con").html(str);
+      $(this).parent(".boardcontent").html(str);
    });
    
    
@@ -292,7 +291,7 @@ function getNumHashTag(num){
       },
       async: false,
       success:function(hash){
-         hashtag = hash;
+    	  hashtag = hash;
       }
    });
    
@@ -325,14 +324,15 @@ function getNumContent(num){
 //해시태그 태그 만들기
 function hashTag(num,hashtag){
    var str = "";
+   var cnt = 0;
    $.each(hashtag,function(i,item){
       if(num==item.num){
-         if(i==4){
+         if(cnt==4){
             str+="...<button type='button' class='hashtagmore' idx='"+item.num+"'>더보기</button>";
-         }else if(i<4){
+         }else if(cnt<4){
             str+="<a href='#' class='hashtag'>#"+item.hashtag+"</a>";
          }
-         
+         cnt++;
       }
    });
    
@@ -344,103 +344,152 @@ function imgTag(num,img){
 	var cnt = 0;
 	var imgcnt = 0;
 	var lastfile = "";
-	var str = "<div class='imgs' style='width:500px; height:500px;position:relative;'>";
+	var str = "<div class='imgs' >";
+		str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
 	$.each(img,function(i,item){
 		if(num==item.num){
-			
 			if(cnt<=2){
-				str += "<img src='"+item.file+"'>";
+				str += "<img src='"+item.file+"' id='boardimg'>";
 			}else if(cnt==3){
-				str += "<img src='"+item.file+"'>";
+				str += "<img src='"+item.file+"' id='boardimg'>";
 			}else{
 				imgcnt++;
 			}
 			cnt++;
 		}
 	});
+	if(cnt==1){
+		str = str.replace("id='boardimg'","class='imgone'");
+	}else if(cnt==2){
+		str = str.replace("class='imgs'","class='imgtwo'");
+	}
 	if(cnt>=4){
 		str += "<div class='moreimg'>+"+imgcnt+"</div>";
 	}
+	str += "</a>"
 	str += "</div>";
-	   
+	//사진이 없으면 초기화
+	if(cnt==0){
+		str="";
+	}
 	return str;
 }
 
 //좋아요 초기 상태 태그 만들기
 function likeTag(num,likes,likecnt){
-	var str ="<img class='likey' src='img/like/heart-empty.png'/><span>"+likecnt+"</span>";
+	var str ="<img class='likey' src='img/like/like01.png' num='"+num+"'/><span>"+likecnt+"</span>";
 	if(likes.length==0){
-		str ="<img class='likey' src='img/like/heart-empty.png'/><span>"+likecnt+"</span>";
+		str ="<img class='likey' src='img/like/like01.png' num='"+num+"'/><span>"+likecnt+"</span>";
 	}else{
 		$.each(likes,function(i,item){
 			if(item.num==num){
-				str ="<img class='likey' src='img/like/heart-full.png'/><span>"+likecnt+"</span>";
+				str ="<img class='likey' src='img/like/like02.png' num='"+num+"'/><span>"+likecnt+"</span>";
 			}
 		});
 	}
 	return str;
 }
 
+//로그인한 계정과 글을 쓴 계정이 일치하면 수정 삭제 버튼 보이기
+function updateBtn(boardid,num){
+	var str = "";
+	var loginid = $.trim($("#loginid").text());
+	if(boardid==loginid){
+		str += "<div class='col-md-2 col-sm-2 col-xs-2 menu' style='text-align:center;'>";
+			str +="<button type='button' class='menubtn' style='border:none; background:none;'>";
+				str +="<img src='img/icon/menu_icon.png' id='menubtn' style='width:25px; height:25px;'>";
+			str +="</button>";
+			//수정 삭제 버튼
+		    str += "<div class='btns'>";
+		       str += "<form class='updatefrm' method='post' action='main.jsp?view=board/updateboard.jsp'>";
+		          str += "<button type='submit' class='updatebtn'>수정</button>";
+		          str += "<input type='hidden' name='num' value='"+num+"'>";
+		       str += "</form>";
+		       str += "<button type='button' class='delbtn' num='"+num+"'>삭제</button>";
+		    str += "</div>";//수정 삭제 버튼 끝
+		str += "</div>";
+		
+	}
+ //btnlist 끝
+ return str;
+}
+
 //글 리스트 태그 만들기
 function listform(data,img,hashtag,likes){
-   var endcheck = true;
-   var str="";
-   //db에서 가져온 테이블이 존재 할 경우
-   if(data.length!=0){
-      $.each(data,function(i,item){
-         var num =item.num;
-         
-         str += "<div id='"+item.num+"' class='listform'>";
-            //아이디
-            str += "<div class='id'>";
-               str +="<font style='text-align:left;'>"+item.nickname+"</font>"
-               str +="<font style='text-align:rigth;'>"+item.writeday+"</font>"
-            str += "</div>";//아이디 끝
+	var endcheck = true;
+	var str="";
+	//db에서 가져온 테이블이 존재 할 경우
+	if(data.length!=0){
+		$.each(data,function(i,item){
+			var num =item.num;
+			str +="<div id='"+item.num+"' class='container bordercontainer'>"
+				str += "<div class='row board'>"
+					var updateBtnStr = updateBtn(item.id, item.num);
+					
+					//로그인한 아이디와 글쓴 아이디가 다를 때
+					if(updateBtnStr==""){
+						str += "<div class='col-md-8 col-sm-8 col-xs-8 boardwriter'>";
+							str +="<img src='img/member/logo.jpg' alt='프로필사진' class='boardprofile'>"
+							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
+						str += "</div>";
+							str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
+							str +="<span class='boardwriteday'>"+item.writeday+"</span>"
+						str += "</div>";//아이디 끝
+					}else{
+						str += "<div class='col-md-6 col-sm-6 col-xs-6 boardwriter'>";
+							str +="<img src='img/member/logo.jpg' alt='프로필사진' class='boardprofile'>"
+							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
+					str += "</div>";
+						str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
+							str +="<span class='boardwriteday'>"+item.writeday+"</span>"
+							str += "</div>";//아이디 끝
+						str += updateBtnStr;
+					}
+					
+					var imgstr = imgTag(num,img);
+					if($.trim(imgstr)==""){
+						str += "<div class='col-md-12 col-sm-12 col-xs-12 noimglist'>";
+										
+						str += "</div>";
+					}else{
+						str += "<div class='col-md-12 col-sm-12 col-xs-12 imglist'>";
+							str += imgstr;
+						str += "</div>";
+					}
+					
+					//내용
+					str += "<div class='col-md-12 col-sm-12 col-xs-12 boardcontent'>";
+					var con = item.content;
+					
+					if($.trim(con.substring(0,1))==""){
+						str +="...";
+						str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
+					}else{
+						if(con.length>10){
+							str +=$.trim(con).substring(0,10)+"...";
+							str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
+						}else{
+							str +="<pre>"+item.content+"</pre>"
+						}   
+					}
+   
+					str += "</div>";//내용 끝
+               
+					//좋아요, 댓글 수 
+					str += "<div class='col-md-12 col-sm-12 col-xs-12 boardlike_reply'>";
+						str += likeTag(num,likes,item.likes);
+						str +="<span>댓글 : "+item.reply+"</span>";
+					str += "</div>";//좋아요, 댓글 수 끝
 
-            
-            str += "<div class='btnlist'>";
-               str +="<button class='btn btn-primary dropdown-toggle'></button>"
-               //수정 삭제 버튼
-               str += "<div class='dropdown-menu'>";
-                  str += "<form class='updatefrm' method='post' action='updateboard.jsp'>";
-                     str += "<button type='submit' class='updatebtn btn btn-primary'>수정</button>";
-                     str += "<input type='hidden' name='num' value='"+item.num+"'>";
-                  str += "</form>";
-                  str += "<button type='button' class='delbtn btn btn-primary' num='"+item.num+"'>삭제</button>";
-                  
-               str += "</div>";//수정 삭제 버튼 끝
-            str += "</div>";
-               str += imgTag(num,img);
-            //내용
-            str += "<div class='con'>";
-               var con = item.content;
-               if($.trim(con.substring(0,1))==""){
-                  str +="...";
-                  str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
-               }else{
-                  if(con.length>10){
-                     str +=$.trim(con).substring(0,10)+"...";
-                     str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
-                  }else{
-                     str +="<pre>"+item.content+"</pre>"
-                  }   
-               }
-               
-            str += "</div>";//내용 끝
-               
-            //좋아요, 댓글 수 
-            str += "<div class='likes'>";
-            	str += likeTag(num,likes,item.likes);
-            	str +="<span>댓글 : "+item.reply+"</span>";
-            str += "</div>";//좋아요, 댓글 수 끝
-            
-            //해쉬태그 
-            str += "<div class='hashtags'>";
-               str += hashTag(num,hashtag);
-            str += "</div>";//해쉬태그 끝
-            
-         str += "</div>";
+					//해쉬태그 
+					str += "<div class='col-md-12 col-sm-12 col-xs-12 hashtags'>";
+						str += hashTag(num,hashtag);
+					str += "</div>";//해쉬태그 끝
+
+				str += "</div>"//row 끝
+			str += "</div>";//container 끝
       });
+     
       $("#list").append(str);
    }else{
       endcheck = false;
@@ -453,7 +502,6 @@ function listform(data,img,hashtag,likes){
 ////////////////////////////////////////////
 //페이지 이동 시 현재 maxrow를 쿠키에 저장
 function createMaxrowCookie(maxrow){
-
    $.ajax({
       type: "post", 
       url: "board/cookie/createmaxrowcookie.jsp", 
