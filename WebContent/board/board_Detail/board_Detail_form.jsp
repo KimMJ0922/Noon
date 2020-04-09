@@ -87,10 +87,17 @@ margin-left:10px;
 }
 .reply_content_re{
 	width:410px;
-	height:100px;
 	margin-left:10px;
 	margin-top:20px;
 	margin-bottom:20px;	
+	float:left;
+}
+.reply_content_re:after{
+	clear: both;
+	display:block;
+	margin:0;
+	padding:0;
+	
 }
 
 .reply_content_re>img{
@@ -104,7 +111,6 @@ margin-left:10px;
 
 .reply_content_re_writer{
 	width:410px;
-	height:100px;
 	margin-right:10px;
 	margin-top:20px;
 	float:right;
@@ -119,6 +125,13 @@ margin-left:10px;
 .reply_content_re_writer>a{
 	color:black;
 	float:right;
+}
+
+.reply_content_re_writer:after{
+	clear: both;
+	display:block;
+	margin:0;
+	padding:0;
 }
 #re_board_text{
 	width:390px;
@@ -178,60 +191,203 @@ background:none;
 font-size:12px;
 float:right;
 }
+.re_reply_textarea{
+	width:360px;
+	height:50px;
+	resize:none;
+	background: #f7f7f7;
+	border-radius: 5px;
+}
+
+.bar{
+background-image:none;
+background:none;
+}
+.re_re{
+	width:360px;
+	height:100px;
+	resize:none;
+	background: #f7f7f7;
+	border-radius: 5px;
+}
   </style>
 <script type="text/javascript">
 $(function(){
 	var boardnum = $("#re_board_text").attr("num");
-	getReply(boardnum);
+	//댓글 불러오기
+	getReply();
+	 
+	
 	$("#re_send").click(function(){
-		var content = $("#re_board_text").val();		  
-		$.ajax({
-			type:"post",
-			dataType:"html",
-			url:"board/board_Detail/board_Detail_reply_add.jsp",
-			data:{
-				"boardnum":boardnum,
-				"content":content
-			},
-			async: false,
-			success:function(data){
-				 $("#re_board_text").val("");
-				getReply(boardnum); 
-			}
-		});
+		var content = $("#re_board_text").val();
+		
+		if($.trim(content).length==0){
+			alert("댓글을 입력해주세요.");
+			return false;
+		}else{
+			$.ajax({
+				type:"post",
+				dataType:"html",
+				url:"board/board_Detail/board_Detail_reply_add.jsp",
+				data:{
+					"boardnum":boardnum,
+					"content":content
+				},
+				async: false,
+				success:function(data){
+					 $("#re_board_text").val("");
+					getReply(); 
+				}
+			});
+		}
 	});
-});
+	//삭제 버튼 눌렀을 때
+	$(document).on("click","#del_btn",function(){
+		var replynum=$(this).parent("div").attr("replynum");
+		
+		var pclass = $(this).siblings("p:eq(0)").attr("class");
+		var content=$(this).siblings("."+pclass).children(".re_reply_textarea").val();
+		
+		var str=$(this).val();
+		if(str=="수정"){
+			if($.trim(content).length==0){
+				alert("댓글을 입력해주세요");
+				return false;
+			}else{
+				$.ajax({
+			        type:"post", 
+			        url:"board/board_Detail/board_Detail_reply_update.jsp", 
+			        dataType:"html",
+			        data:{
+			        	"replynum":replynum,
+			        	"content":content
+			        },
+			        async: false,
+			        success:function(data){
+			        	getReply();
+					}
+				});
+			}
+		}else{
+			var replynum=$(this).parent("div").attr("replynum");
+			var ch = confirm("해당 댓글을 삭제하시겠습니까?");
+			if(ch==true){
+				deleteReply(replynum);	
+			}else{
+				return false;
+			}
+			
+		}
+		
+	}); 
+	
+	//수정버튼 눌렀을때
+	$(document).on("click","#up_btn",function(){
+		var replynum=$(this).parent("div").attr("replynum");
+		var pclass = $(this).siblings("p:eq(0)").attr("class");
+		var content=$(this).siblings("."+pclass).text();
+			
+		if($(this).val()=="수정취소"){
+			getReply();
+		}else{
+			$(this).siblings("."+pclass).html("<textarea class='re_reply_textarea'>"+content+"</textarea>");
+			$("#del_btn").val("수정");
+			$(this).val("수정취소");
+		}
+	}); 
+	
+	
+	//답글 버튼 눌렀을때
+	$(document).on("click","#re_btn",function(){
+		var a =$(this).parent("p").siblings("div");
+		a.html("<textarea class='re_re'></textarea>");
+		a.append("<input type='button' id='re_re_cc' value='취소'>");
+		a.append("<input type='button' id='re_re_add' value='답글 달기'>");
+	});
+	//답글-> 취소
+	$(document).on("click","#re_re_cc",function(){
+		var a =$(this).parent("div");
+		a.html("");
+	});
+	
+	$(document).on("click","#re_re_add",function(){
+		var content =$(this).siblings(".re_re").val();
+		var parentnum = $(this).parent("div").attr("replynum");
+		
+			 $.ajax({
+		        type:"post", 
+		        url:"board/board_Detail/board_Detail_replay_re_add.jsp", 
+		        dataType:"html",
+		        data:{
+		        	"content":content,
+		        	"parentnum":parentnum,
+		        	"boardnum":boardnum,
+		        },
+		        async: false,
+		        success:function(data){
+		        	getReply();
+				}
+			}); 
+	});
+	
+	
+	
+	
+});//window.function 끝
 
-function getReply(boardnum){
+function deleteReply(replynum){
 	$.ajax({
         type:"post", 
-        url:"board/board_Detail/bo.jsp", 
+        url:"board/board_Detail/board_Detail_reply_delete.jsp", 
+        dataType:"html",
+        data:{
+        	"replynum":replynum
+        },
+        async: false,
+        success:function(data){
+        	getReply();
+		}
+	});
+} 
+function getReply(){
+	var boardnum = $("#re_board_text").attr("num");
+	$.ajax({
+        type:"post", 
+        url:"board/board_Detail/board_Reply_get_data.jsp", 
         dataType:"json",
         data:{
         	"boardnum":boardnum
         },
         async: false,
         success:function(data){
-        	var str="";
+          	var str="";
+          	var id = $.trim($("#loginid").text());
+
         	var writernik = $(".writernik").children("b").text();
 			$.each(data,function(i,item){
 				if(item.name==writernik){
 					str+="<div class='reply_content_re_writer' replynum='"+item.replynum+"'>"
 					str+="<img src='save/ddd/iu.jpg'>";
 					str+="<a href='#' style='margin-left:10px;'>"+" "+item.writeday+" "+item.name+"</a>";
-					str+="<input class='p_rebtn_s_writer' type='button' value='삭제'>";
-					str+="<input class='p_rebtn_s_writer' type='button' value='수정'>";
+					if(item.name==id){
+						str+="<input class='p_rebtn_s_writer' id='del_btn' type='button' value='삭제' >";
+						str+="<input class='p_rebtn_s_writer' id='up_btn' type='button' value='수정'>";
+					}
 					str+="<p class='p_reply_writer'>"+item.content+"</p>"
-					str+="<p ><input class='p_rebtn_writer' type='button' value='답글'></p>";
+					str+="<p ><input class='p_rebtn_writer' id='re_btn' type='button' value='답글'></p>";
+					str+="<div replynum='"+item.replynum+"'></div>"
 				str+="</div>";
 				}else{
-					str+="<div class='reply_content_re' replynum='"+item.replynum+"'>"
+					str+="<div class='reply_content_re' id='"+item.replynum+"' replynum='"+item.replynum+"'>"
 						str+="<img src='save/ddd/iu.jpg'>";
 						str+="<a href='#' style='margin-right:10px;'>"+" "+item.name+" "+item.writeday+"</a>";
-						str+="<input class='p_rebtn_s' type='button' value='수정'>";
-						str+="<input class='p_rebtn_s' type='button' value='삭제'>";
+						if(item.name==id){
+							str+="<input class='p_rebtn_s' id='up_btn' type='button' value='수정'>";
+							str+="<input class='p_rebtn_s' id='del_btn' type='button' value='삭제'>";
+						}
 						str+="<p class='p_reply'>"+item.content+"</p>"
-						str+="<p ><input class='p_rebtn' type='button' value='답글'></p>";
+						str+="<p ><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
+						str+="<div replynum='"+item.replynum+"'></div>"
 					str+="</div>";
 				}
 			});
@@ -313,12 +469,12 @@ function getReply(boardnum){
 					</div><!-- class="carousel slide" 끝 -->
 					
 					<!-- Left and right controls -->
-					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-left"></span>
 						<span class="sr-only">Previous</span>
 					</a>
 					
-					<a class="right carousel-control" href="#myCarousel" data-slide="next">
+					<a class="right carousel-control" href="#myCarousel" data-slide="next" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-right"></span>
 						<span class="sr-only">Next</span>
 					</a>
