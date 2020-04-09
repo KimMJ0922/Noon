@@ -5,7 +5,7 @@
 .searchtag{
     text-align: center;
     border-radius: 23px;
-    width: 144px;
+    width: 300px;
     position: relative;
     top: 24px;
     border-style: solid;
@@ -14,19 +14,19 @@
 .searchtag:hover{
 	text-align: center;
     font-size: 21px;
-    height: 50px;
-    width: 500px;
+    height: 40px;
+    width: 400px;
 }
 .topcontent{
-	height: 120px;
+	max-height: 120px;
 	text-align: center;
 }
 .myinfo>img{
 	style="border-radius: 52px;
 	max-width: 100px;
-	margin-top: 11px;
 }
 .subtopcontent{
+	text-align:center;
 	height:50px;
 	border: 1px solid black;
 }
@@ -38,7 +38,6 @@
 }
 .myinfolistid{
 	font-size: 20px;
-    line-height: 38px;
 }
 .myinfolist>span{
 	display: inline-block;

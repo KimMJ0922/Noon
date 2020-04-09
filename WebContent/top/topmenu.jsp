@@ -49,13 +49,5 @@
 			</div>
 		</div>
 	</div>
-	<!-- 		sub top	       -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-sm-4 col-xs-4 subtopcontent">1</div>
-			<div class="col-md-4 col-sm-4 col-xs-4 subtopcontent">2</div>
-			<div class="col-md-4 col-sm-4 col-xs-4 subtopcontent">3</div>
-		</div>
-	</div>
 </body>
 </html>

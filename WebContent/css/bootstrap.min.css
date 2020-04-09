@@ -1973,10 +1973,69 @@ pre code {
 	    font-size: 13px;
 	    display: inline;
 	}
+	.showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+	.subtopcontent{
+		font-size: 17px;
+	}
+	.remocon{
+		position: fixed;
+	    display: inline-block;
+	    right: 28%;
+	    width: 100px;
+	    height: auto;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+        width: 50px;
+   		height: 50px;
+    }
 
 }
-
-
 
 /* 성은이의 틈새CSS 끝 따란- */
 
