@@ -43,7 +43,7 @@ $(function(){
 			
 		</div>
 		<div class="writeboardbtn">
-			<label id="write" name="write" type="submit"  style="margin: 0;font-weight: unset;">전송</label>
+			<label id="write" name="write" type="submit"  style="margin: 0;font-weight: unset;">작성완료</label>
 			
 			<label for="photo" class="choicepicture" style="margin: 0;font-weight: unset;">사진선택</label>
 		</div>
