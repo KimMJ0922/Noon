@@ -45,14 +45,21 @@ $(function(){
  
 		imgUpload(str); 
 	}); 
-	$("#write").click(function(){ 
-		var form = $("form")[0]; 
-		$("#hashtagtext").val(""); 
-		$("#taghidden").val(hashlist); 
-		form.submit(); 
-		 $(window).off("beforeunload"); 
-		 return true; 
-	}); 
+	$("#write").click(function(){
+		$(window).off("beforeunload");
+		var text = $.trim($("#content").val());
+		if(text==null||text==""){
+			alert("내용을 입력해주세요");
+			return false;
+		}else{
+			var form = $("form")[0];
+			$("#hashtagtext").val("");
+			$("#taghidden").val(hashlist);
+			form.submit();
+			
+			return true;
+		}
+	});
 	 
 	 
 	//해시태그 
