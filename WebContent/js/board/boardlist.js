@@ -1,49 +1,46 @@
 $(function(){
    //루트 경로
    var root = $("#root").val();
-   
+  
    //초기에 화면에 보여질 글 갯수
    var minrow = 0;
-   var maxrow = parseInt($.trim(getMaxrowCookie()));
+   var arry = getMaxrowCookie();
+  
+   var maxrow = parseInt(arry[0]);
+   var sort = arry[1];
    
    //쿠키 삭제
    deleteMaxrowCookie();
-   
-   //테이블의 값이 끝이 아니면 true 끝이면 false
-   var endcheck = true;
    
    //임시폴더에 아이디 폴더 삭제
    deletePreviewFolder();
    
    //이미지 불러오기
-   var img = getImgList(minrow,maxrow);
+   var img = getImgList(minrow,maxrow,sort);
    
    //해시태그 불러오기
-   var hashtag = getHashTag(minrow,maxrow);
+   var hashtag = getHashTag(minrow,maxrow,sort);
   
    //좋아요 불러오기
-   var likes = getLikeList(minrow,maxrow);
-   boardList(minrow,maxrow,img,hashtag,likes);
+   var likes = getLikeList(minrow,maxrow,sort);
+   boardList(minrow,maxrow,img,hashtag,likes,sort);
+   
    //글쓰는 페이지 이동
    $("#writebtn").click(function(){
+	  createMaxrowCookie(maxrow,sort);
       location.href="main.jsp?view=board/writeboard.jsp";
    });
    
    //스크롤 내리면 자동으로 항목 불러오기
    $(window).on("scroll",function(){
-      if($(window).scrollTop() == $(document).height() - $(window).height()){
-         //화면에 보여줄 리스트가 있을 경우
-         if(endcheck==true){
-            minrow = maxrow;
-            maxrow = maxrow+5;
-            img = getImgList(minrow,maxrow);
-            hashtag = getHashTag(minrow,maxrow);
-            likes = getLikeList(minrow,maxrow);
-            endcheck = boardList(minrow,maxrow,img,hashtag,likes);
-         }else{
-            endcheck = false;
-            return false;
-         }
+      if($(window).scrollTop() == ($(document).height() - $(window).height())){
+        minrow = maxrow;
+        maxrow = maxrow+5;
+        createMaxrowCookie(maxrow,sort);
+        img = getImgList(minrow,maxrow,sort);
+        hashtag = getHashTag(minrow,maxrow,sort);
+        likes = getLikeList(minrow,maxrow,sort);
+        boardList(minrow,maxrow,img,hashtag,likes,sort);
       }
    });
    
@@ -75,7 +72,11 @@ $(function(){
                "num":num
             },
             success:function(data){
-               boardList(row,img);
+            	$("#list").html("");
+            	img = getImgList(minrow,maxrow,sort);
+            	hashtag = getHashTag(minrow,maxrow,sort);
+            	likes = getLikeList(minrow,maxrow,sort);
+            	boardList(minrow,maxrow,img,hashtag,likes,sort);
             }
          });
       }else{
@@ -91,9 +92,7 @@ $(function(){
    //글 리스트에서 페이지 이동할 때 반드시 쿠키 만들 것
    //페이지 이동시 쿠키 만들기
    $(document).on("click",".move",function(){
-      var scroll = $(window).scrollTop();
-      createMaxrowCookie(maxrow);
-      
+      createMaxrowCookie(maxrow,sort);
    });
    
    
@@ -143,7 +142,9 @@ $(function(){
       var num = $(this).attr("idx");
       //해당 번호의 해시태그 가져오기
       var content = getNumContent(num);
-      var str ="<pre class='content'>"+content+"</pre>";
+      var str = "<span class='boarddetail' num='"+num+"'>";
+      	str +="<pre class='content'>"+content+"</pre>";
+      	str +="</span>"
       $(this).parent(".boardcontent").html(str);
    });
    
@@ -179,8 +180,40 @@ $(function(){
       });
    });
    
-   
+   $(document).on("click",".boarddetail",function(){
+	   createMaxrowCookie(maxrow,sort);
+	   var num = $(this).attr("num");
+	   location.href="main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num;
+   });
   
+   //좋아요 많은 순서대로
+   $(".favorite").click(function(){
+	   sort = "like";
+	   minrow=0;
+	   maxrow=10;
+	   createMaxrowCookie(maxrow,sort);
+	   $(window).scrollTop(0);
+	   $("#list").html("");
+	   var img = getImgList(minrow,maxrow,sort);
+	   var hashtag = getHashTag(minrow,maxrow,sort);
+       var likes = getLikeList(minrow,maxrow,sort);
+       boardList(minrow,maxrow,img,hashtag,likes,sort);
+   });
+   
+   //최신순
+   $(".showboard").click(function(){
+	   sort = "";
+	   minrow=0;
+	   maxrow=10;
+	   createMaxrowCookie(maxrow,sort);
+	   $(window).scrollTop(0);
+	   $("#list").html("");
+	   var img = getImgList(minrow,maxrow,sort);
+       var hashtag = getHashTag(minrow,maxrow,sort);
+       var likes = getLikeList(minrow,maxrow,sort);
+       boardList(minrow,maxrow,img,hashtag,likes,sort);
+   });
+   
 });//$(function) 끝
 
 
@@ -197,27 +230,27 @@ function deletePreviewFolder(){
    });
 }
 //글 목록
-function boardList(minrow,maxrow,img,hashtag,likes){
-   var endcheck = true;
+function boardList(minrow,maxrow,img,hashtag,likes,sort){
    $.ajax({
       type: "post", 
       url: "board/getboardlist.jsp",
       data:{
          "minrow":minrow,
-         "maxrow":maxrow
+         "maxrow":maxrow,
+         "sort":sort
       },
       dataType: "json",
       async: false,
       success:function(data){
-         endcheck = listform(data,img,hashtag,likes);
+         listform(data,img,hashtag,likes);
       }
    });
-   return endcheck;
+
 }
 
 
 //이미지 가져오기
-function getImgList(minrow,maxrow){
+function getImgList(minrow,maxrow,sort){
    var imglist ="";
    $.ajax({
       type: "post", 
@@ -225,7 +258,8 @@ function getImgList(minrow,maxrow){
       dataType: "json",
       data:{
          "minrow":minrow,
-         "maxrow":maxrow
+         "maxrow":maxrow,
+         "sort":sort
       },
       async: false,
       success:function(img){
@@ -238,7 +272,7 @@ function getImgList(minrow,maxrow){
 
 
 //해시태그 가져오기
-function getHashTag(minrow,maxrow){
+function getHashTag(minrow,maxrow,sort){
    var hashtag ="";
    $.ajax({
       type: "post", 
@@ -246,7 +280,8 @@ function getHashTag(minrow,maxrow){
       dataType: "json",
       data:{
          "minrow":minrow,
-         "maxrow":maxrow
+         "maxrow":maxrow,
+         "sort":sort
       },
       async: false,
       success:function(hash){
@@ -259,7 +294,7 @@ function getHashTag(minrow,maxrow){
 
 
 //좋아요 가져오기
-function getLikeList(minrow,maxrow){
+function getLikeList(minrow,maxrow,sort){
    var likelist ="";
    $.ajax({
       type: "post", 
@@ -267,7 +302,8 @@ function getLikeList(minrow,maxrow){
       dataType: "json",
       data:{
          "minrow":minrow,
-         "maxrow":maxrow
+         "maxrow":maxrow,
+         "sort":sort
       },
       async: false,
       success:function(likes){
@@ -343,8 +379,8 @@ function imgTag(num,img){
 	var cnt = 0;
 	var imgcnt = 0;
 	var lastfile = "";
-	var str = "<div class='imgs' >";
-		str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
+	var str = "<div class='imgs'>";
+		str+= "<span class='boarddetail' num='"+num+"'>";
 	$.each(img,function(i,item){
 		if(num==item.num){
 			if(cnt<=2){
@@ -365,7 +401,7 @@ function imgTag(num,img){
 	if(cnt>4){
 		str += "<div class='moreimg'>+"+imgcnt+"</div>";
 	}
-	str += "</a>"
+	str += "</span>"
 	str += "</div>";
 	//사진이 없으면 초기화
 	if(cnt==0){
@@ -377,15 +413,12 @@ function imgTag(num,img){
 //좋아요 초기 상태 태그 만들기
 function likeTag(num,likes,likecnt){
 	var str ="<img class='likey' src='img/like/like01.png' num='"+num+"'/><span>"+likecnt+"</span>";
-	if(likes.length==0){
-		str ="<img class='likey' src='img/like/like01.png' num='"+num+"'/><span>"+likecnt+"</span>";
-	}else{
-		$.each(likes,function(i,item){
-			if(item.num==num){
-				str ="<img class='likey' src='img/like/like02.png' num='"+num+"'/><span>"+likecnt+"</span>";
-			}
-		});
-	}
+	$.each(likes,function(i,item){
+		if(item.num==num){
+			str ="<img class='likey' src='img/like/like02.png' num='"+num+"'/><span>"+likecnt+"</span>";
+		}
+	});
+	
 	return str;
 }
 
@@ -444,7 +477,7 @@ function listform(data,img,hashtag,likes){
 							str += "</div>";//아이디 끝
 						str += updateBtnStr;
 					}
-					
+					str +="<span id='boardnum' num='"+item.num+"'></span>"
 					var imgstr = imgTag(num,img);
 					if($.trim(imgstr)==""){
 						str += "<div class='col-md-12 col-sm-12 col-xs-12 noimglist'>";
@@ -468,7 +501,9 @@ function listform(data,img,hashtag,likes){
 							str +=$.trim(con).substring(0,10)+"...";
 							str += "<button type='button' class='conmorebtn' idx='"+item.num+"'>더보기</button>";
 						}else{
+							str +="<span class='boarddetail' num='"+item.num+"'>";
 							str +="<pre>"+item.content+"</pre>"
+							str += "</span>";
 						}   
 					}
    
@@ -487,49 +522,47 @@ function listform(data,img,hashtag,likes){
 
 				str += "</div>"//row 끝
 			str += "</div>";//container 끝
-      });
-     
-      $("#list").append(str);
-   }else{
-      endcheck = false;
-   }
-   return endcheck;
+		});
+	}
+	$("#list").append(str);
 }
 
 ////////////////////////////////////////////
 //쿠키 관련
 ////////////////////////////////////////////
 //페이지 이동 시 현재 maxrow를 쿠키에 저장
-function createMaxrowCookie(maxrow){
+function createMaxrowCookie(maxrow,sort){
    $.ajax({
       type: "post", 
       url: "board/cookie/createmaxrowcookie.jsp", 
       dataType: "html",
       data:{
-         "maxrow":maxrow
+         "maxrow":maxrow,
+         "sort":sort
       },
       async: false,
       success:function(con){
-         
       }
    });
 }
 
 //쿠키에 저장된 maxrow 가져오기
 function getMaxrowCookie(){
-   var row=0;
+   var arr = new Array();
    $.ajax({
       type: "post", 
       url: "board/cookie/getmaxrowcookie.jsp", 
-      dataType: "html",
+      dataType: "json",
       async: false,
-      success:function(maxrow){
-         row = maxrow;
+      success:function(data){
+    	  arr[0] = data.maxrow;
+    	  arr[1] = data.sort;
       }
    });
    
-   return row;
+   return arr;
 }
+
 
 //일회용으로 쓴 쿠키 삭제
 function deleteMaxrowCookie(){

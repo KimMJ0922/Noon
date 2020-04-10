@@ -61,14 +61,23 @@ public class BoardLikesDAO {
 	
 	
 	//리스트에 보여질 것
-	public List<BoardLikesDTO> getLikeList(String minrow, String maxrow, String id){
+	public List<BoardLikesDTO> getLikeList(String minrow, String maxrow, String id,String sort){
 		List<BoardLikesDTO> list = new Vector<BoardLikesDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select min(num),max(num) from("+
+		String sql = "";
+		if(sort.equals("like")) {
+			sql = "select min(num),max(num) from("+
+					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					 "from ( select * from boardtb order by likes desc,writeday desc) a"+
+					 ") where rnum > ? and rnum <= ?";
+		}else {
+			sql = "select min(num),max(num) from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
 					 "from ( select * from boardtb order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";	
+		}
+		
 		ResultSet rs = null;
 		conn = db.getConnection();
 		int max = 0;

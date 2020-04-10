@@ -13,9 +13,9 @@
 	BoardDAO dao = new BoardDAO();
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
-	
+	String sort = request.getParameter("sort");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
-	List<BoardDTO> list = dao.getBoardList(minrow,maxrow);
+	List<BoardDTO> list = dao.getBoardList(minrow,maxrow,sort);
 	
 	JSONArray arr = new JSONArray();
 	for(BoardDTO dto : list){

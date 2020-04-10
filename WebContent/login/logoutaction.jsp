@@ -6,4 +6,6 @@
 		session.removeAttribute("idcheck");
 	}
 	session.removeAttribute("loginok");
+	
+	
 %>

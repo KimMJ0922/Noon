@@ -1,7 +1,6 @@
 /*active button class onclick*/
 $(function(){
 	$('.custom-nav a').click(function(e) {
-		console.log("gd");
 		e.preventDefault();
 		$('.custom-nav a').removeClass('active');
 		$(this).addClass('active');

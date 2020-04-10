@@ -1,5 +1,4 @@
 <%@page import="member.MemberDto"%>
-<%@page import="java.util.List"%>
 <%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -16,11 +15,6 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="script.js"></script>
-<script type="text/javascript">
-	$(function(){
-		
-	});
-</script>
 <style>
 .topmain{
 	width:100%;
@@ -30,18 +24,33 @@
 }
 </style>
 </head>
-<%
-	String loginok = (String)session.getAttribute("loginok");
-	String id = (String)session.getAttribute("id");
-	if(loginok==null){%>
-		<script type="text/javascript">
-			alert("로그인이 필요한 서비스 입니다.");
-			location.replace("../login/noonlogin.jsp");
-		</script>
-	<%}
-	MemberDao db = new MemberDao();
-	MemberDto dto = db.getdata(id);
-%>
+<script type="text/javascript">
+	$(function(){
+		logincheck();
+		getData();
+		
+		$(".update").click(function(){
+			$("p").addClass('')
+		});
+	});
+	function logincheck(){
+		<%
+		String loginok = (String)session.getAttribute("loginok");
+		if(loginok==null){%>
+			<script type="text/javascript">
+				alert("로그인이 필요한 서비스 입니다.");
+				location.replace("../login/noonlogin.jsp");
+			</script>
+		<%}	%>
+	}
+	function getData(){
+		<%
+		String id = (String)session.getAttribute("id");
+		MemberDao db = new MemberDao();
+		MemberDto dto = db.getdata(id);
+		%>
+	}
+</script>
 <body>
 	<div class="topmain" style="padding:0; margin:0;">
 		<div class="row">
@@ -65,7 +74,12 @@
 				<h2 class="font2">이름</h2>
 				<p class="custom-p">
 					<%=dto.getName() %>
-					<button class="custom-btn"  data-toggle="modal" data-target="#changeModal">변경</button>
+					<!-- <button class="custom-btn" data-toggle="modal" data-target="#changeModal">변경</button> -->
+					<button class="custom-btn update">변경</button>
+				</p>
+				<p class="custom-p noshow">
+					<input type="text" name="name" value="<%=dto.getName() %>" required="required">
+					<button class="custom-btn">변경</button>
 				</p>
 				<h2 class="font2">아이디</h2>
 				<p class="custom-p"><%=dto.getId() %>
@@ -210,7 +224,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">아이디 중복체크</h4>
+	        <h4 class="modal-title">이름 변경</h4>
 	      </div>
 	      <div class="modal-body">
 	      	<div class="form-group">
@@ -220,7 +234,7 @@
 	      	</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default com" chk="no" data-dismiss="modal">완료</button>
+	        <button type="button" class="btn btn-default com" data-dismiss="modal">완료</button>
 	      </div>
 	    </div>
 	  </div>

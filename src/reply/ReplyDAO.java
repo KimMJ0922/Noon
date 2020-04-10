@@ -26,7 +26,7 @@ public class ReplyDAO {
 			pstmt.setString(3, dto.getContent());
 			pstmt.execute();
 			
-			
+			updateBoardtbReply(dto.getBoardnum());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("insertReply 메소드 오류 : "+e.getMessage());
@@ -68,6 +68,8 @@ public class ReplyDAO {
 			pstmt.setString(5, dto.getName());
 			pstmt.setString(6, dto.getContent());
 			pstmt.execute();
+			
+			updateBoardtbReply(dto.getBoardnum());
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -114,15 +116,29 @@ public class ReplyDAO {
 		return list;
 	} 
 	
-	public void deleteReply(String replynum) {
+	public void deleteReply(String replynum, String boardnum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "delete from board_detail_reply where replynum = ?";
+		String sql = "delete from BOARD_DETAIL_REPLY where replynum in(" + 
+					 "select replynum " + 
+					 "from BOARD_DETAIL_REPLY " + 
+					 "where boardnum= ? " + 
+					 "START WITH parentnum = ?" + 
+					 "CONNECT BY PRIOR replynum = parentnum)";
 		conn = db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, replynum);
+			pstmt.setString(1, boardnum);
+			pstmt.setString(2, replynum);
 			pstmt.execute();
+			
+			sql = "delete from BOARD_DETAIL_REPLY where boardnum = ? and replynum = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardnum);
+			pstmt.setString(2, replynum);
+			pstmt.execute();
+			
+			updateBoardtbReply(boardnum);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -144,6 +160,57 @@ public class ReplyDAO {
 			e.printStackTrace();
 		}finally {
 			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	public String getReplyNum(String boardnum) {
+		String replynum = "";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select reply from boardtb where num = ?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardnum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				replynum = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return replynum;
+	}
+	
+	//해당 게시물의 댓글 개수 업데이트
+	public void updateBoardtbReply(String boardnum) {
+		int cnt = 0;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(boardnum) from board_detail_reply where boardnum = ?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardnum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+			sql="update boardtb set reply = ? where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cnt);
+			pstmt.setString(2, boardnum);
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
 		}
 	}
 	
