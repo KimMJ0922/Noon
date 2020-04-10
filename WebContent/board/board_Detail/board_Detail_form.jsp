@@ -312,7 +312,7 @@ $(function(){
 	
 	$(document).on("click","#re_re_add",function(){
 		var content =$(this).siblings(".re_re").val();
-		var parentnum = $(this).parent("div").attr("replynum");
+		var replynum = $(this).parent("div").attr("replynum");
 		
 			 $.ajax({
 		        type:"post", 
@@ -320,7 +320,7 @@ $(function(){
 		        dataType:"html",
 		        data:{
 		        	"content":content,
-		        	"parentnum":parentnum,
+		        	"replynum":replynum,
 		        	"boardnum":boardnum,
 		        },
 		        async: false,

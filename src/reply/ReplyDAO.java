@@ -17,7 +17,7 @@ public class ReplyDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "insert into board_detail_reply values ("
-				+ "?,seq_reply.nextval,0,seq_reply.nextval,?,?,sysdate)";	
+				+ "?,seq_reply.nextval,0,0,seq_reply.nextval,?,?,sysdate)";	
 		conn = db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -40,31 +40,33 @@ public class ReplyDAO {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select max(sortnum) from board_detail_reply where boardnum=? and parentnum=?";
+		String sql = "select groupnum,sortnum from board_detail_reply where boardnum=? and replynum=?";
 		ResultSet rs=null;
 		conn = db.getConnection();
 		try {
-			int sort=0;
+			int groupnum=0;
+			int sortnum = 0;
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getBoardnum());
 			pstmt.setString(2, dto.getReplynum());
 			rs=pstmt.executeQuery();
-			
+			System.out.println();
 			if(rs.next()) {
-				sort=rs.getInt(1);
-				sort++;
+				groupnum=rs.getInt(1);
+				sortnum = rs.getInt(2);
 			}
-			
-			System.out.println("소트넘 : " + sort);
+			sortnum++;
+			System.out.println("groupnum : " + groupnum);
 			
 			String sql2="insert into board_detail_reply values ("
-					+ "?,seq_reply.nextval,?,?,?,?,sysdate)";
+					+ "?,seq_reply.nextval,?,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, dto.getBoardnum());
-			pstmt.setInt(2, sort);
-			pstmt.setString(3, dto.getParentnum());
-			pstmt.setString(4, dto.getName());
-			pstmt.setString(5, dto.getContent());
+			pstmt.setInt(2, sortnum);
+			pstmt.setString(3, dto.getReplynum());
+			pstmt.setInt(4, groupnum);
+			pstmt.setString(5, dto.getName());
+			pstmt.setString(6, dto.getContent());
 			pstmt.execute();
 			
 		} catch (SQLException e) {
@@ -81,7 +83,11 @@ public class ReplyDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<ReplyDTO> list= new Vector<ReplyDTO>();
-		String sql="select * from board_detail_reply where boardnum=? order by sortnum asc";
+		String sql="select * " + 
+				"from BOARD_DETAIL_REPLY " + 
+				"where boardnum= ? " + 
+				"START WITH parentnum = 0 " + 
+				"CONNECT BY PRIOR replynum = parentnum";
 		conn=db.getConnection();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -95,6 +101,7 @@ public class ReplyDAO {
 				dto.setSortnum(rs.getString("sortnum"));
 				dto.setContent(rs.getString("content"));
 				dto.setName(rs.getString("name"));
+				dto.setGroupnum(rs.getString("groupnum"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				list.add(dto);
 			}

@@ -7,9 +7,18 @@ public class ReplyDTO {
 	private String replynum;
 	private String sortnum;
 	private String parentnum;
+	private String groupnum;
 	private String name;
 	private String content;
 	private Timestamp writeday;
+	
+	
+	public String getGroupnum() {
+		return groupnum;
+	}
+	public void setGroupnum(String groupnum) {
+		this.groupnum = groupnum;
+	}
 	public String getBoardnum() {
 		return boardnum;
 	}
