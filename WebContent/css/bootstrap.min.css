@@ -1815,7 +1815,7 @@ pre code {
 	margin-right: auto;
 	margin-left: auto
 }
-/* ¼ºÀºÀÌÀÇ Æ´»õCSS ½ÃÀÛ µû¶õ- */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ´ï¿½ï¿½CSS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½- */
 
 
 
@@ -1978,7 +1978,7 @@ pre code {
 
 
 
-/* ¼ºÀºÀÌÀÇ Æ´»õCSS ³¡ µû¶õ- */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ´ï¿½ï¿½CSS ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½- */
 
 @media ( min-width :768px) {
 	.container {
@@ -6435,7 +6435,7 @@ button.close {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 1040;
+	z-index: 10000;
 	display: none;
 	overflow: hidden;
 	-webkit-overflow-scrolling: touch;

@@ -12,8 +12,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
- <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+ 	 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>상세 페이지</title>
@@ -451,7 +451,7 @@ function getReply(){
 		   				</ol>
 		   				<div class="carousel-inner">
 		   					<div class="item active">
-		   						<img src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;height:520px;">
+		   						<img src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
 							
 		   					</div><!-- class="item active" 끝 -->
 <%
@@ -459,7 +459,7 @@ function getReply(){
 								imgs=Ilist.get(i);
 %>
 								<div class="item">
-									<img src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;height:520px;">
+									<img src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
 								
 								</div><!-- class="item"끝  -->	
 <%
@@ -540,6 +540,19 @@ function getReply(){
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="modal" id="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					</div>
+	
+					<img src="<%=url %>/save/ddd/iu.jpg" width="500px" height="500px;">
+					
+				</div>
+			</div>
+		 </div>
 	</div>
 </body>
 </html>
