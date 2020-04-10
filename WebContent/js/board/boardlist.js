@@ -144,7 +144,9 @@ $(function(){
       var num = $(this).attr("idx");
       //해당 번호의 해시태그 가져오기
       var content = getNumContent(num);
-      var str ="<pre class='content'>"+content+"</pre>";
+      var str = "<a id='boarddetail' href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
+      	str +="<pre class='content'>"+content+"</pre>";
+      	str +="</a>"
       $(this).parent(".boardcontent").html(str);
    });
    
@@ -180,7 +182,9 @@ $(function(){
       });
    });
    
-   
+   $(document).on("click","#boardditail",function(){
+	   createMaxrowCookie(maxrow);
+   });
   
 });//$(function) 끝
 
@@ -345,7 +349,7 @@ function imgTag(num,img){
 	var imgcnt = 0;
 	var lastfile = "";
 	var str = "<div class='imgs' >";
-		str+= "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
+		str+= "<a id='boarddetail' href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
 	$.each(img,function(i,item){
 		if(num==item.num){
 			if(cnt<=2){
