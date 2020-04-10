@@ -12,8 +12,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
- <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+ 	 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>상세 페이지</title>
@@ -209,6 +209,7 @@ background:none;
 	resize:none;
 	background: #f7f7f7;
 	border-radius: 5px;
+	display: block;
 }
   </style>
 <script type="text/javascript">
@@ -294,7 +295,7 @@ $(function(){
 			getReplyNum(boardnum);
 		}else{
 			$(this).siblings("."+pclass).html("<textarea class='re_reply_textarea'>"+content+"</textarea>");
-			$("#del_btn").val("수정");
+			$(this).siblings("#del_btn").val("수정");
 			$(this).val("수정취소");
 		}
 	}); 
@@ -302,10 +303,12 @@ $(function(){
 	
 	//답글 버튼 눌렀을때
 	$(document).on("click","#re_btn",function(){
+		var prtname=$(this).parent("p").siblings("a").attr("prtname");
+	
 		var a =$(this).parent("p").siblings("div");
-		a.html("<textarea class='re_re'></textarea>");
-		a.append("<input type='button' id='re_re_cc' value='취소'>");
-		a.append("<input type='button' id='re_re_add' value='답글 달기'>");
+		a.html("<textarea class='re_re'>@"+prtname+"</textarea>");
+		a.append("<input type='button' id='re_re_cc' style='border:none;background:none;font-size:12px;' value='취소'>");
+		a.append("<input type='button' id='re_re_add' style='border:none;background:none;font-size:12px;' value='답글 달기'>");
 	});
 	//답글-> 취소
 	$(document).on("click","#re_re_cc",function(){
@@ -333,8 +336,14 @@ $(function(){
 				}
 			}); 
 	});
-	
-	
+	//모달 이미지 상세화면
+	$(document).on("click","#modal_img",function(){
+		var imgsrc=$(this).attr("src");
+		
+		$("#atfer_modal_img").attr("src",imgsrc);
+		
+		
+	});
 	
 	
 });//window.function 끝
@@ -368,35 +377,49 @@ function getReply(){
         success:function(data){
           	var str="";
           	var id = $.trim($("#loginid").text());
-
+			
         	var writernik = $(".writernik").children("b").text();
+        
 			$.each(data,function(i,item){
 				if(item.name==writernik){
 					str+="<div class='reply_content_re_writer' replynum='"+item.replynum+"'>"
 					str+="<img src='save/ddd/iu.jpg'>";
-					str+="<a href='#' style='margin-left:10px;'>"+" "+item.writeday+" "+item.name+"</a>";
+					str+="<a href='#' style='margin-left:10px;' prtname='"+item.name+"'>"+" "+item.writeday+" "+item.name+"</a>";
 					if(item.name==id){
 						str+="<input class='p_rebtn_s_writer' id='del_btn' type='button' value='삭제' >";
 						str+="<input class='p_rebtn_s_writer' id='up_btn' type='button' value='수정'>";
 					}
+					if(item.sortnum>=1){
+					str+="<p class='p_reply_writer' style='width:250px;'>"+item.content+"</p>";
+					str+="<p style='float:right;margin-left:70px;'><input class='p_rebtn_writer' id='re_btn' type='button' value='답글'></p>";
+					}else{
 					str+="<p class='p_reply_writer'>"+item.content+"</p>"
 					str+="<p ><input class='p_rebtn_writer' id='re_btn' type='button' value='답글'></p>";
+					}
+					
 					str+="<div replynum='"+item.replynum+"'></div>"
 				str+="</div>";
 				}else{
 					str+="<div class='reply_content_re' id='"+item.replynum+"' replynum='"+item.replynum+"'>"
 						str+="<img src='save/ddd/iu.jpg'>";
-						str+="<a href='#' style='margin-right:10px;'>"+" "+item.name+" "+item.writeday+"</a>";
+						str+="<a href='#' style='margin-right:10px;' prtname='"+item.name+"'>"+" "+item.name+" "+item.writeday+"</a>";
 						if(item.name==id){
 							str+="<input class='p_rebtn_s' id='up_btn' type='button' value='수정'>";
 							str+="<input class='p_rebtn_s' id='del_btn' type='button' value='삭제'>";
 						}
-						str+="<p class='p_reply'>"+item.content+"</p>"
-						str+="<p ><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
+						if(item.sortnum>=1){
+							str+="<p class='p_reply' style='width:250px;'>"+item.content+"</p>";
+							str+="<p style='float:left;margin-left:50px;'><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
+							}else{
+							str+="<p class='p_reply'>"+item.content+"</p>"
+							str+="<p><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
+							}
+						
 						str+="<div replynum='"+item.replynum+"'></div>"
 					str+="</div>";
 				}
 			});
+			
 			$("#reply_content").html(str);
         }
      });
@@ -471,7 +494,7 @@ function getReplyNum(boardnum){
 		   				</ol>
 		   				<div class="carousel-inner">
 		   					<div class="item active">
-		   						<img src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;height:520px;">
+		   						<img id="modal_img" src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
 							
 		   					</div><!-- class="item active" 끝 -->
 <%
@@ -479,7 +502,7 @@ function getReplyNum(boardnum){
 								imgs=Ilist.get(i);
 %>
 								<div class="item">
-									<img src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;height:520px;">
+									<img id="modal_img" src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
 								
 								</div><!-- class="item"끝  -->	
 <%
@@ -531,7 +554,7 @@ function getReplyNum(boardnum){
 					</div>
 					<textarea name="re_board_text" id="re_board_text" num="<%=num %>"
 					 style="" placeholder="  댓글을 입력하세요"></textarea>
-					 <input type="button" name="re_send" id="re_send" value="전송">
+					 <input type="button" name="re_send" id="re_send" class="btn btn-defualt" value="전송">
 					 
 				</div>
 			</div><!-- class="col-md-5 col-sm-5"끝 -->
@@ -547,7 +570,16 @@ function getReplyNum(boardnum){
 					<p><b>좋아요 0개</b></p>
 					<p><b id="replycnt">댓글 0개</b></p>
 					<!-- 글 내용 -->
+					<%
+						if(Ilist.size()==0){
+					%>		
+					<%
+						}else{
+					%>
 					<b><%=dto.getContent()%></b>
+					<%
+						}
+					%>
 					<p style="margin-top:10px;"><b>
 						<%
 							for(int i=0;i<Hlist.size();i++){
@@ -561,6 +593,13 @@ function getReplyNum(boardnum){
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="modal" id="modal">
+			<div class="modal-dialog" >
+				<img id="atfer_modal_img" src="" style="border:none; width:800px;height:700px; margin-top:150px; margin-left:-150px;">
+			</div>
+		 </div>
 	</div>
 </body>
 </html>
