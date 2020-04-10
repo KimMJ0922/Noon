@@ -40,6 +40,12 @@
   letter-spacing: 1px;
   margin-left: 2px;
 }
+.custom-input{
+  width: 80%;
+  font-family: "Montserrat", sans-serif;
+  padding: 7px 0;
+  color: #070707;
+}
 
 .custom-p {
   border-width: 1px;
@@ -66,11 +72,15 @@
   border: none;
   color: #3FB6A8;
   cursor: pointer;
+  width: 45px;
+  margin-right: 5px;
 }
 
 .custom-btn:hover {
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: 900;
+  background-color: #3FB6A8;
+  color: white;
 }
 
 .custom-input {
@@ -91,6 +101,10 @@
 .noshow {
   opacity: 0;
   visibility: hidden;
+}
+
+.hidden{
+	display: none;
 }
 
 .logo {

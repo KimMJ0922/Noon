@@ -104,7 +104,6 @@ $(function(){
 	if(id!=null && idcheck!=null && idcheck.equals("yes")){
 		myid = id;
 	}
-	session.removeAttribute("id");
 %>
 <body>
 <div id="wrapper">

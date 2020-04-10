@@ -10,9 +10,9 @@
 	//테이블 검색
 	MemberDao db = new MemberDao();
 	boolean success = db.login(id, pass);
-	MemberDto dto = db.getdata(id);
 	if(success==true){
 		//성공시 세션 부여
+		MemberDto dto = db.getdata(id);
 		session.setAttribute("id", id);
 		session.setAttribute("loginok", "ok");
 		session.setAttribute("dto", dto);
