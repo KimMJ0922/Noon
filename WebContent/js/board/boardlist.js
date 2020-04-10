@@ -131,9 +131,8 @@ $(function(){
       var posX = $(".menubtn").offset().left;
       var posY = $(".menubtn").offset().top;
       if(css=="none"){
-    	 $(this).siblings(".btns").css("display","block");
-    	 $(this).siblings(".btns").css("top",posY);
-    	 $(this).siblings(".btns").css("left",posX-100);
+    	 $(this).siblings(".btns").css("display","inline-block");
+    	 $(this).siblings(".btns").css("position","relative");
       }else{
     	  $(this).siblings(".btns").css("display","none");
       }
@@ -367,7 +366,7 @@ function imgTag(num,img){
 	}else if(cnt==2){
 		str = str.replace("class='imgs'","class='imgtwo'");
 	}
-	if(cnt>=4){
+	if(cnt>4){
 		str += "<div class='moreimg'>+"+imgcnt+"</div>";
 	}
 	str += "</a>"
@@ -406,10 +405,10 @@ function updateBtn(boardid,num){
 			//수정 삭제 버튼
 		    str += "<div class='btns'>";
 		       str += "<form class='updatefrm' method='post' action='main.jsp?view=board/updateboard.jsp'>";
-		          str += "<button type='submit' class='updatebtn'>수정</button>";
+		          str += "<button type='submit' class='updatebtn myboardbtn'>수정</button>";
 		          str += "<input type='hidden' name='num' value='"+num+"'>";
 		       str += "</form>";
-		       str += "<button type='button' class='delbtn' num='"+num+"'>삭제</button>";
+		       str += "<button type='button' class='delbtn myboardbtn' num='"+num+"'>삭제</button>";
 		    str += "</div>";//수정 삭제 버튼 끝
 		str += "</div>";
 		

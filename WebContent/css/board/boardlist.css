@@ -37,19 +37,28 @@ div.boardcontent{
 }
 
 div.btns{
-	display:none;
-	postion:relative;
-	width:80px;
-	background-color:white;
-	box-shadow: 2px 2px 10px 2px gray;
-	border-radius: 5px;
-	
+	border-style: none;
+    display: none;
+    width: 82px;
+    height: 60px;
+    left: -15px;
+   	top: 8px;
+    z-index: 10;
 }
+
+.myboardbtn{
+	background-color: rgba(255,255,255,0.9);
+    width: 82px;
+    height: 30px;
+    border-style: none;
+}
+
 div.imglist{
 	padding: 0;
-	width:499px;
-	height:500px;
-	border-bottom: 1px solid gray;
+    width: 500px;
+    min-height: 500px;
+    max-height: 601px;
+    border-bottom: 1px solid gray;
 }
 
 div.noimglist{
@@ -71,7 +80,9 @@ div.boardlike_reply{
 	background-color: #ffdee9;
 }
 #boardimg{
-	width: 248px;
+    margin-top: 0.5px;
+    margin-left: 0.5px;
+    width: 248px;
     height: 249px;
 }
 pre{
@@ -130,7 +141,6 @@ pre{
 .hashtag{
 	margin:5px 10px 5px 10px;
 }
-
 /*해시태그 더보기 버튼*/
 .hashtagmore{
 	border:none;
@@ -138,7 +148,6 @@ pre{
 	padding:0;
 	margin:0;
 }
-
 .hashtagmore:hover{
 	border:none;
 	background: none;
@@ -146,19 +155,16 @@ pre{
 	padding:0;
 	margin:0;
 }
-
-/*성은이형 필독*/
-/*추가 이미지 갯수*/
 .moreimg{
 	background-color: black;
     background: rgba(0,0,0,0.7);
     width: 248px;
     height: 249px;
     position: absolute;
-    top: 248px;
+    top: 250px;
     left: 249px;
     text-align: center;
-    line-height: 200px;
+    line-height: 258px;
     font-size: 70pt;
     color: white;
 }
@@ -179,8 +185,12 @@ pre{
 }
 /*이미지가 하나일 경우*/
 img.imgone{
-    width: 498px;
-    height: 499px;
+   margin-left: 1px;
+    text-align: center;
+    width: 453px;
+    min-width: 496px;
+    min-height: 499px;
+    max-height: 600px;
 }
 
 div.imgtwo{
@@ -191,3 +201,4 @@ div.imgtwo{
 img.detail{
 	cursor:pointer;	
 }
+/* 내 게시물 삭제 수정 css */

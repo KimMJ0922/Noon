@@ -12,9 +12,9 @@
 </head>
 <body>
 	<div style="margin: 1px auto; width: 500px;">
-		<textarea class="addwrite"style="" placeholder="오늘 하루는 어땠나요?"></textarea>
+		<textarea class="addwrite" id="writebtn" placeholder="오늘 하루는 어땠나요?"></textarea>
 		
-		<button type="button" id="writebtn">글쓰기</button>
+<!-- 		<button type="button" id="writebtn">글쓰기</button> -->
 <!-- 		<button type="button" id="hsbtn">알림</button> -->
 	</div>
 	

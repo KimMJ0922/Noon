@@ -13,7 +13,7 @@
 	MemberDto dto = db.getdata(id);
 	System.out.println("로그인 했을 때 "+dto.getName());
 	if(success==true){
-		//성공시 세션 부여
+		//if success grant session 
 		session.setAttribute("id", id);
 		session.setAttribute("loginok", "ok");
 		session.setAttribute("dto", dto);
