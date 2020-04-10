@@ -6,7 +6,7 @@
 	String name = (String)session.getAttribute("id");
 	String boardnum = request.getParameter("boardnum");
 	String content = request.getParameter("content");
-	String parentnum = request.getParameter("parentnum");
+	String replynum = request.getParameter("replynum");
 	
 	System.out.println(boardnum);
 	
@@ -14,7 +14,7 @@
 	ReplyDTO dto = new ReplyDTO();
 	dto.setBoardnum(boardnum);
 	dto.setContent(content);
-	dto.setParentnum(parentnum);
+	dto.setReplynum(replynum);
 	dto.setName(name);
 	
 	ReplyDAO dao = new ReplyDAO();
