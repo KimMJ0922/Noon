@@ -216,7 +216,7 @@ $(function(){
 	var boardnum = $("#re_board_text").attr("num");
 	//댓글 불러오기
 	getReply();
-	 
+	getReplyNum(boardnum);
 	
 	$("#re_send").click(function(){
 		var content = $("#re_board_text").val();
@@ -237,6 +237,7 @@ $(function(){
 				success:function(data){
 					 $("#re_board_text").val("");
 					getReply(); 
+					getReplyNum(boardnum);
 				}
 			});
 		}
@@ -244,7 +245,6 @@ $(function(){
 	//삭제 버튼 눌렀을 때
 	$(document).on("click","#del_btn",function(){
 		var replynum=$(this).parent("div").attr("replynum");
-		
 		var pclass = $(this).siblings("p:eq(0)").attr("class");
 		var content=$(this).siblings("."+pclass).children(".re_reply_textarea").val();
 		
@@ -265,6 +265,7 @@ $(function(){
 			        async: false,
 			        success:function(data){
 			        	getReply();
+			        	getReplyNum(boardnum);
 					}
 				});
 			}
@@ -272,7 +273,8 @@ $(function(){
 			var replynum=$(this).parent("div").attr("replynum");
 			var ch = confirm("해당 댓글을 삭제하시겠습니까?");
 			if(ch==true){
-				deleteReply(replynum);	
+				deleteReply(replynum,boardnum);	
+				getReplyNum(boardnum);
 			}else{
 				return false;
 			}
@@ -289,6 +291,7 @@ $(function(){
 			
 		if($(this).val()=="수정취소"){
 			getReply();
+			getReplyNum(boardnum);
 		}else{
 			$(this).siblings("."+pclass).html("<textarea class='re_reply_textarea'>"+content+"</textarea>");
 			$("#del_btn").val("수정");
@@ -326,6 +329,7 @@ $(function(){
 		        async: false,
 		        success:function(data){
 		        	getReply();
+		        	getReplyNum(boardnum);
 				}
 			}); 
 	});
@@ -335,17 +339,19 @@ $(function(){
 	
 });//window.function 끝
 
-function deleteReply(replynum){
+function deleteReply(replynum,boardnum){
 	$.ajax({
         type:"post", 
         url:"board/board_Detail/board_Detail_reply_delete.jsp", 
         dataType:"html",
         data:{
-        	"replynum":replynum
+        	"replynum":replynum,
+        	"boardnum":boardnum
         },
         async: false,
         success:function(data){
         	getReply();
+        	getReplyNum(boardnum);
 		}
 	});
 } 
@@ -396,6 +402,20 @@ function getReply(){
      });
 }
 
+function getReplyNum(boardnum){
+	$.ajax({
+        type:"post", 
+        url:"board/board_Detail/board_Detail_get_replynum.jsp", 
+        dataType:"json",
+        data:{
+        	"boardnum":boardnum
+        },
+        async: false,
+        success:function(data){
+        	$("#replycnt").html("댓글 "+data.replynum+"개");
+		}
+	});
+}
   </script>
 </head>
 <%	
@@ -525,6 +545,7 @@ function getReply(){
 				<div class="detail_content">
 					<p>이미지 넣으면됨</p><!--  아이콘 자리 -->
 					<p><b>좋아요 0개</b></p>
+					<p><b id="replycnt">댓글 0개</b></p>
 					<!-- 글 내용 -->
 					<b><%=dto.getContent()%></b>
 					<p style="margin-top:10px;"><b>
