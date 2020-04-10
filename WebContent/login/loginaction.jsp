@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,14 +7,15 @@
 	String id = request.getParameter("id");
 	String pass = request.getParameter("pass");
 	String idcheck[] = request.getParameterValues("idcheck");
-	System.out.println("idcheck : "+idcheck);
 	//테이블 검색
 	MemberDao db = new MemberDao();
 	boolean success = db.login(id, pass);
+	MemberDto dto = db.getdata(id);
 	if(success==true){
 		//성공시 세션 부여
 		session.setAttribute("id", id);
 		session.setAttribute("loginok", "ok");
+		session.setAttribute("dto", dto);
 		if(idcheck!=null)
 			session.setAttribute("idcheck", "yes");
 		else
