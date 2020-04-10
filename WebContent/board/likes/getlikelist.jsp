@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="board.BoardLikesDTO"%>
 <%@page import="java.util.List"%>
@@ -8,7 +9,8 @@
 <%
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
-	String id = (String)session.getAttribute("id");
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
 	BoardLikesDAO dao = new BoardLikesDAO();
 	List<BoardLikesDTO> list = dao.getLikeList(minrow, maxrow, id);
 	String url=request.getContextPath();

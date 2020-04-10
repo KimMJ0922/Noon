@@ -34,7 +34,8 @@
 </head>
 <%
 	String id = (String)session.getAttribute("id");
-	if(id==null){
+	String loginok = (String)session.getAttribute("loginok");
+	if(loginok==null){
 %>
 	<script>
 		alert("로그인해주세요");

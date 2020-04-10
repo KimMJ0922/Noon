@@ -11,6 +11,7 @@
 	MemberDao db = new MemberDao();
 	boolean success = db.login(id, pass);
 	MemberDto dto = db.getdata(id);
+	System.out.println("로그인 했을 때 "+dto.getName());
 	if(success==true){
 		//성공시 세션 부여
 		session.setAttribute("id", id);
