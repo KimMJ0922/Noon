@@ -18,27 +18,13 @@
 	z-index:100;
 }
 
-.filebox label {
-  display: inline-block;
-  padding: .5em .75em;
-  color: #fff;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #5cb85c;
-  cursor: pointer;
-  border: 1px solid #4cae4c;
-  border-radius: .25em;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
+
+.choicepicture:hover {
+  background-color: #6480c1;
 }
 
-.filebox label:hover {
-  background-color: #6ed36e;
-}
-
-.filebox label:active {
-  background-color: #367c36;
+.choicepicture:active {
+  background-color: #274384;
 }
 
 .filebox input[type="file"] {
@@ -54,25 +40,96 @@
 
 #imglist{
 	background-color:#eeeeee;
-	width: 460px;
-	height:200px;
+	height:300px;
+	border-bottom: 1px solid #DBDBDB;
 	overflow:auto;
 }
 #taglist{
-	border:1px solid gary;
-	box-sizing:border-box;
-	width: 700px;
-	height: 100px;
-	overflow:auto;
+	box-sizing: border-box;
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid #DBDBDB;
+    overflow: auto;
 }
 .delhashbtn{
 	cursor:pointer;
 }
 .tag{
-	display:inline-block;
-	background-color: #9de4ff;
-	font-size:12pt;
-	padding: 4px 8px;
-	margin: 5px 8px 5px 8px;
-	border-radius: 20px;
+		display: inline-block;
+    font-size: 10pt;
+    margin: 5px 8px 5px 8px;
+    color: #4c6ebd;
+}
+.writeboardform{
+    margin: 15px auto;
+    border: 1px solid #DBDBDB;
+    width: 500px;
+}
+#fileform>div>#content{
+	min-height: 200px;
+    width: 100%;
+    resize: none;
+    border: unset;
+	padding: 2px 10px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #DBDBDB;
+}
+#fileform>div>#content::placeholder{
+	text-align: center;
+	line-height: 150px;
+	font-size: 17px;	
+}
+#hashtagtext{
+	font-size: 13pt;
+	width: 100%;
+    border: unset;
+    height: 36px;
+    border-bottom: 1px solid #DBDBDB;
+}
+#hashtagtext::placeholder{
+	padding-left:10px;
+	font-size: 13pt;
+}
+.writeboardbtn>#write{
+    border-right: 1px solid #DBDBDB;
+	width: 249px;
+    line-height: 46px;
+    font-size: 16px;
+    height: 40px;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #1e2a46;
+}
+
+.writeboardbtn>.choicepicture{
+	width: 249px;
+    line-height: 46px;
+    font-size: 16px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #1e2a46;
+    transition:0.3s;
+}
+.writeboardbtn>.choicepicture:hover {
+  background-color: #445a8e;
+    color: #fff;
+}
+
+.writeboardbtn>.choicepicture:active {
+  background-color: #fff;
+   color: #000;
+}
+
+.writeboardbtn>#write:hover {
+  background-color: #445a8e;
+    color: #fff;
+}
+
+.writeboardbtn>#write:active {
+  background-color: #fff;
+   color: #000;
 }
