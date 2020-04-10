@@ -37,14 +37,22 @@ div.boardcontent{
 }
 
 div.btns{
-	display:none;
-	postion:relative;
-	width:80px;
-	background-color:white;
-	box-shadow: 2px 2px 10px 2px gray;
-	border-radius: 5px;
-	
+	border-style: none;
+    display: none;
+    width: 82px;
+    height: 60px;
+    left: -15px;
+   	top: 8px;
+    z-index: 10;
 }
+
+.myboardbtn{
+	background-color: rgba(255,255,255,0.9);
+    width: 82px;
+    height: 30px;
+    border-style: none;
+}
+
 div.imglist{
 	padding: 0;
     width: 500px;
@@ -133,7 +141,6 @@ pre{
 .hashtag{
 	margin:5px 10px 5px 10px;
 }
-
 /*해시태그 더보기 버튼*/
 .hashtagmore{
 	border:none;
@@ -141,7 +148,6 @@ pre{
 	padding:0;
 	margin:0;
 }
-
 .hashtagmore:hover{
 	border:none;
 	background: none;
@@ -149,9 +155,6 @@ pre{
 	padding:0;
 	margin:0;
 }
-
-/*성은이형 필독*/
-/*추가 이미지 갯수*/
 .moreimg{
 	background-color: black;
     background: rgba(0,0,0,0.7);
@@ -161,7 +164,7 @@ pre{
     top: 250px;
     left: 249px;
     text-align: center;
-    line-height: 200px;
+    line-height: 258px;
     font-size: 70pt;
     color: white;
 }
@@ -198,3 +201,4 @@ div.imgtwo{
 img.detail{
 	cursor:pointer;	
 }
+/* 내 게시물 삭제 수정 css */
