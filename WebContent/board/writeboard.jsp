@@ -15,6 +15,9 @@ $(function(){
 	$(".choicepicture").click(function(){
 		$("#imglist").css("display","inline-block");
 	});
+	$(".wtiteback").click(function(){
+		history.back();
+	});
 });
 </script>
 </head>
@@ -40,6 +43,7 @@ $(function(){
 			<label id="write" name="write" style="margin: 0;font-weight: unset;">작성완료</label>
 			
 			<label for="photo" class="choicepicture" style="margin: 0;font-weight: unset;">사진선택</label>
+			<label class="wtiteback" style="margin: 0;font-weight: unset;">취소하기</label>
 		</div>
 		<div class="filebox">
 			<input type="file" name="photo"
