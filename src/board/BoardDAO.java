@@ -44,14 +44,23 @@ public class BoardDAO {
 		return num;
 	}
 	
-	public List<BoardDTO> getBoardList(String minrow,String maxrow){
+	public List<BoardDTO> getBoardList(String minrow,String maxrow,String sort){
 		List<BoardDTO> list = new Vector<BoardDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select * from("+
+		String sql = "";
+		if(sort.equals("like")) {
+			sql = "select * from("+
+					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					 "from ( select * from boardtb order by likes desc,writeday desc) a"+
+					 ") where rnum > ? and rnum <= ?";
+		}else {
+			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
 					 "from ( select * from boardtb order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";	
+					 ") where rnum > ? and rnum <= ?";
+		}
+				
 		ResultSet rs = null;
 		conn = db.getConnection();
 		try {

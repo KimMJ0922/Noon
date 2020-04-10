@@ -11,8 +11,19 @@
 <script type="text/javascript" src="js/board/boardlist.js"></script>
 </head>
 <body>
+<%
+	String[] comment = {"오늘 하루는 어땠나요?",
+						"오늘 기분 어떠신가요?",
+						"자랑 할 일이 있나요?",
+						"알리고 싶은 소식이 있나요?"
+					   };
+
+	double ran = Math.random()*4;
+	int ranf = (int)ran;
+	System.out.println(ranf);
+%>
 	<div style="margin: 1px auto; width: 500px;">
-		<textarea class="addwrite" id="writebtn" placeholder="오늘 하루는 어땠나요?"></textarea>
+		<textarea class="addwrite" id="writebtn" placeholder="<%=comment[ranf]%>"></textarea>
 		
 <!-- 		<button type="button" id="writebtn">글쓰기</button> -->
 <!-- 		<button type="button" id="hsbtn">알림</button> -->
@@ -22,14 +33,16 @@
 	
 	</div>
 	<div id="list">
-		<div class="remocon">
-			<a><div class="showboard remoconlist"></div></a>
-			<a><div class="favorite remoconlist" ></div></a>
-			<a><div class="alam remoconlist" ></div></a>
-			<a href="#"><div class="pagetopup remoconlist"></div></a>
-			<a><div class="setting remoconlist"></div></a>
-		</div>
-	</div>
 	
+		
+		
+	</div>
+	<div class="remocon">
+		<a><div class="showboard remoconlist"></div></a>
+		<a><div class="favorite remoconlist" ></div></a>
+		<a><div class="alam remoconlist" ></div></a>
+		<a href="#"><div class="pagetopup remoconlist"></div></a>
+		<a><div class="setting remoconlist"></div></a>
+	</div>
 </body>
 </html>

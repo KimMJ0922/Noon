@@ -1978,6 +1978,7 @@ pre code {
 	    display: inline-block;
 	    right: 7%;
 	    width: 100px;
+	    top: 235px;
 	    height: auto;
 	    bottom: inherit;
 	    background-color: unset;
@@ -2065,6 +2066,7 @@ pre code {
 	    margin: 10px auto;
 	    background-size: cover;
 	    width: 50px;
+	    top: 235px;
 	    height: 50px;
 	    float: none;
     }
@@ -2189,6 +2191,7 @@ pre code {
 	    margin: 10px auto;
 	    background-size: cover;
 	    width: 50px;
+	    top: 235px;
 	    height: 50px;
 	    float: none;
     }
@@ -2437,6 +2440,7 @@ pre code {
 	    display: inline-block;
 	    right: 28%;
 	    width: 100px;
+	    top: 235px;
 	    height: auto;
 	    background-color:unset;
     }

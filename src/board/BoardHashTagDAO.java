@@ -57,15 +57,23 @@ public class BoardHashTagDAO {
 		return list;
 	}
 	
-	public List<BoardHashTagDTO> getHashTags(String minrow, String maxrow) {
+	public List<BoardHashTagDTO> getHashTags(String minrow, String maxrow,String sort) {
 		List<BoardHashTagDTO> list = new Vector<BoardHashTagDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select min(num),max(num) from("+
+		String sql = "";
+		if(sort.equals("like")) {
+			sql = "select min(num),max(num) from("+
+					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					 "from ( select * from boardtb order by likes desc,writeday desc) a"+
+					 ") where rnum > ? and rnum <= ?";
+		}else {
+			sql = "select min(num),max(num) from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
 					 "from ( select * from boardtb order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";	
+		}
 		conn = db.getConnection();
 		int max = 0;
 		int min = 0;
