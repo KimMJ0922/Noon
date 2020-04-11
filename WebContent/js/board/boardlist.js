@@ -202,6 +202,35 @@ $(function(){
        boardList(minrow,maxrow,img,hashtag,likes,sort);
    });
    
+   //리모컨 아이콘 마우스 올렸을 때
+   $(document).on("mouseover",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+	   var idx = $(this).attr("idx");
+	   $(this).css("cursor","pointer");
+	   var windowwidth = $(window).width();
+	   if(windowwidth>=766){
+		   $(".remoconcomment:eq("+idx+")").css({
+			   "display":"inline-block",
+			   "position":"relative",
+			   "top":"-60px",
+			   "left":"70px",
+			   "margin":"0",
+			   "padding":"0",
+			   "float":"right",
+			   "text-align":"center",
+			   "line-height":"45px"
+			   
+		   });
+	   }
+   });
+   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+	   var idx = $(this).attr("idx");
+	   var windowwidth = $(window).width();
+	   if(windowwidth>=766){
+		   $(".remoconcomment:eq("+idx+")").css({
+			   "display":"none"
+		   });
+	   }
+   });
 });//$(function) 끝
 
 

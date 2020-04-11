@@ -38,11 +38,16 @@
 		
 	</div>
 	<div class="remocon">
-		<a><div class="showboard remoconlist"></div></a>
-		<a><div class="favorite remoconlist" ></div></a>
-		<a><div class="alam remoconlist" ></div></a>
-		<a href="#"><div class="pagetopup remoconlist"></div></a>
-		<a><div class="setting remoconlist"></div></a>
+		<a><div class="showboard remoconlist" idx="0"></div></a>
+		<div class="remoconcomment">최신순</div>
+		<a><div class="favorite remoconlist" idx="1"></div></a>
+		<div class="remoconcomment" >좋아요순</div>
+		<a><div class="alam remoconlist" idx="2"></div></a>
+		<div class="remoconcomment">알림</div>
+		<a href="#"><div class="pagetopup remoconlist" idx="3"></div></a>
+		<div class="remoconcomment">맨위로</div>
+		<a><div class="setting remoconlist" idx="4"></div></a>
+		<div class="remoconcomment" >설정</div>
 	</div>
 </body>
 </html>

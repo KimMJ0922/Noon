@@ -213,3 +213,13 @@ img.detail{
 .boarddetail{
 	cursor:pointer;
 }
+
+/*리모컨 설명*/
+.remoconcomment{
+	display:none;
+	width:80px;
+	height:50px;
+	border:1px solid gray;
+	border-radius: 10px;
+}
+
