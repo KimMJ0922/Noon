@@ -202,6 +202,35 @@ $(function(){
        boardList(minrow,maxrow,img,hashtag,likes,sort);
    });
    
+   //리모컨 아이콘 마우스 올렸을 때
+   $(document).on("mouseover",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+	   var idx = $(this).attr("idx");
+	   $(this).css("cursor","pointer");
+	   var windowwidth = $(window).width();
+	   if(windowwidth>=766){
+		   $(".remoconcomment:eq("+idx+")").css({
+			   "display":"inline-block",
+			   "position":"relative",
+			   "top":"-60px",
+			   "left":"70px",
+			   "margin":"0",
+			   "padding":"0",
+			   "float":"right",
+			   "text-align":"center",
+			   "line-height":"45px"
+			   
+		   });
+	   }
+   });
+   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+	   var idx = $(this).attr("idx");
+	   var windowwidth = $(window).width();
+	   if(windowwidth>=766){
+		   $(".remoconcomment:eq("+idx+")").css({
+			   "display":"none"
+		   });
+	   }
+   });
 });//$(function) 끝
 
 
@@ -457,7 +486,13 @@ function listform(data,img,hashtag,likes){
 						str += "</div>";//아이디 끝
 					}else{
 						str += "<div class='col-md-6 col-sm-6 col-xs-6 boardwriter'>";
-							str +="<img src='img/member/logo.jpg' alt='프로필사진' class='boardprofile'>"
+							//프로필 사진이 없을 때
+							if(item.profilepic==""||item.profilepic==null){
+								str +="<img src='profile/default.png' alt='프로필사진' class='boardprofile'>"
+							}else{
+								str +="<img src='profile/"+item.id+"/"+item.profilepic+"' alt='프로필사진' class='boardprofile'>"
+							}
+							
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
 					str += "</div>";
 						str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";

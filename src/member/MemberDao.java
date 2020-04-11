@@ -116,7 +116,7 @@ public class MemberDao {
 				dto.setPass(rs.getString("pass"));
 				dto.setSignupday(rs.getTimestamp("signupday"));
 				dto.setType(rs.getString("type"));
-				dto.setPic(rs.getString("pic"));
+				dto.setPic(rs.getString("profilpic"));
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
