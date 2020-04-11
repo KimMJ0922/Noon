@@ -52,12 +52,12 @@ public class BoardDAO {
 		if(sort.equals("like")) {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m order by likes desc,writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}else {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}
 				
