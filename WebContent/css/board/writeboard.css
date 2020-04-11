@@ -93,7 +93,7 @@
 }
 .writeboardbtn>#write{
     border-right: 1px solid #DBDBDB;
-	width: 249px;
+	width: 33.333%;
     line-height: 46px;
     font-size: 16px;
     height: 40px;
@@ -105,15 +105,38 @@
 }
 
 .writeboardbtn>.choicepicture{
-	width: 249px;
+	width: 33.333%;
+    line-height: 46px;
+    font-size: 16px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+    color: #fff;
+    border-right: 1px solid #DBDBDB;
+    background-color: #1e2a46;
+    transition: 0.3s;
+}
+.wtiteback{
+	width: 33.333%;
     line-height: 46px;
     font-size: 16px;
     height: 40px;
     text-align: center;
     cursor: pointer;
     color: #fff;
+    border-right: 1px solid #DBDBDB;
     background-color: #1e2a46;
-    transition:0.3s;
+    transition: 0.3s;
+}
+.writeboardbtn>.wtiteback:hover{
+	 background-color: #445a8e;
+    color: #fff;
+}
+
+.writeboardbtn>.wtiteback:active{
+	background-color: #445a8e;
+    color: #fff;
 }
 .writeboardbtn>.choicepicture:hover {
   background-color: #445a8e;
