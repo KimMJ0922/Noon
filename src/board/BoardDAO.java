@@ -211,4 +211,28 @@ public class BoardDAO {
 		
 		return con;
 	}
+	
+	public BoardDTO getCount(String id) {
+		BoardDTO dto = new BoardDTO();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(num),sum(likes) from boardtb where id=?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setNum(rs.getString(1));
+				dto.setLikes(rs.getInt(2));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
 }

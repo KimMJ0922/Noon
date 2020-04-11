@@ -1,3 +1,6 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="board.BoardDTO"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="member.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -13,6 +16,12 @@
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
 	String id = dto.getId();
+	BoardDAO dao = new BoardDAO();
+	BoardDTO bdto = dao.getCount(id);
+	NumberFormat nf = NumberFormat.getInstance();
+	
+	String like = nf.format(bdto.getLikes());
+	String boardcnt = nf.format(Integer.parseInt(bdto.getNum()));
 %>
 <body>
 	<div class="container" style="width: 100%;">
@@ -42,8 +51,8 @@
 						</div>
 								<!--	좋아요 게시글 팔로워 숫자	 -->
 						<div class="col-md-12 col-sm-12 hidden-xs myinfolist myinfolistval">
-							<span> 14,032 </span>
-							<span> 43 </span>
+							<span> <%=like %> </span>
+							<span> <%=boardcnt %> </span>
 							<span> 348 </span>
 						</div>
 					</div>
