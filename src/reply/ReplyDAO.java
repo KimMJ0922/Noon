@@ -85,10 +85,10 @@ public class ReplyDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<ReplyDTO> list= new Vector<ReplyDTO>();
-		String sql="select * " + 
-				"from BOARD_DETAIL_REPLY " + 
-				"where boardnum= ? " + 
-				"START WITH parentnum = 0 " + 
+		String sql="select b.*, m.profilpic "+
+				"from BOARD_DETAIL_REPLY b, membertb m "+
+				"where b.boardnum = ? and b.name = m.id "+
+				"START WITH parentnum = 0 "+
 				"CONNECT BY PRIOR replynum = parentnum";
 		conn=db.getConnection();
 		try {
@@ -105,6 +105,7 @@ public class ReplyDAO {
 				dto.setName(rs.getString("name"));
 				dto.setGroupnum(rs.getString("groupnum"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setProfilepic(rs.getString("profilpic"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -123,7 +124,7 @@ public class ReplyDAO {
 					 "select replynum " + 
 					 "from BOARD_DETAIL_REPLY " + 
 					 "where boardnum= ? " + 
-					 "START WITH parentnum = ?" + 
+					 "START WITH parentnum = ? " + 
 					 "CONNECT BY PRIOR replynum = parentnum)";
 		conn = db.getConnection();
 		try {
