@@ -486,7 +486,13 @@ function listform(data,img,hashtag,likes){
 						str += "</div>";//아이디 끝
 					}else{
 						str += "<div class='col-md-6 col-sm-6 col-xs-6 boardwriter'>";
-							str +="<img src='img/member/logo.jpg' alt='프로필사진' class='boardprofile'>"
+							//프로필 사진이 없을 때
+							if(item.profilepic==""||item.profilepic==null){
+								str +="<img src='profile/default.png' alt='프로필사진' class='boardprofile'>"
+							}else{
+								str +="<img src='profile/"+item.profilepic+"' alt='프로필사진' class='boardprofile'>"
+							}
+							
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
 					str += "</div>";
 						str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";

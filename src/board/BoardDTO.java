@@ -10,8 +10,16 @@ public class BoardDTO {
 	private int likes;
 	private Timestamp writeday;
 	private String reply;
+	private String profilepic;
 	
 	
+	
+	public String getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
 	public String getReply() {
 		return reply;
 	}

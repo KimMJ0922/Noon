@@ -22,6 +22,10 @@
 	
 	String like = nf.format(bdto.getLikes());
 	String boardcnt = nf.format(Integer.parseInt(bdto.getNum()));
+	String profilesrc = "profile/default.png";
+	if(dto.getPic()!=null && dto.getPic()!=""){
+		profilesrc = dto.getPic();
+	}
 %>
 <body>
 	<div class="container" style="width: 100%;">
@@ -35,7 +39,8 @@
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-xs-6 myinfo">
-						<img src="img/member/logo.jpg" alt="프로필 사진">
+
+						<img src="<%=profilesrc %>" alt="프로필 사진">
 					</div>
 					<div class="col-md-9 col-sm-8 col-xs-6 myinfo">
 								<!--	아이디	 -->

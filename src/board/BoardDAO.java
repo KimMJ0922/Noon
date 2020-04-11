@@ -52,12 +52,12 @@ public class BoardDAO {
 		if(sort.equals("like")) {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by likes desc,writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m order by likes desc,writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}else {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}
 				
@@ -78,6 +78,8 @@ public class BoardDAO {
 				dto.setLikes(rs.getInt("likes"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
+				dto.setProfilepic(rs.getString("profilpic"));
+				
 				list.add(dto);
 			}
 			
