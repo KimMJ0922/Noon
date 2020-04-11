@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +11,8 @@
 <title>Insert title here</title>
 </head>
 <%
-	String id = (String)session.getAttribute("id");
+	MemberDto dto = (MemberDto)session.getAttribute("dto");
+	String id = dto.getId();
 %>
 <body>
 	<div class="container" style="width: 100%;">

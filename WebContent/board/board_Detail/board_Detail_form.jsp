@@ -211,6 +211,12 @@ background:none;
 	border-radius: 5px;
 	display: block;
 }
+.likeyimg{
+	width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 10px;
+}
   </style>
 <script type="text/javascript">
 $(function(){
@@ -218,7 +224,8 @@ $(function(){
 	//댓글 불러오기
 	getReply();
 	getReplyNum(boardnum);
-	
+	getLikeNum(boardnum);
+	getLikeStatus(boardnum);
 	$("#re_send").click(function(){
 		var content = $("#re_board_text").val();
 		
@@ -306,7 +313,7 @@ $(function(){
 		var prtname=$(this).parent("p").siblings("a").attr("prtname");
 	
 		var a =$(this).parent("p").siblings("div");
-		a.html("<textarea class='re_re'>@"+prtname+"</textarea>");
+		a.html("<textarea class='re_re'>@"+prtname+"  </textarea>");
 		a.append("<input type='button' id='re_re_cc' style='border:none;background:none;font-size:12px;' value='취소'>");
 		a.append("<input type='button' id='re_re_add' style='border:none;background:none;font-size:12px;' value='답글 달기'>");
 	});
@@ -344,7 +351,33 @@ $(function(){
 		
 		
 	});
-	
+	//좋아요 아이콘 눌렀을 때
+	$(".likeyimg").click(function(){
+		var src = $(this).attr("src");
+		var cnt = 0;
+		if(src == "img/like/like01.png"){
+			$(this).attr("src","img/like/like02.png");
+			cnt++;
+		}else{
+			$(this).attr("src","img/like/like01.png");
+			cnt--;
+		}
+		
+		$.ajax({
+	        type:"post", 
+	        url:"board/likes/updatelike.jsp", 
+	        dataType:"html",
+	        data:{
+	        	"num":boardnum,
+	        	"likes":cnt
+	        },
+	        async: false,
+	        success:function(data){
+	        	$(".likycnt").html("좋아요 "+$.trim(data)+"개");
+			}
+		});
+		
+	});
 	
 });//window.function 끝
 
@@ -436,6 +469,42 @@ function getReplyNum(boardnum){
         async: false,
         success:function(data){
         	$("#replycnt").html("댓글 "+data.replynum+"개");
+		}
+	});
+}
+
+function getLikeNum(boardnum){
+	$.ajax({
+        type:"post", 
+        url:"board/likes/getlikenum.jsp", 
+        dataType:"html",
+        data:{
+        	"num":boardnum
+        },
+        async: false,
+        success:function(data){
+        	$(".likycnt").html("좋아요 "+$.trim(data)+"개");
+		}
+	});
+}
+
+function getLikeStatus(boardnum){
+	$.ajax({
+        type:"post", 
+        url:"board/likes/getlikestatus.jsp", 
+        dataType:"html",
+        data:{
+        	"num":boardnum
+        },
+        async: false,
+        success:function(data){
+        	var id = $.trim(data);
+        	var loginid = $.trim($("#loginid").text());
+        	if(id == loginid){
+        		$(".likeyimg").attr("src","img/like/like02.png");
+        	}else{
+        		$(".likeyimg").attr("src","img/like/like01.png");
+        	}
 		}
 	});
 }
@@ -566,8 +635,8 @@ function getReplyNum(boardnum){
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
 				<div class="detail_content">
-					<p>이미지 넣으면됨</p><!--  아이콘 자리 -->
-					<p><b>좋아요 0개</b></p>
+					<p><img class="likeyimg" src="img/like/like01.png"></p><!--  아이콘 자리 -->
+					<p><b class="likycnt">좋아요 0개</b></p>
 					<p><b id="replycnt">댓글 0개</b></p>
 					<!-- 글 내용 -->
 					<%
