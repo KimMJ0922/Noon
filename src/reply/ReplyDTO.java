@@ -11,8 +11,16 @@ public class ReplyDTO {
 	private String name;
 	private String content;
 	private Timestamp writeday;
+	private String profilepic;
 	
 	
+	
+	public String getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
 	public String getGroupnum() {
 		return groupnum;
 	}

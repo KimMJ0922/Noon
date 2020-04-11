@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardHashTagDAO"%>
 <%@page import="board.BoardDAO"%>
@@ -416,7 +417,12 @@ function getReply(){
 			$.each(data,function(i,item){
 				if(item.name==writernik){
 					str+="<div class='reply_content_re_writer' replynum='"+item.replynum+"'>"
-					str+="<img src='save/ddd/iu.jpg'>";
+					if(item.profilepic==null||item.profilepic==""){
+						str+="<img src='profile/default.png'>";
+					}else{
+						str+="<img src='profile/"+item.name+"/"+item.profilepic+"'>";
+					}
+					
 					str+="<a href='#' style='margin-left:10px;' prtname='"+item.name+"'>"+" "+item.writeday+" "+item.name+"</a>";
 					if(item.name==id){
 						str+="<input class='p_rebtn_s_writer' id='del_btn' type='button' value='삭제' >";
@@ -434,7 +440,11 @@ function getReply(){
 				str+="</div>";
 				}else{
 					str+="<div class='reply_content_re' id='"+item.replynum+"' replynum='"+item.replynum+"'>"
-						str+="<img src='save/ddd/iu.jpg'>";
+						if(item.profilepic==null||item.profilepic==""){
+							str+="<img src='profile/default.png'>";
+						}else{
+							str+="<img src='profile/"+item.name+"/"+item.profilepic+"'>";
+						}
 						str+="<a href='#' style='margin-right:10px;' prtname='"+item.name+"'>"+" "+item.name+" "+item.writeday+"</a>";
 						if(item.name==id){
 							str+="<input class='p_rebtn_s' id='up_btn' type='button' value='수정'>";
@@ -526,7 +536,12 @@ function getLikeStatus(boardnum){
 	//이미지 url
 	String url=request.getContextPath();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	
+	String profileimg = "profile/default.png";
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
+	if(dto.getProfilepic()!=null||dto.getProfilepic()!=""){
+		profileimg = "profile/"+id+"/"+dto.getProfilepic();
+	}
 %>
 <body>
 <%	
@@ -596,7 +611,8 @@ function getLikeStatus(boardnum){
 %>					
 				<div class="img_none_box">
 					<div class="img_none">
-					<img src="<%=url %>/save/ddd/iu.jpg" style="float:left">
+
+					<img src="<%=profileimg %>" style="float:left">
 					<span><b style="color:skyblue"><%=dto.getNickname() %></b></span>
 					<span style="display:block;margin-left:70px; color:gray;"><%=sdf.format(dto.getWriteday()) %></span>
 					</div>
@@ -613,7 +629,7 @@ function getLikeStatus(boardnum){
 			<div class="col-md-5 col-sm-5" style="padding:0;"><!-- 댓글창 -->
 				<div class="reboard">
 					<div class="img_on">
-					<img src="<%=url %>/save/ddd/iu.jpg" style="float:left">
+					<img src="<%=profileimg %>" style="float:left">
 					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
 					</div>
 					<hr>

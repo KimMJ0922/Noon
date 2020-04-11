@@ -62,6 +62,7 @@
 	            ret = day;
 	        }
 			ob.put("writeday",ret);
+			ob.put("profilepic",dto.getProfilepic());
 			arr.add(ob);
 		}
 	}

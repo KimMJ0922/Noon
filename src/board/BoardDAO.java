@@ -52,12 +52,12 @@ public class BoardDAO {
 		if(sort.equals("like")) {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m order by likes desc,writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}else {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}
 				
@@ -116,7 +116,7 @@ public class BoardDAO {
 		BoardDTO dto = new BoardDTO();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select * from boardtb where num = ?";	
+		String sql = "select b.*,m.profilpic from boardtb b, membertb m where b.num = ? and b.id=m.id";	
 		ResultSet rs = null;
 		conn = db.getConnection();
 		try {
@@ -132,6 +132,7 @@ public class BoardDAO {
 				dto.setLikes(rs.getInt("likes"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
+				dto.setProfilepic(rs.getString("profilpic"));
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
