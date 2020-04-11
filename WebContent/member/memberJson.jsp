@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String id = request.getParameter("id");
+	String id = request.getParameter("num");
 	MemberDao db = new MemberDao();
 	MemberDto dto = db.getdata(id);
 	
