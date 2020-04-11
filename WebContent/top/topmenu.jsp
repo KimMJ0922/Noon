@@ -23,8 +23,9 @@
 	String like = nf.format(bdto.getLikes());
 	String boardcnt = nf.format(Integer.parseInt(bdto.getNum()));
 	String profilesrc = "profile/default.png";
+	System.out.println(dto.getPic());
 	if(dto.getPic()!=null && dto.getPic()!=""){
-		profilesrc = dto.getPic();
+		profilesrc = "profile/"+id+"/"+dto.getPic();
 	}
 %>
 <body>

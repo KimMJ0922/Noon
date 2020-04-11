@@ -490,7 +490,7 @@ function listform(data,img,hashtag,likes){
 							if(item.profilepic==""||item.profilepic==null){
 								str +="<img src='profile/default.png' alt='프로필사진' class='boardprofile'>"
 							}else{
-								str +="<img src='profile/"+item.profilepic+"' alt='프로필사진' class='boardprofile'>"
+								str +="<img src='profile/"+item.id+"/"+item.profilepic+"' alt='프로필사진' class='boardprofile'>"
 							}
 							
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
