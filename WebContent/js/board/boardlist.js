@@ -453,7 +453,7 @@ function listform(data,img,hashtag,likes){
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
 						str += "</div>";
 							str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
-							str +="<span class='boardwriteday'>"+item.writeday+"</span>"
+							str +="<span class='boardwriteday' style='float:right; margin-right:10px;'>"+item.writeday+"</span>"
 						str += "</div>";//아이디 끝
 					}else{
 						str += "<div class='col-md-6 col-sm-6 col-xs-6 boardwriter'>";
@@ -461,7 +461,7 @@ function listform(data,img,hashtag,likes){
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
 					str += "</div>";
 						str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
-							str +="<span class='boardwriteday'>"+item.writeday+"</span>"
+							str +="<span class='boardwriteday' style='float:right; margin-right:10px;'>"+item.writeday+"</span>"
 							str += "</div>";//아이디 끝
 						str += updateBtnStr;
 					}

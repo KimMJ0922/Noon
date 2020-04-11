@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.JSONArray"%>
@@ -13,6 +14,13 @@
 	ReplyDAO dao=new ReplyDAO();
 	System.out.println(boardnum);
 	List<ReplyDTO> list= dao.getAllDatas(boardnum);
+	
+	
+	Calendar c = Calendar.getInstance();
+
+	long now = c.getTimeInMillis();
+	
+	
 	JSONArray arr = new JSONArray();
 	if(list.size()!=0){
 		for(ReplyDTO dto : list){
@@ -23,7 +31,37 @@
 			ob.put("sortnum",dto.getSortnum());
 			ob.put("name",dto.getName());
 			ob.put("content",dto.getContent());
-			ob.put("writeday",sdf.format(dto.getWriteday()));
+			
+			String day = sdf.format(dto.getWriteday());
+			
+			long dateM = dto.getWriteday().getTime();
+			
+			long gap = now - dateM;
+
+	        String ret = "";
+	        
+	        gap = (long)(gap/1000);
+	        long hour = gap/3600;
+	        gap = gap%3600;
+	        long min = gap/60;
+	        long sec = gap%60;
+
+	        if(hour > 24){
+	            ret = day;
+	        }
+	        else if(hour > 0){
+	            ret = hour+"시간 전";
+	        }
+	        else if(min > 0){
+	            ret = min+"분 전";
+	        }
+	        else if(sec >= 0){
+	            ret = sec+"초 전";
+	        }
+	        else{
+	            ret = day;
+	        }
+			ob.put("writeday",ret);
 			arr.add(ob);
 		}
 	}
