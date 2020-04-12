@@ -150,20 +150,36 @@ $(function(){
    });
    
    
-   //임시 알림 보이기
-   $(document).on("click","#hsbtn",function(){
+   //알림
+   $(document).on("click",".alam",function(){
       $.ajax({
          type: "post", 
-         url: "history/get.jsp", 
+         url: "history/gethistory.jsp", 
          dataType:"json",
          success:function(data){
             var str = "<ul>";
             $.each(data,function(i,item){
-               str+="<li>"+item.fromid+"님이 회원님의 게시물에 "+item.action+"</li>";
+               str += "<li>";
+               	//프로필 사진
+               	if(item.profilepic==null||item.profilepic==""){
+               		str += "<img src=profile/default.png>";
+               	}else{
+               		str += "<img src=profile/"+item.fromid+"/"+item.profilepic+">";
+               	}
+               	
+               	//좋아요, 댓글이면 해당 게시물로 이동
+               	if(item.action.indexOf("좋아요")>=0 || item.action.indexOf("댓글")>=0){
+               		str += "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+item.num+"'>";
+               	}
+               	
+               	str += item.fromid+"님이 회원님의 게시물에 "+item.action+"<br>";
+               	str += "</a>";
+               	str += "<span class='actionday'>"+item.actionday+"</span>";
+               str += "</li>";
             });
             str += "</ul>";
             
-            $("#history").html(str);
+            $(".alamli").html(str);
          }
       });
    });
@@ -217,11 +233,6 @@ $(function(){
 			   "padding":"0",
 			   "float":"right",
 			   "text-align":"center",
-			   
-				   //그러자 ㅋㅋㅋㅋㅋ 바로 떠는것도 괜찮아서 음 그럼 이건 걍 냅둘게여 ㅋㅋ ㅋㅋㅋ 오키오키
-				   //해쉬태그 검색하는걸 오늘 할까 내일할까고민중인데 
-				   //어떡할까 뭔가 방향만 잡아주면 내가 혼자 서 천천히 할수 있을것 같기도하고
-				   //어.. 지금 만약 검색 넣는다면 
 		   });
 	   }
    });
@@ -481,7 +492,11 @@ function listform(data,img,hashtag,likes){
 					//로그인한 아이디와 글쓴 아이디가 다를 때
 					if(updateBtnStr==""){
 						str += "<div class='col-md-8 col-sm-8 col-xs-8 boardwriter'>";
-							str +="<img src='img/member/logo.jpg' alt='프로필사진' class='boardprofile'>"
+							if(item.profilepic==""||item.profilepic==null){
+								str +="<img src='profile/default.png' alt='프로필사진' class='boardprofile'>"
+							}else{
+								str +="<img src='profile/"+item.id+"/"+item.profilepic+"' alt='프로필사진' class='boardprofile'>"
+							}
 							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
 						str += "</div>";
 							str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";

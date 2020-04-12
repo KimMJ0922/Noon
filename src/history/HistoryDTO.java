@@ -8,8 +8,16 @@ public class HistoryDTO {
 	private String toid;
 	private String action;
 	private Timestamp actionday;
+	private String profilepic;
 	
 	
+	
+	public String getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
 	public String getNum() {
 		return num;
 	}

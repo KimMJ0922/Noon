@@ -104,6 +104,11 @@ public class BoardDAO {
 			pstmt.setString(1, num);
 			pstmt.execute();
 			
+			sql ="delete from history where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.execute();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

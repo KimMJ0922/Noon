@@ -531,6 +531,14 @@ function getLikeStatus(boardnum){
 	BoardDAO Bdb=new BoardDAO();
 	BoardDTO dto=Bdb.getBoard(num);
 	
+	if(dto.getNum()==null||dto.getNum()==""){
+%>
+		<script>
+			alert("삭제된 게시글입니다.");
+			history.back();
+		</script>
+<%
+	}
 	//해시태그 불러오기
 	BoardHashTagDAO Hdb= new BoardHashTagDAO();
 	List<String> Hlist= Hdb.getNumHashTag(num);

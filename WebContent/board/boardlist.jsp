@@ -50,11 +50,7 @@ $(function(){
 			<div  class="alamul">
 				<span class="alamli">
 				<!--이부분 반복  시작-->
-					<a href="#">
-						<!-- 게시물첫번째그림 표시 -->
-						<img src="profile/default.png" alt="d" class="alamprofilelist">
-						 ming__go_'v'_ 님이 게시물에 댓글을 남겼습니다.(텍스트 넘어가ㅏ면...보이게하는거 보여주는용)
-					</a>
+					
 				</span>
 				<br>
 				<!--이부분 반복 끝 -->

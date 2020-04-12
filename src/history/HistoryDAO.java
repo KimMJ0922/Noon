@@ -16,8 +16,11 @@ public class HistoryDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from history where toid = ? order by actionday desc";
-		String con = "";
+		String sql = "select h.*, m.profilpic "+
+					 "from history h, membertb m "+
+					 "where h.toid = ? and h.fromid = m.id "+
+					 "order by actionday desc";
+		
 		conn = db.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -29,6 +32,7 @@ public class HistoryDAO {
 				dto.setFormid(rs.getString("fromid"));
 				dto.setAction(rs.getString("action"));
 				dto.setActionday(rs.getTimestamp("actionday"));
+				dto.setProfilepic(rs.getString("profilpic"));
 				
 				list.add(dto);
 			}
