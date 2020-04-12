@@ -10,7 +10,7 @@
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
 	String sort = request.getParameter("sort");
-	
+	String text = request.getParameter("text");
 	//MemberDto mdto = (MemberDto)session.getAttribute("dto");
 	String id = (String)session.getAttribute("id");
 	/* if(mdto.getId()==null){
@@ -20,7 +20,7 @@
 	} */
 	
 	BoardLikesDAO dao = new BoardLikesDAO();
-	List<BoardLikesDTO> list = dao.getLikeList(minrow, maxrow, id,sort);
+	List<BoardLikesDTO> list = dao.getLikeList(minrow, maxrow, id,sort,text);
 	String url=request.getContextPath();
 	JSONArray arr = new JSONArray();
 	if(list.size()!=0){

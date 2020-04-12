@@ -11,9 +11,15 @@ public class BoardDTO {
 	private Timestamp writeday;
 	private String reply;
 	private String profilepic;
+	private String hashtag;
 	
 	
-	
+	public String getHashtag() {
+		return hashtag;
+	}
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
 	public String getProfilepic() {
 		return profilepic;
 	}
