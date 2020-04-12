@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,13 +23,17 @@ $(function(){
 </script>
 </head>
 <body>
+<%
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
+%>
 <div class=" writeboardform" style="padding: 0;">
 	<form name="fileform" id="fileform" method="post"
 		  action="board/writeboardaction.jsp" enctype="multipart/form-data">
 		<div id="imglist" style="display: none;">
 		</div>
 		<div>
-			<textarea id="content" name="content" placeholder="id 님, 오늘 하루 어떤가요?" cols="50" rows="10" required="required"></textarea>
+			<textarea id="content" name="content" placeholder="<%=id %> 님, 오늘 하루 어떤가요?" cols="50" rows="10" required="required"></textarea>
 		</div>
 <!-- 		<label for="hashtag"><h5>#입력해주세요</h5></label> -->
 		<div id="hashtag">
