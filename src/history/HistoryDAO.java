@@ -48,6 +48,8 @@ public class HistoryDAO {
 		ResultSet rs = null;
 		if(action.equals("like")) {
 			action = "좋아요를 눌렀습니다.";
+		}else if(action.equals("reply")) {
+			action = "댓글을 달았습니다.";
 		}
 		
 		String sql = "insert into history values(?,?,?,?,sysdate)";

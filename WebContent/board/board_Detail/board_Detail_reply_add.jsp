@@ -1,3 +1,5 @@
+<%@page import="board.BoardDAO"%>
+<%@page import="history.HistoryDAO"%>
 <%@page import="reply.ReplyDAO"%>
 <%@page import="reply.ReplyDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,4 +16,10 @@
 	
 	ReplyDAO dao = new ReplyDAO();
 	dao.insertReply(dto);
+	
+	HistoryDAO hdao = new HistoryDAO();
+	BoardDAO bdao = new BoardDAO();
+	String action = "reply";
+	String toid = bdao.getBoardWriter(boardnum);
+	hdao.insertHistory(boardnum, name, toid, action);
 %>
