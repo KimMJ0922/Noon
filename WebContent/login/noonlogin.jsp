@@ -25,7 +25,6 @@
 <style>
 #wrapper{
 	width:100%;
-
 }
 .login_main{
 	width:750px;

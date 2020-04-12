@@ -208,17 +208,20 @@ $(function(){
 	   $(this).css("cursor","pointer");
 	   var windowwidth = $(window).width();
 	   if(windowwidth>=766){
-		   $(".remoconcomment:eq("+idx+")").css({
+		   $(".remoconcomment:eq("+idx+")").css({ 
 			   "display":"inline-block",
 			   "position":"relative",
-			   "top":"-60px",
-			   "left":"70px",
+			   "top":"-50px",
+			   "left":"-84px",
 			   "margin":"0",
 			   "padding":"0",
 			   "float":"right",
 			   "text-align":"center",
-			   "line-height":"45px"
 			   
+				   //그러자 ㅋㅋㅋㅋㅋ 바로 떠는것도 괜찮아서 음 그럼 이건 걍 냅둘게여 ㅋㅋ ㅋㅋㅋ 오키오키
+				   //해쉬태그 검색하는걸 오늘 할까 내일할까고민중인데 
+				   //어떡할까 뭔가 방향만 잡아주면 내가 혼자 서 천천히 할수 있을것 같기도하고
+				   //어.. 지금 만약 검색 넣는다면 
 		   });
 	   }
    });
