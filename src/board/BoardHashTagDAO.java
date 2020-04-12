@@ -57,30 +57,71 @@ public class BoardHashTagDAO {
 		return list;
 	}
 	
-	public List<BoardHashTagDTO> getHashTags(String minrow, String maxrow,String sort) {
+	public List<BoardHashTagDTO> getHashTags(String minrow, String maxrow,String sort,String text) {
 		List<BoardHashTagDTO> list = new Vector<BoardHashTagDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		if(sort.equals("like")) {
-			sql = "select min(num),max(num) from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by likes desc,writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";
+			if(!text.equals("#")) {
+				sql = "select min(num),max(num)"+
+					  "from( "+
+					  		"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  		"from ("+
+					  			   "select b.*, bh.hashtag "+
+					  			   "from boardtb b, BOARDHASHTAGTB bh "+
+					  			   "where b.num = bh.num and bh.hashtag like ? "+
+					  			   "order by writeday desc"+
+					  		") a "+
+					  ")"+
+					  "where rnum > ? and rnum <= ?";
+			}else {
+				sql = "select min(num),max(num) from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( select * from boardtb order by likes desc, writeday desc) a"+
+						 ") where rnum > ? and rnum <= ?";
+			}
+			
 		}else {
-			sql = "select min(num),max(num) from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";	
+			if(!text.equals("#")) {
+				System.out.println("2번으로 들어옴");
+				sql = "select min(num),max(num)"+
+					  "from( "+
+					  		"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  		"from ("+
+					  			   "select b.*, bh.hashtag "+
+					  			   "from boardtb b, BOARDHASHTAGTB bh "+
+					  			   "where b.num = bh.num and bh.hashtag like ? "+
+					  			   "order by writeday desc"+
+					  		") a "+
+					  ")"+
+					  "where rnum > ? and rnum <= ?";	
+			}else {
+				System.out.println("3번으로 들어옴");
+				sql = "select min(num),max(num) from("+
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select * from boardtb order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
+			}
 		}
+		
 		conn = db.getConnection();
 		int max = 0;
 		int min = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			if(text.equals("#")&&(sort.equals("")||sort.equals("like"))) {
+				System.out.println("바인드 1번으로 들어옴");
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}else {
+				System.out.println("바인드 2번으로 들어옴");
+				pstmt.setString(1, text);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+				
+			}
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {

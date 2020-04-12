@@ -11,12 +11,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("utf-8");
 	BoardDAO dao = new BoardDAO();
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
 	String sort = request.getParameter("sort");
+	String text = request.getParameter("text");
+	System.out.println("getboardlist.jsp 안에 minrow : "+minrow);
+	System.out.println("getboardlist.jsp 안에 maxrow : "+maxrow);
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
-	List<BoardDTO> list = dao.getBoardList(minrow,maxrow,sort);
+	List<BoardDTO> list = dao.getBoardList(minrow,maxrow,sort,text);
 	
 	//시간 구하기
 	Calendar c = Calendar.getInstance();
@@ -62,6 +66,7 @@
 		ob.put("writeday",ret);
 		ob.put("reply",dto.getReply());
 		ob.put("profilepic",dto.getProfilepic());
+		ob.put("hashtag", dto.getHashtag());
 		arr.add(ob);
 	}
 %>

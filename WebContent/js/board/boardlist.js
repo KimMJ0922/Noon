@@ -1,14 +1,13 @@
 $(function(){
    //루트 경로
    var root = $("#root").val();
-  
+   var text = "#";
    //초기에 화면에 보여질 글 갯수
    var minrow = 0;
    var arry = getMaxrowCookie();
   
    var maxrow = parseInt(arry[0]);
    var sort = arry[1];
-   
    //쿠키 삭제
    deleteMaxrowCookie();
    
@@ -16,14 +15,14 @@ $(function(){
    deletePreviewFolder();
    
    //이미지 불러오기
-   var img = getImgList(minrow,maxrow,sort);
+   var img = getImgList(minrow,maxrow,sort,text);
    
    //해시태그 불러오기
-   var hashtag = getHashTag(minrow,maxrow,sort);
+   var hashtag = getHashTag(minrow,maxrow,sort,text);
   
    //좋아요 불러오기
-   var likes = getLikeList(minrow,maxrow,sort);
-   boardList(minrow,maxrow,img,hashtag,likes,sort);
+   var likes = getLikeList(minrow,maxrow,sort,text);
+   boardList(minrow,maxrow,img,hashtag,likes,sort,text);
    
    //글쓰는 페이지 이동
    $("#writebtn").click(function(){
@@ -36,11 +35,10 @@ $(function(){
       if($(window).scrollTop() == ($(document).height() - $(window).height())){
         minrow = maxrow;
         maxrow = maxrow+5;
-        createMaxrowCookie(maxrow,sort);
-        img = getImgList(minrow,maxrow,sort);
-        hashtag = getHashTag(minrow,maxrow,sort);
-        likes = getLikeList(minrow,maxrow,sort);
-        boardList(minrow,maxrow,img,hashtag,likes,sort);
+        img = getImgList(minrow,maxrow,sort,text);
+        hashtag = getHashTag(minrow,maxrow,sort,text);
+        likes = getLikeList(minrow,maxrow,sort,text);
+        boardList(minrow,maxrow,img,hashtag,likes,sort,text);
       }
    });
    
@@ -61,10 +59,10 @@ $(function(){
             },
             success:function(data){
             	$("#list").html("");
-            	img = getImgList(minrow,maxrow,sort);
-            	hashtag = getHashTag(minrow,maxrow,sort);
-            	likes = getLikeList(minrow,maxrow,sort);
-            	boardList(minrow,maxrow,img,hashtag,likes,sort);
+            	img = getImgList(minrow,maxrow,sort,text);
+            	hashtag = getHashTag(minrow,maxrow,sort,text);
+            	likes = getLikeList(minrow,maxrow,sort,text);
+            	boardList(minrow,maxrow,img,hashtag,likes,sort,text);
             }
          });
       }else{
@@ -169,7 +167,7 @@ $(function(){
                	
                	//좋아요, 댓글이면 해당 게시물로 이동
                	if(item.action.indexOf("좋아요")>=0 || item.action.indexOf("댓글")>=0){
-               		str += "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+item.num+"'>";
+               		str += "<a class='move' href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+item.num+"'>";
                	}
                	
                	str += item.fromid+"님이 회원님의 게시물에 "+item.action+"<br>";
@@ -195,13 +193,13 @@ $(function(){
 	   sort = "like";
 	   minrow=0;
 	   maxrow=10;
-	   createMaxrowCookie(maxrow,sort);
 	   $(window).scrollTop(0);
+	   text = "#";
 	   $("#list").html("");
-	   var img = getImgList(minrow,maxrow,sort);
-	   var hashtag = getHashTag(minrow,maxrow,sort);
-       var likes = getLikeList(minrow,maxrow,sort);
-       boardList(minrow,maxrow,img,hashtag,likes,sort);
+	   var img = getImgList(minrow,maxrow,sort,text);
+	   var hashtag = getHashTag(minrow,maxrow,sort,text);
+       var likes = getLikeList(minrow,maxrow,sort,text);
+       boardList(minrow,maxrow,img,hashtag,likes,sort,text);
    });
    
    //최신순
@@ -209,13 +207,13 @@ $(function(){
 	   sort = "";
 	   minrow=0;
 	   maxrow=10;
-	   createMaxrowCookie(maxrow,sort);
 	   $(window).scrollTop(0);
+	   text = "#";
 	   $("#list").html("");
-	   var img = getImgList(minrow,maxrow,sort);
-       var hashtag = getHashTag(minrow,maxrow,sort);
-       var likes = getLikeList(minrow,maxrow,sort);
-       boardList(minrow,maxrow,img,hashtag,likes,sort);
+	   var img = getImgList(minrow,maxrow,sort,text);
+       var hashtag = getHashTag(minrow,maxrow,sort,text);
+       var likes = getLikeList(minrow,maxrow,sort,text);
+       boardList(minrow,maxrow,img,hashtag,likes,sort,text);
    });
    
    //리모컨 아이콘 마우스 올렸을 때
@@ -245,6 +243,48 @@ $(function(){
 		   });
 	   }
    });
+   $(document).on("click",".hashtag, .searchbtn",function(){
+	   var cl = $(this).attr("class");
+	   if(cl=="hashtag"){
+		   text = "#";
+		   text = $.trim($(this).text());
+	   }else if(cl == "searchbtn"){
+		   text = "#";
+		   text = $.trim($(".searchtag").val());
+	   }
+	   
+	   if(text.length==0){
+		   alert("검색할 내용을 입력해주세요");
+	   }else{
+		   //해시태그 검색
+		   if(text.indexOf("#")!=-1){
+			   text = text.substring(1,text.length);
+			   $.ajax({
+				      type: "post", 
+				      url: "board/getboardlist.jsp",
+				      data:{
+				         "minrow":0,
+				         "maxrow":10,
+				         "sort":sort,
+				         "text":text
+				      },
+				      dataType: "json",
+				      async: false,
+				      success:function(data){
+				    	  $(window).scrollTop(0);
+				   	   $("#list").html("");
+				   	   var img = getImgList(minrow,maxrow,sort,text);
+				       var hashtag = getHashTag(minrow,maxrow,sort,text);
+				       var likes = getLikeList(minrow,maxrow,sort,text);
+				       boardList(minrow,maxrow,img,hashtag,likes,sort,text);
+				      }
+				   });
+			   
+		   }else{
+			   
+		   }
+	   }
+   });
 });//$(function) 끝
 
 
@@ -261,14 +301,15 @@ function deletePreviewFolder(){
    });
 }
 //글 목록
-function boardList(minrow,maxrow,img,hashtag,likes,sort){
+function boardList(minrow,maxrow,img,hashtag,likes,sort,text){
    $.ajax({
       type: "post", 
       url: "board/getboardlist.jsp",
       data:{
          "minrow":minrow,
          "maxrow":maxrow,
-         "sort":sort
+         "sort":sort,
+         "text":text
       },
       dataType: "json",
       async: false,
@@ -281,7 +322,7 @@ function boardList(minrow,maxrow,img,hashtag,likes,sort){
 
 
 //이미지 가져오기
-function getImgList(minrow,maxrow,sort){
+function getImgList(minrow,maxrow,sort,text){
    var imglist ="";
    $.ajax({
       type: "post", 
@@ -290,7 +331,8 @@ function getImgList(minrow,maxrow,sort){
       data:{
          "minrow":minrow,
          "maxrow":maxrow,
-         "sort":sort
+         "sort":sort,
+         "text":text
       },
       async: false,
       success:function(img){
@@ -303,7 +345,7 @@ function getImgList(minrow,maxrow,sort){
 
 
 //해시태그 가져오기
-function getHashTag(minrow,maxrow,sort){
+function getHashTag(minrow,maxrow,sort,text){
    var hashtag ="";
    $.ajax({
       type: "post", 
@@ -312,7 +354,8 @@ function getHashTag(minrow,maxrow,sort){
       data:{
          "minrow":minrow,
          "maxrow":maxrow,
-         "sort":sort
+         "sort":sort,
+         "text":text
       },
       async: false,
       success:function(hash){
@@ -325,7 +368,7 @@ function getHashTag(minrow,maxrow,sort){
 
 
 //좋아요 가져오기
-function getLikeList(minrow,maxrow,sort){
+function getLikeList(minrow,maxrow,sort,text){
    var likelist ="";
    $.ajax({
       type: "post", 
@@ -334,7 +377,8 @@ function getLikeList(minrow,maxrow,sort){
       data:{
          "minrow":minrow,
          "maxrow":maxrow,
-         "sort":sort
+         "sort":sort,
+         "text":text
       },
       async: false,
       success:function(likes){
