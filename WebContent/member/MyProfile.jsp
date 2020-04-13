@@ -31,7 +31,7 @@
 			class="fa fa-user"> 계정설정</i></a> <a
 			href="main.jsp?view=member/MyProfile.jsp?content=boardlist/memberboardlist.jsp"><i
 			class="fa fa-credit-card"> 게시물</i></a> <a
-			href="main.jsp?view=member/MyProfile.jsp?content=test2.jsp"><i
+			href="main.jsp?view=member/MyProfile.jsp?content=follower.jsp"><i
 			class="fa fa-tv"> 팔로워</i></a> <a
 			href="main.jsp?view=member/MyProfile.jsp?content=deleteMemberform.jsp"><i
 			class="fa fa-cog"> 회원탈퇴</i></a>

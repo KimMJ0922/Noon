@@ -95,7 +95,6 @@ public class MemberDao {
 		ResultSet rs = null;
 		MemberDto dto = new MemberDto();
 		String sql = "select * from membertb where id=?";
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
