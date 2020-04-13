@@ -7,14 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 수정</title>
-<link rel= "stylesheet" type="text/css" href="../css/top/topmenu.css">
-<link rel= "stylesheet" type="text/css" href="style.css">
+<!-- <link rel= "stylesheet" type="text/css" href="../css/top/topmenu.css"> -->
+<link rel= "stylesheet" type="text/css" href="member/style.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.10/css/all.css'>
-<link rel= "stylesheet" type="text/css" href="../css/bootstrap.min.css"> 
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="script.js"></script>
+<!-- <link rel= "stylesheet" type="text/css" href="../css/bootstrap.min.css">  -->
+<!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'> -->
+
+<!--  <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ -->
+ 
+ <script src="member/script.js"></script>
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css">
 <script src="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.js"></script>
 <style>
@@ -23,6 +26,10 @@
 	background-color: #FAFAFA;
 	max-height: 120px;
 	border-bottom: 1px solid #DBDBDB;
+}
+.content{
+	display:block;
+	height:600px;
 }
 </style>
 </head>
@@ -60,7 +67,7 @@
 				<div class="row">
 					<div class="col-md-3" style="text-align: center; line-height: 412px;">
 						<div class="picarea">
-							<img alt="#" class="pic" src="../profile/<%=id %>/<%=dto.getPic()%>" style="width: 180px;height: 180px;">
+							<img alt="#" class="pic" src="profile/<%=id %>/<%=dto.getPic()%>" style="width: 180px;height: 180px;">
 							<a data-toggle="modal" data-target="#myModal" style="color: black; text-decoration: none; cursor: pointer;"><span class="glyphicon glyphicon-plus-sign picadd" style="top: 80px;"></span></a>	
 						</div>
 					</div>
@@ -123,31 +130,9 @@
 					</div>
 				</div>
 			</div>
-			
+			<!-- 해당 회원이 작성한 글 -->
 			<div class="payment noshow">
-				<h1 class="font1">Payment Info</h1>
-				<h2 class="font2">Payment Method</h2>
-				<p class="custom-p">
-					Mastercard •••• •••• •••• 0000
-					<button class="custom-btn">update</button>
-				</p>
-				<h2 class="font2">Billing Address</h2>
-				<p class="custom-p">
-					1234 Example Ave | Seattle, WA
-					<button class="custom-btn">change</button>
-				</p>
-				<h2 class="font2">Zipcode</h2>
-				<p class="custom-p">999000</p>
-				<h2 class="font2">Billing History</h2>
-				<p class="custom-p">
-					2018
-					<button class="custom-btn">view</button>
-				</p>
-				<h2 class="font2">Redeem Gift Subscription</h2>
-				<p class="custom-p">
-					<input class="custom-input"  type="text" placeholder="Enter Gift Code"></input>
-					<button class="custom-btn">Redeem</button>
-				</p>
+				
 			</div>
 
 			<div class="subscription noshow">
