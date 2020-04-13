@@ -5,8 +5,6 @@ $(function(){
 	logincheck();
 	getData();
 	
-	
-	
 	$(".update").click(function(){
 		$(this).parent().addClass("hidden");
 		$(this).parent().next().removeClass("hidden");
@@ -21,6 +19,8 @@ $(function(){
 		var inputSelect = $(this).prev().prev()
 		var data = inputSelect.val();
 		var type = inputSelect.attr("name");
+		
+		console.log(data,type);
 		
 		var hpCheck = RegExp(/^01[0179]-[0-9]{3,4}-[0-9]{4}$/);
 		var emailCheck = RegExp(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
@@ -50,7 +50,7 @@ $(function(){
 function update(data,type){
 	$.ajax({
 		type:"post",
-		url:"updateAction.jsp",
+		url:"member/updateAction.jsp",
 		dataType:"html",
 		data:{
 			"data":data,
@@ -107,4 +107,30 @@ function memberBoardList(minrow, maxrow){
         success:function(data){
         }
      });
+}
+
+function deleteMember(){
+	var pass = $("#deletePass").val();
+	var ans = confirm("삭제 하시겠습니까?");
+	if(ans==false)
+		return;
+	$.ajax({
+		type:"post",
+		url:"member/deleteMember.jsp",
+		dataType:"html",
+		data:{
+			"pass":pass
+		},
+		success:function(data){
+			console.log(data.trim());
+			if(data.trim()=="false"){
+				alert("비밀번호를 확인해주세요");
+				$("#deletePass").val("");
+				$("#deletePass").focus();
+			}else{
+				alert("정상적으로 탈퇴 되었습니다.");
+				location.replace("login/noonlogin.jsp");
+			}
+		}
+	});
 }

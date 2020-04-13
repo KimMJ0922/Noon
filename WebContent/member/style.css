@@ -17,8 +17,6 @@
 }
 .profile, .payment, .subscription, .privacy, .settings {
   transition: opacity .5s ease-in;
-  position: relative;
-
 }
 .active {
   color: #3FB6A8;
@@ -131,7 +129,7 @@
     background-color: white;
     border-radius: 20px;
 }
-/*°Ô½Ã¹°*/
+/*ï¿½Ô½Ã¹ï¿½*/
 .board{
 	width:500px;
 	heigth:500px;
@@ -153,7 +151,7 @@ div.menu{
 	width:50px;
 	height:80px;
 }
-/* º¸µå ÇÁ·ÎÇÊ ÀÌ¹ÌÁö */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ */
 .boardwriter>img{
 	margin: 12px;
     margin-right: 14px;
