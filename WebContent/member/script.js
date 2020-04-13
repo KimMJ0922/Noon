@@ -5,36 +5,6 @@ $(function(){
 	logincheck();
 	getData();
 	
-	$('.custom-nav a').click(function(e) {
-		e.preventDefault();
-		$('.custom-nav a').removeClass('active');
-		$(this).addClass('active');
-		if(this.id === !'payment'){
-			$('.payment').addClass('noshow');
-		}
-		else if(this.id === 'payment') {
-			$('.payment').removeClass('noshow');
-			$('.payment').siblings('div').addClass('noshow');
-			memberBoardList(minrow,maxrow);
-		}
-		else if (this.id === 'profile') {
-			$('.profile').removeClass('noshow');
-			$('.profile').siblings('div').addClass('noshow');
-		}
-		else if(this.id === 'subscription') {
-			$('.subscription').removeClass('noshow');
-			$('.subscription').siblings('div').addClass('noshow');
-		}
-		else if(this.id === 'privacy') {
-			$('.privacy').removeClass('noshow');
-			$('.privacy').siblings('div').addClass('noshow');
-		}
-		else if(this.id === 'settings') {
-			$('.settings').removeClass('noshow');
-			$('.settings').siblings('div').addClass('noshow');
-		}
-	});
-	
 	$(".update").click(function(){
 		$(this).parent().addClass("hidden");
 		$(this).parent().next().removeClass("hidden");
@@ -49,6 +19,8 @@ $(function(){
 		var inputSelect = $(this).prev().prev()
 		var data = inputSelect.val();
 		var type = inputSelect.attr("name");
+		
+		console.log(data,type);
 		
 		var hpCheck = RegExp(/^01[0179]-[0-9]{3,4}-[0-9]{4}$/);
 		var emailCheck = RegExp(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
@@ -78,7 +50,7 @@ $(function(){
 function update(data,type){
 	$.ajax({
 		type:"post",
-		url:"updateAction.jsp",
+		url:"member/updateAction.jsp",
 		dataType:"html",
 		data:{
 			"data":data,
