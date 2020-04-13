@@ -2,8 +2,6 @@
 $(function(){
 	var minrow = 0;
 	var maxrow = 10;
-	logincheck();
-	getData();
 	
 	$(".update").click(function(){
 		$(this).parent().addClass("hidden");

@@ -271,12 +271,13 @@ $(function(){
 				      dataType: "json",
 				      async: false,
 				      success:function(data){
+				    	  
 				    	  $(window).scrollTop(0);
-				   	   $("#list").html("");
-				   	   var img = getImgList(minrow,maxrow,sort,text);
-				       var hashtag = getHashTag(minrow,maxrow,sort,text);
-				       var likes = getLikeList(minrow,maxrow,sort,text);
-				       boardList(minrow,maxrow,img,hashtag,likes,sort,text);
+				    	  $("#list").html("");
+				    	  var img = getImgList(minrow,maxrow,sort,text);
+				    	  var hashtag = getHashTag(minrow,maxrow,sort,text);
+				    	  var likes = getLikeList(minrow,maxrow,sort,text);
+				    	  boardList(minrow,maxrow,img,hashtag,likes,sort,text);
 				      }
 				   });
 			   

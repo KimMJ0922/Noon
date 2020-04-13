@@ -16,6 +16,11 @@
 	}
 %>
 <script type="text/javascript">
+	$(function(){
+		 getData();
+		 logincheck();
+		 
+	});
 	function getData(){
 		<%
 		MemberDao db = new MemberDao();

@@ -4,13 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="js/member/boardlist/boardlist.js"></script>
+
 <title>Insert title here</title>
+<script src="js/member/boardlist/memberboardlist.js"></script>
+<link rel="stylesheet" href="css/member/boardlist/memberboardlist.css">
 </head>
 <body>
 	<input type="hidden" id="getId">
-	<div id="memberboardlist">
+
+	<div id="memberboardlist" >
 	
 	</div>
+
+	
 </body>
 </html>

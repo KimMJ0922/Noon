@@ -18,12 +18,7 @@
 }
 </style>
 </head>
-<%
-	String content = request.getParameter("content");
-	if(content==null || content.equals("")){
-		content="profile.jsp";
-	}
-%>
+
 <body>
 <%
 	String content = request.getParameter("content");
@@ -32,15 +27,15 @@
 		content = "main.jsp?view=member/Myprofile.jsp&content=profile.jsp";
 	}
 %>
-	<div class="container">
+
 		<nav class="custom-nav">
 			<a href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp"><i class="fa fa-user"> 계정설정</i></a> 
 			<a href="main.jsp?view=member/MyProfile.jsp?content=boardlist/memberboardlist.jsp"><i class="fa fa-credit-card"> 게시물</i></a> 
 			<a href="main.jsp?view=member/MyProfile.jsp?content=test2.jsp"><i class="fa fa-tv"> 팔로워</i></a> 
 			<a href="main.jsp?view=member/MyProfile.jsp?content=test2.jsp"><i class="fa fa-cog"> 회원탈퇴</i></a>
 		</nav>
-	</div>
-	<div>
+
+	<div class="container bordercontainer">
 		<jsp:include page="<%=content %>"/>
 	</div>
 		
