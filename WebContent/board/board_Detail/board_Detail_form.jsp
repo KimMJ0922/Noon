@@ -8,24 +8,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%request.setCharacterEncoding("UTF-8"); %>
-    <%
-    	String dark_check=(String)session.getAttribute("dark_check");
-    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <%
-  	if(dark_check.equals("0")){
-  		
-  	}else{
-  		%>
-  		<link rel="">
-  	<%
-  	}
-  	%>
+   <%
+    String dark="";
+     dark=(String)session.getAttribute("dark_check");
+   	 System.out.println("먹니"+dark);
+     
+     if(dark.equals("0")){
+        
+     }else if(dark.equals("1")){
+     %>
+       <link rel="stylesheet" href="board/board_Detail/dark_detail.css" />
+     <%   
+     }
+     %>
   
 <meta charset="UTF-8">
 <script type="text/javascript">

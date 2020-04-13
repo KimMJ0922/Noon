@@ -53,18 +53,14 @@ var a=$("#darkmodes").val();
 						$(this).addClass('darkmode'); 
 					} 
 				});
+			
 		$("#darkmode").click(function(){
-// 			$("#darkmodes").val("1");
+	 			$("#darkmodes").val("1");
 			var dark=$("#darkmodes").val();
-			
-			if(<%=aa.equals("0")%>){
-				$("#darkmode").val("dark","1");
+			//1이 다크모드
+			if(dark=="1"){
 				$("*").toggleClass("dark-mode transform");	
-				
-			}else{
-				
 			}
-			
 			$.ajax({
 				type:"post",
 				url:"css/dark/dark_mode_session.jsp",
@@ -72,17 +68,9 @@ var a=$("#darkmodes").val();
 				data:{"dark":dark},
 				success:function(data){
 					alert("성공");}
-				
-				});
-			
-			
-			
-			
-				
 			});
-			
-		});		
-
+		});
+});		
 </script>
 <style>
 .row>.boardlist {
