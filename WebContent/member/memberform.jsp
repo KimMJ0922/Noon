@@ -142,7 +142,7 @@
 				<div class="form-group" hidden>
 					<label for="addr1">주소:</label> 
 					<div class="input-group">
-					   <input type="text" class="form-control" id="addr1" name="addr1" required="required">
+					   <input type="text" class="form-control" id="addr1" name="addr1" required="required" readonly>
 					   <span class="input-group-btn">
 					        <input type="button" class="btn btn-default" id="btnaddr" onclick="addr()" value="주소검색">
 					   </span>

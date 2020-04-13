@@ -13,16 +13,34 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
- 	 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <%
+    String dark="";
+     dark=(String)session.getAttribute("dark_check");
+   	 System.out.println("먹니"+dark);
+     
+     if(dark.equals("0")){
+        
+     }else if(dark.equals("1")){
+     %>
+       <link rel="stylesheet" href="board/board_Detail/dark_detail.css" />
+     <%   
+     }
+     %>
+  
 <meta charset="UTF-8">
+<script type="text/javascript">
+	$(function(){
+		var c= $("#darkmodes").val();
+		alert(c);
+	});
+</script>
 <title>상세 페이지</title>
 
 <style>
   .carousel {
  	width:680px;
- 	height:600px;
+ 	max-height:638px;
  	background: gary;
 	}
 	
@@ -561,9 +579,9 @@ function getLikeStatus(boardnum){
 	
 	
 %>
-	<div class="container">
+	<div class="container detail_box">
 		<div class="row">
-			<div class="col-md-7 col-sm-7" style="padding:0;">
+			<div class="col-md-7 col-sm-7 col-xs-12"  style="padding:0;">
 <%
 				if(Ilist.size()!=0){
 					thumbnail=Ilist.get(0);
@@ -587,7 +605,7 @@ function getLikeStatus(boardnum){
 		   				</ol>
 		   				<div class="carousel-inner">
 		   					<div class="item active">
-		   						<img id="modal_img" src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
+		   						<img id="modal_img" src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;min-height:638px;max-height:638px;" data-toggle="modal" data-target="#modal">
 							
 		   					</div><!-- class="item active" 끝 -->
 <%
@@ -595,7 +613,7 @@ function getLikeStatus(boardnum){
 								imgs=Ilist.get(i);
 %>
 								<div class="item">
-									<img id="modal_img" src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
+									<img id="modal_img" src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;min-height:638px;max-height:638px;" data-toggle="modal" data-target="#modal">
 								
 								</div><!-- class="item"끝  -->	
 <%
@@ -635,7 +653,7 @@ function getLikeStatus(boardnum){
 				}
 %>
 			</div><!-- class="col-md-7 col-sm-7" 끝 -->
-			<div class="col-md-5 col-sm-5" style="padding:0;"><!-- 댓글창 -->
+			<div class="col-md-5 col-sm-5 col-xs-12" style="padding:0;"><!-- 댓글창 -->
 				<div class="reboard">
 					<div class="img_on">
 					<img src="<%=profileimg %>" style="float:left">

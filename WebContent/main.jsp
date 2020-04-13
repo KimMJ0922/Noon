@@ -18,7 +18,97 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- css폴더 안에 있는 파일 목록 -->
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
+<%
+	String aa=(String)session.getAttribute("dark_check");
+	if(aa==null){
+		aa="0";
+	}
+	if(aa.equals("1")||aa==null){
+		System.out.println(" 다크모드");
+	}else{
+		System.out.println("일반모드");
+	}
+%>
+<script>
+$(function(){
+	
+var a=$("#darkmodes").val();
 
+		
+// 			$("#darkmode").toggle(function () {
+// 				$(this).css({"background-image":"url('img/icon/moon_dark.png')"});
+// 			}, function () {
+// 				$(this).css({"background-image":"url('img/icon/moon.png')"});
+// 			});
+			$("#darkmode").click(function(){
+				if($(this).hasClass('darkmode'))
+					{
+						$(this).removeClass('darkmode');
+						$(this).addClass('lightmode'); 
+					}
+					else if($("#darkmode").hasClass('lightmode'))
+					{
+						$(this).removeClass('lightmode');
+						$(this).addClass('darkmode'); 
+					} 
+				});
+			
+		$("#darkmode").click(function(){
+	 			
+			var dark=$("#darkmodes").val();
+			//0이 다크모드
+			if(dark=="1"){
+				$("#darkmodes").val("0");
+				
+				$("*").removeClass("dark-mode transform");
+
+				$("#showboard").removeClass("showboardDark");
+			
+				$("#favorite").removeClass("favoriteDark");
+				
+				$("#alam").removeClass("alamDark");
+				
+				$("#pagetopup").removeClass("pagetopupDark");
+				
+				$("#setting").removeClass("settingDark");
+				
+				$("#darkmode").removeClass("darkmodeDark");
+			}else{
+				$("#darkmodes").val("1");
+				
+				$("*").addClass("dark-mode transform");
+				
+				$(".showboard").addClass("showboardDark");
+				$("#showboard").removeClass("showboard");
+				
+				$(".favorite").addClass("favoriteDark");
+				$("#favorite").removeClass("favorite");
+				
+				$(".alam").addClass("alamDark");
+				$("#alam").removeClass("alam");
+				
+				$(".pagetopup").addClass("pagetopupDark");
+				$("#pagetopup").removeClass("pagetopup");
+				
+				$(".setting").addClass("settingDark");
+				$("#setting").removeClass("setting");
+				
+				$(".darkmode").addClass("darkmodeDark");
+				$("#darkmode").removeClass("darkmode");
+			
+			}
+			$.ajax({
+				type:"post",
+				url:"css/dark/dark_mode_session.jsp",
+				dataType:"html",
+				data:{"dark":dark},
+				success:function(data){
+					alert("성공");}
+			});
+		});
+});		
+</script>
 <style>
 .row>.boardlist {
 	background: #DBDBDB;
@@ -49,6 +139,7 @@
 	System.out.println(view);
 %>
 <body>
+
 	<div class="container topmain" style="padding:0; margin:0;">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 ">
@@ -56,6 +147,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="container">
 		<div class="row">
 <%
