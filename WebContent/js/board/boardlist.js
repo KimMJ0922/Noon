@@ -542,7 +542,7 @@ function listform(data,img,hashtag,likes){
 							}else{
 								str +="<img src='profile/"+item.id+"/"+item.profilepic+"' alt='프로필사진' class='boardprofile'>"
 							}
-							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
+							str +="<font style='text-align:left;'><a class='showProfile' style='cursor: pointer;'>"+item.nickname+"</a></font>"
 						str += "</div>";
 							str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
 							str +="<span class='boardwriteday' style='float:right; margin-right:10px;'>"+item.writeday+"</span>"
@@ -556,7 +556,7 @@ function listform(data,img,hashtag,likes){
 								str +="<img src='profile/"+item.id+"/"+item.profilepic+"' alt='프로필사진' class='boardprofile'>"
 							}
 							
-							str +="<font style='text-align:left;'>"+item.nickname+"</font>"
+							str +="<font style='text-align:left;'><a class='showProfile' style='cursor: pointer;'>"+item.nickname+"</a></font>"
 					str += "</div>";
 						str += "<div class='col-md-4 col-sm-4 col-xs-4 boardwriter'>";
 							str +="<span class='boardwriteday' style='float:right; margin-right:10px;'>"+item.writeday+"</span>"

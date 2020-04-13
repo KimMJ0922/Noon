@@ -109,7 +109,7 @@ function memberBoardList(minrow, maxrow){
 
 function deleteMember(){
 	var pass = $("#deletePass").val();
-	var ans = confirm("삭제 하시겠습니까?");
+	var ans = confirm("탈퇴 하시겠습니까?");
 	if(ans==false)
 		return;
 	$.ajax({

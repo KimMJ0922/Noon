@@ -7,14 +7,13 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String id = request.getParameter("num");
+	String id = request.getParameter("id");
 	MemberDao db = new MemberDao();
 	MemberDto dto = db.getdata(id);
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	JSONObject ob = new JSONObject();
-	
 	ob.put("addr1", dto.getAddr1());
 	ob.put("addr2", dto.getAddr2());
 	ob.put("email", dto.getEmail1()+"@"+dto.getEmail2());
