@@ -81,8 +81,8 @@
 			<div class="imgs">
 <%
 				List<String> bilist = bidao.getNumImglist(bdto.getNum());
-				for(int j=0;j<bilist.size();i++){
-					String filename = bilist.get(i);
+				for(int j=0;j<bilist.size();j++){
+					String filename = bilist.get(j);
 %>
 				<img src="" id="boardimg">
 <%

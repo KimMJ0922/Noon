@@ -16,6 +16,10 @@
 	}
 %>
 <script type="text/javascript">
+	$(function(){
+		getData();
+		logincheck();
+	});
 	function getData(){
 		<%
 		MemberDao db = new MemberDao();
@@ -36,7 +40,7 @@
 <body>
 	<div class="profile">
 		<div class="row">
-			<div class="col-md-3" style="text-align: center; line-height: 412px;">
+			<div class="col-md-3" style="text-align: center; line-height: 569px;">
 				<div class="picarea">
 					<img alt="#" class="pic" src="<%=profilesrc %>"	style="width: 180px; height: 180px;"> 
 						<a class="glyphicon glyphicon-plus-sign picadd" data-toggle="modal" data-target="#myModal"
