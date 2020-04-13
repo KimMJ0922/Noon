@@ -304,4 +304,50 @@ public class BoardDAO {
 		
 		return writer;
 	}
+	
+	public List<BoardDTO> getMemberBoardList(String minrow, String maxrow, String id){
+		List<BoardDTO> list = new Vector<BoardDTO>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = 
+				"select * from("+
+						"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						"from ( "+
+							"select b.*,m.profilpic "+
+							"from boardtb b, membertb m "+
+							"where b.id = m.id and b.id like ? "+
+							"order by writeday desc "+
+				 		") a"+
+				 ") where rnum > ? and rnum <= ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, minrow);
+			pstmt.setString(3, maxrow);
+			System.out.println(id+", "+minrow+", "+maxrow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setContent(rs.getString("content"));
+				dto.setLikes(rs.getInt("likes"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+				dto.setReply(rs.getString("reply"));
+				dto.setProfilepic(rs.getString("profilpic"));
+				
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("getMemberBoardList 메소드 오류 : "+e.getMessage());
+		}finally {
+			db.dbClose(rs, pstmt, conn); 
+		}
+		return list;
+	}
 }
