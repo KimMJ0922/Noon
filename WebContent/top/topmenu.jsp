@@ -35,7 +35,7 @@
 <body>
 	<div class="container" style="width: 100%;">
 	
-		<div class="row">
+		<div class="row howtotopdark">
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
 			<input type="hidden" id="darkmodes" name="darkmodes" value="0">
 				<P><a href="main.jsp">NOON</a></P>
