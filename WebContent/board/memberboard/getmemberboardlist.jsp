@@ -17,6 +17,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <%
 	request.setCharacterEncoding("utf-8");
 	String id = request.getParameter("id");
@@ -83,7 +84,7 @@
 				for(int j=0;j<bilist.size();i++){
 					String filename = bilist.get(i);
 %>
-
+				<img src="" id="boardimg">
 <%
 				}
 %>

@@ -5,35 +5,7 @@ $(function(){
 	logincheck();
 	getData();
 	
-	$('.custom-nav a').click(function(e) {
-		e.preventDefault();
-		$('.custom-nav a').removeClass('active');
-		$(this).addClass('active');
-		if(this.id === !'payment'){
-			$('.payment').addClass('noshow');
-		}
-		else if(this.id === 'payment') {
-			$('.payment').removeClass('noshow');
-			$('.payment').siblings('div').addClass('noshow');
-			memberBoardList(minrow,maxrow);
-		}
-		else if (this.id === 'profile') {
-			$('.profile').removeClass('noshow');
-			$('.profile').siblings('div').addClass('noshow');
-		}
-		else if(this.id === 'subscription') {
-			$('.subscription').removeClass('noshow');
-			$('.subscription').siblings('div').addClass('noshow');
-		}
-		else if(this.id === 'privacy') {
-			$('.privacy').removeClass('noshow');
-			$('.privacy').siblings('div').addClass('noshow');
-		}
-		else if(this.id === 'settings') {
-			$('.settings').removeClass('noshow');
-			$('.settings').siblings('div').addClass('noshow');
-		}
-	});
+	
 	
 	$(".update").click(function(){
 		$(this).parent().addClass("hidden");
@@ -133,7 +105,6 @@ function memberBoardList(minrow, maxrow){
            "maxrow":maxrow
         },
         success:function(data){
-        	$(".payment").html($.trim(data));
         }
      });
 }
