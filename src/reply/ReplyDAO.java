@@ -25,8 +25,9 @@ public class ReplyDAO {
 			pstmt.setString(2, dto.getName());
 			pstmt.setString(3, dto.getContent());
 			pstmt.execute();
-			
+
 			updateBoardtbReply(dto.getBoardnum());
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("insertReply 메소드 오류 : "+e.getMessage());

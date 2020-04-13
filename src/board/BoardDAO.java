@@ -44,30 +44,68 @@ public class BoardDAO {
 		return num;
 	}
 	
-	public List<BoardDTO> getBoardList(String minrow,String maxrow,String sort){
+	public List<BoardDTO> getBoardList(String minrow,String maxrow,String sort,String text){
 		List<BoardDTO> list = new Vector<BoardDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		System.out.println("getBoardList메소드 밖에 sort : "+sort);
 		String sql = "";
 		if(sort.equals("like")) {
-			sql = "select * from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";
+			if(!text.equals("#")) {
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( "+
+						 		"select b.*,m.profilpic, bh.hashtag "+
+						 		"from boardtb b, membertb m, boardhashtagtb bh "+
+						 		"where b.id = m.id and b.num = bh.num and bh.hashtag like ?"+
+						 		"order by writeday desc"+
+						 ") a"+
+					  ") where rnum > ? and rnum <= ?";
+			}else {
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
+						 ") where rnum > ? and rnum <= ?";
+			}
+			
 		}else {
-			sql = "select * from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";
-		}
+			if(!text.equals("#")) {
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( "+
+						 		"select b.*,m.profilpic, bh.hashtag "+
+						 		"from boardtb b, membertb m, boardhashtagtb bh "+
+						 		"where b.id = m.id and b.num = bh.num and bh.hashtag like ?"+
+						 		"order by writeday desc"+
+						 ") a"+
+					  ") where rnum > ? and rnum <= ?";
+			}else {
+				System.out.println("3번 sql");
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
+						 ") where rnum > ? and rnum <= ?";
+				
+			}
+		} 
 				
 		ResultSet rs = null;
 		conn = db.getConnection();
 		try {
 			//boardtb에 insert
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			System.out.println("getBoardList메소드 안에 sort : "+sort);
+			if(text.equals("#")&&(sort.equals("")||sort.equals("like"))) {
+				System.out.println("바인드 1번으로 들어옴");
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}else {
+				System.out.println("바인드 2번으로 들어옴");
+				pstmt.setString(1, text);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+				
+			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
@@ -79,7 +117,6 @@ public class BoardDAO {
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
 				dto.setProfilepic(rs.getString("profilpic"));
-				
 				list.add(dto);
 			}
 			
@@ -100,6 +137,11 @@ public class BoardDAO {
 		conn = db.getConnection();
 		try {
 			//boardtb에 insert
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.execute();
+			
+			sql ="delete from history where num = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
 			pstmt.execute();
@@ -237,5 +279,29 @@ public class BoardDAO {
 			db.dbClose(rs, pstmt, conn);
 		}
 		return dto;
+	}
+	
+	public String getBoardWriter(String num) {
+		String writer = "";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select id from boardtb where num = ?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				writer = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return writer;
 	}
 }

@@ -327,7 +327,7 @@ $(function(){
 	$(document).on("click","#re_re_add",function(){
 		var content =$(this).siblings(".re_re").val();
 		var replynum = $(this).parent("div").attr("replynum");
-		
+		var writer = $(this).parent("div").attr("writer");
 			 $.ajax({
 		        type:"post", 
 		        url:"board/board_Detail/board_Detail_replay_re_add.jsp", 
@@ -336,6 +336,7 @@ $(function(){
 		        	"content":content,
 		        	"replynum":replynum,
 		        	"boardnum":boardnum,
+		        	"writer":writer
 		        },
 		        async: false,
 		        success:function(data){
@@ -436,7 +437,7 @@ function getReply(){
 					str+="<p ><input class='p_rebtn_writer' id='re_btn' type='button' value='답글'></p>";
 					}
 					
-					str+="<div replynum='"+item.replynum+"'></div>"
+					str+="<div replynum='"+item.replynum+"' writer='"+item.name+"'></div>"
 				str+="</div>";
 				}else{
 					str+="<div class='reply_content_re' id='"+item.replynum+"' replynum='"+item.replynum+"'>"
@@ -458,7 +459,7 @@ function getReply(){
 							str+="<p><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
 							}
 						
-						str+="<div replynum='"+item.replynum+"'></div>"
+						str+="<div replynum='"+item.replynum+"' writer='"+item.name+"'></div>"
 					str+="</div>";
 				}
 			});
@@ -530,6 +531,14 @@ function getLikeStatus(boardnum){
 	BoardDAO Bdb=new BoardDAO();
 	BoardDTO dto=Bdb.getBoard(num);
 	
+	if(dto.getNum()==null||dto.getNum()==""){
+%>
+		<script>
+			alert("삭제된 게시글입니다.");
+			history.back();
+		</script>
+<%
+	}
 	//해시태그 불러오기
 	BoardHashTagDAO Hdb= new BoardHashTagDAO();
 	List<String> Hlist= Hdb.getNumHashTag(num);

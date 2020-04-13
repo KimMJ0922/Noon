@@ -36,6 +36,7 @@
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs topcontent">
 				<input type="text" name="searchtag" class="searchtag">
+				<button class="searchbtn">검색</button>
 			</div>
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
 				<div class="row">
