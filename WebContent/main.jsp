@@ -19,24 +19,73 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- css폴더 안에 있는 파일 목록 -->
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel= "stylesheet" type="text/css" href="">
-<link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
+<%
+	String aa=(String)session.getAttribute("dark_check");
+	if(aa==null){
+		aa="0";
+	}
+	if(aa.equals("1")||aa==null){
+		System.out.println(" 다크모드");
+	}else{
+		System.out.println("일반모드");
+	}
+%>
 <script>
 $(function(){
+	
+var a=$("#darkmodes").val();
+
+		
+// 			$("#darkmode").toggle(function () {
+// 				$(this).css({"background-image":"url('img/icon/moon_dark.png')"});
+// 			}, function () {
+// 				$(this).css({"background-image":"url('img/icon/moon.png')"});
+// 			});
+			$("#darkmode").click(function(){
+				if($(this).hasClass('darkmode'))
+					{
+						$(this).removeClass('darkmode');
+						$(this).addClass('lightmode'); 
+					}
+					else if($("#darkmode").hasClass('lightmode'))
+					{
+						$(this).removeClass('lightmode');
+						$(this).addClass('darkmode'); 
+					} 
+				});
 		$("#darkmode").click(function(){
-			$("*").toggleClass("dark-mode");
+// 			$("#darkmodes").val("1");
+			var dark=$("#darkmodes").val();
+			
+			if(<%=aa.equals("0")%>){
+				$("#darkmode").val("dark","1");
+				$("*").toggleClass("dark-mode transform");	
+				
+			}else{
+				
+			}
+			
+			$.ajax({
+				type:"post",
+				url:"css/dark/dark_mode_session.jsp",
+				dataType:"html",
+				data:{"dark":dark},
+				success:function(data){
+					alert("성공");}
+				
+				});
+			
+			
+			
+			
+				
+			});
+			
 		});		
-})
+
 </script>
 <style>
-
-
-.dark-mode {
-  background-color: black;
-  color: white;
-}
-
-
 .row>.boardlist {
 	background: #DBDBDB;
 	border: 1px solid #000;
@@ -74,6 +123,7 @@ $(function(){
 			</div>
 		</div>
 	</div>
+
 	<div class="container">
 		<div class="row">
 <%

@@ -8,6 +8,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%request.setCharacterEncoding("UTF-8"); %>
+    <%
+    	String dark_check=(String)session.getAttribute("dark_check");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +18,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <%
+<<<<<<< HEAD
   	
   	String dark=(String)session.getAttribute("dark_check");
   	dark="";
@@ -27,7 +31,24 @@
   	}
   	%>
 
+=======
+  	if(dark_check.equals("0")){
+  		
+  	}else{
+  		%>
+  		<link rel="">
+  	<%
+  	}
+  	%>
+  
+>>>>>>> KSE
 <meta charset="UTF-8">
+<script type="text/javascript">
+	$(function(){
+		var c= $("#darkmodes").val();
+		alert(c);
+	});
+</script>
 <title>상세 페이지</title>
 
 <style>

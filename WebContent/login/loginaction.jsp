@@ -17,6 +17,7 @@
 		session.setAttribute("id", id);
 		session.setAttribute("loginok", "ok");
 		session.setAttribute("dto", dto);
+		session.setAttribute("dark_check", "0");
 		if(idcheck!=null)
 			session.setAttribute("idcheck", "yes");
 		else

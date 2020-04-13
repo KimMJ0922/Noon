@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+.transform{
+	transition:0.1s;
+}

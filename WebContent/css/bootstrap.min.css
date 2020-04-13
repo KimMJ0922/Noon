@@ -2453,8 +2453,13 @@ pre code {
 		transition:0.2s;
 		
 	}
-	.darkmode{
+	.lightmode{
 		background-image : url('../img/icon/moon.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.darkmode{
+		background-image : url('../img/icon/moon_dark.png');
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
