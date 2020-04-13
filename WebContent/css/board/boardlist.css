@@ -13,11 +13,11 @@ div.boardwriter{
 	height:80px;
 	padding:0;
 	margin:0;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #DBDBDB;
 }
 div.menu{
 	height:80px;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #DBDBDB;
 }
 button.menubtn{
 	line-height: 70px;
@@ -31,7 +31,8 @@ div.btnlist{
 }
 div.boardcontent{
 	width:499px;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #DBDBDB;
+	border-right: 1px solid #DBDBDB;
 	min-height:50px;
 	line-height: 47px;
 }
@@ -52,13 +53,16 @@ div.btns{
     height: 30px;
     border-style: none;
 }
-
+.imgs{
+    width: 499px;
+    border-right: 1px solid #DBDBDB;
+}
 div.imglist{
 	padding: 0;
     width: 500px;
     min-height: 500px;
     max-height: 601px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #DBDBDB;
 }
 
 div.noimglist{
@@ -67,7 +71,7 @@ div.noimglist{
 	margin:0;
 }
 div.boardlike_reply{
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #DBDBDB;
 	height:50px;
 	line-height: 50px;
 }
@@ -219,7 +223,7 @@ img.detail{
 /*리모컨 설명*/
 .remoconcomment{
 	display:none;
-	border:1px solid gray;
+	border:1px solid #DBDBDB;
 	width: 71px;
     height: 35px;
     border-radius: 5px;

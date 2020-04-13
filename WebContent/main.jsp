@@ -55,11 +55,48 @@ var a=$("#darkmodes").val();
 				});
 			
 		$("#darkmode").click(function(){
-	 			$("#darkmodes").val("1");
+	 			
 			var dark=$("#darkmodes").val();
-			//1이 다크모드
+			//0이 다크모드
 			if(dark=="1"){
-				$("*").toggleClass("dark-mode transform");	
+				$("#darkmodes").val("0");
+				
+				$("*").removeClass("dark-mode transform");
+
+				$("#showboard").removeClass("showboardDark");
+			
+				$("#favorite").removeClass("favoriteDark");
+				
+				$("#alam").removeClass("alamDark");
+				
+				$("#pagetopup").removeClass("pagetopupDark");
+				
+				$("#setting").removeClass("settingDark");
+				
+				$("#darkmode").removeClass("darkmodeDark");
+			}else{
+				$("#darkmodes").val("1");
+				
+				$("*").addClass("dark-mode transform");
+				
+				$(".showboard").addClass("showboardDark");
+				$("#showboard").removeClass("showboard");
+				
+				$(".favorite").addClass("favoriteDark");
+				$("#favorite").removeClass("favorite");
+				
+				$(".alam").addClass("alamDark");
+				$("#alam").removeClass("alam");
+				
+				$(".pagetopup").addClass("pagetopupDark");
+				$("#pagetopup").removeClass("pagetopup");
+				
+				$(".setting").addClass("settingDark");
+				$("#setting").removeClass("setting");
+				
+				$(".darkmode").addClass("darkmodeDark");
+				$("#darkmode").removeClass("darkmode");
+			
 			}
 			$.ajax({
 				type:"post",
