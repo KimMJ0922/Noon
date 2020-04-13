@@ -13,7 +13,7 @@ $(function(){
 	//해시태그 목록 가져오기 
 	hashlist = getHashList(num); 
 	cnt = hashlist.length; 
-	 
+
 	//파일 업로드 바꼈을 때 
 	$("#photo").change(function(){ 
 		var form = $("form")[0];         

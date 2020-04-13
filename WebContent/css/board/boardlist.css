@@ -54,7 +54,9 @@ div.btns{
     border-style: none;
 }
 .imgs{
-    width: 499px;
+    width: 500px;
+    padding:0;
+    margin:0;
     border-right: 1px solid #DBDBDB;
 }
 div.imglist{
@@ -67,6 +69,7 @@ div.imglist{
 
 div.noimglist{
 	width:500px;
+	height:0px;
 	padding:0;
 	margin:0;
 }
@@ -84,10 +87,12 @@ div.boardlike_reply{
 	background-color: #ffdee9;
 }
 #boardimg{
-    margin-top: 0.5px;
-    margin-left: 0.5px;
-    width: 248px;
-    height: 249px;
+    margin: 0;
+    padding:0;
+    width: 249px;
+    height: 250px;
+    display: block;
+    float:left
 }
 pre{
 	border:none;
@@ -136,7 +141,6 @@ pre{
 .hashtags{
 	min-height:50px;
 	line-height:40px;
-	white-space: pre-wrap;
 	word-break: break-all;
 	word-wrap:break-word;
 	padding: 3px 5px;
@@ -159,11 +163,14 @@ pre{
 	padding:0;
 	margin:0;
 }
+.hashtagspan>a{
+	margin: 0 10px 0 10px;
+}
 .moreimg{
 	background-color: black;
     background: rgba(0,0,0,0.7);
-    width: 248px;
-    height: 249px;
+    width: 249px;
+    height: 250px;
     position: absolute;
     top: 250px;
     left: 249px;
