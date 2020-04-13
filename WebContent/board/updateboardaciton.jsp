@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="board.BoardHashTagDTO"%>
 <%@page import="board.BoardHashTagDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -13,14 +14,15 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String id = "aaa";
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
 	String userFolderPath = getServletContext().getRealPath("/save/"+id); //폴더 경로
 	String prviewFolderPath = getServletContext().getRealPath("/preview/"+id); //폴더 경로
-	//쓰레기 패스
-	String garPath = getServletContext().getRealPath("/gar");
+	System.out.println("1번");
 	//해당 유저 폴더에 같은 이름의 이미지 삭제
 	ImgFileDelete ifd = new ImgFileDelete();
 	ifd.userFolderImgFileDelete(prviewFolderPath,userFolderPath);
+	System.out.println("2번");
 	//삭제 후 저장
 	MoveFile mf = new MoveFile();
 	List<String> fianlNames = 
@@ -37,16 +39,18 @@
 		BoardHashTagDAO hstgdao = new BoardHashTagDAO();
 		BoardHashTagDTO hstgdto = new BoardHashTagDTO();
 		//의미 없는 것
-		multi = new MultipartRequest(request, garPath, uploadSize,"utf-8", new DefaultFileRenamePolicy());
+		multi = new MultipartRequest(request, prviewFolderPath, uploadSize,"utf-8", new DefaultFileRenamePolicy());
 		String num = multi.getParameter("num");
 		String content = multi.getParameter("content");
 		String hash = multi.getParameter("taghidden");
-		
+		System.out.println("3번");
 		dto.setNum(num);
+		dto.setId(id);
 		dto.setContent(content);
 		dao.updateBoard(dto);
-		
+		System.out.println("4번");
 		imgdao.deleteImgBoard(num);
+		System.out.println("5번");
 		for(String fileName : fianlNames){
 			System.out.println(fileName);
 			imgdao.insertImgFileName(num, id+"/"+fileName);
@@ -65,7 +69,7 @@
 		}
 %>
 		<script type="text/javascript">
-			location.replace("boardlist.jsp");
+			location.replace("../main.jsp");
 		</script>
 <%
 	}catch(Exception e){

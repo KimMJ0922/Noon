@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="board.BoardHashTagDTO"%>
 <%@page import="board.BoardHashTagDAO"%>
 <%@page import="board.BoardImgDAO"%>
@@ -13,7 +14,9 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String id = "aaa";
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
+	System.out.println("아이디 : "+id);
 	String createUserFolderPath = getServletContext().getRealPath("/save/"+id); //폴더 경로
 	String prviewFolderPath = getServletContext().getRealPath("/preview/"+id); //폴더 경로
 	//해당 유저의 아이디로 된 폴더명 생성(없으면 생성)
@@ -41,6 +44,7 @@
 		String hash = multi.getParameter("taghidden");	
 		String content = multi.getParameter("content");
 		dto.setContent(content);
+		dto.setId(id);
 		String num = dao.insertPosts(dto);
 		//파일 이름 넣기
 		if(fianlFileName.size()!=0){
@@ -49,19 +53,21 @@
 			}
 		}
 		//해시태그 넣기
-		String[] tag = hash.split(",");
-		for(String hashtag : tag){
-			if(!hashtag.equals("")||hashtag!=null){
-				System.out.println(hashtag);
-				hstgdto.setNum(num);
-				hstgdto.setHashtag(hashtag);
-				hstgdao.insertHashTag(hstgdto);
+		if(!hash.equals("")||hash!=null){
+			String[] tag = hash.split(",");
+			for(String hashtag : tag){
+				if(!hashtag.equals("")||hashtag!=null){
+					System.out.println(hashtag);
+					hstgdto.setNum(num);
+					hstgdto.setHashtag(hashtag);
+					hstgdao.insertHashTag(hstgdto);
+				}
 			}
 		}
 		
 %>
 		<script type="text/javascript">
-			location.replace("boardlist.jsp");
+			location.replace("../main.jsp?main=board/boardlist.jsp");
 		</script>
 <%
 	}catch(Exception e){

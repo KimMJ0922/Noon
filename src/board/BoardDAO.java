@@ -22,8 +22,8 @@ public class BoardDAO {
 		try {
 			//boardtb에 insert
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "testid");
-			pstmt.setString(2, "testnickname");
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getContent());
 			pstmt.execute();
 			
@@ -44,14 +44,23 @@ public class BoardDAO {
 		return num;
 	}
 	
-	public List<BoardDTO> getBoardList(String minrow,String maxrow){
+	public List<BoardDTO> getBoardList(String minrow,String maxrow,String sort){
 		List<BoardDTO> list = new Vector<BoardDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select * from("+
+		String sql = "";
+		if(sort.equals("like")) {
+			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";	
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
+					 ") where rnum > ? and rnum <= ?";
+		}else {
+			sql = "select * from("+
+					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
+					 ") where rnum > ? and rnum <= ?";
+		}
+				
 		ResultSet rs = null;
 		conn = db.getConnection();
 		try {
@@ -69,6 +78,8 @@ public class BoardDAO {
 				dto.setLikes(rs.getInt("likes"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
+				dto.setProfilepic(rs.getString("profilpic"));
+				
 				list.add(dto);
 			}
 			
@@ -105,7 +116,7 @@ public class BoardDAO {
 		BoardDTO dto = new BoardDTO();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select * from boardtb where num = ?";	
+		String sql = "select b.*,m.profilpic from boardtb b, membertb m where b.num = ? and b.id=m.id";	
 		ResultSet rs = null;
 		conn = db.getConnection();
 		try {
@@ -121,6 +132,7 @@ public class BoardDAO {
 				dto.setLikes(rs.getInt("likes"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
+				dto.setProfilepic(rs.getString("profilpic"));
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -177,5 +189,53 @@ public class BoardDAO {
 		}
 		
 		return likecnt;
+	}
+	
+	public String getNumContent(String num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select content from boardtb where num = ?";
+		String con = "";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				con = rs.getString("content");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return con;
+	}
+	
+	public BoardDTO getCount(String id) {
+		BoardDTO dto = new BoardDTO();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(num),sum(likes) from boardtb where id=?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setNum(rs.getString(1));
+				dto.setLikes(rs.getInt(2));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
 	}
 }
