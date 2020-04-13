@@ -1,7 +1,9 @@
 /*active button class onclick*/
 $(function(){
+	logincheck();
+	getData();
+	
 	$('.custom-nav a').click(function(e) {
-		console.log("gd");
 		e.preventDefault();
 		$('.custom-nav a').removeClass('active');
 		$(this).addClass('active');
@@ -29,4 +31,76 @@ $(function(){
 			$('.content').children().not('.settings').addClass('noshow');
 		}
 	});
+	
+	$(".update").click(function(){
+		$(this).parent().addClass("hidden");
+		$(this).parent().next().removeClass("hidden");
+	});
+	
+	$(".cancel").click(function(){
+		$(this).parent().addClass("hidden");
+		$(this).parent().prev().removeClass("hidden");
+	});
+	
+	$(".submit").click(function(){
+		var inputSelect = $(this).prev().prev()
+		var data = inputSelect.val();
+		var type = inputSelect.attr("name");
+		
+		var hpCheck = RegExp(/^01[0179]-[0-9]{3,4}-[0-9]{4}$/);
+		var emailCheck = RegExp(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
+		var passwdCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
+		if(type=="hp" && !hpCheck.test(data)){
+			alert("휴대폰 형식에 맞지 않습니다.");
+			return;
+		}
+		else if(type=="email" && !emailCheck.test(data)){
+			alert("이메일 형식에 맞지 않습니다.");
+			return;
+		}
+		else if(type=="addr" && data.indexOf("/")==-1){
+			alert("주소 형식에 맞지 않습니다. 세부 주소는 / 뒤에 적어주세요");
+			return;
+		}
+		else if(type=="pass" && !passwdCheck.test(data)){
+			alert("비밀번호 형식에 맞지 않습니다.");
+			return;
+		}
+		update(data,type);
+		$(this).parent().addClass("hidden");
+		$(this).parent().prev().removeClass("hidden");
+	});
 });
+
+function update(data,type){
+	$.ajax({
+		type:"post",
+		url:"updateAction.jsp",
+		dataType:"html",
+		data:{
+			"data":data,
+			"type":type
+		},
+		success:function(data){
+			getData();
+			alert("수정완료");
+			location.reload();
+		}
+	});
+}
+
+function updatePic(){
+	
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}

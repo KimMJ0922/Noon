@@ -62,7 +62,9 @@ $(function(){
 		}
 	});
 	
+	
 	$("#write").click(function(){
+		$(window).off("beforeunload");
 		var text = $.trim($("#content").val());
 		if(text==null||text==""){
 			alert("내용을 입력해주세요");
@@ -72,7 +74,7 @@ $(function(){
 			$("#hashtagtext").val("");
 			$("#taghidden").val(hashlist);
 			form.submit();
-			$(window).off("beforeunload");
+			
 			return true;
 		}
 	});

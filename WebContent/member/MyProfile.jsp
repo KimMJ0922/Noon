@@ -1,5 +1,4 @@
 <%@page import="member.MemberDto"%>
-<%@page import="java.util.List"%>
 <%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -16,11 +15,8 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="script.js"></script>
-<script type="text/javascript">
-	$(function(){
-		
-	});
-</script>
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css">
+<script src="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.js"></script>
 <style>
 .topmain{
 	width:100%;
@@ -30,18 +26,25 @@
 }
 </style>
 </head>
-<%
-	String loginok = (String)session.getAttribute("loginok");
-	String id = (String)session.getAttribute("id");
-	if(loginok==null){%>
-		<script type="text/javascript">
+<script type="text/javascript">
+	function getData(){
+		<%
+		String id = (String)session.getAttribute("id");
+		MemberDao db = new MemberDao();
+		MemberDto dto = db.getdata(id);
+		String Path = getServletContext().getRealPath("/profile/"+id);
+		%>
+	}
+	
+	function logincheck(){
+		<%
+		String loginok = (String)session.getAttribute("loginok");
+		if(loginok==null){%>
 			alert("로그인이 필요한 서비스 입니다.");
 			location.replace("../login/noonlogin.jsp");
-		</script>
-	<%}
-	MemberDao db = new MemberDao();
-	MemberDto dto = db.getdata(id);
-%>
+		<%}	%>
+	}
+</script>
 <body>
 	<div class="topmain" style="padding:0; margin:0;">
 		<div class="row">
@@ -58,37 +61,73 @@
 			<a id="privacy"><i class="fa fa-tasks"> 좋아요</i></a>
 			<a id="settings"><i class="fa fa-cog"> 회원탈퇴</i></a>
 		</nav>
+		<div class="profilePic" style="text-align: center;">
+			<img id="preview" src="http://placehold.it/180" style="width: 180px;height: 180px;" />
+			<form action="updateProfilePic.jsp" enctype="multipart/form-data" method="post">
+				<div class="filebox">
+					<label for="photo">업로드</label>
+					<input type="file" class="form-control" name="photo" id="photo" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
+					<input type="submit" value="제출">
+				</div>
+			</form>
+		</div>
+		<img alt="#" src="../profile/<%=id %>/<%=dto.getPic()%>" style="width: 180px;height: 180px;">
 		<div class="content">
-		
 			<div class="profile">
 				<h1 class="font1">내 정보</h1>
+				<input type="hidden" name="num" id="num" value="<%=dto.getNum() %>">
 				<h2 class="font2">이름</h2>
-				<p class="custom-p">
+				<p class="custom-p view">
 					<%=dto.getName() %>
-					<button class="custom-btn"  data-toggle="modal" data-target="#changeModal">변경</button>
 				</p>
+				
 				<h2 class="font2">아이디</h2>
-				<p class="custom-p"><%=dto.getId() %>
-					<button class="custom-btn">변경</button>
+				<p class="custom-p">
+					<%=dto.getId() %>
 				</p>
+				
 				<h2 class="font2">휴대전화</h2>
-				<p class="custom-p"><%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>
-					<button class="custom-btn">변경</button>
+				<p class="custom-p">
+					<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>
+					<button class="custom-btn update">변경</button>
 				</p>
+				<p class="custom-p form hidden">
+					<input type="text" class="custom-input" name="hp" value="<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>" required="required">
+					<button class="custom-btn cancel">취소</button>
+					<button class="custom-btn submit">변경</button>
+				</p>
+				
 				<h2 class="font2">이메일</h2>
 				<p class="custom-p">
 					<%=dto.getEmail1() %>@<%=dto.getEmail2() %>
-					<button class="custom-btn">변경</button>
+					<button class="custom-btn update">변경</button>
 				</p>
+				<p class="custom-p form hidden">
+					<input type="text" class="custom-input" name="email" value="<%=dto.getEmail1() %>@<%=dto.getEmail2() %>" required="required">
+					<button class="custom-btn cancel">취소</button>
+					<button class="custom-btn submit">변경</button>
+				</p>
+				
 				<h2 class="font2">주소</h2>
 				<p class="custom-p">
-					<%=dto.getAddr1() %> <%=dto.getAddr2() %>
-					<button class="custom-btn">변경</button>
+					<%=dto.getAddr1() %>/<%=dto.getAddr2() %>
+					<button class="custom-btn update">변경</button>
 				</p>
+				<p class="custom-p form hidden">
+					<input type="text" class="custom-input" name="addr" value="<%=dto.getAddr1() %>/<%=dto.getAddr2() %>" required="required">
+					<button class="custom-btn cancel">취소</button>
+					<button class="custom-btn submit">변경</button>
+				</p>
+				
 				<h2 class="font2">비밀번호</h2>
 				<p class="custom-p">
 					•••••••
-					<button class="custom-btn">변경</button>
+					<button class="custom-btn update">변경</button>
+				</p>
+				<p class="custom-p form hidden">
+					<input type="password" class="custom-input" name="pass" value="" required="required">
+					<button class="custom-btn cancel">취소</button>
+					<button class="custom-btn submit">변경</button>
 				</p>
 			</div>
 			
@@ -200,30 +239,6 @@
 				<p class="custom-p"></p>
 			</div>
 		</div>
-	</div>
-	
-	<!-- Modal -->
-	<div id="changeModal" class="modal fade" role="dialog" style="top: 38%;">
-	  <div class="modal-dialog">
-	
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">아이디 중복체크</h4>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="form-group">
-	      		<label for="checkid">아이디:</label>
-	      		<input type="text" class="form-control" id="checkid">
-	      		<p id="idchkResult" style="margin-top: 5px;"></p>
-	      	</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default com" chk="no" data-dismiss="modal">완료</button>
-	      </div>
-	    </div>
-	  </div>
 	</div>
 </body>
 </html>

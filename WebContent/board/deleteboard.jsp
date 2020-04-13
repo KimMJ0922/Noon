@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="java.util.Vector"%>
 <%@page import="imgfile.ImgFileDelete"%>
 <%@page import="java.util.List"%>
@@ -13,7 +14,8 @@
 	ImgFileDelete ifd = new ImgFileDelete();
 	
 	List<String> list = imgdao.getNumImglist(num);
-	String id = (String)session.getAttribute("id");
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
 	
 	String folderPath = getServletContext().getRealPath("/save/"+id); //폴더 경로
 	//삭제하는 글에 이미지 파일이 있는 경우

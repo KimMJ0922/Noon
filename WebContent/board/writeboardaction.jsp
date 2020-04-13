@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="board.BoardHashTagDTO"%>
 <%@page import="board.BoardHashTagDAO"%>
 <%@page import="board.BoardImgDAO"%>
@@ -13,8 +14,9 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String id = (String)session.getAttribute("id");
-	System.out.println(id);
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
+	System.out.println("아이디 : "+id);
 	String createUserFolderPath = getServletContext().getRealPath("/save/"+id); //폴더 경로
 	String prviewFolderPath = getServletContext().getRealPath("/preview/"+id); //폴더 경로
 	//해당 유저의 아이디로 된 폴더명 생성(없으면 생성)

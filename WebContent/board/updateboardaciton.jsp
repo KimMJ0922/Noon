@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="board.BoardHashTagDTO"%>
 <%@page import="board.BoardHashTagDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -13,7 +14,8 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String id = (String)session.getAttribute("id");
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
 	String userFolderPath = getServletContext().getRealPath("/save/"+id); //폴더 경로
 	String prviewFolderPath = getServletContext().getRealPath("/preview/"+id); //폴더 경로
 	System.out.println("1번");

@@ -3,8 +3,8 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String replynum=request.getParameter("replynum");
-	
+	String replynum = request.getParameter("replynum");
+	String boardnum = request.getParameter("boardnum");
 	ReplyDAO dao=new ReplyDAO();
-	dao.deleteReply(replynum);
+	dao.deleteReply(replynum, boardnum);
 %>

@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="board.BoardLikesDAO"%>
 <%@page import="board.BoardLikesDTO"%>
 <%@page import="board.BoardDAO"%>
@@ -8,7 +9,8 @@
 	int likes = Integer.parseInt(request.getParameter("likes"));
 	BoardDAO dao = new BoardDAO();
 	int likecnt = dao.updateLikes(num,likes);
-	String id = (String)session.getAttribute("id");
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
 	System.out.println(id);
 	
 	BoardLikesDTO bldto = new BoardLikesDTO();

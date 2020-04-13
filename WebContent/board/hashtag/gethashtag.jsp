@@ -8,9 +8,11 @@
 <%
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
+	String sort = request.getParameter("sort");
+	String text = request.getParameter("text");
 	BoardHashTagDAO htdao = new BoardHashTagDAO();
 	
-	List<BoardHashTagDTO> list = htdao.getHashTags(minrow,maxrow);
+	List<BoardHashTagDTO> list = htdao.getHashTags(minrow,maxrow,sort,text);
 	JSONArray arr = new JSONArray();
 	if(list.size()!=0){
 		for(BoardHashTagDTO htdto : list){

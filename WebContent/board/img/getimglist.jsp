@@ -8,9 +8,12 @@
 <%
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
-	
+	String sort = request.getParameter("sort");
+	String text = request.getParameter("text");
 	BoardImgDAO dao = new BoardImgDAO();
-	List<BoardImgDTO> list = dao.getImglist(minrow,maxrow);
+	System.out.println("getimglist.jsp에 text : "+text);
+	List<BoardImgDTO> list = dao.getImglist(minrow,maxrow,sort,text);
+	
 	String url=request.getContextPath();
 	JSONArray arr = new JSONArray();
 	if(list.size()!=0){

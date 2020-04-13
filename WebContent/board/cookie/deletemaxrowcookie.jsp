@@ -4,7 +4,11 @@
     // 특정 쿠키만 삭제하기
     Cookie kc = new Cookie("maxrow", null) ;
     kc.setMaxAge(0) ;
-    response.addCookie(kc) ;
+    response.addCookie(kc);
+    
+    kc = new Cookie("sort", null) ;
+    kc.setMaxAge(0) ;
+    response.addCookie(kc);
  
  
 %>

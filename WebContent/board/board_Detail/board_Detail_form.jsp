@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardHashTagDAO"%>
 <%@page import="board.BoardDAO"%>
@@ -211,13 +212,21 @@ background:none;
 	border-radius: 5px;
 	display: block;
 }
+.likeyimg{
+	width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 10px;
+}
   </style>
 <script type="text/javascript">
 $(function(){
 	var boardnum = $("#re_board_text").attr("num");
 	//댓글 불러오기
 	getReply();
-	
+	getReplyNum(boardnum);
+	getLikeNum(boardnum);
+	getLikeStatus(boardnum);
 	$("#re_send").click(function(){
 		var content = $("#re_board_text").val();
 		
@@ -237,6 +246,7 @@ $(function(){
 				success:function(data){
 					 $("#re_board_text").val("");
 					getReply(); 
+					getReplyNum(boardnum);
 				}
 			});
 		}
@@ -244,7 +254,6 @@ $(function(){
 	//삭제 버튼 눌렀을 때
 	$(document).on("click","#del_btn",function(){
 		var replynum=$(this).parent("div").attr("replynum");
-		
 		var pclass = $(this).siblings("p:eq(0)").attr("class");
 		var content=$(this).siblings("."+pclass).children(".re_reply_textarea").val();
 		
@@ -265,6 +274,7 @@ $(function(){
 			        async: false,
 			        success:function(data){
 			        	getReply();
+			        	getReplyNum(boardnum);
 					}
 				});
 			}
@@ -272,7 +282,8 @@ $(function(){
 			var replynum=$(this).parent("div").attr("replynum");
 			var ch = confirm("해당 댓글을 삭제하시겠습니까?");
 			if(ch==true){
-				deleteReply(replynum);	
+				deleteReply(replynum,boardnum);	
+				getReplyNum(boardnum);
 			}else{
 				return false;
 			}
@@ -289,6 +300,7 @@ $(function(){
 			
 		if($(this).val()=="수정취소"){
 			getReply();
+			getReplyNum(boardnum);
 		}else{
 			$(this).siblings("."+pclass).html("<textarea class='re_reply_textarea'>"+content+"</textarea>");
 			$(this).siblings("#del_btn").val("수정");
@@ -302,7 +314,7 @@ $(function(){
 		var prtname=$(this).parent("p").siblings("a").attr("prtname");
 	
 		var a =$(this).parent("p").siblings("div");
-		a.html("<textarea class='re_re'>@"+prtname+"</textarea>");
+		a.html("<textarea class='re_re'>@"+prtname+"  </textarea>");
 		a.append("<input type='button' id='re_re_cc' style='border:none;background:none;font-size:12px;' value='취소'>");
 		a.append("<input type='button' id='re_re_add' style='border:none;background:none;font-size:12px;' value='답글 달기'>");
 	});
@@ -315,7 +327,7 @@ $(function(){
 	$(document).on("click","#re_re_add",function(){
 		var content =$(this).siblings(".re_re").val();
 		var replynum = $(this).parent("div").attr("replynum");
-		
+		var writer = $(this).parent("div").attr("writer");
 			 $.ajax({
 		        type:"post", 
 		        url:"board/board_Detail/board_Detail_replay_re_add.jsp", 
@@ -324,10 +336,12 @@ $(function(){
 		        	"content":content,
 		        	"replynum":replynum,
 		        	"boardnum":boardnum,
+		        	"writer":writer
 		        },
 		        async: false,
 		        success:function(data){
 		        	getReply();
+		        	getReplyNum(boardnum);
 				}
 			}); 
 	});
@@ -339,21 +353,49 @@ $(function(){
 		
 		
 	});
-	
+	//좋아요 아이콘 눌렀을 때
+	$(".likeyimg").click(function(){
+		var src = $(this).attr("src");
+		var cnt = 0;
+		if(src == "img/like/like01.png"){
+			$(this).attr("src","img/like/like02.png");
+			cnt++;
+		}else{
+			$(this).attr("src","img/like/like01.png");
+			cnt--;
+		}
+		
+		$.ajax({
+	        type:"post", 
+	        url:"board/likes/updatelike.jsp", 
+	        dataType:"html",
+	        data:{
+	        	"num":boardnum,
+	        	"likes":cnt
+	        },
+	        async: false,
+	        success:function(data){
+	        	$(".likycnt").html("좋아요 "+$.trim(data)+"개");
+			}
+		});
+		
+	});
 	
 });//window.function 끝
 
-function deleteReply(replynum){
+function deleteReply(replynum,boardnum){
 	$.ajax({
         type:"post", 
         url:"board/board_Detail/board_Detail_reply_delete.jsp", 
         dataType:"html",
         data:{
-        	"replynum":replynum
+        	"replynum":replynum,
+        	"boardnum":boardnum
         },
         async: false,
         success:function(data){
         	getReply();
+        	getReplyNum(boardnum);
 		}
 	});
 } 
@@ -376,7 +418,12 @@ function getReply(){
 			$.each(data,function(i,item){
 				if(item.name==writernik){
 					str+="<div class='reply_content_re_writer' replynum='"+item.replynum+"'>"
-					str+="<img src='save/ddd/iu.jpg'>";
+					if(item.profilepic==null||item.profilepic==""){
+						str+="<img src='profile/default.png'>";
+					}else{
+						str+="<img src='profile/"+item.name+"/"+item.profilepic+"'>";
+					}
+					
 					str+="<a href='#' style='margin-left:10px;' prtname='"+item.name+"'>"+" "+item.writeday+" "+item.name+"</a>";
 					if(item.name==id){
 						str+="<input class='p_rebtn_s_writer' id='del_btn' type='button' value='삭제' >";
@@ -390,11 +437,15 @@ function getReply(){
 					str+="<p ><input class='p_rebtn_writer' id='re_btn' type='button' value='답글'></p>";
 					}
 					
-					str+="<div replynum='"+item.replynum+"'></div>"
+					str+="<div replynum='"+item.replynum+"' writer='"+item.name+"'></div>"
 				str+="</div>";
 				}else{
 					str+="<div class='reply_content_re' id='"+item.replynum+"' replynum='"+item.replynum+"'>"
-						str+="<img src='save/ddd/iu.jpg'>";
+						if(item.profilepic==null||item.profilepic==""){
+							str+="<img src='profile/default.png'>";
+						}else{
+							str+="<img src='profile/"+item.name+"/"+item.profilepic+"'>";
+						}
 						str+="<a href='#' style='margin-right:10px;' prtname='"+item.name+"'>"+" "+item.name+" "+item.writeday+"</a>";
 						if(item.name==id){
 							str+="<input class='p_rebtn_s' id='up_btn' type='button' value='수정'>";
@@ -408,7 +459,7 @@ function getReply(){
 							str+="<p><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
 							}
 						
-						str+="<div replynum='"+item.replynum+"'></div>"
+						str+="<div replynum='"+item.replynum+"' writer='"+item.name+"'></div>"
 					str+="</div>";
 				}
 			});
@@ -418,6 +469,56 @@ function getReply(){
      });
 }
 
+function getReplyNum(boardnum){
+	$.ajax({
+        type:"post", 
+        url:"board/board_Detail/board_Detail_get_replynum.jsp", 
+        dataType:"json",
+        data:{
+        	"boardnum":boardnum
+        },
+        async: false,
+        success:function(data){
+        	$("#replycnt").html("댓글 "+data.replynum+"개");
+		}
+	});
+}
+
+function getLikeNum(boardnum){
+	$.ajax({
+        type:"post", 
+        url:"board/likes/getlikenum.jsp", 
+        dataType:"html",
+        data:{
+        	"num":boardnum
+        },
+        async: false,
+        success:function(data){
+        	$(".likycnt").html("좋아요 "+$.trim(data)+"개");
+		}
+	});
+}
+
+function getLikeStatus(boardnum){
+	$.ajax({
+        type:"post", 
+        url:"board/likes/getlikestatus.jsp", 
+        dataType:"html",
+        data:{
+        	"num":boardnum
+        },
+        async: false,
+        success:function(data){
+        	var id = $.trim(data);
+        	var loginid = $.trim($("#loginid").text());
+        	if(id == loginid){
+        		$(".likeyimg").attr("src","img/like/like02.png");
+        	}else{
+        		$(".likeyimg").attr("src","img/like/like01.png");
+        	}
+		}
+	});
+}
   </script>
 </head>
 <%	
@@ -430,13 +531,26 @@ function getReply(){
 	BoardDAO Bdb=new BoardDAO();
 	BoardDTO dto=Bdb.getBoard(num);
 	
+	if(dto.getNum()==null||dto.getNum()==""){
+%>
+		<script>
+			alert("삭제된 게시글입니다.");
+			history.back();
+		</script>
+<%
+	}
 	//해시태그 불러오기
 	BoardHashTagDAO Hdb= new BoardHashTagDAO();
 	List<String> Hlist= Hdb.getNumHashTag(num);
 	//이미지 url
 	String url=request.getContextPath();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	
+	String profileimg = "profile/default.png";
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String id = mdto.getId();
+	if(dto.getProfilepic()!=null||dto.getProfilepic()!=""){
+		profileimg = "profile/"+id+"/"+dto.getProfilepic();
+	}
 %>
 <body>
 <%	
@@ -506,7 +620,8 @@ function getReply(){
 %>					
 				<div class="img_none_box">
 					<div class="img_none">
-					<img src="<%=url %>/save/ddd/iu.jpg" style="float:left">
+
+					<img src="<%=profileimg %>" style="float:left">
 					<span><b style="color:skyblue"><%=dto.getNickname() %></b></span>
 					<span style="display:block;margin-left:70px; color:gray;"><%=sdf.format(dto.getWriteday()) %></span>
 					</div>
@@ -523,7 +638,7 @@ function getReply(){
 			<div class="col-md-5 col-sm-5" style="padding:0;"><!-- 댓글창 -->
 				<div class="reboard">
 					<div class="img_on">
-					<img src="<%=url %>/save/ddd/iu.jpg" style="float:left">
+					<img src="<%=profileimg %>" style="float:left">
 					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
 					</div>
 					<hr>
@@ -545,8 +660,9 @@ function getReply(){
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
 				<div class="detail_content">
-					<p>이미지 넣으면됨</p><!--  아이콘 자리 -->
-					<p><b>좋아요 0개</b></p>
+					<p><img class="likeyimg" src="img/like/like01.png"></p><!--  아이콘 자리 -->
+					<p><b class="likycnt">좋아요 0개</b></p>
+					<p><b id="replycnt">댓글 0개</b></p>
 					<!-- 글 내용 -->
 					<%
 						if(Ilist.size()==0){
