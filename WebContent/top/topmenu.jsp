@@ -35,8 +35,8 @@
 				<P><a href="main.jsp">NOON</a></P>
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs topcontent">
-				<input type="text" name="searchtag" class="searchtag">
-				<button class="searchbtn">검색</button>
+				<input type="text" name="searchtag" class="searchtag" placeholder="#을 붙여서 해시태그검색">
+				<button class="searchbtn"><img alt="돋보기" src="img/icon/search.png" style="margin-left: -10px;width: 47px;"></button>
 			</div>
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
 				<div class="row">
@@ -47,7 +47,7 @@
 					<div class="col-md-9 col-sm-8 col-xs-6 myinfo">
 								<!--	아이디	 -->
 						<div class="col-md-12 col-sm-12 col-xs-12 myinfolist myinfolistid">
-							<span id="loginid"><%=id %></span>
+							<span id="loginid"><a href="main.jsp?view=member/MyProfile.jsp"><%=id %></a></span>
 								<a href="#" id="logout" class="toplogout">로그아웃</a>
 						</div>
 								<!--	좋아요 게시글 팔로워	 -->
