@@ -7,7 +7,7 @@
 	}
 	session.removeAttribute("loginok");
 	session.removeAttribute("dto");
-
+	session.removeAttribute("dark_check");
     Cookie c = new Cookie("sort", null) ;
 
     // 쿠키 유효기간을 설정한다. 초단위 : 60*60*24= 1일
