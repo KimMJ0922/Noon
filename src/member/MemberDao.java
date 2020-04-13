@@ -169,7 +169,7 @@ public class MemberDao {
 	public void profilepic(String id, String pic) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql="update membertb set pic=? where id=?";
+		String sql="update membertb set profilpic=? where id=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
