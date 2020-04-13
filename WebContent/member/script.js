@@ -104,3 +104,8 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+//회원이 작성한 글
+function memberBoardList(){
+	var id = $("#loginid").val();
+}
