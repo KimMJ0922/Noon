@@ -129,3 +129,40 @@
     background-color: white;
     border-radius: 20px;
 }
+/*�Խù�*/
+.board{
+	width:500px;
+	heigth:500px;
+	border: 1px solid gary;
+	background-color: #ffffff;
+	margin :3px auto;
+	border: 1px solid #DBDBDB;
+}
+
+div.boardwriter{
+	height:80px;
+	width:450;
+	padding:0;
+	margin:0;
+	border-bottom: 1px solid gray;
+}
+div.menu{
+	flaot:right;
+	width:50px;
+	height:80px;
+}
+/* ���� ������ �̹��� */
+.boardwriter>img{
+	margin: 12px;
+    margin-right: 14px;
+    border-radius: 50px;
+    max-height: 55px;
+    max-width: 55px;
+}
+.boardwriter>.boardwriteday{
+	    line-height: 76px;
+    margin-left: 42px;
+}
+.boardwriter:nth-child(2){
+	border-right: 1px solid #DBDBDB;
+}

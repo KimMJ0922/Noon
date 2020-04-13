@@ -1,5 +1,7 @@
 /*active button class onclick*/
 $(function(){
+	var minrow = 0;
+	var maxrow = 10;
 	logincheck();
 	getData();
 	
@@ -12,23 +14,24 @@ $(function(){
 		}
 		else if(this.id === 'payment') {
 			$('.payment').removeClass('noshow');
-			$('.content').children().not('.payment').addClass('noshow');
+			$('.payment').siblings('div').addClass('noshow');
+			memberBoardList(minrow,maxrow);
 		}
 		else if (this.id === 'profile') {
 			$('.profile').removeClass('noshow');
-			$('.content').children().not('.profile').addClass('noshow');
+			$('.profile').siblings('div').addClass('noshow');
 		}
 		else if(this.id === 'subscription') {
 			$('.subscription').removeClass('noshow');
-			$('.content').children().not('.subscription').addClass('noshow');
+			$('.subscription').siblings('div').addClass('noshow');
 		}
 		else if(this.id === 'privacy') {
 			$('.privacy').removeClass('noshow');
-			$('.content').children().not('.privacy').addClass('noshow');
+			$('.privacy').siblings('div').addClass('noshow');
 		}
 		else if(this.id === 'settings') {
 			$('.settings').removeClass('noshow');
-			$('.content').children().not('.settings').addClass('noshow');
+			$('.settings').siblings('div').addClass('noshow');
 		}
 	});
 	
@@ -106,8 +109,33 @@ function readURL(input) {
 }
 
 //회원이 작성한 글
-function memberBoardList(){
-	var id = $("#loginid").val();
+function memberBoardList(minrow, maxrow){
+	var text = $.trim($(".searchtag").val());
+	var loginid = $.trim($("#loginid").text());
+	
+	if(text.indexOf("#")==-1 && text.length==0){
+		$("#getId").val(loginid);
+	}else if(text.indexOf("#")==-1 && text.length>0){
+		$("#getId").val(text);
+	}else{
+		$("#getId").val(loginid);
+	}
+	
+	id = $("#getId").val();
+	$.ajax({
+        type: "post", 
+        url: "board/memberboard/getmemberboardlist.jsp", 
+        dataType: "html",
+        async: false,
+        data:{
+           "id":id,
+           "minrow":minrow,
+           "maxrow":maxrow
+        },
+        success:function(data){
+        	$(".payment").html($.trim(data));
+        }
+     });
 }
 
 function deleteMember(){
