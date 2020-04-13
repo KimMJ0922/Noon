@@ -18,8 +18,24 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- css폴더 안에 있는 파일 목록 -->
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
-
+<link rel= "stylesheet" type="text/css" href="">
+<link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script>
+$(function(){
+		$("#darkmode").click(function(){
+			$("*").toggleClass("dark-mode");
+		});		
+})
+</script>
 <style>
+
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+
+
 .row>.boardlist {
 	background: #DBDBDB;
 	border: 1px solid #000;
@@ -49,6 +65,7 @@
 	System.out.println(view);
 %>
 <body>
+
 	<div class="container topmain" style="padding:0; margin:0;">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 ">
