@@ -105,7 +105,6 @@ function memberBoardList(minrow, maxrow){
            "maxrow":maxrow
         },
         success:function(data){
-        	$(".payment").html($.trim(data));
         }
      });
 }
