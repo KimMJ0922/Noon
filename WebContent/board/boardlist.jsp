@@ -9,6 +9,10 @@
 <link rel= "stylesheet" type="text/css" href="css/board/boardlist.css">
 <script type="text/javascript" src="js/board/onhashchange.js"></script>
 <script type="text/javascript" src="js/board/boardlist.js"></script>
+
+<script type="text/javascript" src="js/UserProfile.js"></script>
+<link rel="stylesheet" href="css/member/profile.css">
+
 <script type="text/javascript">
 $(function(){
 	$(".alam").click(function(){
@@ -63,5 +67,6 @@ $(function(){
 		<a><div class="darkmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
 		<div class="remoconcomment">다크/라이트</div>
 	</div>
+	<div class="profileModal"></div>
 </body>
 </html>
