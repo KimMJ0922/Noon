@@ -117,3 +117,17 @@
   font-size: 1.5em;
   letter-spacing: 1px;
 }
+
+.pic{
+	border-radius: 90px;
+	width: 100px;
+	height: 100px;
+	border: 1px solid lightgrey;
+	position: relative;
+}
+.picadd{
+    left: -50px;
+    font-size: 30px;
+    background-color: white;
+    border-radius: 20px;
+}
