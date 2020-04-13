@@ -1,14 +1,19 @@
 .p_reply_writer{
-	color:black;
+   color:black;
 }
 .p_reply{
-	color:black;
+   color:black;
 }
 #dark_np{
-	background:none;
+   background:none;
 }
 
 #re_board_text{
-	background: rgba(128,128,128,0.4);
+   background: rgba(128,128,128,0.4);
+   
+}
+body{
+	background: black;
+	color:white;
 	
 }

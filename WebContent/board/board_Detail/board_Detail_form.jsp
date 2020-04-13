@@ -8,9 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%request.setCharacterEncoding("UTF-8"); %>
-    <%
-    	String dark_check=(String)session.getAttribute("dark_check");
-    %>
 <!DOCTYPE html>
 <html>
 <head>
