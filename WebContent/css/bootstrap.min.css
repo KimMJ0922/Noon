@@ -1815,7 +1815,7 @@ pre code {
 	margin-right: auto;
 	margin-left: auto
 }
-/* º∫¿∫¿Ã¿« ∆¥ªıCSS Ω√¿€ µ˚∂ı- */
+/* ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ∆¥ÔøΩÔøΩCSS ÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩ- */
 
 
 
@@ -1826,7 +1826,7 @@ pre code {
 	.topcontent>p{
 		font-size: 2em;
 	    line-height: 1.1em;
-	    margin-left: -5.9em;
+	    margin-left: -3.9em;
 	    padding: 0;
 	}
 	.myinfo>img{
@@ -1846,7 +1846,137 @@ pre code {
 	    margin-left: -15px;
 	    line-height: 29px;	
 	}
+	.myinfolistid{
+		font-size: 14px;
+	    margin-left: -15px;
+	    line-height: 29px;	
+	}
+	.toplogout{
+		display: none;
+	}
+	.bordercontainer{
+		width: 500px;
+		padding: 0;
+		margin: 0;	
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 40px;
+	}
+	.addwrite{
+	 	height: 50px;
+	 	width: 500px;
+	 	resize: none;
+	}
+	.remocon {
+		bottom: unset;
+	    bottom: 0;
+	    position: fixed;
+	    display: inline-block;
+	    width: 500px;
+	    height: auto;
+	    z-index: 1;
+        background-color: rgba(204,204,204,0.7);
+	}
+	.remoconlist{
+	    background-size: cover;
+	    width: 50px;
+        margin: 11px 25px;
+	    height: 50px;
+	    float: left;
+    }
+	.showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+	.alambox {
+		position: absolute;
+	    background: #fafafa;
+	    border: 1px solid #dbdbdb;
+        top: -330px;
+   		left: 38px;
+	    width: 430px;
+	    height: 300px;
+	    display:none;  
+	
+	}
+	.alambox:after, .alambox:before {
+		top: 100%;
+		left: 50%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+	
+	.alambox:after {
+		border-color: rgba(250, 250, 250, 0);
+		border-top-color: #fafafa;
+		border-width: 20px;
+		margin-left: -20px;
+	}
+	.alambox:before {
+		border-color: rgba(189, 189, 189, 0);
+		border-top-color: #bdbdbd;
+		border-width: 21px;
+		margin-left: -20px;
+	}
+	.alamul{
+	    overflow-y: auto;
+	    padding-left: 10px;
+	    font-size: 14px;
+	    width: 420px;
+	    height: 300px;
+	    white-space: nowrap;
+	    overflow-x: hidden;
+	    text-overflow: ellipsis;
+	}
 }
+
 
 @media ( min-width :768px) {
 	.topcontent>p{
@@ -1869,6 +1999,208 @@ pre code {
 	}
 	.topcontent{
 		height: 100px;
+	}
+	.toplogout{
+		margin-left: 12px;
+	    font-size: 13px;
+	}
+	.bordercontainer{
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
+	}
+	.remocon{
+		position: fixed;
+	    display: inline-block;
+	    right: 7%;
+	    width: 100px;
+	    top: 235px;
+	    height: auto;
+	    bottom: inherit;
+	    background-color: unset;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+	    width: 50px;
+	    height: 50px;
+	    float: none;
+    }
+    .showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+
+	.toplogout{
+		margin-left: 12px;
+	    font-size: 13px;
+	}
+	.bordercontainer{
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
+	}
+	.remocon{
+		position: fixed;
+	    display: inline-block;
+	    right: 7%;
+	    width: 100px;
+	    height: auto;
+	    bottom: inherit;
+	    background-color: unset;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+	    width: 50px;
+	    top: 235px;
+	    height: 50px;
+	    float: none;
+    }
+    .showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+	.alambox {
+		position: absolute;
+	    background: #fafafa;
+	    border: 1px solid #dbdbdb;
+	    top: 5px;
+     	left: -438px;
+	    width: 430px;
+	    height: 300px;
+	    display:none;  
+	}
+	.alambox:after, .alambox:before {
+		left: 448px;
+		top: 50%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	.alambox:after {
+		border-color: rgba(250, 250, 250, 0);
+		border-left-color: #fafafa;
+		border-width: 20px;
+		margin-top: -20px;
+	}
+	.alambox:before {
+		border-color: rgba(189, 189, 189, 0);
+		border-left-color: #bdbdbd;
+		border-width: 21px;
+		margin-top: -21px;
+	}
+	.alamul{
+	    overflow-y: auto;
+	    padding-left: 10px;
+	    font-size: 14px;
+	    width: 420px;
+	    height: 300px;
+	    white-space: nowrap;
+	    overflow-x: hidden;
+	    text-overflow: ellipsis;
 	}
 
 }
@@ -1907,11 +2239,142 @@ pre code {
 	    font-size: 21px;
 	    height: 40px;
 	   width: 350px;
+	    height: 40px;
+	   width: 350px;
 	}
 	.myinfolist>span{
 		font-size: 9px;
 	    display: inline-block;
 	    width: 37px;
+	}
+	.toplogout{
+		margin-left: 12px;
+	    font-size: 13px;
+	}
+	.bordercontainer{
+		width: 500px;
+		padding: 0;
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
+	}
+	.remocon{
+		position: fixed;
+	    display: inline-block;
+	    right: 28%;
+	    width: 100px;
+	    height: auto;
+	    background-color:unset;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+	    width: 50px;
+	    top: 235px;
+	    height: 50px;
+	    float: none;
+    }
+    .showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.myinfolist>span{
+		font-size: 9px;
+	    display: inline-block;
+	    width: 37px;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+	.alambox {
+		position: absolute;
+	    background: #fafafa;
+	    border: 1px solid #dbdbdb;
+	    top: 5px;
+	    left: 100px;
+	    width: 430px;
+	    height: 300px;
+	    display:none;  
+	
+	}
+	.alambox:after, .alambox:before {
+		right: 100%;
+		top: 50%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+	
+	.alambox:after {
+		border-color: rgba(250, 250, 250, 0);
+		border-right-color: #fafafa;
+		border-width: 15px;
+		margin-top: -15px;
+	}
+	.alambox:before {
+		border-color: rgba(219, 219, 219, 0);
+		border-right-color: #dbdbdb;
+		border-width: 16px;
+		margin-top: -16px;
+	}
+	.alamul{
+	    overflow-y: auto;
+	    padding-left: 10px;
+	    font-size: 14px;
+	    width: 420px;
+	    height: 300px;
+	    white-space: nowrap;
+	    overflow-x: hidden;
+	    text-overflow: ellipsis;
 	}
 }
 
@@ -1949,19 +2412,241 @@ pre code {
 	    width: 600px;
 	}
 	.myinfolistid{
-	font-size: 20px;	
+		font-size: 20px;	
 	}
 	.myinfolist>span{
-	font-size: 14px;
-    display: inline-block;
-    width: 57px;
+		font-size: 14px;
+	    display: inline-block;
+	    width: 57px;
+	}
+	.toplogout{
+		margin-left: 12px;
+	    font-size: 13px;
+	    display: inline;
+	}
+	.showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+	.subtopcontent{
+		font-size: 17px;
+	}
+	.remocon{
+	    bottom: unset;
+		position: fixed;
+	    display: inline-block;
+	    right: 28%;
+	    width: 100px;
+	    height: auto;
+	    background-color:unset;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+	    width: 50px;
+	    height: 50px;
+	    float: none;
+    }
+    .bordercontainer{
+		width: 900px;
+		padding: 0;
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
 	}
 
+	.myinfolistid{
+		font-size: 20px;	
+	}
+	.myinfolist>span{
+		font-size: 14px;
+	    display: inline-block;
+	    width: 57px;
+	}
+	.toplogout{
+		margin-left: 12px;
+	    font-size: 13px;
+	    display: inline;
+	}
+	.showboard{
+		background-image : url('../img/icon/showboard01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	.favorite{
+		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+		
+	}
+	.favorite:hover{
+		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.setting{
+		background-image : url('../img/icon/settings.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.setting:hover{
+		background-image : url('../img/icon/settings02.png');
+		background-repeat : no-repeat;
+	}
+	.pagetopup{
+		background-image : url('../img/icon/up01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopup:hover{
+		background-image : url('../img/icon/up02.png');
+		background-repeat : no-repeat;
+	}
+	.alam{
+		background-image : url('../img/icon/alam.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alam:hover{
+		background-image : url('../img/icon/alam02.png');
+		background-repeat : no-repeat;
+	}
+	.subtopcontent{
+		font-size: 17px;
+	}
+	.remocon{
+	    bottom: unset;
+		position: fixed;
+	    display: inline-block;
+        right: 26%;
+	    width: 100px;
+	    top: 235px;
+	    height: auto;
+	    background-color:unset;
+    }
+    .remoconlist{
+	    margin: 10px auto;
+	    background-size: cover;
+	    width: 50px;
+	    height: 50px;
+	    float: none;
+    }
+    .bordercontainer{
+		width: 900px;
+		padding: 0;
+		margin: 0;	
+	}
+	.addwrite{
+		width:500px ;
+		height: 100px;
+		resize: none;
+	}
+	.addwrite::placeholder{
+		text-align: center;
+		font-size: 17px;
+		line-height: 60px;
+	}
+	.alambox {
+		position: absolute;
+	    background: #fafafa;
+	    border: 1px solid #dbdbdb;
+	    top: 5px;
+	    left: 100px;
+	    width: 430px;
+	    height: 300px;
+	    display:none;  
+	
+	}
+	.alambox:after, .alambox:before {
+		right: 100%;
+		top: 50%;
+		left: -17px;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+	
+	.alambox:after {
+		border-color: rgba(250, 250, 250, 0);
+		border-right-color: #fafafa;
+		border-width: 20px;
+		margin-top: -20px;
+	}
+	.alambox:before {
+		border-color: rgba(189, 189, 189, 0);
+		border-right-color: #bdbdbd;
+	    border-width: 18px;
+   		margin-top: -17px;
+	}
+	.alamul{
+	    overflow-y: auto;
+	    padding-left: 10px;
+	    font-size: 14px;
+	    width: 420px;
+	    height: 300px;
+	    white-space: nowrap;
+	    overflow-x: hidden;
+	    text-overflow: ellipsis;
+	}
 }
 
 
 
-/* º∫¿∫¿Ã¿« ∆¥ªıCSS ≥° µ˚∂ı- */
+/* º∫¿∫¿Ã¿« CSS ≥°- */
 
 @media ( min-width :768px) {
 	.container {
@@ -6418,7 +7103,7 @@ button.close {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 1040;
+	z-index: 10000;
 	display: none;
 	overflow: hidden;
 	-webkit-overflow-scrolling: touch;
@@ -6467,10 +7152,11 @@ button.close {
 }
 
 .modal-backdrop {
-	position: absolute;
+	 
 	top: 0;
 	right: 0;
 	left: 0;
+	bottom:0;
 	background-color: #000
 }
 

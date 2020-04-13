@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>부트스트랩 101 템플릿</title>
+<title>Noon</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,7 +17,6 @@
 <!-- 제이쿼리 -->
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- css폴더 안에 있는 파일 목록 -->
-<link rel= "stylesheet" type="text/css" href="css/topmenu.css">
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
 
 <style>
@@ -35,7 +34,8 @@
 </head>
 <%
 	String id = (String)session.getAttribute("id");
-	if(id==null){
+	String loginok = (String)session.getAttribute("loginok");
+	if(loginok==null){
 %>
 	<script>
 		alert("로그인해주세요");
@@ -71,7 +71,6 @@
 <%
 			}
 %>
-			
 		</div>
 	</div>
 	<div>

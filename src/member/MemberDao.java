@@ -17,7 +17,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = "INSERT INTO membertb VALUES (seq_signup.nextval, ?,?,?,?,?,?,?,sysdate,?,null)";
-		String type = "¿œπ›»∏ø¯";
+		String type = "ÏùºÎ∞òÌöåÏõê";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -89,11 +89,11 @@ public class MemberDao {
 		return isEqual;
 	}
 	
-	public List<MemberDto> getdata(String id) {
-		List<MemberDto> list = new Vector<MemberDto>();
+	public MemberDto getdata(String id) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		MemberDto dto = new MemberDto();
 		String sql = "select * from membertb where id=?";
 		
 		try {
@@ -101,7 +101,6 @@ public class MemberDao {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				MemberDto dto = new MemberDto();
 				String[] email = rs.getString("email").split("@");
 				String[] hp = rs.getString("hp").split("-");
 				dto.setAddr1(rs.getString("addr1"));
@@ -117,8 +116,7 @@ public class MemberDao {
 				dto.setPass(rs.getString("pass"));
 				dto.setSignupday(rs.getTimestamp("signupday"));
 				dto.setType(rs.getString("type"));
-				
-				list.add(dto);
+				dto.setPic(rs.getString("profilpic"));
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -126,6 +124,63 @@ public class MemberDao {
 		}finally {
 			db.dbClose(rs, pstmt, conn);
 		}
-		return list;
+		return dto;
+	}
+	
+	public void update(String data, String type, String id) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "";
+		
+		try {
+			if(type.equals("hp")) {
+				sql = "update membertb set hp=? where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, data);
+				pstmt.setString(2, id);
+			}
+			else if(type.equals("email")) {
+				sql = "update membertb set email=? where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, data);
+				pstmt.setString(2, id);
+			}else if(type.equals("addr")) {
+				sql = "update membertb set addr1=?,addr2=? where id=?";
+				pstmt = conn.prepareStatement(sql);
+				String addr[] = data.split("/");
+				pstmt.setString(1, addr[0]);
+				pstmt.setString(2, addr[1]);
+				pstmt.setString(3, id);
+			}else if(type.equals("pass")) {
+				sql = "update membertb set pass=? where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, data);
+				pstmt.setString(2, id);
+			}
+			pstmt.execute();
+		}catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	public void profilepic(String id, String pic) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql="update membertb set pic=? where id=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, pic);
+			pstmt.setString(2, id);
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }

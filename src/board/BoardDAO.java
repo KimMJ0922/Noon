@@ -44,21 +44,68 @@ public class BoardDAO {
 		return num;
 	}
 	
-	public List<BoardDTO> getBoardList(String minrow,String maxrow){
+	public List<BoardDTO> getBoardList(String minrow,String maxrow,String sort,String text){
 		List<BoardDTO> list = new Vector<BoardDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select * from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";	
+		System.out.println("getBoardList메소드 밖에 sort : "+sort);
+		String sql = "";
+		if(sort.equals("like")) {
+			if(!text.equals("#")) {
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( "+
+						 		"select b.*,m.profilpic, bh.hashtag "+
+						 		"from boardtb b, membertb m, boardhashtagtb bh "+
+						 		"where b.id = m.id and b.num = bh.num and bh.hashtag like ?"+
+						 		"order by writeday desc"+
+						 ") a"+
+					  ") where rnum > ? and rnum <= ?";
+			}else {
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
+						 ") where rnum > ? and rnum <= ?";
+			}
+			
+		}else {
+			if(!text.equals("#")) {
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( "+
+						 		"select b.*,m.profilpic, bh.hashtag "+
+						 		"from boardtb b, membertb m, boardhashtagtb bh "+
+						 		"where b.id = m.id and b.num = bh.num and bh.hashtag like ?"+
+						 		"order by writeday desc"+
+						 ") a"+
+					  ") where rnum > ? and rnum <= ?";
+			}else {
+				System.out.println("3번 sql");
+				sql = "select * from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
+						 ") where rnum > ? and rnum <= ?";
+				
+			}
+		} 
+				
 		ResultSet rs = null;
 		conn = db.getConnection();
 		try {
 			//boardtb에 insert
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			System.out.println("getBoardList메소드 안에 sort : "+sort);
+			if(text.equals("#")&&(sort.equals("")||sort.equals("like"))) {
+				System.out.println("바인드 1번으로 들어옴");
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}else {
+				System.out.println("바인드 2번으로 들어옴");
+				pstmt.setString(1, text);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+				
+			}
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
@@ -69,6 +116,7 @@ public class BoardDAO {
 				dto.setLikes(rs.getInt("likes"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
+				dto.setProfilepic(rs.getString("profilpic"));
 				list.add(dto);
 			}
 			
@@ -93,6 +141,11 @@ public class BoardDAO {
 			pstmt.setString(1, num);
 			pstmt.execute();
 			
+			sql ="delete from history where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.execute();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,7 +158,7 @@ public class BoardDAO {
 		BoardDTO dto = new BoardDTO();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select * from boardtb where num = ?";	
+		String sql = "select b.*,m.profilpic from boardtb b, membertb m where b.num = ? and b.id=m.id";	
 		ResultSet rs = null;
 		conn = db.getConnection();
 		try {
@@ -121,6 +174,7 @@ public class BoardDAO {
 				dto.setLikes(rs.getInt("likes"));
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
+				dto.setProfilepic(rs.getString("profilpic"));
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -201,5 +255,53 @@ public class BoardDAO {
 		}
 		
 		return con;
+	}
+	
+	public BoardDTO getCount(String id) {
+		BoardDTO dto = new BoardDTO();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(num),sum(likes) from boardtb where id=?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setNum(rs.getString(1));
+				dto.setLikes(rs.getInt(2));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
+	
+	public String getBoardWriter(String num) {
+		String writer = "";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select id from boardtb where num = ?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				writer = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return writer;
 	}
 }

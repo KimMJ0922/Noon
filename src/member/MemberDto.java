@@ -16,7 +16,7 @@ public class MemberDto {
 	private String addr2;
 	private Timestamp signupday;
 	private String type;
-	
+	private String pic;
 	public String getNum() {
 		return num;
 	}
@@ -55,6 +55,9 @@ public class MemberDto {
 	}
 	public String getType() {
 		return type;
+	}
+	public String getPic() {
+		return pic;
 	}
 	public void setNum(String num) {
 		this.num = num;
@@ -95,6 +98,7 @@ public class MemberDto {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 }

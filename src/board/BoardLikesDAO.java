@@ -61,22 +61,71 @@ public class BoardLikesDAO {
 	
 	
 	//리스트에 보여질 것
-	public List<BoardLikesDTO> getLikeList(String minrow, String maxrow, String id){
+	public List<BoardLikesDTO> getLikeList(String minrow, String maxrow, String id,String sort,String text){
 		List<BoardLikesDTO> list = new Vector<BoardLikesDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select min(num),max(num) from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";	
+		String sql = "";
+		if(sort.equals("like")) {
+			if(!text.equals("#")) {
+				sql = "select min(num),max(num)"+
+					  "from( "+
+					  		"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  		"from ("+
+					  			   "select b.*, bh.hashtag "+
+					  			   "from boardtb b, BOARDHASHTAGTB bh "+
+					  			   "where b.num = bh.num and bh.hashtag like ? "+
+					  			   "order by writeday desc"+
+					  		") a "+
+					  ")"+
+					  "where rnum > ? and rnum <= ?";
+			}else {
+				sql = "select min(num),max(num) from("+
+						 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+						 "from ( select * from boardtb order by likes desc, writeday desc) a"+
+						 ") where rnum > ? and rnum <= ?";
+			}
+			
+		}else {
+			if(!text.equals("#")) {
+				System.out.println("2번으로 들어옴");
+				sql = "select min(num),max(num)"+
+					  "from( "+
+					  		"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  		"from ("+
+					  			   "select b.*, bh.hashtag "+
+					  			   "from boardtb b, BOARDHASHTAGTB bh "+
+					  			   "where b.num = bh.num and bh.hashtag like ? "+
+					  			   "order by writeday desc"+
+					  		") a "+
+					  ")"+
+					  "where rnum > ? and rnum <= ?";	
+			}else {
+				System.out.println("3번으로 들어옴");
+				sql = "select min(num),max(num) from("+
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select * from boardtb order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
+			}
+		}
+		
 		ResultSet rs = null;
 		conn = db.getConnection();
 		int max = 0;
 		int min = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			if(text.equals("#")&&(sort.equals("")||sort.equals("like"))) {
+				System.out.println("바인드 1번으로 들어옴");
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}else {
+				System.out.println("바인드 2번으로 들어옴");
+				pstmt.setString(1, text);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+				
+			}
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -106,5 +155,56 @@ public class BoardLikesDAO {
 		}
 		
 		return list;
+	}
+	
+	public String getLikeNum(String num) {
+		String likecnt = "";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select likes from boardtb where num = ?";
+		
+		conn = db.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				likecnt = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return likecnt;
+	}
+	
+	public String getLikeStatus(String num, String id) {
+		String likeStatus = "";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select id from BOARDLIKE where num = ? and id = ?";
+		
+		conn = db.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				likeStatus = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return likeStatus;
 	}
 }

@@ -10,8 +10,22 @@ public class BoardDTO {
 	private int likes;
 	private Timestamp writeday;
 	private String reply;
+	private String profilepic;
+	private String hashtag;
 	
 	
+	public String getHashtag() {
+		return hashtag;
+	}
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
+	public String getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
 	public String getReply() {
 		return reply;
 	}
