@@ -17,8 +17,6 @@
 }
 .profile, .payment, .subscription, .privacy, .settings {
   transition: opacity .5s ease-in;
-  position: absolute;
-  width: 80%;
 }
 .active {
   color: #3FB6A8;

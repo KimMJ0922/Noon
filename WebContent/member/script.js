@@ -109,3 +109,29 @@ function readURL(input) {
 function memberBoardList(){
 	var id = $("#loginid").val();
 }
+
+function deleteMember(){
+	var pass = $("#deletePass").val();
+	var ans = confirm("삭제 하시겠습니까?");
+	if(ans==false)
+		return;
+	$.ajax({
+		type:"post",
+		url:"member/deleteMember.jsp",
+		dataType:"html",
+		data:{
+			"pass":pass
+		},
+		success:function(data){
+			console.log(data.trim());
+			if(data.trim()=="false"){
+				alert("비밀번호를 확인해주세요");
+				$("#deletePass").val("");
+				$("#deletePass").focus();
+			}else{
+				alert("정상적으로 탈퇴 되었습니다.");
+				location.replace("login/noonlogin.jsp");
+			}
+		}
+	});
+}
