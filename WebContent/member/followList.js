@@ -1,5 +1,6 @@
 $(function(){
 	followedList();
+	followingList();
 	
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
@@ -16,6 +17,8 @@ $(function(){
 					"toid":toid
 				},
 				success:function(data){
+					followingList();
+					followedList();
 				}
 			});
 		}else{
@@ -31,6 +34,7 @@ $(function(){
 				},
 				success:function(data){
 					followedList();
+					followingList();
 				}
 			});
 		}
@@ -44,6 +48,16 @@ function followedList(){
 		dataType:"html",
 		success:function(data){
 			$(".followed").html(data);
+		}
+	});
+}
+function followingList(){
+	$.ajax({
+		type:"get",
+		url:"member/followingList.jsp",
+		dataType:"html",
+		success:function(data){
+			$(".follower").html(data);
 		}
 	});
 }

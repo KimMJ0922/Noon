@@ -46,6 +46,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+<div class="profileModal"></div>
 <%
 	for(int i=0;i<list.size();i++){
 		BoardDTO dto = list.get(i);
@@ -70,7 +71,7 @@
 <%
 				}
 %>
-					<%=dto.getId() %>
+					<a class="showProfile" style="cursor: pointer;"><%=dto.getId() %></a>
 				</div><!-- boardwriter끝 -->
 				
 				<div class="col-md-4 col-sm-4 col-xs-4 boardwriter">

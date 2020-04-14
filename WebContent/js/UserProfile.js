@@ -1,5 +1,5 @@
 $(function(){
-	$("a.showProfile").click(function(){
+	$(document).on("click","a.showProfile",function(){
 		getProfile($(this).text());
 	});
 	

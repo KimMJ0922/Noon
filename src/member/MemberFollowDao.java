@@ -78,7 +78,7 @@ public class MemberFollowDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select toid from followtb where fromid=?";
+		String sql = "select toid from followtb where fromid=? order by toid";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, fromid);
@@ -103,7 +103,7 @@ public class MemberFollowDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select fromid from followtb where toid=?";
+		String sql = "select fromid from followtb where toid=? order by fromid";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, toid);
