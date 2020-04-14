@@ -21,7 +21,7 @@
 	BoardDAO dao = new BoardDAO();
 	BoardDTO bdto = dao.getCount(id);
 	NumberFormat nf = NumberFormat.getInstance();
-	//민재의 피와땀은 어디로?
+	
 	String like = nf.format(bdto.getLikes());
 	String boardcnt = nf.format(Integer.parseInt(bdto.getNum()));
 	String profilesrc = "profile/default.png";
