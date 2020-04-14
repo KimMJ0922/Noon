@@ -141,17 +141,8 @@ $(function(){
 //회원이 작성한 글
 function memberBoardList(minrow, maxrow){
 	var text = $.trim($(".searchtag").val());
-	var loginid = $.trim($("#loginid").text());
+	var id = $("#getId").val();
 	
-	if(text.indexOf("#")==-1 && text.length==0){
-		$("#getId").val(loginid);
-	}else if(text.indexOf("#")==-1 && text.length>0){
-		$("#getId").val(text);
-	}else{
-		$("#getId").val(loginid);
-	}
-	
-	id = $("#getId").val();
 	$.ajax({
         type: "post", 
         url: "board/memberboard/getmemberboardlist.jsp", 
@@ -163,7 +154,11 @@ function memberBoardList(minrow, maxrow){
            "maxrow":maxrow
         },
         success:function(data){
-        	$("#memberboardlist").append(data);
+        	if($.trim(data).length==0 && maxrow==10){
+        		$("#memberboardlist").html("작성한 글이 없습니다.");
+        	}else{
+        		$("#memberboardlist").append(data);
+        	}
         }
      });
 }

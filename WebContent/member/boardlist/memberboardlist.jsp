@@ -16,7 +16,7 @@
 	
 	String id = request.getParameter("id");
 %>
-	<input type="text" id="getId" value="<%=id%>">
+	<input type="hidden" id="getId" value="<%=id%>">
 
 	<div id="memberboardlist" >
 	

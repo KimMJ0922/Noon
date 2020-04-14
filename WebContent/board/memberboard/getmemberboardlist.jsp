@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="member.MemberDto"%>
 <%@page import="board.BoardLikesDAO"%>
 <%@page import="board.BoardHashTagDAO"%>
@@ -8,13 +11,6 @@
 <%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body >
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -30,7 +26,13 @@
 	BoardHashTagDAO bhtdao = new BoardHashTagDAO();
 	
 	List<BoardDTO> blist = bdao.getMemberBoardList(minrow,maxrow,id);
-	
+	if(blist.size()==0){
+%>
+	<div style="text-align:center; line-height:500px; font-size:30pt">
+		작성한 게시글이 없습니다.
+	</div>
+<%
+	}
 	for(int i=0; i<blist.size();i++){
 		BoardDTO bdto = blist.get(i);
 %>
@@ -52,7 +54,42 @@
 				<font style="text-align:left;"><%=bdto.getId() %></font>
 			</div>
 			<div class="col-md-4 col-sm-4 col-xs-4 boardwriter">
-				시간
+				<span class="boardwriteday" style="float:right; margin:0 10px 0 0;">
+<%
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
+					Calendar c = Calendar.getInstance();
+					long now = c.getTimeInMillis();
+					
+					String day = sdf.format(bdto.getWriteday());
+					
+					long dateM = bdto.getWriteday().getTime();
+					long gap = now - dateM;
+
+			        String ret = "";
+			        gap = (long)(gap/1000);
+			        long hour = gap/3600;
+			        gap = gap%3600;
+			        long min = gap/60;
+			        long sec = gap%60;
+
+			        if(hour > 24){
+			            ret = day;
+			        }
+			        else if(hour > 0){
+			            ret = hour+"시간 전";
+			        }
+			        else if(min > 0){
+			            ret = min+"분 전";
+			        }
+			        else if(sec >= 0){
+			            ret = sec+"초 전";
+			        }
+			        else{
+			            ret = day;
+			        }
+%>
+						<%=ret %>
+					</span>
 			</div>
 <%
 			if(id.equals(loginid)){
@@ -172,5 +209,3 @@
 <%
 	}
 %>
-</body>
-</html>
