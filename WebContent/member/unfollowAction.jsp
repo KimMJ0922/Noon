@@ -5,7 +5,7 @@
 	request.setCharacterEncoding("utf-8");
 	String fromid = request.getParameter("fromid");
 	String toid = request.getParameter("toid");
-	System.out.println(fromid+" -> "+toid+"insert");
+	System.out.println(fromid+" -> "+toid+"delete");
 	MemberFollowDao db = new MemberFollowDao();
-	db.insertFollow(fromid, toid);
+	db.deleteFollow(fromid, toid);
 %>

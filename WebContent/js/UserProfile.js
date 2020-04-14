@@ -4,16 +4,34 @@ $(function(){
 	});
 	
 	$(document).on("click",".follow,.following",function(){
-		if($(this).attr("class")=="follow"){
+		var fromid = $(this).attr("fromid");
+		var toid = $(this).attr("toid");
+		if($(this).attr("class")=="pro-btn follow"){
+			$(this).attr("class","pro-btn following");
+			$(this).text("언팔로우");
 			$.ajax({
+				type:"get",
+				url:"member/followAction.jsp",
+				dataType:"html",
+				data:{
+					"fromid":fromid,
+					"toid":toid
+				},
 				success:function(data){
-					$(this).attr("class","pro-btn following");
 				}
 			});
 		}else{
+			$(this).attr("class","pro-btn follow");
+			$(this).text("팔로우");
 			$.ajax({
+				type:"get",
+				url:"member/unfollowAction.jsp",
+				dataType:"html",
+				data:{
+					"fromid":fromid,
+					"toid":toid
+				},
 				success:function(data){
-					$(this).attr("class","pro-btn follow");
 				}
 			});
 		}
@@ -59,9 +77,9 @@ function getProfile(id){
 			if(loginid==data.id){
 				str+="<a href='main.jsp?view=member/MyProfile.jsp&content=profile.jsp' class='pro-btn'>프로필 수정</a>";
 			}else if(followchk=="true"){
-				str+="<a href='member/followAction.jsp?fromid="+loginid+"&toid="+data.id+"' class='pro-btn following' id='followbtn'>언팔로우</a>";
+				str+="<a fromid="+loginid+" toid="+data.id+" class='pro-btn following' style='cursor: pointer;'>언팔로우</a>";
 			}else{
-				str+="<a href='member/followAction.jsp?fromid="+loginid+"&toid="+data.id+"' class='pro-btn follow' id='followbtn'>팔로우</a>";
+				str+="<a fromid="+loginid+" toid="+data.id+" class='pro-btn follow' style='cursor: pointer;'>팔로우</a>";
 			}
 			str+="</div>";
 			str+="</div>";
