@@ -1888,16 +1888,26 @@ pre code {
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
-	.showboard:hover{
-		background-image : url('../img/icon/showboard02.png');
-	}
-	.darkmode{
-		background-image : url('../img/icon/moon.png');
+	.showboardDark{
+		background-image : url('../img/icon/showboard01_dark.png');
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
+	.showboardDark:hover{
+		background-image : url('../img/icon/showboard02_dark.png');
+	}
+	
+	.showboard:hover{
+		background-image : url('../img/icon/showboard02.png');
+	}
+	
 	.favorite{
 		background-image : url('../img/icon/heart01.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.favoriteDark{
+		background-image : url('../img/icon/heart01_dark.png');
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
@@ -1905,10 +1915,23 @@ pre code {
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
 	}
+	.favoriteDark:hover{
+		background-image : url('../img/icon/heart02_dark.png');
+		background-repeat : no-repeat;
+	}
 	.setting{
 		background-image : url('../img/icon/settings.png');
 		background-repeat : no-repeat;
 		transition:0.2s;
+	}
+	.settingDark{
+		background-image : url('../img/icon/settings_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.settingDark:hover{
+		background-image : url('../img/icon/settings02_dark.png');
+		background-repeat : no-repeat;
 	}
 	.setting:hover{
 		background-image : url('../img/icon/settings02.png');
@@ -1919,6 +1942,15 @@ pre code {
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
+	.pagetopupDark{
+		background-image : url('../img/icon/up01_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopupDark:hover{
+		background-image : url('../img/icon/up02_dark.png');
+		background-repeat : no-repeat;
+	}
 	.pagetopup:hover{
 		background-image : url('../img/icon/up02.png');
 		background-repeat : no-repeat;
@@ -1928,9 +1960,28 @@ pre code {
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
+	.alamDark{
+		background-image : url('../img/icon/alam_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alamDark:hover{
+		background-image : url('../img/icon/alam02_dark.png');
+		background-repeat : no-repeat;
+	}
 	.alam:hover{
 		background-image : url('../img/icon/alam02.png');
 		background-repeat : no-repeat;
+	}
+	.lightmode{
+		background-image : url('../img/icon/moon.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.darkmode{
+		background-image : url('../img/icon/moon_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
 	}
 	.alambox {
 		position: absolute;
@@ -2049,11 +2100,7 @@ pre code {
 		transition:0.2s;
 		
 	}
-	.darkmode{
-		background-image : url('../img/icon/moon.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
+	
 	.favorite:hover{
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
@@ -2311,11 +2358,6 @@ pre code {
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
 	}
-	.darkmode{
-		background-image : url('../img/icon/moon.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
 
 	.setting{
 		background-image : url('../img/icon/settings.png');
@@ -2453,16 +2495,7 @@ pre code {
 		transition:0.2s;
 		
 	}
-	.lightmode{
-		background-image : url('../img/icon/moon.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
-	.darkmode{
-		background-image : url('../img/icon/moon_dark.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
+	
 	.favorite:hover{
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;

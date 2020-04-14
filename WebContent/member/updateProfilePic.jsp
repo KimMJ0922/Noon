@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="imgfile.ImgFolderCreate"%>
@@ -21,7 +22,9 @@
 		String photo = multi.getFilesystemName("photo");
 		
 		db.profilepic(id, photo);
-		response.sendRedirect("MyProfile.jsp");
+		MemberDto dto = db.getdata(id);
+		session.setAttribute("dto", dto);
+		response.sendRedirect("../main.jsp?view=member/MyProfile.jsp&content=profile.jsp");
 	}catch(Exception e){
 		System.out.println("업로드 오류"+e.getMessage());
 	}
