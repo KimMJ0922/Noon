@@ -10,5 +10,7 @@
     kc.setMaxAge(0) ;
     response.addCookie(kc);
  
- 
+    kc = new Cookie("top", null) ;
+    kc.setMaxAge(0) ;
+    response.addCookie(kc);
 %>

@@ -13,16 +13,28 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
- 	 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <%
+  	String dark="";
+  	dark=(String)session.getAttribute("dark_check");
+  	
+  	if(dark.equals("0")){
+  		
+  	}else if(dark.equals("1")){
+  	%>
+  	  <link rel="stylesheet" href="board/board_Detail/dark_detail.css" />
+  	<%	
+  	}
+  	%>
 <meta charset="UTF-8">
+
 <title>상세 페이지</title>
 
 <style>
+
   .carousel {
  	width:680px;
- 	height:600px;
+ 	max-height:638px;
  	background: gary;
 	}
 	
@@ -561,9 +573,9 @@ function getLikeStatus(boardnum){
 	
 	
 %>
-	<div class="container">
+	<div class="container detail_box">
 		<div class="row">
-			<div class="col-md-7 col-sm-7" style="padding:0;">
+			<div class="col-md-7 col-sm-7 col-xs-12"  style="padding:0;">
 <%
 				if(Ilist.size()!=0){
 					thumbnail=Ilist.get(0);
@@ -575,7 +587,7 @@ function getLikeStatus(boardnum){
 							for(int i=0;i<Ilist.size();i++){
 								if(i==0){
 %>
-									<li data-target="#myCarousel" data-slide-to="<%=i %>" class="active"></li>
+									<li data-target="#myCarousel" data-slide-to="<%=i %>" class="active" ></li>
 <%
 								}else{
 %>
@@ -587,7 +599,7 @@ function getLikeStatus(boardnum){
 		   				</ol>
 		   				<div class="carousel-inner">
 		   					<div class="item active">
-		   						<img id="modal_img" src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
+		   						<img id="modal_img" src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;min-height:638px;max-height:638px;" data-toggle="modal" data-target="#modal">
 							
 		   					</div><!-- class="item active" 끝 -->
 <%
@@ -595,7 +607,7 @@ function getLikeStatus(boardnum){
 								imgs=Ilist.get(i);
 %>
 								<div class="item">
-									<img id="modal_img" src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;height:520px;" data-toggle="modal" data-target="#modal">
+									<img id="modal_img" src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;min-height:638px;max-height:638px;" data-toggle="modal" data-target="#modal">
 								
 								</div><!-- class="item"끝  -->	
 <%
@@ -605,12 +617,12 @@ function getLikeStatus(boardnum){
 					</div><!-- class="carousel slide" 끝 -->
 					
 					<!-- Left and right controls -->
-					<a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background-image: none;">
+					<a class="left carousel-control" id="dark_np" href="#myCarousel" data-slide="prev" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-left"></span>
 						<span class="sr-only">Previous</span>
 					</a>
 					
-					<a class="right carousel-control" href="#myCarousel" data-slide="next" style="background-image: none;">
+					<a class="right carousel-control" id="dark_np" href="#myCarousel" data-slide="next" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-right"></span>
 						<span class="sr-only">Next</span>
 					</a>
@@ -627,19 +639,23 @@ function getLikeStatus(boardnum){
 					</div>
 					
 					<pre style="border:none; background: none;white-space: pre-wrap;
-  						 word-break: break-all;word-wrap:break-word;">
-  						 <%=dto.getContent() %></pre>
+  					word-break: break-all;word-wrap:break-word;text-align: left;"><%=dto.getContent() %></pre>
 					
 					</div>
 <%
 				}
 %>
 			</div><!-- class="col-md-7 col-sm-7" 끝 -->
-			<div class="col-md-5 col-sm-5" style="padding:0;"><!-- 댓글창 -->
+			<div class="col-md-5 col-sm-5 col-xs-12" style="padding:0;"><!-- 댓글창 -->
 				<div class="reboard">
 					<div class="img_on">
 					<img src="<%=profileimg %>" style="float:left">
 					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
+					<%if(dto.getNickname().equals(id)){ %>
+					<b style="color:blue;float:right"><a href="#">글수정</a> / <a a href="#">글삭제</a></b>
+					<%}else{%>
+					
+					<%} %>
 					</div>
 					<hr>
 					<div id="reply_content">

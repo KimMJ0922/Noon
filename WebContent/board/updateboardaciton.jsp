@@ -18,11 +18,11 @@
 	String id = mdto.getId();
 	String userFolderPath = getServletContext().getRealPath("/save/"+id); //폴더 경로
 	String prviewFolderPath = getServletContext().getRealPath("/preview/"+id); //폴더 경로
-	System.out.println("1번");
+
 	//해당 유저 폴더에 같은 이름의 이미지 삭제
 	ImgFileDelete ifd = new ImgFileDelete();
 	ifd.userFolderImgFileDelete(prviewFolderPath,userFolderPath);
-	System.out.println("2번");
+
 	//삭제 후 저장
 	MoveFile mf = new MoveFile();
 	List<String> fianlNames = 
@@ -43,14 +43,13 @@
 		String num = multi.getParameter("num");
 		String content = multi.getParameter("content");
 		String hash = multi.getParameter("taghidden");
-		System.out.println("3번");
 		dto.setNum(num);
 		dto.setId(id);
 		dto.setContent(content);
 		dao.updateBoard(dto);
-		System.out.println("4번");
+
 		imgdao.deleteImgBoard(num);
-		System.out.println("5번");
+
 		for(String fileName : fianlNames){
 			System.out.println(fileName);
 			imgdao.insertImgFileName(num, id+"/"+fileName);
@@ -61,7 +60,6 @@
 		String[] tag = hash.split(",");
 		for(String hashtag : tag){
 			if(!hashtag.equals("")||hashtag!=null){
-				System.out.println(hashtag);
 				hstgdto.setNum(num);
 				hstgdto.setHashtag(hashtag);
 				hstgdao.insertHashTag(hstgdto);

@@ -1,0 +1,40 @@
+.p_reply_writer{
+   color:beige;
+}
+.p_reply{
+   color:beige;
+}
+#dark_np{
+   background:none;
+}
+
+#re_board_text{
+   background: rgba(128,128,128,0.4);
+   
+}
+body{
+	background: #232323;
+	color:white;
+	
+}
+
+.topmain{
+	background:#393939;
+	
+}
+#re_send{
+	background:#676767;
+	
+}
+.p_reply_writer{
+ color:black;
+}
+.p_reply{
+color:black;
+}
+.likycnt{
+	color:skyblue;
+}
+pre{
+color:beige;		
+}

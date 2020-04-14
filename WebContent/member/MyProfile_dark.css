@@ -1,0 +1,36 @@
+body{
+	background:#232323;
+}
+.custom-p{
+	color:beige;
+	border:none;
+	border-bottom: 1px solid #DBDBDB;
+}
+.custom-btn{
+	background: #232323;
+	color:beige;
+	
+}
+.custom-btn:hover{
+	background: lightgrey;
+	border-radius:8px;
+	color:#232323;
+}
+
+
+.topmain{
+	background:#393939;
+	
+}
+.font1{
+	color:beige;
+}
+i{
+	color:beige;
+}
+
+i:hover{
+	text-shadow:-1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+	 -moz-text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+ -webkit-text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+}

@@ -1815,10 +1815,7 @@ pre code {
 	margin-right: auto;
 	margin-left: auto
 }
-/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ´ï¿½ï¿½CSS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½- */
-
-
-
+/*  kse CSS start */
 
 
 
@@ -1874,7 +1871,7 @@ pre code {
 	    bottom: 0;
 	    position: fixed;
 	    display: inline-block;
-	    width: 500px;
+	    width: 485px;
 	    height: auto;
 	    z-index: 1;
         background-color: rgba(204,204,204,0.7);
@@ -1882,7 +1879,7 @@ pre code {
 	.remoconlist{
 	    background-size: cover;
 	    width: 50px;
-        margin: 11px 25px;
+        margin: 11px 15px;
 	    height: 50px;
 	    float: left;
     }
@@ -1891,23 +1888,50 @@ pre code {
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
+	.showboardDark{
+		background-image : url('../img/icon/showboard01_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.showboardDark:hover{
+		background-image : url('../img/icon/showboard02_dark.png');
+	}
+	
 	.showboard:hover{
 		background-image : url('../img/icon/showboard02.png');
 	}
+	
 	.favorite{
 		background-image : url('../img/icon/heart01.png');
 		background-repeat : no-repeat;
 		transition:0.2s;
-		
+	}
+	.favoriteDark{
+		background-image : url('../img/icon/heart01_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
 	}
 	.favorite:hover{
 		background-image : url('../img/icon/heart02.png');
+		background-repeat : no-repeat;
+	}
+	.favoriteDark:hover{
+		background-image : url('../img/icon/heart02_dark.png');
 		background-repeat : no-repeat;
 	}
 	.setting{
 		background-image : url('../img/icon/settings.png');
 		background-repeat : no-repeat;
 		transition:0.2s;
+	}
+	.settingDark{
+		background-image : url('../img/icon/settings_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.settingDark:hover{
+		background-image : url('../img/icon/settings02_dark.png');
+		background-repeat : no-repeat;
 	}
 	.setting:hover{
 		background-image : url('../img/icon/settings02.png');
@@ -1918,6 +1942,15 @@ pre code {
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
+	.pagetopupDark{
+		background-image : url('../img/icon/up01_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.pagetopupDark:hover{
+		background-image : url('../img/icon/up02_dark.png');
+		background-repeat : no-repeat;
+	}
 	.pagetopup:hover{
 		background-image : url('../img/icon/up02.png');
 		background-repeat : no-repeat;
@@ -1927,9 +1960,28 @@ pre code {
 		background-repeat : no-repeat;
 		transition:0.2s;
 	}
+	.alamDark{
+		background-image : url('../img/icon/alam_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.alamDark:hover{
+		background-image : url('../img/icon/alam02_dark.png');
+		background-repeat : no-repeat;
+	}
 	.alam:hover{
 		background-image : url('../img/icon/alam02.png');
 		background-repeat : no-repeat;
+	}
+	.lightmode{
+		background-image : url('../img/icon/moon.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.darkmode{
+		background-image : url('../img/icon/moon_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
 	}
 	.alambox {
 		position: absolute;
@@ -2048,6 +2100,7 @@ pre code {
 		transition:0.2s;
 		
 	}
+	
 	.favorite:hover{
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
@@ -2230,15 +2283,15 @@ pre code {
 	.searchtag{
 		display:inline-block;
 		text-align: center;
-	    font-size: 21px;
-	    height: 30px;
-	    width: 300px;
+	    font-size: 14px;
+	    height: 40px;
+	    width: 200px;
 	}
 	.searchtag:hover{
 		text-align: center;
 	    font-size: 21px;
 	    height: 40px;
-	   width: 350px;
+	   width: 220px;
 	    height: 40px;
 	   width: 350px;
 	}
@@ -2305,6 +2358,7 @@ pre code {
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
 	}
+
 	.setting{
 		background-image : url('../img/icon/settings.png');
 		background-repeat : no-repeat;
@@ -2376,6 +2430,9 @@ pre code {
 	    overflow-x: hidden;
 	    text-overflow: ellipsis;
 	}
+	.searchbtn{
+		width: 50px;
+	}
 }
 
 @media ( min-width :1200px) {
@@ -2401,13 +2458,13 @@ pre code {
 	}
 	.searchtag{
 		text-align: center;
-	    font-size: 21px;
+        font-size: 14px;
 	    height: 40px;
 	    width: 400px;
 	}
 	.searchtag:hover{
 		text-align: center;
-	    font-size: 21px;
+	    font-size: 14px;
 	    height: 50px;
 	    width: 600px;
 	}
@@ -2438,6 +2495,7 @@ pre code {
 		transition:0.2s;
 		
 	}
+	
 	.favorite:hover{
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
@@ -2642,11 +2700,12 @@ pre code {
 	    overflow-x: hidden;
 	    text-overflow: ellipsis;
 	}
+	
 }
 
 
 
-/* ¼ºÀºÀÌÀÇ CSS ³¡- */
+/* kse  CSS end  */
 
 @media ( min-width :768px) {
 	.container {
@@ -2694,11 +2753,16 @@ pre code {
 
 .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3,
 	.col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-	float: left
+	float: left;
+	
+
+
 }
 
 .col-xs-12 {
-	width: 100%
+	width: 100%;
+	
+
 }
 
 .col-xs-11 {

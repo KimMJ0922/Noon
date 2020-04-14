@@ -14,6 +14,7 @@
 <title>Insert title here</title>
 </head>
 <%
+	String dark_se=(String)session.getAttribute("dark_check");
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
 	String id = dto.getId();
 	BoardDAO dao = new BoardDAO();
@@ -27,16 +28,23 @@
 	if(dto.getPic()!=null && dto.getPic()!=""){
 		profilesrc = "profile/"+id+"/"+dto.getPic();
 	}
+	
 %>
+<script type="text/javascript">
+	
+</script>
 <body>
 	<div class="container" style="width: 100%;">
-		<div class="row">
+		<div class="row howtotopdark">
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
+			<!-- 세션 히든값 -->
+			<input type="hidden" id="darkmodes" name="darkmodes" value="<%=dark_se%>">
+			
 				<P><a href="main.jsp">NOON</a></P>
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs topcontent">
-				<input type="text" name="searchtag" class="searchtag">
-				<button class="searchbtn">검색</button>
+				<input type="text" name="searchtag" class="searchtag" placeholder="#을 붙여서 해시태그검색">
+				<button class="searchbtn"><img id="searchimg" alt="돋보기" src="img/icon/search.png" style="margin-left: -10px;width: 47px;"></button>
 			</div>
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
 				<div class="row">
@@ -47,7 +55,7 @@
 					<div class="col-md-9 col-sm-8 col-xs-6 myinfo">
 								<!--	아이디	 -->
 						<div class="col-md-12 col-sm-12 col-xs-12 myinfolist myinfolistid">
-							<span id="loginid"><a href="main.jsp?view=member/MyProfile.jsp"><%=id %></a></span>
+							<span id="loginid"><a href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp"><%=id %></a></span>
 								<a href="#" id="logout" class="toplogout">로그아웃</a>
 						</div>
 								<!--	좋아요 게시글 팔로워	 -->
@@ -62,6 +70,7 @@
 							<span> <%=boardcnt %> </span>
 							<span> 348 </span>
 						</div>
+						
 					</div>
 				</div>
 			</div>
