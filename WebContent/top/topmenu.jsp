@@ -14,6 +14,7 @@
 <title>Insert title here</title>
 </head>
 <%
+	String dark_se=(String)session.getAttribute("dark_check");
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
 	String id = dto.getId();
 	BoardDAO dao = new BoardDAO();
@@ -34,10 +35,11 @@
 </script>
 <body>
 	<div class="container" style="width: 100%;">
-	
 		<div class="row howtotopdark">
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
-			<input type="hidden" id="darkmodes" name="darkmodes" value="0">
+			<!-- 세션 히든값 -->
+			<input type="hidden" id="darkmodes" name="darkmodes" value="<%=dark_se%>">
+			
 				<P><a href="main.jsp">NOON</a></P>
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs topcontent">

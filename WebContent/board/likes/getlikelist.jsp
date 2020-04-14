@@ -20,7 +20,7 @@
 	} */
 	
 	BoardLikesDAO dao = new BoardLikesDAO();
-	List<BoardLikesDTO> list = dao.getLikeList(minrow, maxrow, id,sort,text);
+	List<BoardLikesDTO> list = dao.getLikeList(minrow, maxrow, id,sort);
 	String url=request.getContextPath();
 	JSONArray arr = new JSONArray();
 	if(list.size()!=0){

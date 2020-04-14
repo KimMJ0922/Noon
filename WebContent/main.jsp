@@ -28,22 +28,50 @@
 		dark_se="0";
 	}
 	if(dark_se.equals("1")||dark_se==null){
-		System.out.println("다크모드");
+		%>
+		<link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
+		<%
 	}else{
-		System.out.println("일반모드");
 	}
 %>
 <script>
 $(function(){
 	
-var a=$("#darkmodes").val();
+var darkmodes=$("#darkmodes").val();
 
-		
-// 			$("#darkmode").toggle(function () {
-// 				$(this).css({"background-image":"url('img/icon/moon_dark.png')"});
-// 			}, function () {
-// 				$(this).css({"background-image":"url('img/icon/moon.png')"});
-// 			});
+		if(darkmodes=="1"){
+			$("body").addClass("backdark transform");
+			$(".addwrite").addClass("dark-mode transform");
+			$(".board>div").addClass("dark-mode transform");
+			$(".boarddetail>pre").addClass("dark-mode transform");
+			$(".howtotopdark").addClass("topdark transform");			
+			$(".likey").attr("src","img/like/like01_dark.png");
+			$("#menubtn").attr("src","img/icon/menu_icon_dark.png");
+			
+			
+			$(".topcontent>button").addClass("searchbtndark searchtransform");
+			$(".topcontent>button").removeClass("searchbtn");
+			
+			
+			$(".showboard").addClass("showboardDark");
+			$("#showboard").removeClass("showboard");
+			
+			$(".favorite").addClass("favoriteDark");
+			$("#favorite").removeClass("favorite");
+			
+			$(".alam").addClass("alamDark");
+			$("#alam").removeClass("alam");
+			
+			$(".pagetopup").addClass("pagetopupDark");
+			$("#pagetopup").removeClass("pagetopup");
+			
+			$(".setting").addClass("settingDark");
+			$("#setting").removeClass("setting");
+			
+			$("#darkmode").addClass("darkmode");
+			$("#darkmode").removeClass("lightmode");
+		}
+
 			$("#darkmode").click(function(){
 				if($(this).hasClass('darkmode'))
 					{
@@ -58,12 +86,10 @@ var a=$("#darkmodes").val();
 				});
 			
 		$("#darkmode").click(function(){
-	 			
 			var dark=$("#darkmodes").val();
 			if(dark=="1"){
 				//light 모드
-				$("#darkmodes").val("1");
-				
+				$("#darkmodes").val("0");
 				$("body").removeClass("backdark ");
 				$(".addwrite").removeClass("dark-mode ");
 				$(".board>div").removeClass("dark-mode ");
@@ -72,11 +98,8 @@ var a=$("#darkmodes").val();
 				$(".likey").attr("src","img/like/like01.png").addClass("transform");
 				$("#menubtn").attr("src","img/icon/menu_icon.png");
 				
-				
-				
 				$(".topcontent>button").removeClass("searchbtndark ");
 				$(".topcontent>button").addClass("searchbtn");
-				
 				
 				$("#showboard").removeClass("showboardDark");
 				$("#showboard").addClass("showboard");
@@ -97,7 +120,7 @@ var a=$("#darkmodes").val();
 				$("#darkmode").addClass("lightmode");
 			}else{
 				//dark 모드
-				$("#darkmodes").val("0");
+				$("#darkmodes").val("1");
 				
 				$("body").addClass("backdark transform");
 				$(".addwrite").addClass("dark-mode transform");
@@ -107,10 +130,8 @@ var a=$("#darkmodes").val();
 				$(".likey").attr("src","img/like/like01_dark.png");
 				$("#menubtn").attr("src","img/icon/menu_icon_dark.png");
 				
-				
 				$(".topcontent>button").addClass("searchbtndark searchtransform");
 				$(".topcontent>button").removeClass("searchbtn");
-				
 				
 				$(".showboard").addClass("showboardDark");
 				$("#showboard").removeClass("showboard");
@@ -129,7 +150,6 @@ var a=$("#darkmodes").val();
 				
 				$("#darkmode").addClass("darkmode");
 				$("#darkmode").removeClass("lightmode");
-			
 			}
 			$.ajax({
 				type:"post",
@@ -137,7 +157,7 @@ var a=$("#darkmodes").val();
 				dataType:"html",
 				data:{"dark":dark},
 				success:function(data){
-					alert("성공"+dark);
+				
 					}
 			});
 		});
