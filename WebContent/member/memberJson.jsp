@@ -1,3 +1,7 @@
+<%@page import="member.MemberFollowDao"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="board.BoardDTO"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.json.simple.JSONArray"%>
@@ -11,6 +15,15 @@
 	MemberDao db = new MemberDao();
 	MemberDto dto = db.getdata(id);
 	
+	BoardDAO dao = new BoardDAO();
+	BoardDTO bdto = dao.getCount(id);
+	MemberFollowDao follow = new MemberFollowDao();
+	NumberFormat nf = NumberFormat.getInstance();
+	String like = nf.format(bdto.getLikes());//좋아요수
+	String boardcnt = nf.format(Integer.parseInt(bdto.getNum()));//게시글수
+	int followCnt = follow.followerCnt(id);//팔로워 수
+	
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	JSONObject ob = new JSONObject();
@@ -22,5 +35,8 @@
 	ob.put("name", dto.getName());
 	ob.put("num", dto.getNum());
 	ob.put("pic", dto.getPic());
+	ob.put("like", like);
+	ob.put("boardcnt", boardcnt);
+	ob.put("followCnt", followCnt);
 %>
 <%=ob.toString()%>
