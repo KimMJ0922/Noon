@@ -36,7 +36,6 @@
 	List<BoardImgDTO> bilist = bidao.getImglist(minrow, maxrow, sort);
 	List<String> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort);
 	
-	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
 	
 	
