@@ -12,7 +12,11 @@ $(function(){
       });
    });
    
-   
+   $(".searchtag").keyup(function(e){
+	  if(e.keyCode==13){
+		  $(".searchbtn").click();
+	  } 
+   });
    $(".searchbtn, #searchimg").click(function(){
 	   var text = $.trim($(this).siblings(".searchtag").val());
 	   if(text.indexOf("#")==-1){

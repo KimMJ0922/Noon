@@ -12,9 +12,7 @@
 	String profilesrc = "profile/default.png";
 	String id = request.getParameter("id");
 	
-	if(dto1.getPic()!=null && dto1.getPic()!=""){
-		profilesrc = "profile/"+id+"/"+dto1.getPic();
-	}
+	
 %>
 <script type="text/javascript">
 	$(function(){
@@ -25,6 +23,9 @@
 		<%
 		MemberDao db = new MemberDao();
 		MemberDto dto = db.getdata(id);
+		if(dto.getPic()!=null && dto.getPic()!=""){
+			profilesrc = "profile/"+id+"/"+dto.getPic();
+		}
 		String Path = getServletContext().getRealPath("/profile/"+id);
 		%>
 	}
