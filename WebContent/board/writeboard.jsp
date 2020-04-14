@@ -35,7 +35,7 @@ $(function(){
 		<div>
 			<textarea id="content" name="content" placeholder="<%=id %> 님, 오늘 하루 어떤가요?" cols="50" rows="10" required="required"></textarea>
 		</div>
-<!-- 		<label for="hashtag"><h5>#입력해주세요</h5></label> -->
+		<label for="hashtag"><h5>#입력해주세요</h5></label>
 		<div id="hashtag">
 			<div>
 				<input type="text" placeholder="이곳에 #태그를 입력후 엔터나 스페이스바를 눌러주세요." id="hashtagtext" name="hashtagtext">

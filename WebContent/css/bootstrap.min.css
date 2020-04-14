@@ -1900,11 +1900,7 @@ pre code {
 	.showboard:hover{
 		background-image : url('../img/icon/showboard02.png');
 	}
-	.darkmode{
-		background-image : url('../img/icon/moon.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
+	
 	.favorite{
 		background-image : url('../img/icon/heart01.png');
 		background-repeat : no-repeat;
@@ -1976,6 +1972,16 @@ pre code {
 	.alam:hover{
 		background-image : url('../img/icon/alam02.png');
 		background-repeat : no-repeat;
+	}
+	.lightmode{
+		background-image : url('../img/icon/moon.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
+	}
+	.darkmode{
+		background-image : url('../img/icon/moon_dark.png');
+		background-repeat : no-repeat;
+		transition:0.2s;
 	}
 	.alambox {
 		position: absolute;
@@ -2094,11 +2100,7 @@ pre code {
 		transition:0.2s;
 		
 	}
-	.darkmode{
-		background-image : url('../img/icon/moon.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
+	
 	.favorite:hover{
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
@@ -2356,11 +2358,6 @@ pre code {
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
 	}
-	.darkmode{
-		background-image : url('../img/icon/moon.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
 
 	.setting{
 		background-image : url('../img/icon/settings.png');
@@ -2498,16 +2495,7 @@ pre code {
 		transition:0.2s;
 		
 	}
-	.lightmode{
-		background-image : url('../img/icon/moon.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
-	.darkmode{
-		background-image : url('../img/icon/moon_dark.png');
-		background-repeat : no-repeat;
-		transition:0.2s;
-	}
+	
 	.favorite:hover{
 		background-image : url('../img/icon/heart02.png');
 		background-repeat : no-repeat;
@@ -2765,11 +2753,16 @@ pre code {
 
 .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3,
 	.col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-	float: left
+	float: left;
+	
+
+
 }
 
 .col-xs-12 {
-	width: 100%
+	width: 100%;
+	
+
 }
 
 .col-xs-11 {

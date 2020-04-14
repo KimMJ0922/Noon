@@ -64,8 +64,8 @@ $(function(){
 		<div class="remoconcomment">맨위로</div>
 		<a><div class="setting remoconlist" idx="4" id="setting"></div></a>
 		<div class="remoconcomment" >설정</div>
-		<a><div class="darkmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
-		<div class="remoconcomment">다크/라이트</div>
+		<a><div class="lightmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
+		<div class="remoconcomment">다크모드</div>
 	</div>
 	<div class="profileModal"></div>
 </body>

@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +22,13 @@
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
 <%
-	String aa=(String)session.getAttribute("dark_check");
-	if(aa==null){
-		aa="0";
+	String dark_se="";
+	dark_se=(String)session.getAttribute("dark_check");
+	if(dark_se==null){
+		dark_se="0";
 	}
-	if(aa.equals("1")||aa==null){
-		System.out.println(" 다크모드");
+	if(dark_se.equals("1")||dark_se==null){
+		System.out.println("다크모드");
 	}else{
 		System.out.println("일반모드");
 	}
@@ -58,27 +60,57 @@ var a=$("#darkmodes").val();
 		$("#darkmode").click(function(){
 	 			
 			var dark=$("#darkmodes").val();
-			//0이 다크모드
 			if(dark=="1"){
-				$("#darkmodes").val("0");
-				
-				$("*").removeClass("dark-mode transform");
-
-				$("#showboard").removeClass("showboardDark");
-			
-				$("#favorite").removeClass("favoriteDark");
-				
-				$("#alam").removeClass("alamDark");
-				
-				$("#pagetopup").removeClass("pagetopupDark");
-				
-				$("#setting").removeClass("settingDark");
-				
-				$("#darkmode").removeClass("darkmodeDark");
-			}else{
+				//light 모드
 				$("#darkmodes").val("1");
 				
-				$("*").addClass("dark-mode transform");
+				$("body").removeClass("backdark ");
+				$(".addwrite").removeClass("dark-mode ");
+				$(".board>div").removeClass("dark-mode ");
+				$(".boarddetail>pre").removeClass("dark-mode ");
+				$(".howtotopdark").removeClass("topdark ");
+				$(".likey").attr("src","img/like/like01.png").addClass("transform");
+				$("#menubtn").attr("src","img/icon/menu_icon.png");
+				
+				
+				
+				$(".topcontent>button").removeClass("searchbtndark ");
+				$(".topcontent>button").addClass("searchbtn");
+				
+				
+				$("#showboard").removeClass("showboardDark");
+				$("#showboard").addClass("showboard");
+				
+				$("#favorite").removeClass("favoriteDark");
+				$("#favorite").addClass("favorite");
+				
+				$("#alam").removeClass("alamDark");
+				$("#alam").addClass("alam");
+				
+				$("#pagetopup").removeClass("pagetopupDark");
+				$("#pagetopup").addClass("pagetopup");
+				
+				$("#setting").removeClass("settingDark");
+				$("#setting").addClass("setting");
+				
+				$("#darkmode").removeClass("darkmode");
+				$("#darkmode").addClass("lightmode");
+			}else{
+				//dark 모드
+				$("#darkmodes").val("0");
+				
+				$("body").addClass("backdark transform");
+				$(".addwrite").addClass("dark-mode transform");
+				$(".board>div").addClass("dark-mode transform");
+				$(".boarddetail>pre").addClass("dark-mode transform");
+				$(".howtotopdark").addClass("topdark transform");
+				$(".likey").attr("src","img/like/like01_dark.png");
+				$("#menubtn").attr("src","img/icon/menu_icon_dark.png");
+				
+				
+				$(".topcontent>button").addClass("searchbtndark searchtransform");
+				$(".topcontent>button").removeClass("searchbtn");
+				
 				
 				$(".showboard").addClass("showboardDark");
 				$("#showboard").removeClass("showboard");
@@ -95,8 +127,8 @@ var a=$("#darkmodes").val();
 				$(".setting").addClass("settingDark");
 				$("#setting").removeClass("setting");
 				
-				$(".darkmode").addClass("darkmodeDark");
-				$("#darkmode").removeClass("darkmode");
+				$("#darkmode").addClass("darkmode");
+				$("#darkmode").removeClass("lightmode");
 			
 			}
 			$.ajax({
@@ -105,7 +137,8 @@ var a=$("#darkmodes").val();
 				dataType:"html",
 				data:{"dark":dark},
 				success:function(data){
-					alert("성공");}
+					alert("성공"+dark);
+					}
 			});
 		});
 });		
@@ -126,7 +159,7 @@ var a=$("#darkmodes").val();
 <%
 	String id = (String)session.getAttribute("id");
 	String loginok = (String)session.getAttribute("loginok");
-	if(loginok==null){
+	if(loginok==null||loginok==""){
 %>
 	<script>
 		alert("로그인해주세요");

@@ -14,20 +14,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-   <%
-    String dark="";
-     dark=(String)session.getAttribute("dark_check");
-   	 System.out.println("먹니"+dark);
-     
-     if(dark.equals("0")){
-        
-     }else if(dark.equals("1")){
-     %>
-       <link rel="stylesheet" href="board/board_Detail/dark_detail.css" />
-     <%   
-     }
-     %>
-  
+  <%
+  	String dark="";
+  	dark=(String)session.getAttribute("dark_check");
+  	if(dark.equals("0")){
+  		
+  	}else if(dark.equals("1")){
+  	%>
+  	  <link rel="stylesheet" href="board/board_Detail/dark_detail.css" />
+  	<%	
+  	}
+  	%>
+
+
 <meta charset="UTF-8">
 <script type="text/javascript">
 	$(function(){
@@ -593,7 +592,7 @@ function getLikeStatus(boardnum){
 							for(int i=0;i<Ilist.size();i++){
 								if(i==0){
 %>
-									<li data-target="#myCarousel" data-slide-to="<%=i %>" class="active"></li>
+									<li data-target="#myCarousel" data-slide-to="<%=i %>" class="active" ></li>
 <%
 								}else{
 %>
@@ -623,12 +622,12 @@ function getLikeStatus(boardnum){
 					</div><!-- class="carousel slide" 끝 -->
 					
 					<!-- Left and right controls -->
-					<a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background-image: none;">
+					<a class="left carousel-control" id="dark_np" href="#myCarousel" data-slide="prev" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-left"></span>
 						<span class="sr-only">Previous</span>
 					</a>
 					
-					<a class="right carousel-control" href="#myCarousel" data-slide="next" style="background-image: none;">
+					<a class="right carousel-control" id="dark_np" href="#myCarousel" data-slide="next" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-right"></span>
 						<span class="sr-only">Next</span>
 					</a>

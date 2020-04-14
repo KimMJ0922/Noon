@@ -33,7 +33,6 @@ $(function(){
    });
    
    
-   
    //삭제 버튼
    $(document).on("click",".delbtn",function(){
       var num = $(this).attr("num");
