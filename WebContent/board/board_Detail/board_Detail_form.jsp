@@ -15,10 +15,8 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <%
-<<<<<<< HEAD
-  	
-  	String dark=(String)session.getAttribute("dark_check");
-  	dark="";
+  	String dark="";
+  	dark=(String)session.getAttribute("dark_check");
   	if(dark.equals("0")){
   		
   	}else if(dark.equals("1")){
@@ -28,17 +26,7 @@
   	}
   	%>
 
-=======
-  	if(dark_check.equals("0")){
-  		
-  	}else{
-  		%>
-  		<link rel="">
-  	<%
-  	}
-  	%>
-  
->>>>>>> KSE
+
 <meta charset="UTF-8">
 <script type="text/javascript">
 	$(function(){

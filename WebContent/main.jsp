@@ -22,12 +22,13 @@
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
 <%
-	String aa=(String)session.getAttribute("dark_check");
-	if(aa==null){
-		aa="0";
+	String dark_se="";
+	dark_se=(String)session.getAttribute("dark_check");
+	if(dark_se==null){
+		dark_se="0";
 	}
-	if(aa.equals("1")||aa==null){
-		System.out.println(" 다크모드");
+	if(dark_se.equals("1")||dark_se==null){
+		System.out.println("다크모드");
 	}else{
 		System.out.println("일반모드");
 	}
@@ -61,7 +62,7 @@ var a=$("#darkmodes").val();
 			var dark=$("#darkmodes").val();
 			if(dark=="1"){
 				//light 모드
-				$("#darkmodes").val("0");
+				$("#darkmodes").val("1");
 				
 				$("body").removeClass("backdark ");
 				$(".addwrite").removeClass("dark-mode ");
@@ -96,7 +97,7 @@ var a=$("#darkmodes").val();
 				$("#darkmode").addClass("lightmode");
 			}else{
 				//dark 모드
-				$("#darkmodes").val("1");
+				$("#darkmodes").val("0");
 				
 				$("body").addClass("backdark transform");
 				$(".addwrite").addClass("dark-mode transform");
@@ -136,6 +137,7 @@ var a=$("#darkmodes").val();
 				dataType:"html",
 				data:{"dark":dark},
 				success:function(data){
+					alert("성공"+dark);
 					}
 			});
 		});
@@ -157,7 +159,7 @@ var a=$("#darkmodes").val();
 <%
 	String id = (String)session.getAttribute("id");
 	String loginok = (String)session.getAttribute("loginok");
-	if(loginok==null){
+	if(loginok==null||loginok==""){
 %>
 	<script>
 		alert("로그인해주세요");
