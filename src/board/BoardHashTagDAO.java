@@ -163,8 +163,6 @@ public class BoardHashTagDAO {
 				min = rs.getInt(1);
 				max = rs.getInt(2);
 			}
-			System.out.println(text);
-			System.out.println(min+", "+max);
 			sql = "select * from boardhashtagtb "+
 				  "where num between ? and ? order by hashtag asc";
 			pstmt = conn.prepareStatement(sql);

@@ -177,7 +177,7 @@ $(function(){
 	   minrow=0;
 	   maxrow=10;
 	   $(window).scrollTop(0);
-	   text = "#";
+
 	   $("#list").html("");
 	   boardList(minrow,maxrow,sort);
    });
@@ -188,7 +188,6 @@ $(function(){
 	   minrow=0;
 	   maxrow=10;
 	   $(window).scrollTop(0);
-	   text = "#";
 	   $("#list").html("");
 	   boardList(minrow,maxrow,sort);
    });
@@ -219,6 +218,11 @@ $(function(){
 			   "display":"none"
 		   });
 	   }
+   });
+   $(".hashtag").click(function(){
+	  var hash = $(this).text();
+	  hash = hash.replace("#","%23");
+	  location.href="main.jsp?view=board/boardlist.jsp&search="+text+"";
    });
 });//$(function) 끝
 

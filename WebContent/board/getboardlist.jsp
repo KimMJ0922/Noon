@@ -22,7 +22,9 @@
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
 	String sort = request.getParameter("sort");
-	
+	if(sort==null || sort.equals("")){
+		sort = "";
+	}
 	BoardDAO dao = new BoardDAO();
 	BoardImgDAO bidao = new BoardImgDAO();
 	BoardHashTagDAO bhtdao = new BoardHashTagDAO();
@@ -34,9 +36,7 @@
 	List<BoardImgDTO> bilist = bidao.getImglist(minrow, maxrow, sort);
 	List<String> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort);
 	
-	if(sort==null || sort.equals("")){
-		sort = "";
-	}
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
 	
 	

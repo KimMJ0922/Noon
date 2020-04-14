@@ -169,8 +169,8 @@ public class BoardLikesDAO {
 		return likeStatus;
 	}
 	
-	public List<BoardLikesDTO> getSearchLikeList(String minrow, String maxrow, String id, String text){
-		List<BoardLikesDTO> list = new Vector<BoardLikesDTO>();
+	public List<String> getSearchLikeList(String minrow, String maxrow, String id, String text){
+		List<String> list = new Vector<String>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -210,10 +210,8 @@ public class BoardLikesDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				BoardLikesDTO dto = new BoardLikesDTO();
-				dto.setNum(rs.getString("num"));
-				System.out.println(dto.getNum());
-				list.add(dto);
+				String num = rs.getString("num");
+				list.add(num);
 			}
 			
 		} catch (SQLException e) {

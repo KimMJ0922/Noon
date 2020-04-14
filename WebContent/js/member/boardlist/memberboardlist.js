@@ -25,7 +25,7 @@ $(function(){
     	  $(this).siblings(".btns").css("display","none");
       }
    });
-	
+
 	//내용 더보기 버튼
 	$(document).on("click",".conmorebtn",function(){
 		var num = $(this).attr("idx");

@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Vector;
 
 public class MoveFile {
-	public List<String> previewToUserFolder(String prviewFolderPath,String userFolderPath) {
-		sameFileNameDelete(prviewFolderPath,userFolderPath);
+	public List<String> previewToUserFolder(String prviewFolderPath,String userFolderPath,String ch) {
+		if(ch.equals("update")) {
+			sameFileNameDelete(prviewFolderPath,userFolderPath);
+		}
+		
 		//이름 중복 체크
 		fileNameChack(prviewFolderPath,userFolderPath);
 		File previewFolder = new File(prviewFolderPath);
