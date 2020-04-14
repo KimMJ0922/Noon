@@ -1,3 +1,4 @@
+<%@page import="member.MemberFollowDao"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="board.BoardDTO"%>
 <%@page import="board.BoardDAO"%>
@@ -23,6 +24,11 @@
 	String like = nf.format(bdto.getLikes());
 	String boardcnt = nf.format(Integer.parseInt(bdto.getNum()));
 	String profilesrc = "profile/default.png";
+	
+	//팔로워 수
+	MemberFollowDao follow = new MemberFollowDao();
+	int followCnt = follow.followerCnt(id);
+	
 	System.out.println(dto.getPic());
 	if(dto.getPic()!=null && dto.getPic()!=""){
 		profilesrc = "profile/"+id+"/"+dto.getPic();
@@ -66,7 +72,7 @@
 						<div class="col-md-12 col-sm-12 hidden-xs myinfolist myinfolistval">
 							<span> <%=like %> </span>
 							<span> <%=boardcnt %> </span>
-							<span> 348 </span>
+							<span> <%=followCnt %> </span>
 						</div>
 						
 					</div>

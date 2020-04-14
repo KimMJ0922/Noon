@@ -85,11 +85,11 @@ function getProfile(id){
 			str+="</div>";
 			str+="<div class='pro-right'>";
 			str+="<a href='#' class='pro-right-box'>";
-			str+="<p>523</p> <span>Posts</span></a>";
-			str+="<a href='#' class='pro-right-box'>";
-			str+="<p>1387</p> <span>Likes</span></a>";
-			str+="<a href='#' class='pro-right-box'>";
-			str+="<p>146</p> <span>Followers</span></a>";
+			str+="<p>"+data.like+"</p> <span>좋아요</span></a>";
+			str+="<a href='main.jsp?view=member/MyProfile.jsp&content=boardlist/memberboardlist.jsp&id="+data.id+"' class='pro-right-box'>";
+			str+="<p>"+data.boardcnt+"</p> <span>게시글</span></a>";
+			str+="<a href='main.jsp?view=member/MyProfile.jsp&content=follower.jsp&id="+data.id+"' class='pro-right-box'>";
+			str+="<p>"+data.followCnt+"</p> <span>팔로워</span></a>";
 			str+="</div>";
 			str+="</div>";
 			str+="</div>";

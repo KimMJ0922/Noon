@@ -122,4 +122,26 @@ public class MemberFollowDao {
 		}
 		return list;
 	}
+	
+	public int followerCnt(String toid) {
+		int cnt = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from followtb where toid=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, toid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return cnt;
+	}
 }
