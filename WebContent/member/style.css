@@ -11,7 +11,7 @@
 
 .custom-nav a{
 	list-style: none;
-  	padding: 9%;
+  	padding: 0 9%;
   	color: black;
   	display: inline;
   	transition: all .3s ease-in-out;
