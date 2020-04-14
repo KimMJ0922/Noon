@@ -8,7 +8,18 @@
 <title>회원 수정</title>
 <link rel= "stylesheet" type="text/css" href="member/style.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.10/css/all.css'>
- 
+  <%
+  	String dark="";
+  	dark=(String)session.getAttribute("dark_check");
+  	
+  	if(dark.equals("0")){
+  		
+  	}else if(dark.equals("1")){
+  	%>
+  	  <link rel="stylesheet" href="member/MyProfile_dark.css" />
+  	<%	
+  	}
+  	%>
  <script src="member/script.js"></script>
 <style>
 .topmain{

@@ -31,9 +31,7 @@
 <title>상세 페이지</title>
 
 <style>
-body{
-	color:black;
-}
+
   .carousel {
  	width:680px;
  	max-height:638px;
