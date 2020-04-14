@@ -28,9 +28,8 @@
 	MemberDto mdto = (MemberDto)session.getAttribute("dto");
 	List<BoardDTO> list = dao.getSearchBoardList(minrow,maxrow,searchtext);
 	List<BoardHashTagDTO> hashlist = bhtdao.getSearchHashTags(minrow, maxrow, searchtext);
-	System.out.println("리스트 사이즈 : "+hashlist.size());
 	List<BoardImgDTO> bilist = bidao.getSearchImglist(minrow, maxrow, searchtext);
-	List<BoardLikesDTO> bllist = bldao.getSearchLikeList(minrow, maxrow, mdto.getId(), searchtext);
+	List<String> bllist = bldao.getSearchLikeList(minrow, maxrow, mdto.getId(), searchtext);
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
 	
@@ -199,8 +198,8 @@
 				str = "<img class='likey' src='img/like/like01.png' num="+dto.getNum()+">";
 				str += "<span id='likecnt'>"+dto.getLikes()+"</span>";
 				for(int q=0;q<bllist.size();q++){
-					BoardLikesDTO bldto = bllist.get(q);
-					if(bldto.getNum().equals(dto.getNum())){
+					String num = bllist.get(q);
+					if(num.equals(dto.getNum())){
 						str = "<img class='likey' src='img/like/like02.png' num="+dto.getNum()+">";
 						str += "<span id='likecnt'>"+dto.getLikes()+"</span>";
 						break;

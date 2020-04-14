@@ -25,8 +25,9 @@
 
 	//삭제 후 저장
 	MoveFile mf = new MoveFile();
+	String ch = "update";
 	List<String> fianlNames = 
-			mf.previewToUserFolder(prviewFolderPath,userFolderPath);
+			mf.previewToUserFolder(prviewFolderPath,userFolderPath,ch);
 	
 	int uploadSize = 1024*1024*5;
 	String imgName = "";

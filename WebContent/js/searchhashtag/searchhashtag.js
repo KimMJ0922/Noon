@@ -18,7 +18,7 @@ $(function(){
    $("#writebtn").click(function(){
       location.href="main.jsp?view=board/writeboard.jsp";
    });
-   
+
  //내용 더보기 버튼
    $(document).on("click",".conmorebtn",function(){
       var num = $(this).attr("idx");
