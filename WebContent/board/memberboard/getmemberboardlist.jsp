@@ -1,3 +1,4 @@
+<%@page import="board.BoardLikesDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.Calendar"%>
@@ -174,23 +175,26 @@
 			</div><!-- boardcontent 끝 -->
 			<div class="col-md-12 col-sm-12 col-xs-12 boardlike_reply">
 <%
-				String like = bldao.getLikeStatus(bdto.getNum(), bdto.getId());
-				if(like==null||like.equals("")){
-%>
-					<img class='likey' src='img/like/like01.png' num="<%=bdto.getNum() %>"/><span><%=bdto.getLikes() %></span>
-<%
-				}else{
-%>
-					<img class='likey' src='img/like/like02.png' num="<%=bdto.getNum() %>"/><span><%=bdto.getLikes() %></span>
-<%
+				String sort="";
+				List<String> bllist = bldao.getLikeList(minrow, maxrow, id, sort);
+				String str = "<img class='likey' src='img/like/like01.png' num="+bdto.getNum()+">";
+				str += "<span id='likecnt'>"+bdto.getLikes()+"</span>";
+				for(int q=0;q<bllist.size();q++){
+					String num = bllist.get(q);
+					if(num.equals(bdto.getNum())){
+						str = "<img class='likey' src='img/like/like02.png' num="+bdto.getNum()+">";
+						str += "<span id='likecnt'>"+bdto.getLikes()+"</span>";
+						break;
+					}
 				}
 %>
+					<%=str %>
 				<span>댓글 : <%=bdto.getReply() %></span>
 			</div><!-- boardlike_reply 끝 -->
 			<div class="col-md-12 col-sm-12 col-xs-12 hashtags">
 <%
 				List<String> hashlist = bhtdao.getNumHashTag(bdto.getNum());
-				String str = "";
+				str = "";
 				for(int k=0;k<hashlist.size();k++){
 					String hashtag = hashlist.get(k);
 					if(k>=4){

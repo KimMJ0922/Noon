@@ -46,7 +46,7 @@
 			<%=id %>은(는) 없는 아이디 입니다.
 		</div>
 <%
-	}else{
+	}else if(id.equals(dto1.getId())){
 %>
 	<div class="profile">
 		<div class="row">
@@ -151,7 +151,41 @@
 	  </div>
 	</div>
 <%
-	}
+	}else{
 %>
+	<div class="profile">
+		<div class="row">
+			<div class="col-md-3" style="text-align: center; line-height: 569px;">
+				<div class="picarea" style="line-height: 450px;">
+					<img alt="#" class="pic" src="<%=profilesrc %>"	style="width: 180px; height: 180px;"> 
+				</div>
+			</div>
+			<div class="col-md-8">
+				<h1 class="font1"><%=id %>님 정보</h1>
+				<input type="hidden" name="num" id="num" value="<%=dto.getNum() %>">
+				<h2 class="font2">이름</h2>
+				<p class="custom-p view">
+					<%=dto.getName() %>
+				</p>
+
+				<h2 class="font2">아이디</h2>
+				<p class="custom-p">
+					<%=dto.getId() %>
+				</p>
+
+				<h2 class="font2">휴대전화</h2>
+				<p class="custom-p">
+					<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>
+				</p>
+
+				<h2 class="font2">이메일</h2>
+				<p class="custom-p">
+					<%=dto.getEmail1() %>@<%=dto.getEmail2() %>
+				</p>
+				
+			</div>
+		</div>
+	</div>
+<%} %>
 </body>
 </html>
