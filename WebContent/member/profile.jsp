@@ -10,7 +10,8 @@
 <%
 	MemberDto dto1 = (MemberDto)session.getAttribute("dto");
 	String profilesrc = "profile/default.png";
-	String id = dto1.getId();
+	String id = request.getParameter("id");
+	
 	if(dto1.getPic()!=null && dto1.getPic()!=""){
 		profilesrc = "profile/"+id+"/"+dto1.getPic();
 	}
@@ -23,7 +24,7 @@
 	function getData(){
 		<%
 		MemberDao db = new MemberDao();
-		MemberDto dto = db.getdata(dto1.getId());
+		MemberDto dto = db.getdata(id);
 		String Path = getServletContext().getRealPath("/profile/"+id);
 		%>
 	}
@@ -38,6 +39,15 @@
 	}
 </script>
 <body>
+<%
+	if(dto.getId()==null){
+%>
+		<div style="text-align:center; line-height:500px; font-size:30pt">
+			<%=id %>은(는) 없는 아이디 입니다.
+		</div>
+<%
+	}else{
+%>
 	<div class="profile">
 		<div class="row">
 			<div class="col-md-3" style="text-align: center; line-height: 569px;">
@@ -140,5 +150,8 @@
 		</form>
 	  </div>
 	</div>
+<%
+	}
+%>
 </body>
 </html>

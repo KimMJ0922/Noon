@@ -48,6 +48,7 @@ public class ReplyDTO {
 	public Timestamp getWriteday() {
 		return writeday;
 	}
+
 	public void setBoardnum(String boardnum) {
 		this.boardnum = boardnum;
 	}

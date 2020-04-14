@@ -8,7 +8,7 @@
 
 <link rel= "stylesheet" type="text/css" href="css/board/boardlist.css">
 <script type="text/javascript" src="js/board/onhashchange.js"></script>
-<script type="text/javascript" src="js/board/boardlist.js"></script>
+
 
 <script type="text/javascript" src="js/UserProfile.js"></script>
 <link rel="stylesheet" href="css/member/profile.css">
@@ -24,6 +24,7 @@ $(function(){
 </head>
 <body>
 <%
+	request.setCharacterEncoding("utf-8");
 	String[] comment = {"오늘 하루는 어땠나요?",
 						"오늘 기분 어떠신가요?",
 						"자랑 할 일이 있나요?",
@@ -31,7 +32,7 @@ $(function(){
 					   };
 	double ran = Math.random()*4;
 	int ranf = (int)ran;
-	System.out.println(ranf);
+	String search = request.getParameter("search");
 %>
 	<div style="margin: 1px auto; width: 500px;">
 		<textarea class="addwrite" id="writebtn" placeholder="<%=comment[ranf]%>"></textarea>
@@ -40,15 +41,27 @@ $(function(){
 	<div id="history">
 	
 	</div>
+
+<%
+	if(search==null||search.equals("")){
+%>
+	<script type="text/javascript" src="js/board/boardlist.js"></script>
 	<div id="list">
 	
 	</div>
+<%
+	}else{
+%>
+	<jsp:include page="../searchhashtag/searchhashtag.jsp"></jsp:include>
+<%
+	}
+%>
 	<div class="remocon">
-		<a><div class="showboard remoconlist" idx="0"></div></a>
+		<a><div class="showboard remoconlist" idx="0" id="showboard"></div></a>
 		<div class="remoconcomment">최신순</div>
-		<a><div class="favorite remoconlist" idx="1"></div></a>
+		<a><div class="favorite remoconlist" idx="1" id="favorite"></div></a>
 		<div class="remoconcomment" >좋아요순</div>
-		<a><div class="alam remoconlist" idx="2"></div></a>
+		<a><div class="alam remoconlist" idx="2" id="alam"></div></a>
 		<div class="remoconcomment">알림</div>
 		<div class="alambox">
 			<div  class="alamul">
@@ -60,10 +73,12 @@ $(function(){
 				<!--이부분 반복 끝 -->
 			</div>
 		</div>
-		<a href="#"><div class="pagetopup remoconlist" idx="3"></div></a>
+		<a href="#"><div class="pagetopup remoconlist" idx="3" id="pagetopup"></div></a>
 		<div class="remoconcomment">맨위로</div>
-		<a><div class="setting remoconlist" idx="4"></div></a>
+		<a><div class="setting remoconlist" idx="4" id="setting"></div></a>
 		<div class="remoconcomment" >설정</div>
+		<a><div class="lightmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
+		<div class="remoconcomment">다크모드</div>
 	</div>
 	<div class="profileModal"></div>
 </body>
