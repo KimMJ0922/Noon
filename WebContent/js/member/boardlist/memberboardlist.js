@@ -93,7 +93,7 @@ $(function(){
          },
          context: this,
          success:function(html){
-        	 memberBoardList(minrow, maxrow);
+        	 $(this).siblings("#likecnt").html(html);
          }
       });
       

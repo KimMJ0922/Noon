@@ -61,8 +61,8 @@ public class BoardLikesDAO {
 	
 	
 	//리스트에 보여질 것
-	public List<BoardLikesDTO> getLikeList(String minrow, String maxrow, String id, String sort){
-		List<BoardLikesDTO> list = new Vector<BoardLikesDTO>();
+	public List<String> getLikeList(String minrow, String maxrow, String id, String sort){
+		List<String> list = new Vector<String>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -96,7 +96,7 @@ public class BoardLikesDAO {
 				max = rs.getInt(2);
 			}
 			sql = "select num from boardlike "+
-				  "where (num between ? and ?) and id like ?";
+				  "where (num between ? and ?) and id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, min);
 			pstmt.setInt(2, max);
@@ -104,10 +104,8 @@ public class BoardLikesDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				BoardLikesDTO dto = new BoardLikesDTO();
-				dto.setNum(rs.getString("num"));
-				System.out.println(dto.getNum());
-				list.add(dto);
+				String num = rs.getString("num");
+				list.add(num);
 			}
 			
 		} catch (SQLException e) {

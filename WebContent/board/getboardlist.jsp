@@ -32,7 +32,7 @@
 	List<BoardDTO> list = dao.getBoardList(minrow,maxrow,sort);
 	List<BoardHashTagDTO> hashlist = bhtdao.getHashTags(minrow, maxrow, sort);
 	List<BoardImgDTO> bilist = bidao.getImglist(minrow, maxrow, sort);
-	List<BoardLikesDTO> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort);
+	List<String> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort);
 	
 	if(sort==null || sort.equals("")){
 		sort = "";
@@ -212,8 +212,8 @@
 				str = "<img class='likey' src='img/like/like01.png' num="+dto.getNum()+">";
 				str += "<span id='likecnt'>"+dto.getLikes()+"</span>";
 				for(int q=0;q<bllist.size();q++){
-					BoardLikesDTO bldto = bllist.get(q);
-					if(bldto.getNum().equals(dto.getNum())){
+					String num = bllist.get(q);
+					if(num.equals(dto.getNum())){
 						str = "<img class='likey' src='img/like/like02.png' num="+dto.getNum()+">";
 						str += "<span id='likecnt'>"+dto.getLikes()+"</span>";
 						break;
