@@ -21,6 +21,7 @@
 <!-- css폴더 안에 있는 파일 목록 -->
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
+
 <%
 	String dark_se="";
 	dark_se=(String)session.getAttribute("dark_check");

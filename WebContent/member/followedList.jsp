@@ -22,8 +22,8 @@
 		<div>
 			<div class="col-md-12 col-sm-4 col-xs-6 propic">
 				<img src="<%=imgsrc%>" alt="프로필사진" style="margin: 10px;width: 100px;height: 100px; border-radius: 50px;">
-				<a class="showProfile" style="cursor: pointer; line-height: 100px; margin-left: 5px; font-size: 20pt;"><%=dto.getName() %>(<%=dto.getId() %>)</a>
-				<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn following' style='cursor: pointer; float: right;margin-top: 43px;' id="unfollow">언팔로우</a>
+				<a class="showProfile" style="cursor: pointer; line-height: 100px; margin-left: 5px; font-size: 14pt;"><%=dto.getName() %>(<%=dto.getId() %>)</a>
+				<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn following' style='cursor: pointer; float: right;margin-top: 38px;'>언팔로우</a>
 			</div>
 		</div>
 	<%}
