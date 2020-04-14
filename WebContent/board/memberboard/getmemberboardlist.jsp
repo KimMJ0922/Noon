@@ -31,8 +31,6 @@
 	
 	List<BoardDTO> blist = bdao.getMemberBoardList(minrow,maxrow,id);
 	
-	//
-	System.out.println("blist 크기 : "+blist.size());
 	for(int i=0; i<blist.size();i++){
 		BoardDTO bdto = blist.get(i);
 %>

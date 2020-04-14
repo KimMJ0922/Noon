@@ -62,7 +62,7 @@ var a=$("#darkmodes").val();
 			var dark=$("#darkmodes").val();
 			if(dark=="1"){
 				//light 모드
-				$("#darkmodes").val("1");
+				$("#darkmodes").val("0");
 				
 				$("body").removeClass("backdark ");
 				$(".addwrite").removeClass("dark-mode ");
@@ -97,7 +97,7 @@ var a=$("#darkmodes").val();
 				$("#darkmode").addClass("lightmode");
 			}else{
 				//dark 모드
-				$("#darkmodes").val("0");
+				$("#darkmodes").val("1");
 				
 				$("body").addClass("backdark transform");
 				$(".addwrite").addClass("dark-mode transform");
@@ -138,7 +138,7 @@ var a=$("#darkmodes").val();
 				data:{"dark":dark},
 				success:function(data){
 					alert("성공"+dark);
-					}
+				}
 			});
 		});
 });		
@@ -170,7 +170,6 @@ var a=$("#darkmodes").val();
 	String view = request.getParameter("view");
 	if(view==null)
 		view="board/boardlist.jsp";
-	System.out.println(view);
 %>
 <body>
 
