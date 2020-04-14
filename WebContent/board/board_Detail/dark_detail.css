@@ -1,8 +1,8 @@
 .p_reply_writer{
-   color:black;
+   color:beige;
 }
 .p_reply{
-   color:black;
+   color:beige;
 }
 #dark_np{
    background:none;
@@ -13,7 +13,28 @@
    
 }
 body{
-	background: black;
-	color:white;
+	background: #232323;
+	color:beige;
 	
+}
+
+.topmain{
+	background:#393939;
+	
+}
+#re_send{
+	background:#676767;
+	
+}
+.p_reply_writer{
+ color:black;
+}
+.p_reply{
+color:black;
+}
+.likycnt{
+	color:skyblue;
+}
+pre{
+color:beige;		
 }

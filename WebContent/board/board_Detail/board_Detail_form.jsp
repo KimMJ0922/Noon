@@ -17,6 +17,7 @@
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
+  	
   	if(dark.equals("0")){
   		
   	}else if(dark.equals("1")){
@@ -25,18 +26,14 @@
   	<%	
   	}
   	%>
-
-
 <meta charset="UTF-8">
-<script type="text/javascript">
-	$(function(){
-		var c= $("#darkmodes").val();
-		alert(c);
-	});
-</script>
+
 <title>상세 페이지</title>
 
 <style>
+body{
+	color:black;
+}
   .carousel {
  	width:680px;
  	max-height:638px;
@@ -644,8 +641,7 @@ function getLikeStatus(boardnum){
 					</div>
 					
 					<pre style="border:none; background: none;white-space: pre-wrap;
-  						 word-break: break-all;word-wrap:break-word;">
-  						 <%=dto.getContent() %></pre>
+  					word-break: break-all;word-wrap:break-word;text-align: left;"><%=dto.getContent() %></pre>
 					
 					</div>
 <%
@@ -657,6 +653,11 @@ function getLikeStatus(boardnum){
 					<div class="img_on">
 					<img src="<%=profileimg %>" style="float:left">
 					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
+					<%if(dto.getNickname().equals(id)){ %>
+					<b style="color:blue;float:right"><a href="#">글수정</a> / <a a href="#">글삭제</a></b>
+					<%}else{%>
+					
+					<%} %>
 					</div>
 					<hr>
 					<div id="reply_content">
