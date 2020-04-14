@@ -220,49 +220,6 @@ $(function(){
 		   });
 	   }
    });
-   $(document).on("click",".hashtag, .searchbtn",function(){
-	   var cl = $(this).attr("class");
-	   if(cl=="hashtag"){
-		   text = "#";
-		   text = $.trim($(this).text());
-	   }else if(cl == "searchbtn"){
-		   text = "#";
-		   text = $.trim($(".searchtag").val());
-	   }
-	   
-	   if(text.length==0){
-		   alert("검색할 내용을 입력해주세요");
-	   }else{
-		   //해시태그 검색
-		   if(text.indexOf("#")!=-1){
-			   text = text.substring(1,text.length);
-			   $.ajax({
-				      type: "post", 
-				      url: "board/getboardlist.jsp",
-				      data:{
-				         "minrow":0,
-				         "maxrow":10,
-				         "sort":sort,
-				         "text":text
-				      },
-				      dataType: "json",
-				      async: false,
-				      success:function(data){
-				    	  
-				    	  $(window).scrollTop(0);
-				    	  $("#list").html("");
-				    	  var img = getImgList(minrow,maxrow,sort,text);
-				    	  var hashtag = getHashTag(minrow,maxrow,sort,text);
-				    	  var likes = getLikeList(minrow,maxrow,sort,text);
-				    	  boardList(minrow,maxrow,img,hashtag,likes,sort,text);
-				      }
-				   });
-			   
-		   }else{
-			   
-		   }
-	   }
-   });
 });//$(function) 끝
 
 

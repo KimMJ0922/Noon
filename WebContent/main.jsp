@@ -190,7 +190,6 @@ var darkmodes=$("#darkmodes").val();
 	String view = request.getParameter("view");
 	if(view==null)
 		view="board/boardlist.jsp";
-	System.out.println(view);
 %>
 <body>
 

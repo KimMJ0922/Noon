@@ -81,17 +81,7 @@ function readURL(input) {
 //회원이 작성한 글
 function memberBoardList(minrow, maxrow){
 	var text = $.trim($(".searchtag").val());
-	var loginid = $.trim($("#loginid").text());
-	
-	if(text.indexOf("#")==-1 && text.length==0){
-		$("#getId").val(loginid);
-	}else if(text.indexOf("#")==-1 && text.length>0){
-		$("#getId").val(text);
-	}else{
-		$("#getId").val(loginid);
-	}
-	
-	id = $("#getId").val();
+	var id = $("#getId").val();
 	$.ajax({
         type: "post", 
         url: "board/memberboard/getmemberboardlist.jsp", 

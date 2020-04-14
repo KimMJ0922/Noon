@@ -8,7 +8,7 @@
 
 <link rel= "stylesheet" type="text/css" href="css/board/boardlist.css">
 <script type="text/javascript" src="js/board/onhashchange.js"></script>
-<script type="text/javascript" src="js/board/boardlist.js"></script>
+
 
 <script type="text/javascript" src="js/UserProfile.js"></script>
 <link rel="stylesheet" href="css/member/profile.css">
@@ -24,6 +24,7 @@ $(function(){
 </head>
 <body>
 <%
+	request.setCharacterEncoding("utf-8");
 	String[] comment = {"오늘 하루는 어땠나요?",
 						"오늘 기분 어떠신가요?",
 						"자랑 할 일이 있나요?",
@@ -31,7 +32,7 @@ $(function(){
 					   };
 	double ran = Math.random()*4;
 	int ranf = (int)ran;
-	System.out.println(ranf);
+	String search = request.getParameter("search");
 %>
 	<div style="margin: 1px auto; width: 500px;">
 		<textarea class="addwrite" id="writebtn" placeholder="<%=comment[ranf]%>"></textarea>
@@ -40,9 +41,21 @@ $(function(){
 	<div id="history">
 	
 	</div>
+
+<%
+	if(search==null||search.equals("")){
+%>
+	<script type="text/javascript" src="js/board/boardlist.js"></script>
 	<div id="list">
 	
 	</div>
+<%
+	}else{
+%>
+	<jsp:include page="../searchhashtag/searchhashtag.jsp"></jsp:include>
+<%
+	}
+%>
 	<div class="remocon">
 		<a><div class="showboard remoconlist" idx="0" id="showboard"></div></a>
 		<div class="remoconcomment">최신순</div>

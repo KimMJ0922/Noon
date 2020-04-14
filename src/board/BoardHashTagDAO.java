@@ -134,4 +134,60 @@ public class BoardHashTagDAO {
 		}
 	}
 	
+	
+	public List<BoardHashTagDTO> getSearchHashTags(String minrow, String maxrow,String text) {
+		List<BoardHashTagDTO> list = new Vector<BoardHashTagDTO>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql  = "select min(num), max(num) from( " + 
+				"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
+				"from ( select b.*, bh.hashtag " + 
+				"	   from boardtb b, BOARDHASHTAGTB bh " + 
+				"	   where bh.hashtag = ? and bh.num = b.num " + 
+				"	   order by writeday desc " + 
+				"	  ) a " + 
+				") where rnum > ? and rnum <= ?";
+
+		int max = 0;
+		int min = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, text);
+			pstmt.setString(2, minrow);
+			pstmt.setString(3, maxrow);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				min = rs.getInt(1);
+				max = rs.getInt(2);
+			}
+			System.out.println(text);
+			System.out.println(min+", "+max);
+			sql = "select * from boardhashtagtb "+
+				  "where num between ? and ? order by hashtag asc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, min);
+			pstmt.setInt(2, max);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardHashTagDTO dto = new BoardHashTagDTO();
+				dto.setNum(rs.getString("num"));
+				dto.setHashtag(rs.getString("hashtag"));
+				
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("오류 : "+e.getMessage());
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
+	
 }

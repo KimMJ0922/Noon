@@ -170,4 +170,61 @@ public class BoardLikesDAO {
 		}
 		return likeStatus;
 	}
+	
+	public List<BoardLikesDTO> getSearchLikeList(String minrow, String maxrow, String id, String text){
+		List<BoardLikesDTO> list = new Vector<BoardLikesDTO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		
+		sql = "select min(num), max(num) from( " + 
+				"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
+				"from ( select b.*, bh.hashtag " + 
+				"	   from boardtb b, BOARDHASHTAGTB bh " + 
+				"	   where bh.hashtag = ? and bh.num = b.num " + 
+				"	   order by writeday desc " + 
+				"	  ) a " + 
+				") where rnum > ? and rnum <= ?";
+		
+		ResultSet rs = null;
+		conn = db.getConnection();
+		int max = 0;
+		int min = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, text);
+			pstmt.setString(2, minrow);
+			pstmt.setString(3, maxrow);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				min = rs.getInt(1);
+				max = rs.getInt(2);
+			}
+			sql = "select num from boardlike "+
+				  "where (num between ? and ?) and id like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, min);
+			pstmt.setInt(2, max);
+			pstmt.setString(3, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardLikesDTO dto = new BoardLikesDTO();
+				dto.setNum(rs.getString("num"));
+				System.out.println(dto.getNum());
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("오류 : "+e.getMessage());
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
 }
