@@ -52,23 +52,41 @@ public class BoardImgDAO {
 	}
 	
 	//리스트에 보여질 것
-	public List<BoardImgDTO> getImglist(String minrow, String maxrow,String sort){
+	public List<BoardImgDTO> getImglist(String minrow, String maxrow,String sort,String search,String id){
 		List<BoardImgDTO> list = new Vector<BoardImgDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		if(sort.equals("like")) {
 			sql = "select min(num),max(num) from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by likes desc, writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select * from boardtb order by likes desc, writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
 			
-		}else {
+		}else if(!search.equals("")){
+			sql = "select min(num),max(num) " + 
+					"from( " + 
+					"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
+					"from ( " + 
+					"select b.*,bh.hashtag " + 
+					"from boardtb b, BOARDHASHTAGTB bh " + 
+					"where b.num = bh.num and bh.hashtag = ? " + 
+					"order by writeday desc " + 
+					") a " + 
+					") where rnum > ? and rnum <= ?";
+		}else if(!id.equals("")) {
 			sql = "select min(num),max(num) from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";
-		} 
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select b.* from boardtb b, membertb m "+
+					  "where b.id = m.id and b.id = ?"+
+					  "order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
+		}else{
+			sql = "select min(num),max(num) from("+
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select * from boardtb order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
+		}
 		
 		
 		ResultSet rs = null;
@@ -77,8 +95,18 @@ public class BoardImgDAO {
 		int min = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			if(!search.equals("")) {
+				pstmt.setString(1, search);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else if(!id.equals("")){
+				pstmt.setString(1, id);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else {
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}
 				
 			rs = pstmt.executeQuery();
 			

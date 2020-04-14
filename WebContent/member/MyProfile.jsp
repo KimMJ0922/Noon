@@ -33,7 +33,6 @@
 <body>
 <%
 	String content = request.getParameter("content");
-	System.out.println(content);
 	if(content==null||content.equals("")){
 		content = "main.jsp?view=member/Myprofile.jsp&content=profile.jsp";
 	}
@@ -48,7 +47,7 @@
 		<a href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp&id=<%=id%>">
 			<i class="fa fa-user"> 계정설정</i>
 		</a>
-		<a href="main.jsp?view=member/MyProfile.jsp&content=boardlist/memberboardlist.jsp&id=<%=id%>">
+		<a href="main.jsp?view=member/MyProfile.jsp&content=../board/boardlist.jsp&id=<%=id%>">
 			<i class="fa fa-credit-card"> 게시물</i>
 		</a> 
 		<a href="main.jsp?view=member/MyProfile.jsp&content=follower.jsp&id=<%=id%>">

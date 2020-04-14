@@ -56,7 +56,7 @@ public class BoardHashTagDAO {
 		return list;
 	}
 	
-	public List<BoardHashTagDTO> getHashTags(String minrow, String maxrow,String sort) {
+	public List<BoardHashTagDTO> getHashTags(String minrow, String maxrow,String sort,String search,String id) {
 		List<BoardHashTagDTO> list = new Vector<BoardHashTagDTO>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -68,20 +68,47 @@ public class BoardHashTagDAO {
 					  "from ( select * from boardtb order by likes desc, writeday desc) a"+
 					  ") where rnum > ? and rnum <= ?";	
 			
-		}else {
+		}else if(!search.equals("")){
+			sql = "select min(num),max(num) " + 
+					"from( " + 
+					"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
+					"from ( " + 
+					"select b.*,bh.hashtag " + 
+					"from boardtb b, BOARDHASHTAGTB bh " + 
+					"where b.num = bh.num and bh.hashtag = ? " + 
+					"order by writeday desc " + 
+					") a " + 
+					") where rnum > ? and rnum <= ?";
+		}else if(!id.equals("")) {
+			sql = "select min(num),max(num) from("+
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select b.* from boardtb b, membertb m "+
+					  "where b.id = m.id and b.id = ?"+
+					  "order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
+		}else{
 			sql = "select min(num),max(num) from("+
 					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
 					  "from ( select * from boardtb order by writeday desc) a"+
 					  ") where rnum > ? and rnum <= ?";	
 		}
-
 		int max = 0;
 		int min = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
 		
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			if(!search.equals("")) {
+				pstmt.setString(1, search);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else if(!id.equals("")){
+				pstmt.setString(1, id);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else {
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}
 			
 			rs = pstmt.executeQuery();
 			
@@ -107,7 +134,7 @@ public class BoardHashTagDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("오류 : "+e.getMessage());
+			System.out.println("getHashTags 메소드 오류 : "+e.getMessage());
 		}finally {
 			db.dbClose(rs, pstmt, conn);
 		}

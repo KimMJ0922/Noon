@@ -1,9 +1,5 @@
-<%@page import="board.BoardLikesDTO"%>
-<%@page import="board.BoardHashTagDTO"%>
-<%@page import="board.BoardHashTagDAO"%>
-<%@page import="board.BoardLikesDAO"%>
-<%@page import="board.BoardImgDTO"%>
-<%@page import="board.BoardImgDAO"%>
+<%@page import="format.DateFormat"%>
+<%@page import="board.*"%>
 <%@page import="member.MemberDto"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Timestamp"%>
@@ -13,245 +9,226 @@
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.util.List"%>
-<%@page import="board.BoardDAO"%>
-<%@page import="board.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
 	String sort = request.getParameter("sort");
-	if(sort==null || sort.equals("")){
-		sort = "";
+	String search = request.getParameter("search");
+	String id = request.getParameter("id");
+	if(search==null){
+		search="";
 	}
+	
+	if(id==null){
+		id = "";
+	}
+	
+	if(!search.equals("")){
+		search = search.substring(1,search.length());
+		sort="";
+	}else if(!id.equals("")){
+		sort="";
+	}
+	//자바 생성자
+	DateFormat df = new DateFormat();
 	BoardDAO dao = new BoardDAO();
 	BoardImgDAO bidao = new BoardImgDAO();
 	BoardHashTagDAO bhtdao = new BoardHashTagDAO();
 	BoardLikesDAO bldao = new BoardLikesDAO();
 	
-	MemberDto mdto = (MemberDto)session.getAttribute("dto");
-	List<BoardDTO> list = dao.getBoardList(minrow,maxrow,sort);
-	List<BoardHashTagDTO> hashlist = bhtdao.getHashTags(minrow, maxrow, sort);
-	List<BoardImgDTO> bilist = bidao.getImglist(minrow, maxrow, sort);
-	List<String> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort);
+	//현재 로그인 된 세션의 아이디
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",Locale.KOREA);
-	
-	
+	//각 게시글 요소
+	List<BoardDTO> list = dao.getBoardList(minrow,maxrow,sort,search,id);
+	List<BoardHashTagDTO> hashlist = bhtdao.getHashTags(minrow, maxrow, sort,search,id);
+	List<BoardImgDTO> bilist = bidao.getImglist(minrow, maxrow, sort,search,id);
+	List<String> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort,search,id);
 %>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
-<div class="profileModal"></div>
+	<div class="profileModal"></div> 
 <%
-	for(int i=0;i<list.size();i++){
-		BoardDTO dto = list.get(i);
+	for(BoardDTO bdto : list){
+		//작성일 포맷
+		String writeday = df.dateFormat(bdto.getWriteday());
+		
+		//프로필 이미지
+		String profileImg = "profile/default.png";
+		if(bdto.getProfilepic()!=null&&!bdto.getProfilepic().equals("")){
+			profileImg = "profile/"+bdto.getId()+"/"+bdto.getProfilepic();
+		}
 %>
-		<div id="<%=dto.getNum() %>" class="container bordercontainer">
+		<div id="<%=bdto.getNum() %>" class="container bordercontainer">
 			<div class="row board">
-				<div <%if(dto.getId().equals(mdto.getId())){%>
-						class="col-md-6 col-sm-6 col-xs-6 boardwriter"
-					<%}else{%>
-						class="col-md-8 col-sm-8 col-xs-8 boardwriter"
-					<%} %>
-				>
+				<!-- 프로필, 아이디, 작성일, 메뉴 -->
 <%
-				if(dto.getProfilepic()==null||dto.getProfilepic().equals("")){
-%>
-					<img src="profile/default.png" alt="프로필사진" class="boardprofile">
-<%
-				
-				}else{
-%>
-					<img src="profile/<%=dto.getId() %>/<%=dto.getProfilepic() %>" alt="프로필사진" class="boardprofile">
-<%
+				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter";
+				if(bdto.getId().equals(mdto.getId())){
+					classText = "col-md-6 col-sm-6 col-xs-6 boardwriter";
 				}
 %>
-					<a class="showProfile" style="cursor: pointer;"><%=dto.getId() %></a>
-				</div><!-- boardwriter끝 -->
+				<div class="<%=classText%>">
+					<img src="<%=profileImg %>" class="boardprofile">
+					<a class="showProfile" style="cursor: pointer;"><%=bdto.getId() %></a>
+				</div><!-- boardwriter 아이디, 프로필 끝-->
 				
 				<div class="col-md-4 col-sm-4 col-xs-4 boardwriter">
-					<span class="boardwriteday" style="float:right; margin:0 10px 0 0;">
+					<span class="boardwriteday">
+						<%=writeday %>
+					</span><!-- boardwriteday 끝 -->
+				</div><!-- boardwriter 작성일 끝 -->
 <%
-					Calendar c = Calendar.getInstance();
-					long now = c.getTimeInMillis();
-					
-					String day = sdf.format(dto.getWriteday());
-					
-					long dateM = dto.getWriteday().getTime();
-					long gap = now - dateM;
-
-			        String ret = "";
-			        gap = (long)(gap/1000);
-			        long hour = gap/3600;
-			        gap = gap%3600;
-			        long min = gap/60;
-			        long sec = gap%60;
-
-			        if(hour > 24){
-			            ret = day;
-			        }
-			        else if(hour > 0){
-			            ret = hour+"시간 전";
-			        }
-			        else if(min > 0){
-			            ret = min+"분 전";
-			        }
-			        else if(sec >= 0){
-			            ret = sec+"초 전";
-			        }
-			        else{
-			            ret = day;
-			        }
+				if(classText.indexOf("6")!=-1){
 %>
-						<%=ret %>
-					</span>
-				</div><!-- boardwriter 시간 끝 -->
-<%
-				if(dto.getId().equals(mdto.getId())){
-%>
-				<div class="col-md-2 col-sm-2 col-xs-2 menu" style="text-align:center;">
-					<button type="button" class="menubtn" style="border:none; background:none;">
-						<img src="img/icon/menu_icon.png" id="menubtn" style="width:25px; height:25px;">
+				<div class="col-md-2 col-sm-2 col-xs-2 menu" >
+					<button type="button" class="menubtn">
+						<img src="img/icon/menu_icon.png" id="menubtn">
 					</button>
 
 					<div class="btns">
 						<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
 							<button type="submit" class="updatebtn myboardbtn">수정</button>
-							<input type="hidden" name="num" value="<%=dto.getNum()%>">
+							<input type="hidden" name="num" value="<%=bdto.getNum()%>">
 						</form>
-						<button type="button" class="delbtn myboardbtn" num="<%=dto.getNum()%>">삭제</button>
+						<button type="button" class="delbtn myboardbtn" num="<%=bdto.getNum()%>">삭제</button>
 					</div><!-- btns 끝 -->
 				</div><!-- menu 끝 -->
 <%
 				}
-				int cnt = 0; 
-				for(int x=0;x<bilist.size();x++){
-					BoardImgDTO bidto = bilist.get(x);
-					if(bidto.getNum().equals(dto.getNum())){
+
+				int cnt = 0;
+				classText = "col-md-12 col-sm-12 col-xs-12 imglist";
+				for(int i=0;i<bilist.size();i++){
+					BoardImgDTO bidto = bilist.get(i);
+					if(bdto.getNum().equals(bidto.getNum())){
 						cnt++;
 					}
 				}
-				if(cnt==0){
-%>
-				<div class='col-md-12 col-sm-12 col-xs-12 noimglist'>
-<%
-				}else{
-%>
-				<div class='col-md-12 col-sm-12 col-xs-12 imglist'>
-<%
-				}
-%>
 				
-					<div class="imgs">
-						<span class="boarddetail go" num="<%=dto.getNum()%>">
-<%
-						cnt = 0;
-						int imgcnt = 0;
-						String str = "";
-						for(int j=0;j<bilist.size();j++){
-							BoardImgDTO bidto = bilist.get(j);
-							if(dto.getNum().equals(bidto.getNum())){							
-								if(j>=3){
-									cnt++;
-								}else{
-									str += "<img src='save/"+bidto.getImgfile()+"' id=boardimg class>";
-								}
-								imgcnt++;
-							}
-						}
-						
-						if(imgcnt==1){
-							str.replace("class", "class='imgone'");
-						}else if(imgcnt==2){
-							str.replace("class", "class='imgtwo'");
-						}else{
-							str.replace("class", "");
-						}
-%>
-						<%=str %>
-<%
-						if(cnt>=1){
-%>
-							<div class="moreimg">+<%=cnt %></div>
-<%
-						}
-%>
-						</span><!-- boarddetail 끝 -->
-					</div><!-- imgs 끝 -->
-				</div><!-- imglist -->
-					
-				<div class="col-md-12 col-sm-12 col-xs-12 boardcontent">
-<%
-					//본문의 길이가 10 초과
-					if(dto.getContent().trim().length()>10){
-						String con = dto.getContent().trim().substring(0,10)+"...";
-						if(dto.getContent().substring(0,1).equals("")){
-%>
-							<span class="conpre">...<button class="conmorebtn" idx="<%=dto.getNum()%>">더보기</button></span>
-<%
-						}else{
-%>
-							<span class="conpre"><%=con %><button class="conmorebtn" idx="<%=dto.getNum()%>">더보기</button></span>
-<%
-						}
-					}else{
-%>
-							<span class="boarddetail move" num="<%=dto.getNum()%>">
-								<pre class="content"><%=dto.getContent() %></pre>
-							</span>
-<%
-					}
-%>
-				</div><!-- boardcontent 끝 -->
-			<div class="col-md-12 col-sm-12 col-xs-12 boardlike_reply">
-<%
-				str = "<img class='likey' src='img/like/like01.png' num="+dto.getNum()+">";
-				str += "<span id='likecnt'>"+dto.getLikes()+"</span>";
-				for(int q=0;q<bllist.size();q++){
-					String num = bllist.get(q);
-					if(num.equals(dto.getNum())){
-						str = "<img class='likey' src='img/like/like02.png' num="+dto.getNum()+">";
-						str += "<span id='likecnt'>"+dto.getLikes()+"</span>";
-						break;
-					}
+				String imgClass = "";
+				if(cnt==0){
+					classText = "col-md-12 col-sm-12 col-xs-12 noimglist";
+				}
+				
+				if(cnt==1){
+					imgClass = "imgone";
+				}else if(cnt==2){
+					imgClass = "imgtwo";
 				}
 %>
-					<%=str %>
-					<span>댓글 : <%=dto.getReply() %></span>
+				<div class="<%=classText%>">
+					<div class="imgs">
+						<span class="boarddetail go" num="<%=bdto.getNum()%>">
+<%
+							cnt = 0;
+							int ch = 0;
+							for(int j=0;j<bilist.size();j++){
+								BoardImgDTO bidto = bilist.get(j);
+								if(bdto.getNum().equals(bidto.getNum())){
+									ch++;
+									if(ch>=4){
+										cnt++;
+									}else{
+%>
+										<img src="save/<%=bidto.getImgfile() %>" id="boardimg" class="<%=imgClass%>">
+
+<%
+									}													
+								}
+							}
+							if(cnt>0){
+%>
+								<div class="moreimg">+<%=cnt %></div>
+<%
+							}
+%>
+						</span><!-- go 끝 -->
+					</div><!-- imgs 끝 -->
+				</div><!-- imglist 끝 -->
+				<div class="col-md-12 col-sm-12 col-xs-12 boardcontent">
+					<span class="conpre">
+<%
+					String nullch = bdto.getContent().substring(0,1);
+					if(nullch==null||nullch.equals("")){
+%>
+							...
+							<button class="conmorebtn" idx="<%=bdto.getNum()%>">
+								더보기
+							</button>
+<%
+					}else{
+						String content = bdto.getContent().trim();
+						if(content.length()>=20){
+							content = content.substring(0,20);
+%>
+							<%=content %>...
+							<button class="conmorebtn" idx="<%=bdto.getNum()%>">
+								더보기
+							</button>
+<%
+						}else{
+							String href = "main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+bdto.getNum();
+%>
+							<pre>
+								<a href="<%=href%>">
+									<%=content %>
+								</a>
+							</pre>
+<%
+						}
+					}
+%>
+					</span><!-- conpre 끝 -->
+				</div><!-- boardcontent 끝 -->
+				<div class="col-md-12 col-sm-12 col-xs-12 boardlike_reply">
+<%
+					String defaultLikeIcon = "img/like/like01.png";
+					for(int k=0;k<bllist.size();k++){
+						String num = bllist.get(k);
+						if(num.equals(bdto.getNum())){
+							defaultLikeIcon = "img/like/like02.png";
+							break;
+						}
+					}
+%>
+					<img class="likey" src="<%=defaultLikeIcon%>" num="<%=bdto.getNum()%>">
+					<span id="likecnt"><%=bdto.getLikes() %></span>
+					<span>댓글 : <%=bdto.getReply() %></span>
 				</div><!-- boardlike_reply 끝 -->
 				
 				<div class="col-md-12 col-sm-12 col-xs-12 hashtags">
 					<span class="hashtagspan">
 <%
-					cnt=0;
-					for(int k=0;k<hashlist.size();k++){
-						BoardHashTagDTO bhdto = hashlist.get(k);
-						if(dto.getNum().equals(bhdto.getNum())){
-							if(cnt>=4){
+					cnt = 0;
+					for(int l=0;l<hashlist.size();l++){
+						BoardHashTagDTO bhdto = hashlist.get(l);
+						if(bdto.getNum().equals(bhdto.getNum())){
+							if(cnt>=10){
 %>
-								...<button class="hashtagmore" idx="<%=dto.getNum()%>">더보기</button>
+								...
+								<button class="hashtagmore" idx="<%=bdto.getNum()%>">
+									더보기
+								</button>
 <%
 								break;
 							}else{
 								cnt++;
 %>
-								<a href="#" class="hashtag">#<%=bhdto.getHashtag().trim() %></a>
+								<a href="#" class="hashtag">
+									#<%=bhdto.getHashtag().trim() %>
+								</a>
 <%
 							}
 						}
 					}
 %>
-					
 					</span>
-				</div><!-- hashtags 끝 -->
-			</div><!-- board끝 -->
-		</div><!-- bordercontainer끝 -->
+				</div><!-- hashtag 끝 -->
+			</div><!-- row 끝 -->
+		</div><!-- bordercontainer 끝 -->
 <%
 	}
 %>
-</body>
-</html>
