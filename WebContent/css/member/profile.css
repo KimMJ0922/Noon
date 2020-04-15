@@ -207,3 +207,17 @@ font: Open Sans 600, 300
 	float: right;
 	margin-top: 38px;
 }
+
+.propic {
+	animation-duration: 2s;
+	animation-name: slidein;
+}
+@keyframes slidein {
+  from {
+    margin-top: 500px;
+  }
+
+  to {
+    margin-top: 0px;
+  }
+}

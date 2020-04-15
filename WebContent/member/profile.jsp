@@ -18,9 +18,6 @@
 	$(function(){
 		getData();
 		logincheck();
-		/* $(".profile").fadeIn(500, function() {
-			
-		}); */
 	});
 	function getData(){
 		<%

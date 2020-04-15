@@ -10,15 +10,9 @@
 <script	src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
 <script type="text/javascript" src="member/followList.js"></script>
 <link rel="stylesheet" href="css/member/profile.css">
+<script type="text/javascript">
+</script>
 </head>
-<%
-	MemberDto dto = (MemberDto)session.getAttribute("dto");
-	String id = dto.getId();
-	String imgsrc = "profile/"+id+"/"+dto.getPic();
-	if(dto.getPic()==null || dto.getPic().equals("")){
-		imgsrc = "profile/default.png";
-	}
-%>
 <body>
 	<div class="row">
 		<div class="col-md-6">

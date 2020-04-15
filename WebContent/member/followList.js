@@ -1,7 +1,6 @@
 $(function(){
 	followedList();
 	followingList();
-	
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
@@ -47,7 +46,7 @@ function followedList(){
 		url:"member/followedList.jsp",
 		dataType:"html",
 		success:function(data){
-			$(".followed").html(data);
+			$(".followed").html(data).trigger("create");;
 		}
 	});
 }
@@ -57,7 +56,7 @@ function followingList(){
 		url:"member/followingList.jsp",
 		dataType:"html",
 		success:function(data){
-			$(".follower").html(data);
+			$(".follower").html(data).trigger("create");;
 		}
 	});
 }
