@@ -14,7 +14,11 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	MemberDto mdto = (MemberDto)session.getAttribute("dto");
-	
+	String darkmode = (String)session.getAttribute("dark_check");
+	String dark = "";
+	if(darkmode.equals("1")){
+		dark="dark-mode";
+	}
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
 	String sort = request.getParameter("sort");
@@ -65,9 +69,9 @@
 			<div class="row board">
 				<!-- 프로필, 아이디, 작성일, 메뉴 -->
 <%
-				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter";
+				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter transform "+dark;
 				if(bdto.getId().equals(mdto.getId())){
-					classText = "col-md-6 col-sm-6 col-xs-6 boardwriter";
+					classText = "col-md-6 col-sm-6 col-xs-6 boardwriter transform "+dark;
 				}
 %>
 				<div class="<%=classText%>">
@@ -75,18 +79,31 @@
 					<a class="showProfile" style="cursor: pointer;"><%=bdto.getId() %></a>
 				</div><!-- boardwriter 아이디, 프로필 끝-->
 				
-				<div class="col-md-4 col-sm-4 col-xs-4 boardwriter">
+				<div class="col-md-4 col-sm-4 col-xs-4 boardwriter <%=dark%>">
 					<span class="boardwriteday">
 						<%=writeday %>
 					</span><!-- boardwriteday 끝 -->
 				</div><!-- boardwriter 작성일 끝 -->
 <%
 				if(classText.indexOf("6")!=-1){
+					String menuImg="img/icon/menu_icon.png";
+					if(darkmode.equals("1")){
+						menuImg="img/icon/menu_icon_dark.png";
+					}
 %>
-				<div class="col-md-2 col-sm-2 col-xs-2 menu" >
-					<button type="button" class="menubtn">
-						<img src="img/icon/menu_icon.png" id="menubtn">
-					</button>
+				<div class="col-md-2 col-sm-2 col-xs-2 menu <%=dark%>" >
+					<button type="button" class="menubtn" id="menubtn"
+					 		style="
+					 				background:url('<%=menuImg%>');
+					 				margin-top:12px;
+					 				width:50px;
+									height:50px;
+									text-align:center;
+									border:none;
+									background-repeat: no-repeat;
+									background-position: center center;
+					 			  "
+					></button>
 
 					<div class="btns">
 						<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
@@ -100,7 +117,7 @@
 				}
 
 				int cnt = 0;
-				classText = "col-md-12 col-sm-12 col-xs-12 imglist";
+				classText = "col-md-12 col-sm-12 col-xs-12 imglist "+dark;
 				for(int i=0;i<bilist.size();i++){
 					BoardImgDTO bidto = bilist.get(i);
 					if(bdto.getNum().equals(bidto.getNum())){
@@ -110,7 +127,7 @@
 				
 				String imgClass = "";
 				if(cnt==0){
-					classText = "col-md-12 col-sm-12 col-xs-12 noimglist";
+					classText = "col-md-12 col-sm-12 col-xs-12 noimglist "+dark;
 				}
 				
 				if(cnt==1){
@@ -148,7 +165,7 @@
 						</span><!-- go 끝 -->
 					</div><!-- imgs 끝 -->
 				</div><!-- imglist 끝 -->
-				<div class="col-md-12 col-sm-12 col-xs-12 boardcontent">
+				<div class="col-md-12 col-sm-12 col-xs-12 boardcontent <%=dark%>">
 					<span class="conpre">
 <%
 					String nullch = bdto.getContent().substring(0,1);
@@ -183,7 +200,7 @@
 %>
 					</span><!-- conpre 끝 -->
 				</div><!-- boardcontent 끝 -->
-				<div class="col-md-12 col-sm-12 col-xs-12 boardlike_reply">
+				<div class="col-md-12 col-sm-12 col-xs-12 boardlike_reply <%=dark%>">
 <%
 					String defaultLikeIcon = "img/like/like01.png";
 					for(int k=0;k<bllist.size();k++){
@@ -199,7 +216,7 @@
 					<span>댓글 : <%=bdto.getReply() %></span>
 				</div><!-- boardlike_reply 끝 -->
 				
-				<div class="col-md-12 col-sm-12 col-xs-12 hashtags">
+				<div class="col-md-12 col-sm-12 col-xs-12 hashtags <%=dark%>">
 					<span class="hashtagspan">
 <%
 					cnt = 0;

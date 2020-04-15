@@ -174,11 +174,6 @@
 					<%=dto.getId() %>
 				</p>
 
-				<h2 class="font2">휴대전화</h2>
-				<p class="custom-p">
-					<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>
-				</p>
-
 				<h2 class="font2">이메일</h2>
 				<p class="custom-p">
 					<%=dto.getEmail1() %>@<%=dto.getEmail2() %>

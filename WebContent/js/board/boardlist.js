@@ -113,11 +113,11 @@ $(function(){
    //메뉴 버튼
    $(document).on("click",".menubtn",function(){
       var css = $(this).siblings(".btns").css("display");
-      var posX = $(".menubtn").offset().left;
-      var posY = $(".menubtn").offset().top;
       if(css=="none"){
     	 $(this).siblings(".btns").css("display","inline-block");
     	 $(this).siblings(".btns").css("position","relative");
+    	 var thiscon = $(this).parent(".menu").parent(".board").parent(".bordercontainer");
+    	 thiscon.siblings(".bordercontainer").children(".board").children(".menu").children(".btns").css("display","none");
       }else{
     	  $(this).siblings(".btns").css("display","none");
       }
