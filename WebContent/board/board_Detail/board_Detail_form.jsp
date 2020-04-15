@@ -1,3 +1,4 @@
+<%@page import="format.DateFormat"%>
 <%@page import="member.MemberDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="board.BoardHashTagDAO"%>
@@ -554,13 +555,15 @@ function getLikeStatus(boardnum){
 	//해시태그 불러오기
 	BoardHashTagDAO Hdb= new BoardHashTagDAO();
 	List<String> Hlist= Hdb.getNumHashTag(num);
+	DateFormat df = new DateFormat();
+	String day = df.dateFormat(dto.getWriteday());
 	//이미지 url
 	String url=request.getContextPath();
-	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 	String profileimg = "profile/default.png";
 	MemberDto mdto = (MemberDto)session.getAttribute("dto");
 	String id = mdto.getId();
-	if(dto.getProfilepic()!=null||dto.getProfilepic()!=""){
+	if(dto.getProfilepic()!=null&&dto.getProfilepic()!=""){
 		profileimg = "profile/"+id+"/"+dto.getProfilepic();
 	}
 %>
@@ -635,7 +638,7 @@ function getLikeStatus(boardnum){
 
 					<img src="<%=profileimg %>" style="float:left">
 					<span><b style="color:skyblue"><%=dto.getNickname() %></b></span>
-					<span style="display:block;margin-left:70px; color:gray;"><%=sdf.format(dto.getWriteday()) %></span>
+					<span style="display:inline;margin-left:70px; color:gray;"><%=day %></span>
 					</div>
 					
 					<pre style="border:none; background: none;white-space: pre-wrap;
