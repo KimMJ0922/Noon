@@ -29,6 +29,24 @@
 	border-bottom: 1px solid #DBDBDB;
 }
 </style>
+<script type="text/javascript">
+$(function () {
+	$(".picarea").fadeIn(500, function() {
+		//ㅎㅇ
+	});
+    $(".custom-nav a").click(function () {
+        var url = $(this).attr("href");
+        $("#view").animate({
+            "opacity": "0",
+            //"top": "10px"
+        },500, function () {
+            document.location.href = url;
+        });
+        
+        return false;
+    });
+});
+</script>
 </head>
 <body>
 <%
@@ -63,7 +81,7 @@
 		}
 %>
 	</nav>
-	<div style="min-height: 550px;">
+	<div id="view" style="min-height: 550px;">
 		<jsp:include page="<%=content %>">
 			<jsp:param value="<%=id %>" name="id"/>
 		</jsp:include>
