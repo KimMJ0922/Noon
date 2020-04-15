@@ -7,5 +7,10 @@
 	
 	BoardDAO dao = new BoardDAO();
 	String con = dao.getNumContent(num);
+	String href = "main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num;
 %>
-<%=con%>
+<a href="<%=href%>">
+	<pre>
+		<%=con%>
+	</pre>
+</a>

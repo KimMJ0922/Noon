@@ -61,7 +61,7 @@ public class BoardLikesDAO {
 	
 	
 	//리스트에 보여질 것
-	public List<String> getLikeList(String minrow, String maxrow, String id, String sort){
+	public List<String> getLikeList(String minrow, String maxrow, String id, String sort,String search,String getId){
 		List<String> list = new Vector<String>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -69,13 +69,31 @@ public class BoardLikesDAO {
 		if(sort.equals("like")) {
 			sql = "select min(num),max(num) from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by likes desc, writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
-			
+		}else if(!search.equals("")){
+			sql = "select min(num),max(num) " + 
+					"from( " + 
+					"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
+					"from ( " + 
+					"select b.*,m.profilpic,bh.hashtag " + 
+					"from boardtb b, membertb m, BOARDHASHTAGTB bh " + 
+					"where b.id = m.id and bh.num = b.num and bh.hashtag = ? " + 
+					"order by writeday desc " + 
+					") a " + 
+					")" + 
+					"where rnum > ? and rnum <= ?";
+		}else if(!getId.equals("")) {
+			sql = "select min(num),max(num) from("+
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select b.* from boardtb b, membertb m "+
+					  "where b.id = m.id and b.id = ?"+
+					  "order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
 		}else {
 			sql = "select min(num),max(num) from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		} 
 		
@@ -85,9 +103,18 @@ public class BoardLikesDAO {
 		int min = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			if(!search.equals("")) {
+				pstmt.setString(1, search);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else if(!getId.equals("")){
+				pstmt.setString(1, id);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else {
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}
 			
 			rs = pstmt.executeQuery();
 			
@@ -110,7 +137,7 @@ public class BoardLikesDAO {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("오류 : "+e.getMessage());
+			System.out.println("getLikeList 메소드 오류 : "+e.getMessage());
 		}finally {
 			db.dbClose(rs, pstmt, conn);
 		}

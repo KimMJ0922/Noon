@@ -4,23 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
 <link rel= "stylesheet" type="text/css" href="css/board/boardlist.css">
 <script type="text/javascript" src="js/board/onhashchange.js"></script>
-
-
+<script type="text/javascript" src="js/board/boardlist.js"></script>
 <script type="text/javascript" src="js/UserProfile.js"></script>
 <link rel="stylesheet" href="css/member/profile.css">
-
-<script type="text/javascript">
-$(function(){
-	$(".alam").click(function(){
-		$(".alambox").toggle("fast");
-	});
-});
-
-</script>
 </head>
 <body>
 <%
@@ -33,29 +21,22 @@ $(function(){
 	double ran = Math.random()*4;
 	int ranf = (int)ran;
 	String search = request.getParameter("search");
-%>
-	<div style="margin: 1px auto; width: 500px;">
-		<textarea class="addwrite" id="writebtn" placeholder="<%=comment[ranf]%>"></textarea>
-	</div>
-	
-	<div id="history">
-	
-	</div>
-
-<%
-	if(search==null||search.equals("")){
-%>
-	<script type="text/javascript" src="js/board/boardlist.js"></script>
-	<div id="list">
-	
-	</div>
-<%
-	}else{
-%>
-	<jsp:include page="../searchhashtag/searchhashtag.jsp"></jsp:include>
-<%
+	if(search==null){
+		search="";
+	}
+	String id = request.getParameter("id");
+	if(id==null){
+		id="";
 	}
 %>
+	<input type="hidden" id="searchText" value="<%=search %>">
+	<input type="hidden" id="getId" value="<%=id %>">
+<%
+	if(id.equals("")){
+%>
+		<div style="margin: 1px auto; width: 500px;">
+			<textarea class="addwrite" id="writebtn" placeholder="<%=comment[ranf]%>"></textarea>
+		</div>
 	<div class="remocon">
 		<a><div class="showboard remoconlist" idx="0" id="showboard"></div></a>
 		<div class="remoconcomment">최신순</div>
@@ -80,6 +61,11 @@ $(function(){
 		<a><div class="lightmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
 		<div class="remoconcomment">다크모드</div>
 	</div>
-	<div class="profileModal"></div>
+<%
+	}
+%>
+	<div id="list">
+	
+	</div>
 </body>
 </html>

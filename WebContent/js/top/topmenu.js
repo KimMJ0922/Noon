@@ -26,7 +26,7 @@ $(function(){
 		   var top = 0;
 		   createMaxrowCookie(maxrow,top);
 		   text = text.replace("#","%23");
-		   location.href="main.jsp?view=board/boardlist.jsp&search="+text+"";
+		   location.href="main.jsp?view=board/boardlist.jsp&search="+text;
 	   }
 	   
    });

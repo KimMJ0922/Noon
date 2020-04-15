@@ -16,11 +16,19 @@ div.boardwriter{
 	border-bottom: 1px solid #DBDBDB;
 }
 div.menu{
+	width:83px;
 	height:80px;
 	border-bottom: 1px solid #DBDBDB;
+	text-align:center;
 }
 button.menubtn{
-	line-height: 70px;
+	margin-top:12px;
+	width:50px;
+	height:50px;
+	text-align:center;
+	border:none;
+	background-repeat: no-repeat;
+	background-position: center center;
 }
 div.btnlist{
 	float:left;
@@ -85,6 +93,8 @@ div.boardlike_reply{
 .menubtn{
 	border:none;
 	background-color: #ffdee9;
+	width:25px;
+	height:25px;
 }
 #boardimg{
     margin: 0;
@@ -98,11 +108,12 @@ pre{
 	border:none;
 	background:none;
 	overflow:hidden;
+	white-space: pre-line;
 }
 .content{
 	border:none;
 	background:none;
-	white-space: pre-wrap;
+	
 	margin:0;
 	padding:0;
 }
@@ -187,13 +198,14 @@ pre{
     max-height: 55px;
     max-width: 55px;
 }
+/*작성일*/
 .boardwriter>.boardwriteday{
-	    line-height: 76px;
+	line-height: 76px;
     margin-left: 42px;
+    float:right;
+    margin:0 10px 0 0;
 }
-.boardwriter:nth-child(2){
-	border-right: 1px solid #DBDBDB;
-}
+
 /*이미지가 하나일 경우*/
 img.imgone{
    margin-left: 1px;
