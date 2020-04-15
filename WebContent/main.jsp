@@ -36,9 +36,7 @@
 %>
 <script>
 $(function(){
-	
-var darkmodes=$("#darkmodes").val();
-
+	var darkmodes=$("#darkmodes").val();
 		if(darkmodes=="1"){
 			$("body").addClass("backdark transform");
 			$(".addwrite").addClass("dark-mode transform");
@@ -46,7 +44,6 @@ var darkmodes=$("#darkmodes").val();
 			$(".boarddetail>pre").addClass("dark-mode transform");
 			$(".howtotopdark").addClass("topdark transform");			
 			$(".likey").attr("src","img/like/like01_dark.png");
-			$("#menubtn").attr("src","img/icon/menu_icon_dark.png");
 			
 			
 			$(".topcontent>button").addClass("searchbtndark searchtransform");
@@ -72,18 +69,15 @@ var darkmodes=$("#darkmodes").val();
 			$("#darkmode").removeClass("lightmode");
 		}
 
-			$("#darkmode").click(function(){
-				if($(this).hasClass('darkmode'))
-					{
-						$(this).removeClass('darkmode');
-						$(this).addClass('lightmode'); 
-					}
-					else if($("#darkmode").hasClass('lightmode'))
-					{
-						$(this).removeClass('lightmode');
-						$(this).addClass('darkmode'); 
-					} 
-				});
+		$("#darkmode").click(function(){
+			if($(this).hasClass('darkmode')){
+				$(this).removeClass('darkmode');
+				$(this).addClass('lightmode'); 
+			}else if($("#darkmode").hasClass('lightmode')){
+				$(this).removeClass('lightmode');
+				$(this).addClass('darkmode'); 
+			} 
+		});
 			
 		$("#darkmode").click(function(){
 			var dark=$("#darkmodes").val();
@@ -96,7 +90,6 @@ var darkmodes=$("#darkmodes").val();
 				$(".boarddetail>pre").removeClass("dark-mode ");
 				$(".howtotopdark").removeClass("topdark ");
 				$(".likey").attr("src","img/like/like01.png").addClass("transform");
-				$("#menubtn").attr("src","img/icon/menu_icon.png");
 				
 				$(".topcontent>button").removeClass("searchbtndark ");
 				$(".topcontent>button").addClass("searchbtn");
@@ -118,6 +111,13 @@ var darkmodes=$("#darkmodes").val();
 				
 				$("#darkmode").removeClass("darkmode");
 				$("#darkmode").addClass("lightmode");
+				$(".menubtn").css({
+					"background":"url('img/icon/menu_icon.png')",
+					"background-repeat": "no-repeat",
+					"background-position": "center center"
+				});
+				
+				$(".btns").css("color","black");
 			}else{
 				//dark 모드
 				$("#darkmodes").val("1");
@@ -128,7 +128,6 @@ var darkmodes=$("#darkmodes").val();
 				$(".boarddetail>pre").addClass("dark-mode transform");
 				$(".howtotopdark").addClass("topdark transform");
 				$(".likey").attr("src","img/like/like01_dark.png");
-				$("#menubtn").attr("src","img/icon/menu_icon_dark.png");
 				
 				$(".topcontent>button").addClass("searchbtndark searchtransform");
 				$(".topcontent>button").removeClass("searchbtn");
@@ -150,15 +149,21 @@ var darkmodes=$("#darkmodes").val();
 				
 				$("#darkmode").addClass("darkmode");
 				$("#darkmode").removeClass("lightmode");
+				
+				$(".menubtn").css({
+					"background":"url('img/icon/menu_icon_dark.png')",
+					"background-repeat": "no-repeat",
+					"background-position": "center center"
+				});
+				$(".btns").css("color","black");
+				
 			}
 			$.ajax({
 				type:"post",
 				url:"css/dark/dark_mode_session.jsp",
 				dataType:"html",
 				data:{"dark":dark},
-				success:function(data){
-				
-					}
+				success:function(data){}
 			});
 		});
 });		

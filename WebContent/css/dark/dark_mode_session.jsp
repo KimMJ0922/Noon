@@ -11,7 +11,4 @@
 	}else{
 		session.setAttribute("dark_check", dark);
 	}
-
-	
-
 %>
