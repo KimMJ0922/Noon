@@ -17,7 +17,7 @@
 	List<String> list = htdao.getNumHashTag(num);
 	for(String hash : list){
 %>
-	<a href="">#<%=hash %></a>
+	<a class="hashtag">#<%=hash %></a>
 <%
 	}
 %>

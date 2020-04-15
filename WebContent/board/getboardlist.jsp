@@ -234,7 +234,7 @@
 							}else{
 								cnt++;
 %>
-								<a href="#" class="hashtag">
+								<a class="hashtag">
 									#<%=bhdto.getHashtag().trim() %>
 								</a>
 <%

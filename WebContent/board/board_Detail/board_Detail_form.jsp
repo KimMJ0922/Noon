@@ -231,7 +231,32 @@ background:none;
     cursor: pointer;
     margin-right: 10px;
 }
-  </style>
+.myboardbtn{
+	background:none;
+	border:none;
+	padding:0;
+	margin:0;
+}
+.updatebtn{
+    position: relative;
+    right: 50px;
+}
+
+.delbtn{
+
+    position: relative;
+    top: -43px;
+
+}
+
+.btns{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: black;
+	
+}
+</style>
 <script type="text/javascript">
 $(function(){
 	var boardnum = $("#re_board_text").attr("num");
@@ -394,6 +419,27 @@ $(function(){
 		
 	});
 	
+	//글 삭제 버튼
+	$(document).on("click",".delbtn",function(){
+	      var num = $(this).attr("num");
+	      var ch = confirm("해당 글을 삭제하시겠습니까?");
+	      if(ch==true){
+	         $.ajax({
+	            type: "post", 
+	            url: "board/deleteboard.jsp", 
+	            dataType: "html",
+	            async: false,
+	            data:{
+	               "num":num
+	            },
+	            success:function(data){
+	            	location.replace("main.jsp");
+	            }
+	         });
+	      }else{
+	         return false;
+	      }
+	   }); 
 });//window.function 끝
 
 function deleteReply(replynum,boardnum){
@@ -551,7 +597,7 @@ function getLikeStatus(boardnum){
 			history.back();
 		</script>
 <%
-	}
+	}else{
 	//해시태그 불러오기
 	BoardHashTagDAO Hdb= new BoardHashTagDAO();
 	List<String> Hlist= Hdb.getNumHashTag(num);
@@ -653,12 +699,19 @@ function getLikeStatus(boardnum){
 				<div class="reboard">
 					<div class="img_on">
 					<img src="<%=profileimg %>" style="float:left">
-					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a></span>
+					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a>
 					<%if(dto.getNickname().equals(id)){ %>
-					<b style="color:blue;float:right"><a href="#">글수정</a> / <a a href="#">글삭제</a></b>
+						<div class="btns">
+							<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
+								<button type="submit" class="updatebtn myboardbtn">글수정</button>
+								<input type="hidden" name="num" value="<%=dto.getNum()%>">
+							</form>
+							<button type="button" class="delbtn myboardbtn" num="<%=dto.getNum()%>">삭제</button>
+						</div>
 					<%}else{%>
 					
 					<%} %>
+					</span>
 					</div>
 					<hr>
 					<div id="reply_content">
@@ -714,5 +767,8 @@ function getLikeStatus(boardnum){
 			</div>
 		 </div>
 	</div>
+<%
+	}
+%>
 </body>
 </html>

@@ -233,11 +233,12 @@ $(function(){
 		   });
 	   }
    });
-   $(".hashtag").click(function(){
-	  var hash = $(this).text();
-	  hash = hash.replace("#","%23");
-	  location.href="main.jsp?view=board/boardlist.jsp&search="+text+"";
-   });
+	$(document).on("click","a.hashtag",function(){
+		var hash = $.trim($(this).text());
+		hash = hash.replace("#","%23");
+		location.href="main.jsp?view=board/boardlist.jsp&search="+hash;
+	});
+
 });//$(function) 끝
 
 

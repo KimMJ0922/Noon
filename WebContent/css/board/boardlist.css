@@ -159,6 +159,7 @@ pre{
 /*해시태그 요소*/
 .hashtag{
 	margin:5px 10px 5px 10px;
+	cursor:pointer;
 }
 /*해시태그 더보기 버튼*/
 .hashtagmore{
