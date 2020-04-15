@@ -209,12 +209,12 @@ font: Open Sans 600, 300
 }
 
 .propic {
-	animation-duration: 2s;
-	animation-name: slidein;
+	animation-duration: 1.5s;
+	animation-name: slideup;
 }
-@keyframes slidein {
+@keyframes slideup {
   from {
-    margin-top: 500px;
+    margin-top: 1000px;
   }
 
   to {
