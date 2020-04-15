@@ -68,6 +68,5 @@
 			<jsp:param value="<%=id %>" name="id"/>
 		</jsp:include>
 	</div>
-		
 </body>
 </html>
