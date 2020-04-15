@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 수정</title>
-<link rel= "stylesheet" type="text/css" href="member/style.css">
+<link rel= "stylesheet" type="text/css" href="css/member/MyProfilestyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.10/css/all.css'>
   <%
   	String dark="";
@@ -16,11 +16,11 @@
   		
   	}else if(dark.equals("1")){
   	%>
-  	  <link rel="stylesheet" href="member/MyProfile_dark.css" />
+  	  <link rel="stylesheet" href="css/member/MyProfile_dark.css" />
   	<%	
   	}
   	%>
- <script src="member/script.js"></script>
+ <script src="js/member/MyProfilescript.js"></script>
 <style>
 .topmain{
 	width:100%;
