@@ -1,7 +1,9 @@
 $(function(){
 	var id = $("#searchId").val();
-	followedList(id);
-	followingList(id);
+	var cnt = 0;
+	followedList(id, cnt);
+	followingList(id, cnt);
+	
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
@@ -17,8 +19,9 @@ $(function(){
 					"toid":toid
 				},
 				success:function(data){
-					followingList(id);
-					followedList(id);
+					cnt=1;
+					followingList(id, cnt);
+					followedList(id, cnt);
 				}
 			});
 		}else{
@@ -33,37 +36,40 @@ $(function(){
 					"toid":toid
 				},
 				success:function(data){
-					followedList(id);
-					followingList(id);
+					cnt=1;
+					followedList(id, cnt);
+					followingList(id, cnt);
 				}
 			});
 		}
 	});
 });
 
-function followedList(id){
+function followedList(id, cnt){
 	$.ajax({
 		type:"get",
 		url:"member/followedList.jsp",
 		dataType:"html",
 		data:{
-			"id":id
+			"id":id,
+			"cnt":cnt
 		},
 		success:function(data){
-			$(".followed").html(data).trigger("create");;
+			$(".followed").html(data);
 		}
 	});
 }
-function followingList(id){
+function followingList(id, cnt){
 	$.ajax({
 		type:"get",
 		url:"member/followingList.jsp",
 		dataType:"html",
 		data:{
-			"id":id
+			"id":id,
+			"cnt":cnt
 		},
 		success:function(data){
-			$(".follower").html(data).trigger("create");;
+			$(".follower").html(data);
 		}
 	});
 }

@@ -6,6 +6,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String fromid = request.getParameter("id");
+	String cnt = request.getParameter("cnt");
 	MemberFollowDao db = new MemberFollowDao();
 	MemberDto mdto = (MemberDto)session.getAttribute("dto");
 	String loginId = mdto.getId();
@@ -22,9 +23,19 @@
 		}	
 	%>
 		<div>
+<%
+			if(cnt.equals("0")){
+%>
 			<div class="col-md-12 col-sm-4 col-xs-6 propic">
+<%
+			}else{
+%>
+			<div class="col-md-12 col-sm-4 col-xs-6 propic1">
+<%
+			}
+%>
 				<img src="<%=imgsrc%>" class="followpic" alt="프로필사진">
-				<a class="showProfile" class="followname"><%=dto.getName() %>(<%=dto.getId() %>)</a>
+				<span class="followname"><%=dto.getId() %>(<%=dto.getName() %>)</span>
 <%
 				if(fromid.equals(loginId)){
 %>

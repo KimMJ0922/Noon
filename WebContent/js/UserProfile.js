@@ -7,6 +7,7 @@ $(function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
 		if($(this).attr("class")=="pro-btn follow"){
+			console.log("followclick");
 			$(this).attr("class","pro-btn following");
 			$(this).text("언팔로우");
 			$.ajax({
@@ -21,6 +22,7 @@ $(function(){
 				}
 			});
 		}else{
+			console.log("followelseclick");
 			$(this).attr("class","pro-btn follow");
 			$(this).text("팔로우");
 			$.ajax({
