@@ -1,3 +1,4 @@
+<%@page import="member.MemberFollowDao"%>
 <%@page import="member.MemberDto"%>
 <%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,8 +12,8 @@
 	MemberDto dto1 = (MemberDto)session.getAttribute("dto");
 	String profilesrc = "profile/default.png";
 	String id = request.getParameter("id");
-	
-	
+	MemberFollowDao fdb = new MemberFollowDao();
+	boolean followed = fdb.followed(dto1.getId(), id);
 %>
 <script type="text/javascript">
 	$(function(){
@@ -200,7 +201,11 @@
 				<p class="custom-p">
 					<%=dto.getEmail1() %>@<%=dto.getEmail2() %>
 				</p>
-				
+				<%if(followed==true){ %>
+					<a fromid='<%=dto1.getId() %>' toid='<%=id %>' class='pro-btn following' id="fbtn">언팔로우</a>
+				<%}else{ %>
+					<a fromid='<%=dto1.getId() %>' toid='<%=id %>' class='pro-btn follow' id="fbtn">팔로우</a>
+				<%} %>
 			</div>
 		</div>
 	</div>

@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script	src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
-<script type="text/javascript" src="js/member/followList.js"></script>
 <link rel="stylesheet" href="css/member/profile.css">
 <script type="text/javascript">
 </script>

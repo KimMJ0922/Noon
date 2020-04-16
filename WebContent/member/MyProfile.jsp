@@ -21,6 +21,7 @@
   	}
   	%>
  <script src="js/member/MyProfilescript.js"></script>
+ <script src="js/member/followList.js"></script>
 <style>
 .topmain{
 	width:100%;
@@ -31,14 +32,14 @@
 </style>
 <script type="text/javascript">
 $(function () {
-	$('#view').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},800);
+	$('#view').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},600);
 	
     $(".custom-nav a").click(function () {
         var url = $(this).attr("href");
         $("#view").animate({
             "opacity": "0",
             //"top": "10px"
-        },800, function () {
+        },600, function () {
             document.location.href = url;
         });
         
