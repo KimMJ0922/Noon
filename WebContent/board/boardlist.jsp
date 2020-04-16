@@ -12,7 +12,7 @@
 </head>
 <body>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8"); 
 	String[] comment = {"오늘 하루는 어땠나요?",
 						"오늘 기분 어떠신가요?",
 						"자랑 할 일이 있나요?",
