@@ -4,10 +4,10 @@ $(function(){
 	followedList(id, cnt);
 	followingList(id, cnt);
 	var loginid = $("#loginid").text();
-	console.log("앞");
-	console.log(loginid);
-	followcnt(loginid);
-	console.log("뒤");
+	if(loginid == id)
+		followcnt(loginid);
+	else
+		followcnt(id);
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
