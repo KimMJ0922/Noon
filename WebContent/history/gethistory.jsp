@@ -1,3 +1,4 @@
+<%@page import="format.DateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.json.simple.JSONObject"%>
@@ -13,54 +14,52 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 	HistoryDAO dao = new HistoryDAO();
 	List<HistoryDTO> list = dao.getHistory(id);
+	DateFormat df = new DateFormat();
 	
-	//시간 구하기
-	Calendar c = Calendar.getInstance();
-
-	long now = c.getTimeInMillis();
+%>
+	<ul>
+<%
+	String img = "profile/default.png";
+	for(HistoryDTO dto : list){
+		if(dto.getProfilepic()!=null&&!dto.getProfilepic().equals("")){
+			img = "profile/"+dto.getFormid()+"/"+dto.getProfilepic();
+		}
+		String str = "";
+		if(dto.getAction().indexOf("좋아요")>=0||dto.getAction().indexOf("댓글")>=0){
+			str = "main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+dto.getBoardnum();
+%>
+		<li class="alamLi">
+			<img src="<%=img %>">
+			<a class="move" href="<%=str %>">
+				<%=dto.getFormid() %>님이 회원님의 게시물에 <%=dto.getAction() %><br>
+			</a>
+			<button type="button" class="alamDelBtn"
+					num="<%=dto.getNum()%>">
+				삭제
+			</button>
+			<span class="actionday" >
+				<%=df.dateFormat(dto.getActionday()) %>
+			</span>
+		</li>
+<%
 		
-	JSONArray arr = new JSONArray();
-	if(list.size()!=0){
-		for(HistoryDTO dto : list){
-			JSONObject ob = new JSONObject();
-			ob.put("num",dto.getNum());
-			ob.put("fromid",dto.getFormid());
-			ob.put("action",dto.getAction());
-			String day = sdf.format(dto.getActionday());
-			long dateM = dto.getActionday().getTime();
+		}else if(dto.getAction().indexOf("팔로우")>=0){
+%>
+		<li class="alamLi">
+			<img src="<%=img %>">
+			<a class="showProfile"><%=dto.getFormid() %></a>님이 회원님을 <%=dto.getAction() %><br>
+			<button type="button" class="alamDelBtn" 
+					num="<%=dto.getNum()%>">
+				삭제
+			</button>
+			<span class="actionday">
+				<%=df.dateFormat(dto.getActionday()) %>
+			</span>
+		</li>
 			
-			long gap = now - dateM;
-
-	        String ret = "";
-	        
-	        gap = (long)(gap/1000);
-	        long hour = gap/3600;
-	        gap = gap%3600;
-	        long min = gap/60;
-	        long sec = gap%60;
-
-	        if(hour > 24){
-	            ret = day;
-	        }
-	        else if(hour > 0){
-	            ret = hour+"시간 전";
-	        }
-	        else if(min > 0){
-	            ret = min+"분 전";
-	        }
-	        else if(sec >= 0){
-	            ret = sec+"초 전";
-	        }
-	        else{
-	            ret = day;
-	        }
-	        
-	        
-			ob.put("actionday",ret);
-			ob.put("profilepic",dto.getProfilepic());
-			arr.add(ob);
+<%
 		}
 	}
 %>
 
-<%=arr.toString() %>
+	</ul>

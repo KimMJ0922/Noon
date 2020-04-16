@@ -45,7 +45,7 @@ $(function(){
 	});
 
   
-	$(".alam").click(function(){
+	$(".alam, .alamDark").click(function(){
 		$(".alambox").toggle("fast");
 	});
    //삭제 버튼
@@ -152,36 +152,7 @@ $(function(){
    
    //알림
    $(document).on("click",".alam, .alamDark",function(){
-      $.ajax({
-         type: "post", 
-         url: "history/gethistory.jsp", 
-         dataType:"json",
-         success:function(data){
-            var str = "<ul>";
-            $.each(data,function(i,item){
-               str += "<li>";
-               	//프로필 사진
-               	if(item.profilepic==null||item.profilepic==""){
-               		str += "<img src=profile/default.png>";
-               	}else{
-               		str += "<img src=profile/"+item.fromid+"/"+item.profilepic+">";
-               	}
-               	
-               	//좋아요, 댓글이면 해당 게시물로 이동
-               	if(item.action.indexOf("좋아요")>=0 || item.action.indexOf("댓글")>=0){
-               		str += "<a class='move' href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+item.num+"'>";
-               	}
-               	
-               	str += item.fromid+"님이 회원님의 게시물에 "+item.action+"<br>";
-               	str += "</a>";
-               	str += "<span class='actionday'>"+item.actionday+"</span>";
-               str += "</li>";
-            });
-            str += "</ul>";
-            
-            $(".alamli").html(str);
-         }
-      });
+	   alamList();
    });
    
    $(document).on("click",".boarddetail",function(){
@@ -247,6 +218,22 @@ $(function(){
 		hash = hash.replace("#","%23");
 		location.href="main.jsp?view=board/boardlist.jsp&search="+hash;
 	});
+	
+	//알림 삭제
+	$(document).on("click",".alamDelBtn",function(){
+		var alNum = $(this).attr("num");
+		$.ajax({
+		      type: "post", 
+		      url: "history/deletehistory.jsp",
+		      dataType: "html",
+		      data:{
+		    	  "num":alNum
+		      },
+		      success:function(data){
+		    	  alamList();
+		      }
+		   });
+	});
 
 });//$(function) 끝
 
@@ -283,7 +270,16 @@ function boardList(minrow,maxrow,sort,searchText,getId){
    });
 
 }
-
+function alamList(){
+	$.ajax({
+        type: "post", 
+        url: "history/gethistory.jsp", 
+        dataType:"html",
+        success:function(data){
+           $(".alamli").html($.trim(data));
+        }
+     });
+}
 
 //번호 해시태그 가져오기
 function getNumHashTag(num){
