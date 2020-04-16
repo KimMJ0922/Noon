@@ -195,6 +195,8 @@ $(function(){
 	String view = request.getParameter("view");
 	if(view==null)
 		view="board/boardlist.jsp";
+	
+	//룰루
 %>
 <body>
 
