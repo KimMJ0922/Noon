@@ -80,7 +80,7 @@
 				board = "boarddark";
 			}   
 %>
-			<div class="row <%=board%>">
+			<div class="row boardform <%=board%>">
 				<!-- 프로필, 아이디, 작성일, 메뉴 -->
 <%
 				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter transform "+dark;

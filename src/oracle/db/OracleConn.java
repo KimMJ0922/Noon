@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class OracleConn {
 	String driver="oracle.jdbc.driver.OracleDriver";
-	String url="jdbc:oracle:thin:@localhost:1521:root";
+	String url="jdbc:oracle:thin:@localhost:1521:xe";
 
 	public OracleConn() {
 		// TODO Auto-generated constructor stub
@@ -25,7 +25,7 @@ public class OracleConn {
 	public Connection getConnection() {
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection(url,"kse","1234");
+			conn = DriverManager.getConnection(url,"angel","a1234");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

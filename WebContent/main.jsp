@@ -42,7 +42,7 @@ $(function(){
 			$(".addwrite").addClass("dark-mode");
 			$(".board>div").addClass("dark-mode transform");
 			$(".boarddetail>pre").addClass("dark-mode transform");
-			$(".howtotopdark").addClass("topdark");			
+			$(".howtotopdark").addClass("topdark");
 			$(".likey").attr("src","img/like/like01_dark.png");
 			
 			
@@ -90,8 +90,9 @@ $(function(){
 				$(".boarddetail>pre").removeClass("dark-mode ");
 				$(".howtotopdark").removeClass("topdark ");
 				$(".searchtag").css({"border-color":"#000"});
-				$(".likey").attr("src","img/like/like01.png").addClass("transform");
 				
+				$(".likey").attr("src","img/like/like01.png").addClass("transform");
+				$(".likying").attr("src","img/like/like02.png");
 				$(".boardform").removeClass("boarddark");
 				$(".boardform>div").removeClass("dark-mode");
 				$(".boardform").addClass("board transform");
@@ -136,7 +137,7 @@ $(function(){
 				$(".howtotopdark").addClass("topdark transform");
 				$(".searchtag").css({"border-color":"#fff"});
 				$(".likey").attr("src","img/like/like01_dark.png");
-				
+				$(".likying").attr("src","img/like/like02.png");
 				$(".boardform").addClass("boarddark transform");
 				$(".boardform").removeClass("board");
 				

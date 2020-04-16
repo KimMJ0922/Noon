@@ -14,10 +14,10 @@ $(function(){
    
    $(".searchtag").keyup(function(e){
 	  if(e.keyCode==13){
-		  $(".searchbtn").click();
+		  $(".searchbtn, .searchbtndark").click();
 	  } 
    });
-   $(".searchbtn").click(function(){
+   $(".searchbtn, .searchbtndark").click(function(){
 	   var text = $.trim($(this).siblings(".searchtag").val());
 	   if(text.indexOf("#")==-1){
 		   location.href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp&id="+text;
