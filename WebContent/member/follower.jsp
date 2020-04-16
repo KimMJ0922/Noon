@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script	src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
-<script type="text/javascript" src="js/member/followList.js"></script>
 <link rel="stylesheet" href="css/member/profile.css">
 <script type="text/javascript">
 </script>
@@ -23,10 +22,10 @@
 <body>
 	<div class="row">
 		<div class="col-md-5">
-			<h2 style="margin-left: 90px;">FOLLOW</h2>
+			<h2 id="followtitle" style="margin-left: 90px;">FOLLOW</h2>
 		</div> 
 		<div class="col-md-5">
-			<h2 style="margin-left: 170px;">FOLLOWER</h2>
+			<h2 id="followertitle" style="margin-left: 170px;">FOLLOWER</h2>
 		</div>
 	</div>
 	<div class="row">

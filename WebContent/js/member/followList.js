@@ -3,7 +3,8 @@ $(function(){
 	var cnt = 0;
 	followedList(id, cnt);
 	followingList(id, cnt);
-	
+	var loginid = $("#loginid").text();
+	followcnt(loginid);
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
@@ -70,6 +71,24 @@ function followingList(id, cnt){
 		},
 		success:function(data){
 			$(".follower").html(data);
+		}
+	});
+}
+
+function followcnt(id){
+	$.ajax({
+		type:"get",
+		url:"member/followCnt.jsp",
+		dataType:"json",
+		data:{
+			"id":id
+		},
+		success:function(data){
+			console.log("타니");
+			console.log(data);
+			console.log(data.followcnt);
+			$("#followtitle").text("FOLLOW : "+data.followcnt);
+			$("#followertitle").text("FOLLOWER : "+data.followcnt);
 		}
 	});
 }

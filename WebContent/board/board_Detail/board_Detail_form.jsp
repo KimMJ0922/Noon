@@ -1,3 +1,4 @@
+<%@page import="member.MemberFollowDao"%>
 <%@page import="format.DateFormat"%>
 <%@page import="member.MemberDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -16,13 +17,13 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/board/board_detail.js"></script>
+  <script type="text/javascript" src="js/member/followList.js"></script>
   <link rel="stylesheet" href="css/board/board_detail.css"/>
  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet"> 
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
   	MemberDto mdto = (MemberDto)session.getAttribute("dto");
-  	
   	
   	if(dark.equals("0")){
   		
@@ -51,7 +52,12 @@
 	//회원 글 불러오기
 	BoardDAO Bdb=new BoardDAO();
 	BoardDTO dto=Bdb.getBoard(num);
-	
+	MemberFollowDao fdb = new MemberFollowDao();
+  	boolean followed = fdb.followed(mdto.getId(), dto.getId());
+	System.out.println("followed : "+followed);
+	System.out.println("mdtogetId : "+mdto.getId());
+	System.out.println("dtogetId : "+dto.getId());
+	System.out.println("bool : "+mdto.getId().equals(dto.getId()));
 	if(dto.getNum()==null||dto.getNum()==""){
 %>
 		<script>
@@ -162,7 +168,14 @@
 				<div class="reboard">
 					<div class="img_on">
 					<img src="<%=profileimg %>" style="float:left">
-					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a>
+					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b>
+					<%if(!mdto.getId().equals(dto.getId())){
+						if(followed==true){ %>
+							<a fromid='<%=mdto.getId() %>' toid='<%=dto.getId() %>' class='pro-btn following' id="fbtn">언팔로우</a>
+						<%}else{ %>
+							<a fromid='<%=mdto.getId() %>' toid='<%=dto.getId() %>' class='pro-btn follow' id="fbtn">팔로우</a>
+						<%}
+					}%>
 					<%if(dto.getNickname().equals(id) || mdto.getType().equals("관리자")){ %>
 						<div class="btns">
 							<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
