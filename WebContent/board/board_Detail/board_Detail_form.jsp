@@ -119,9 +119,7 @@ margin-left:10px;
 	height:40px;
 	border-radius: 30px;
 }
-.reply_content_re>a{
-	color:black;
-}
+
 
 .reply_content_re_writer{
 	width:410px;
@@ -137,7 +135,6 @@ margin-left:10px;
 	float:right;
 }
 .reply_content_re_writer>a{
-	color:black;
 	float:right;
 }
 
@@ -237,25 +234,13 @@ background:none;
 	padding:0;
 	margin:0;
 }
-.updatebtn{
-    position: relative;
-    right: 50px;
-}
-
-.delbtn{
-
-    position: relative;
-    top: -43px;
-
-}
-
 .btns{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: black;
-	
+display: inline-flex;
+float:right;
+color:#3366ff;
 }
+
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -705,7 +690,7 @@ function getLikeStatus(boardnum){
 								<button type="submit" class="updatebtn myboardbtn">글수정</button>
 								<input type="hidden" name="num" value="<%=dto.getNum()%>">
 							</form>
-							<button type="button" class="delbtn myboardbtn" num="<%=dto.getNum()%>">삭제</button>
+							<button type="button" style="margin-left:5px; "class="delbtn myboardbtn" num="<%=dto.getNum()%>">삭제</button>
 						</div>
 					<%}else{%>
 					
