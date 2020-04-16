@@ -670,7 +670,6 @@ function getLikeStatus(boardnum){
 						<span class="glyphicon glyphicon-chevron-left"></span>
 						<span class="sr-only">Previous</span>
 					</a>
-					
 					<a class="right carousel-control" id="dark_np" href="#myCarousel" data-slide="next" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-right"></span>
 						<span class="sr-only">Next</span>
