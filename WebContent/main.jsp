@@ -38,11 +38,11 @@
 $(function(){
 	var darkmodes=$("#darkmodes").val();
 		if(darkmodes=="1"){
-			$("body").addClass("backdark transform");
-			$(".addwrite").addClass("dark-mode transform");
+			$("body").addClass("backdark");
+			$(".addwrite").addClass("dark-mode");
 			$(".board>div").addClass("dark-mode transform");
 			$(".boarddetail>pre").addClass("dark-mode transform");
-			$(".howtotopdark").addClass("topdark transform");			
+			$(".howtotopdark").addClass("topdark");			
 			$(".likey").attr("src","img/like/like01_dark.png");
 			
 			
