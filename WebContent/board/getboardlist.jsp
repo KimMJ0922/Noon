@@ -52,6 +52,14 @@
 	List<BoardHashTagDTO> hashlist = bhtdao.getHashTags(minrow, maxrow, sort,search,id);
 	List<BoardImgDTO> bilist = bidao.getImglist(minrow, maxrow, sort,search,id);
 	List<String> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort,search,id);
+	
+	if(maxrow.equals("10")&&list.size()==0){
+%>
+	<div class="nolist">
+		작성한 게시물이 없습니다.
+	</div>
+<%
+	}else{
 %>
 	<div class="profileModal"></div> 
 <%
@@ -93,15 +101,9 @@
 %>
 				<div class="col-md-2 col-sm-2 col-xs-2 menu <%=dark%>" >
 					<button type="button" class="menubtn" id="menubtn"
-					 		style="
-					 				background:url('<%=menuImg%>');
-					 				margin-top:12px;
-					 				width:50px;
-									height:50px;
-									text-align:center;
-									border:none;
-									background-repeat: no-repeat;
-									background-position: center center;
+					 		style="background:url('<%=menuImg%>');
+								   background-repeat: no-repeat;
+								   background-position: center center;
 					 			  "
 					></button>
 
@@ -201,8 +203,11 @@
 					</span><!-- conpre 끝 -->
 				</div><!-- boardcontent 끝 -->
 				<div class="col-md-12 col-sm-12 col-xs-12 boardlike_reply <%=dark%>">
-<%
+<%					
 					String defaultLikeIcon = "img/like/like01.png";
+					if(darkmode.equals("1")){
+						defaultLikeIcon = "img/like/like01_dark.png";
+					}
 					for(int k=0;k<bllist.size();k++){
 						String num = bllist.get(k);
 						if(num.equals(bdto.getNum())){
@@ -234,7 +239,7 @@
 							}else{
 								cnt++;
 %>
-								<a href="#" class="hashtag">
+								<a class="hashtag">
 									#<%=bhdto.getHashtag().trim() %>
 								</a>
 <%
@@ -247,5 +252,6 @@
 			</div><!-- row 끝 -->
 		</div><!-- bordercontainer 끝 -->
 <%
+		}
 	}
 %>

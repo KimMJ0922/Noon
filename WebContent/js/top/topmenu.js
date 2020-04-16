@@ -17,7 +17,7 @@ $(function(){
 		  $(".searchbtn").click();
 	  } 
    });
-   $(".searchbtn, #searchimg").click(function(){
+   $(".searchbtn").click(function(){
 	   var text = $.trim($(this).siblings(".searchtag").val());
 	   if(text.indexOf("#")==-1){
 		   location.href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp&id="+text;

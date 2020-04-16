@@ -10,6 +10,8 @@ $(function(){
    var searchText = $("#searchText").val();
    var getId = $("#getId").val();
    var logid = $("#loginid").children("a").text();
+   var darkch = $("#darkmodes").val();
+   
    if(searchText.length!=0){
 	   $(".searchtag").val(searchText);
    }
@@ -38,7 +40,7 @@ $(function(){
 		if(scrollTop == (docuHeight-winHeight)){
 			minrow = maxrow;
 			maxrow = maxrow+5;
-			boardList(minrow,maxrow,sort,searchText);
+			boardList(minrow,maxrow,sort,searchText,getId);
 		}
 	});
 
@@ -83,32 +85,35 @@ $(function(){
    
    
    //좋아요
-   $(document).on("click",".likey",function(){
-      var num = $(this).attr("num");
-      var src = $(this).attr("src");
-      var cnt = 0;
-      if(src=="img/like/like02.png"){
-         $(this).attr("src","img/like/like01.png");
-         cnt = -1;
-      }else{
-         $(this).attr("src","img/like/like02.png");
-         cnt = +1;
-      }
-      $.ajax({
-         type: "post", 
-         url: "board/likes/updatelike.jsp",
-         dataType: "html",
-         data:{
-            "num":num,
-            "likes":cnt
-         },
-         context: this,
-         success:function(html){
-            $(this).siblings("#likecnt").html(html);
-         }
-      });
-      
-   });
+	$(document).on("click",".likey",function(){
+		var num = $(this).attr("num");
+		var src = $(this).attr("src");
+		var cnt = 0;
+		if(src=="img/like/like02.png"){
+			if(darkch=="1"){
+				$(this).attr("src","img/like/like01_dark.png");
+			}else{
+				$(this).attr("src","img/like/like01.png");
+			}
+			cnt = -1;
+		}else{
+			$(this).attr("src","img/like/like02.png");
+			cnt = +1;
+		}
+		$.ajax({
+			type: "post", 
+			url: "board/likes/updatelike.jsp",
+			dataType: "html",
+			data:{
+				"num":num,
+				"likes":cnt
+			},
+			context: this,
+			success:function(html){
+				$(this).siblings("#likecnt").html(html);
+			}
+		});
+	});
 
    //메뉴 버튼
    $(document).on("click",".menubtn",function(){
@@ -191,7 +196,7 @@ $(function(){
 	   $(window).scrollTop(0);
 
 	   $("#list").html("");
-	   boardList(minrow,maxrow,sort);
+	   boardList(minrow,maxrow,sort,searchText,getId);
    });
    
    //최신순
@@ -203,7 +208,7 @@ $(function(){
 	   maxrow=10;
 	   $(window).scrollTop(0);
 	   $("#list").html("");
-	   boardList(minrow,maxrow,sort);
+	   boardList(minrow,maxrow,sort,searchText,getId);
    });
    
    //리모컨 아이콘 마우스 올렸을 때
@@ -233,11 +238,12 @@ $(function(){
 		   });
 	   }
    });
-   $(".hashtag").click(function(){
-	  var hash = $(this).text();
-	  hash = hash.replace("#","%23");
-	  location.href="main.jsp?view=board/boardlist.jsp&search="+text+"";
-   });
+	$(document).on("click","a.hashtag",function(){
+		var hash = $.trim($(this).text());
+		hash = hash.replace("#","%23");
+		location.href="main.jsp?view=board/boardlist.jsp&search="+hash;
+	});
+
 });//$(function) 끝
 
 
