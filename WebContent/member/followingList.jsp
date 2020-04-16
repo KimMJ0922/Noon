@@ -5,7 +5,10 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String fromid = (String)session.getAttribute("id");
+	String fromid = request.getParameter("id");
+
+	
+			
 	MemberFollowDao db = new MemberFollowDao();
 	List<MemberDto> list = db.followingFriend(fromid);
 	if(list.size()==0){%>

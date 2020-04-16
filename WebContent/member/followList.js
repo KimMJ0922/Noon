@@ -1,6 +1,7 @@
 $(function(){
-	followedList();
-	followingList();
+	var id = $("#searchId").val();
+	followedList(id);
+	followingList(id);
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
@@ -16,8 +17,8 @@ $(function(){
 					"toid":toid
 				},
 				success:function(data){
-					followingList();
-					followedList();
+					followingList(id);
+					followedList(id);
 				}
 			});
 		}else{
@@ -32,29 +33,35 @@ $(function(){
 					"toid":toid
 				},
 				success:function(data){
-					followedList();
-					followingList();
+					followedList(id);
+					followingList(id);
 				}
 			});
 		}
 	});
 });
 
-function followedList(){
+function followedList(id){
 	$.ajax({
 		type:"get",
 		url:"member/followedList.jsp",
 		dataType:"html",
+		data:{
+			"id":id
+		},
 		success:function(data){
 			$(".followed").html(data).trigger("create");;
 		}
 	});
 }
-function followingList(){
+function followingList(id){
 	$.ajax({
 		type:"get",
 		url:"member/followingList.jsp",
 		dataType:"html",
+		data:{
+			"id":id
+		},
 		success:function(data){
 			$(".follower").html(data).trigger("create");;
 		}
