@@ -76,8 +76,6 @@ public class MoveFile {
 			}
 			try{
 				folder.delete(); //폴더 삭제
-				System.out.println(prviewFolderPath);
-			    System.out.println(folder.getName()+" 폴더 삭제");
 		    }catch(Exception e){
 			    e.getStackTrace();
 			}        
@@ -115,7 +113,6 @@ public class MoveFile {
 						File fileRename = new File(prviewFolderPath+"/"+ranch[ranf]+extention);
 						//파일이 있을 때
 						if(file.exists()) {
-							System.out.println("파일 있음");
 							//이름 바꾸기
 							file.renameTo(fileRename);
 							i=0;

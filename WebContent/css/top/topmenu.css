@@ -81,3 +81,8 @@
     color: #4c6ebd;
     text-decoration: none
 }
+
+.conpre>pre>a{
+	text-decoration: none;
+	font-weight: normal;
+}

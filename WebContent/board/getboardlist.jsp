@@ -16,8 +16,10 @@
 	MemberDto mdto = (MemberDto)session.getAttribute("dto");
 	String darkmode = (String)session.getAttribute("dark_check");
 	String dark = "";
+	String fontColor = "#000";
 	if(darkmode.equals("1")){
 		dark="dark-mode";
+		fontColor="#fff";
 	}
 	String minrow = request.getParameter("minrow");
 	String maxrow = request.getParameter("maxrow");
@@ -78,9 +80,9 @@
 			String board = "board";
 			if(darkmode.equals("1")){
 				board = "boarddark";
-			}
+			}   
 %>
-			<div class="row <%=board%>">
+			<div class="row boardform <%=board%>">
 				<!-- 프로필, 아이디, 작성일, 메뉴 -->
 <%
 				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter transform "+dark;
@@ -198,7 +200,7 @@
 							String href = "main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+bdto.getNum();
 %>
 							<pre>
-								<a href="<%=href%>">
+								<a href="<%=href%>" style="color:<%=fontColor%>">
 									<%=content %>
 								</a>
 							</pre>

@@ -191,7 +191,7 @@ $(function(){
    });
   
    //좋아요 많은 순서대로
-   $(".favorite").click(function(){
+   $(".favorite, .favoriteDark").click(function(){
 	   sort = "like";
 	   searchText="";
 	   $(".searchtag").val("");
@@ -204,7 +204,7 @@ $(function(){
    });
    
    //최신순
-   $(".showboard").click(function(){
+   $(".showboard, .showboardDark").click(function(){
 	   sort = "";
 	   searchText="";
 	   $(".searchtag").val("");
