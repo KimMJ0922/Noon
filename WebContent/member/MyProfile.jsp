@@ -11,7 +11,6 @@
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
-  	
   	if(dark.equals("0")){
   		
   	}else if(dark.equals("1")){
