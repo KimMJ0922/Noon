@@ -117,6 +117,7 @@ margin-left:10px;
 .reply_content_re>img{
 	width:40px;
 	height:40px;
+	margin-right:5px;
 	border-radius: 30px;
 }
 
@@ -132,6 +133,7 @@ margin-left:10px;
 	width:40px;
 	height:40px;
 	border-radius: 30px;
+	margin-left:5px;
 	float:right;
 }
 .reply_content_re_writer>a{
@@ -167,6 +169,8 @@ margin-left:10px;
 	margin-left:50px;
 	padding-left:5px;
 	min-height:45px;
+	padding-left: 9px;
+    padding-top: 5px;
 	background: #f7f7f7;
 }
 .p_reply_writer{
@@ -176,6 +180,8 @@ margin-left:10px;
 	margin-top:10px;
 	min-height:45px;
 	background: #f7f7f7;
+	padding-left: 9px;
+    padding-top: 5px;
 	float:right;
 }
 .p_rebtn{
