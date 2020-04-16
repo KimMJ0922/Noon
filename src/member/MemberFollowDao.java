@@ -63,6 +63,7 @@ public class MemberFollowDao {
 	public void deleteFollow(String fromid, String toid) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		String sql = "delete from followtb where fromid=? and toid=?";
 		
 		try {
@@ -71,8 +72,17 @@ public class MemberFollowDao {
 			pstmt.setString(2, toid);
 			pstmt.execute();
 			
-			String action = "fallow";
-			hdao.deleteHistory("", fromid, toid, action);
+			sql = "select * from history where fromid=? and toid = ? and action like '%팔로우%'";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, fromid);
+			pstmt.setString(2, toid);
+			rs = pstmt.executeQuery();
+			String num = "";
+			if(rs.next()) {
+				num = rs.getString(1);
+			}
+			
+			hdao.deleteHistory(num);
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
