@@ -18,6 +18,12 @@
 	$(function(){
 		getData();
 		logincheck();
+		$(".slidein").each(function(i,item){
+	    	/*$(this).css("visibility", "visible").animate({
+	    		"margin-left" : "0px"
+	    	},2000);*/
+	    	$(this).css({"visibility":"hidden"});
+	    });
 	});
 	function getData(){
 		<%

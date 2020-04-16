@@ -120,9 +120,9 @@
 	border-radius: 20px;
 }
 ..slidein{
-	visibility: hidden;
+	margin-left: 500px;
 }
-.slidein:nth-child(1){
+/* .slidein:nth-child(1){
 	animation-duration: 1.5s;
 	animation-name: slidein;
 }
@@ -155,7 +155,7 @@
 	animation-duration: 1.5s;
 	animation-name: slidein;
 	animation-delay: 3s;
-}
+} */
 @keyframes slidein {
   from {
     margin-left: 300px;
