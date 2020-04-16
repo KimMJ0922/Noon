@@ -162,4 +162,26 @@ public class MemberFollowDao {
 		}
 		return cnt;
 	}
+	
+	public int followCnt(String fromid) {
+		int cnt = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from followtb where fromid=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, fromid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return cnt;
+	}
 }
