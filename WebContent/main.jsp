@@ -89,11 +89,13 @@ $(function(){
 				$(".board>div").removeClass("dark-mode ");
 				$(".boarddetail>pre").removeClass("dark-mode ");
 				$(".howtotopdark").removeClass("topdark ");
-				var likeClass = $(".likey").attr("class");
+				$(".searchtag").css({"border-color":"#000"});
 				$(".likey").attr("src","img/like/like01.png").addClass("transform");
 				
-				$(".likying").attr("src","img/like/like02.png");
-			
+				$(".boardform").removeClass("boarddark");
+				$(".boardform>div").removeClass("dark-mode");
+				$(".boardform").addClass("board transform");
+				
 				
 				
 				$(".topcontent>button").removeClass("searchbtndark ");
@@ -132,12 +134,11 @@ $(function(){
 				$(".board>div").addClass("dark-mode transform");
 				$(".boarddetail>pre").addClass("dark-mode transform");
 				$(".howtotopdark").addClass("topdark transform");
-				
-				var likeClass = $(".likey").attr("class");
+				$(".searchtag").css({"border-color":"#fff"});
 				$(".likey").attr("src","img/like/like01_dark.png");
 				
-				$(".likying").attr("src","img/like/like02.png");
-				
+				$(".boardform").addClass("boarddark transform");
+				$(".boardform").removeClass("board");
 				
 				$(".topcontent>button").addClass("searchbtndark searchtransform");
 				$(".topcontent>button").removeClass("searchbtn");
@@ -205,6 +206,8 @@ $(function(){
 	String view = request.getParameter("view");
 	if(view==null)
 		view="board/boardlist.jsp";
+	
+	//룰루
 %>
 <body>
 
