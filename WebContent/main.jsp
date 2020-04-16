@@ -89,7 +89,12 @@ $(function(){
 				$(".board>div").removeClass("dark-mode ");
 				$(".boarddetail>pre").removeClass("dark-mode ");
 				$(".howtotopdark").removeClass("topdark ");
+				var likeClass = $(".likey").attr("class");
 				$(".likey").attr("src","img/like/like01.png").addClass("transform");
+				
+				$(".likying").attr("src","img/like/like02.png");
+			
+				
 				
 				$(".topcontent>button").removeClass("searchbtndark ");
 				$(".topcontent>button").addClass("searchbtn");
@@ -127,7 +132,12 @@ $(function(){
 				$(".board>div").addClass("dark-mode transform");
 				$(".boarddetail>pre").addClass("dark-mode transform");
 				$(".howtotopdark").addClass("topdark transform");
+				
+				var likeClass = $(".likey").attr("class");
 				$(".likey").attr("src","img/like/like01_dark.png");
+				
+				$(".likying").attr("src","img/like/like02.png");
+				
 				
 				$(".topcontent>button").addClass("searchbtndark searchtransform");
 				$(".topcontent>button").removeClass("searchbtn");

@@ -205,6 +205,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12 boardlike_reply <%=dark%>">
 <%					
 					String defaultLikeIcon = "img/like/like01.png";
+					String likying = "";
 					if(darkmode.equals("1")){
 						defaultLikeIcon = "img/like/like01_dark.png";
 					}
@@ -212,11 +213,12 @@
 						String num = bllist.get(k);
 						if(num.equals(bdto.getNum())){
 							defaultLikeIcon = "img/like/like02.png";
+							likying = "likying";
 							break;
 						}
 					}
 %>
-					<img class="likey" src="<%=defaultLikeIcon%>" num="<%=bdto.getNum()%>">
+					<img class="likey <%=likying %>" src="<%=defaultLikeIcon%>" num="<%=bdto.getNum()%>">
 					<span id="likecnt"><%=bdto.getLikes() %></span>
 					<span>댓글 : <%=bdto.getReply() %></span>
 				</div><!-- boardlike_reply 끝 -->

@@ -88,16 +88,20 @@ $(function(){
 	$(document).on("click",".likey",function(){
 		var num = $(this).attr("num");
 		var src = $(this).attr("src");
+		darkch = $("#darkmodes").val();
 		var cnt = 0;
 		if(src=="img/like/like02.png"){
 			if(darkch=="1"){
 				$(this).attr("src","img/like/like01_dark.png");
+				$(this).removeClass("likying");
 			}else{
 				$(this).attr("src","img/like/like01.png");
+				$(this).removeClass("likying");
 			}
 			cnt = -1;
 		}else{
 			$(this).attr("src","img/like/like02.png");
+			$(this).addClass("likying");
 			cnt = +1;
 		}
 		$.ajax({
