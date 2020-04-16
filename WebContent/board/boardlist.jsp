@@ -56,7 +56,9 @@
 		</div>
 		<a href="#"><div class="pagetopup remoconlist" idx="3" id="pagetopup"></div></a>
 		<div class="remoconcomment">맨위로</div>
-		<a><div class="setting remoconlist" idx="4" id="setting"></div></a>
+		<a href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp&id=<%=id%>">
+			<div class="setting remoconlist" idx="4" id="setting"></div>
+		</a>
 		<div class="remoconcomment" >설정</div>
 		<a><div class="lightmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
 		<div class="remoconcomment">다크모드</div>

@@ -25,5 +25,8 @@
 	HistoryDAO hdao = new HistoryDAO();
 	BoardDAO bdao = new BoardDAO();
 	String action = "reply";
-	hdao.insertHistory(boardnum, name, toid, action);
+	if(!name.equals(toid)){
+		hdao.insertHistory(boardnum, name, toid, action);
+	}
+	
 %>

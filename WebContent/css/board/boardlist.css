@@ -273,16 +273,32 @@ img.detail{
     border-radius: 50px;
     max-height: 55px;
     max-width: 55px;
+    position: relative;
+    top:7px;
 }
 .actionday{
 	position: relative;
-    top: -20px;
-    left: 80px;
+    top: -15px;
+    left: 75px;
 }
 .nolist{
 	text-align: center;
     font-size: 30pt;
     line-height: 500px;
 }
+a.showProfile{
+	cursor:pointer;
+}
+.alamLi{
+	margin-top:10px;
+	margin-left:5px;
+	border-bottom: 1px solid gray;
+}
 
-
+.alamDelBtn{
+	position: relative;
+    top: -15px;
+    left: 68px;
+	background:none;
+	border:none;
+}

@@ -3,26 +3,18 @@ package history;
 import java.sql.Timestamp;
 
 public class HistoryDTO {
-	private String num;
+	private String boardnum;
 	private String formid;
 	private String toid;
 	private String action;
 	private Timestamp actionday;
 	private String profilepic;
-	
-	
-	
-	public String getProfilepic() {
-		return profilepic;
+	private String num;
+	public String getBoardnum() {
+		return boardnum;
 	}
-	public void setProfilepic(String profilepic) {
-		this.profilepic = profilepic;
-	}
-	public String getNum() {
-		return num;
-	}
-	public void setNum(String num) {
-		this.num = num;
+	public void setBoardnum(String boardnum) {
+		this.boardnum = boardnum;
 	}
 	public String getFormid() {
 		return formid;
@@ -48,4 +40,19 @@ public class HistoryDTO {
 	public void setActionday(Timestamp actionday) {
 		this.actionday = actionday;
 	}
+	public String getProfilepic() {
+		return profilepic;
+	}
+	public void setProfilepic(String profilepic) {
+		this.profilepic = profilepic;
+	}
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
+	
+	
+	
 }

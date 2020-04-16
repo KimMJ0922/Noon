@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import history.HistoryDAO;
 import oracle.db.OracleConn;
 
 public class MemberFollowDao {
 	OracleConn db = new OracleConn();
-	
+	HistoryDAO hdao = new HistoryDAO();
 	public void insertFollow(String fromid, String toid) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -22,6 +23,10 @@ public class MemberFollowDao {
 			pstmt.setString(1, fromid);
 			pstmt.setString(2, toid);
 			pstmt.execute();
+			
+			String action = "fallow";
+			hdao.insertHistory("", fromid, toid, action);
+			
 		} catch (SQLException e) {
 			// TODO: handle exception
 		}finally {
@@ -65,6 +70,9 @@ public class MemberFollowDao {
 			pstmt.setString(1, fromid);
 			pstmt.setString(2, toid);
 			pstmt.execute();
+			
+			String action = "fallow";
+			hdao.deleteHistory("", fromid, toid, action);
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
