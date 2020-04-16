@@ -12,6 +12,7 @@
     border-style: solid;
     transition: 0.4s;	
 }
+
 .searchtag:hover{
 	text-align: center;
     height: 40px;
