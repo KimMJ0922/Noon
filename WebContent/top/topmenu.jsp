@@ -49,7 +49,7 @@
 			<!-- 세션 히든값 -->
 			<input type="hidden" id="darkmodes" name="darkmodes" value="<%=dark_se%>">
 			
-				<P><a href="main.jsp">NOON</a></P>
+				<P><a href="main.jsp" style="font-family: 'Montserrat Subrayada', sans-serif;">NOON</a></P>
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs topcontent">
 				<input type="text" name="searchtag" class="searchtag" placeholder="#을 붙여서 해시태그검색" style="color:black;">
