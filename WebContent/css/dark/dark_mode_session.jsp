@@ -5,13 +5,10 @@
 	
 	String ch = (String)session.getAttribute("dark_check");
 	String dark = "0";
-	if(ch.equals("0")||ch==null){
+	if(ch==null||ch.equals("0")){
 		dark = "1";
 		session.setAttribute("dark_check", dark);
 	}else{
 		session.setAttribute("dark_check", dark);
 	}
-
-	
-
 %>

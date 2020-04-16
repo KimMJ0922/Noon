@@ -52,23 +52,41 @@ public class BoardImgDAO {
 	}
 	
 	//리스트에 보여질 것
-	public List<BoardImgDTO> getImglist(String minrow, String maxrow,String sort){
+	public List<BoardImgDTO> getImglist(String minrow, String maxrow,String sort,String search,String id){
 		List<BoardImgDTO> list = new Vector<BoardImgDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		if(sort.equals("like")) {
 			sql = "select min(num),max(num) from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by likes desc, writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select * from boardtb order by likes desc, writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
 			
-		}else {
+		}else if(!search.equals("")){
+			sql = "select min(num),max(num) " + 
+					"from( " + 
+					"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
+					"from ( " + 
+					"select b.*,bh.hashtag " + 
+					"from boardtb b, BOARDHASHTAGTB bh " + 
+					"where b.num = bh.num and bh.hashtag = ? " + 
+					"order by writeday desc " + 
+					") a " + 
+					") where rnum > ? and rnum <= ?";
+		}else if(!id.equals("")) {
 			sql = "select min(num),max(num) from("+
-					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select * from boardtb order by writeday desc) a"+
-					 ") where rnum > ? and rnum <= ?";
-		} 
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select b.* from boardtb b, membertb m "+
+					  "where b.id = m.id and b.id = ?"+
+					  "order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
+		}else{
+			sql = "select min(num),max(num) from("+
+					  "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
+					  "from ( select * from boardtb order by writeday desc) a"+
+					  ") where rnum > ? and rnum <= ?";	
+		}
 		
 		
 		ResultSet rs = null;
@@ -77,8 +95,18 @@ public class BoardImgDAO {
 		int min = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, minrow);
-			pstmt.setString(2, maxrow);
+			if(!search.equals("")) {
+				pstmt.setString(1, search);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else if(!id.equals("")){
+				pstmt.setString(1, id);
+				pstmt.setString(2, minrow);
+				pstmt.setString(3, maxrow);
+			}else {
+				pstmt.setString(1, minrow);
+				pstmt.setString(2, maxrow);
+			}
 				
 			rs = pstmt.executeQuery();
 			
@@ -137,65 +165,4 @@ public class BoardImgDAO {
 		
 		return list;
 	}
-	
-	
-	public List<BoardImgDTO> getSearchImglist(String minrow, String maxrow,String text){
-		List<BoardImgDTO> list = new Vector<BoardImgDTO>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = "";
-		
-		sql = "select min(num), max(num) from( " + 
-				"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
-				"from ( select b.*, bh.hashtag " + 
-				"	   from boardtb b, BOARDHASHTAGTB bh " + 
-				"	   where bh.hashtag = ? and bh.num = b.num " + 
-				"	   order by writeday desc " + 
-				"	  ) a " + 
-				") where rnum > ? and rnum <= ?";
-			
-		
-		
-		
-		ResultSet rs = null;
-		conn = db.getConnection();
-		int max = 0;
-		int min = 0;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, text);
-			pstmt.setString(2, minrow);
-			pstmt.setString(3, maxrow);
-				
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				min = rs.getInt(1);
-				max = rs.getInt(2);
-			}
-			sql = "select * from boardimgtb "+
-				  "where num between ? and ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, min);
-			pstmt.setInt(2, max);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				BoardImgDTO dto = new BoardImgDTO();
-				dto.setNum(rs.getString("num"));
-				dto.setImgfile(rs.getString("imgfile"));
-				
-				list.add(dto);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("getSearchImglist 메소드 오류 : "+e.getMessage());
-		}finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		
-		return list;
-	}
-	
 }

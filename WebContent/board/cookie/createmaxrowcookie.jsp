@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	System.out.println("옴");
     String maxrow = request.getParameter("maxrow");
 	String sort = request.getParameter("sort");
 	String top = request.getParameter("top");
-	System.out.println(maxrow+", "+sort+", "+top);
 	
     // 회원번호를 쿠키에 지정한다
     Cookie c = new Cookie("maxrow", maxrow) ;

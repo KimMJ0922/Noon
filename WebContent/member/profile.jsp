@@ -18,6 +18,13 @@
 	$(function(){
 		getData();
 		logincheck();
+		$(".slidein").each(function(i,item){
+	    	/*$(this).css("visibility", "visible").animate({
+	    		"margin-left" : "0px"
+	    	},2000);*/
+	    	$(this).css({"margin-left":"500px","opacity": "0.0"}).delay(i*300).animate({"margin-left": "0px", opacity:1.0},500);
+	    	
+	    });
 	});
 	function getData(){
 		<%
@@ -58,24 +65,33 @@
 						style="color: black; text-decoration: none; cursor: pointer; top: 80px;"></a>
 				</div>
 			</div>
+			<input type="hidden" name="num" id="num" value="<%=dto.getNum() %>">
 			<div class="col-md-8">
-				<h1 class="font1">내 정보</h1>
-				<input type="hidden" name="num" id="num" value="<%=dto.getNum() %>">
-				<h2 class="font2">이름</h2>
-				<p class="custom-p view">
-					<%=dto.getName() %>
-				</p>
-
-				<h2 class="font2">아이디</h2>
-				<p class="custom-p">
-					<%=dto.getId() %>
-				</p>
-
-				<h2 class="font2">휴대전화</h2>
-				<p class="custom-p">
-					<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>
-					<button class="custom-btn update">변경</button>
-				</p>
+				<div class="slidein">
+					<h1 class="font1">내 정보</h1>
+				</div>
+				
+				<div class="slidein">
+					<h2 class="font2">이름</h2>
+					<p class="custom-p view">
+						<%=dto.getName() %>
+					</p>
+				</div>
+				
+				<div class="slidein">
+					<h2 class="font2">아이디</h2>
+					<p class="custom-p">
+						<%=dto.getId() %>
+					</p>
+				</div>
+				
+				<div class="slidein">
+					<h2 class="font2">휴대전화</h2>
+					<p class="custom-p">
+						<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>
+						<button class="custom-btn update">변경</button>
+					</p>
+				</div>
 				<p class="custom-p form hidden">
 					<input type="text" class="custom-input" name="hp"
 						value="<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>"
@@ -83,12 +99,14 @@
 					<button class="custom-btn cancel">취소</button>
 					<button class="custom-btn submit">변경</button>
 				</p>
-
-				<h2 class="font2">이메일</h2>
-				<p class="custom-p">
-					<%=dto.getEmail1() %>@<%=dto.getEmail2() %>
-					<button class="custom-btn update">변경</button>
-				</p>
+				
+				<div class="slidein">
+					<h2 class="font2">이메일</h2>
+					<p class="custom-p">
+						<%=dto.getEmail1() %>@<%=dto.getEmail2() %>
+						<button class="custom-btn update">변경</button>
+					</p>
+				</div>
 				<p class="custom-p form hidden">
 					<input type="text" class="custom-input" name="email"
 						value="<%=dto.getEmail1() %>@<%=dto.getEmail2() %>"
@@ -96,12 +114,14 @@
 					<button class="custom-btn cancel">취소</button>
 					<button class="custom-btn submit">변경</button>
 				</p>
-
-				<h2 class="font2">주소</h2>
-				<p class="custom-p">
-					<%=dto.getAddr1() %>/<%=dto.getAddr2() %>
-					<button class="custom-btn update">변경</button>
-				</p>
+				
+				<div class="slidein">
+					<h2 class="font2">주소</h2>
+					<p class="custom-p">
+						<%=dto.getAddr1() %>/<%=dto.getAddr2() %>
+						<button class="custom-btn update">변경</button>
+					</p>
+				</div>
 				<p class="custom-p form hidden">
 					<input type="text" class="custom-input" name="addr"
 						value="<%=dto.getAddr1() %>/<%=dto.getAddr2() %>"
@@ -109,12 +129,14 @@
 					<button class="custom-btn cancel">취소</button>
 					<button class="custom-btn submit">변경</button>
 				</p>
-
-				<h2 class="font2">비밀번호</h2>
-				<p class="custom-p">
-					•••••••
-					<button class="custom-btn update">변경</button>
-				</p>
+				
+				<div class="slidein">
+					<h2 class="font2">비밀번호</h2>
+					<p class="custom-p">
+						•••••••
+						<button class="custom-btn update">변경</button>
+					</p>
+				</div>
 				<p class="custom-p form hidden">
 					<input type="password" class="custom-input" name="pass" value=""
 						required="required">
@@ -172,11 +194,6 @@
 				<h2 class="font2">아이디</h2>
 				<p class="custom-p">
 					<%=dto.getId() %>
-				</p>
-
-				<h2 class="font2">휴대전화</h2>
-				<p class="custom-p">
-					<%=dto.getHp1() %>-<%=dto.getHp2() %>-<%=dto.getHp3() %>
 				</p>
 
 				<h2 class="font2">이메일</h2>

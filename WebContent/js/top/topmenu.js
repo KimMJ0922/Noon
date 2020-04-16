@@ -7,7 +7,7 @@ $(function(){
          dataType: "html",
          async: false,
          success:function(data){
-            location.replace("login/noonlogin.jsp");
+        	 location.replace("login/noonlogin.jsp");
          }
       });
    });
@@ -17,7 +17,7 @@ $(function(){
 		  $(".searchbtn").click();
 	  } 
    });
-   $(".searchbtn, #searchimg").click(function(){
+   $(".searchbtn").click(function(){
 	   var text = $.trim($(this).siblings(".searchtag").val());
 	   if(text.indexOf("#")==-1){
 		   location.href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp&id="+text;
@@ -26,7 +26,7 @@ $(function(){
 		   var top = 0;
 		   createMaxrowCookie(maxrow,top);
 		   text = text.replace("#","%23");
-		   location.href="main.jsp?view=board/boardlist.jsp&search="+text+"";
+		   location.href="main.jsp?view=board/boardlist.jsp&search="+text;
 	   }
 	   
    });

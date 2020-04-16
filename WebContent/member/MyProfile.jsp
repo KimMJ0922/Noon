@@ -6,21 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 수정</title>
-<link rel= "stylesheet" type="text/css" href="member/style.css">
+<link rel= "stylesheet" type="text/css" href="css/member/MyProfilestyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.10/css/all.css'>
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
-  	
   	if(dark.equals("0")){
   		
   	}else if(dark.equals("1")){
   	%>
-  	  <link rel="stylesheet" href="member/MyProfile_dark.css" />
+  	  <link rel="stylesheet" href="css/member/MyProfile_dark.css" />
   	<%	
   	}
   	%>
- <script src="member/script.js"></script>
+ <script src="js/member/MyProfilescript.js"></script>
 <style>
 .topmain{
 	width:100%;
@@ -29,11 +28,28 @@
 	border-bottom: 1px solid #DBDBDB;
 }
 </style>
+<script type="text/javascript">
+$(function () {
+	$('#view').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},800);
+	
+    $(".custom-nav a").click(function () {
+        var url = $(this).attr("href");
+        $("#view").animate({
+            "opacity": "0",
+            //"top": "10px"
+        },800, function () {
+            document.location.href = url;
+        });
+        
+        return false;
+    });
+    
+});
+</script>
 </head>
 <body>
 <%
 	String content = request.getParameter("content");
-	System.out.println(content);
 	if(content==null||content.equals("")){
 		content = "main.jsp?view=member/Myprofile.jsp&content=profile.jsp";
 	}
@@ -48,7 +64,7 @@
 		<a href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp&id=<%=id%>">
 			<i class="fa fa-user"> 계정설정</i>
 		</a>
-		<a href="main.jsp?view=member/MyProfile.jsp&content=boardlist/memberboardlist.jsp&id=<%=id%>">
+		<a href="main.jsp?view=member/MyProfile.jsp&content=../board/boardlist.jsp&id=<%=id%>">
 			<i class="fa fa-credit-card"> 게시물</i>
 		</a> 
 		<a href="main.jsp?view=member/MyProfile.jsp&content=follower.jsp&id=<%=id%>">
@@ -64,11 +80,10 @@
 		}
 %>
 	</nav>
-	<div style="min-height: 550px;">
+	<div id="view" style="min-height: 550px; visibility: hidden; height: 500px">
 		<jsp:include page="<%=content %>">
 			<jsp:param value="<%=id %>" name="id"/>
 		</jsp:include>
 	</div>
-		
 </body>
 </html>

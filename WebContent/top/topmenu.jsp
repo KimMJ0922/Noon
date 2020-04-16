@@ -17,28 +17,31 @@
 <%
 	String dark_se=(String)session.getAttribute("dark_check");
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
-	String id = dto.getId();
+	String id = "";
+	String profilesrc = "profile/default.png";
+	if(dto==null){
+		%>
+		<script type="text/javascript">
+			location.replace('login/logoutaction.jsp');
+		</script>
+		<%
+	}else{
+		id = dto.getId();
+		if(dto.getPic()!=null && dto.getPic()!=""){
+			profilesrc = "profile/"+id+"/"+dto.getPic();
+		}
+	}
 	BoardDAO dao = new BoardDAO();
 	BoardDTO bdto = dao.getCount(id);
 	NumberFormat nf = NumberFormat.getInstance();
-	//민재의 피와땀은 어디로?
+	
 	String like = nf.format(bdto.getLikes());
 	String boardcnt = nf.format(Integer.parseInt(bdto.getNum()));
-	String profilesrc = "profile/default.png";
 	
 	//팔로워 수
 	MemberFollowDao follow = new MemberFollowDao();
 	int followCnt = follow.followerCnt(id);
-	
-	System.out.println(dto.getPic());
-	if(dto.getPic()!=null && dto.getPic()!=""){
-		profilesrc = "profile/"+id+"/"+dto.getPic();
-	}
-	
 %>
-<script type="text/javascript">
-	
-</script>
 <body>
 	<div class="container" style="width: 100%;">
 		<div class="row howtotopdark">
@@ -49,7 +52,7 @@
 				<P><a href="main.jsp">NOON</a></P>
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs topcontent">
-				<input type="text" name="searchtag" class="searchtag" placeholder="#을 붙여서 해시태그검색">
+				<input type="text" name="searchtag" class="searchtag" placeholder="#을 붙여서 해시태그검색" style="color:black;">
 				<button class="searchbtn"><img id="searchimg" alt="돋보기" src="img/icon/search.png" style="margin-left: -10px;width: 47px;"></button>
 			</div>
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">

@@ -1,21 +1,30 @@
 $(function(){
-   //루트 경로
-   var root = $("#root").val();
    var text = "#";
+   
    //초기에 화면에 보여질 글 갯수
-   var minrow = 0;
    var arry = getMaxrowCookie();
+   var minrow = 0;
    var maxrow = parseInt(arry[0]);
    var sort = arry[1];
    var top = arry[2];
+   var searchText = $("#searchText").val();
+   var getId = $("#getId").val();
+   var logid = $("#loginid").children("a").text();
+   var darkch = $("#darkmodes").val();
    
+   if(searchText.length!=0){
+	   $(".searchtag").val(searchText);
+   }
+   if(getId.length!=0&&logid != getId){
+	   $(".searchtag").val(getId);
+   }
    //쿠키 삭제
    deleteMaxrowCookie();
    
    //임시폴더에 아이디 폴더 삭제
    deletePreviewFolder();
    
-   boardList(minrow,maxrow,sort);
+   boardList(minrow,maxrow,sort,searchText,getId);
    $(document).scrollTop(top);
    //글쓰는 페이지 이동
    $("#writebtn").click(function(){
@@ -23,16 +32,22 @@ $(function(){
       location.href="main.jsp?view=board/writeboard.jsp";
    });
    
-   //스크롤 내리면 자동으로 항목 불러오기
-   $(window).on("scroll",function(){
-      if($(window).scrollTop() == ($(document).height() - $(window).height())){
-        minrow = maxrow;
-        maxrow = maxrow+5;
-        boardList(minrow,maxrow,sort);
-      }
-   });
-   
-   
+	//스크롤 내리면 자동으로 항목 불러오기
+	$(window).on("scroll",function(){
+		var scrollTop = $(window).scrollTop();
+		var docuHeight = $(document).height();
+		var winHeight = $(window).height();
+		if(scrollTop == (docuHeight-winHeight)){
+			minrow = maxrow;
+			maxrow = maxrow+5;
+			boardList(minrow,maxrow,sort,searchText,getId);
+		}
+	});
+
+  
+	$(".alam").click(function(){
+		$(".alambox").toggle("fast");
+	});
    //삭제 버튼
    $(document).on("click",".delbtn",function(){
       var num = $(this).attr("num");
@@ -70,41 +85,48 @@ $(function(){
    
    
    //좋아요
-   $(document).on("click",".likey",function(){
-      var num = $(this).attr("num");
-      var src = $(this).attr("src");
-      var cnt = 0;
-      if(src=="img/like/like02.png"){
-         $(this).attr("src","img/like/like01.png");
-         cnt = -1;
-      }else{
-         $(this).attr("src","img/like/like02.png");
-         cnt = +1;
-      }
-      $.ajax({
-         type: "post", 
-         url: "board/likes/updatelike.jsp",
-         dataType: "html",
-         data:{
-            "num":num,
-            "likes":cnt
-         },
-         context: this,
-         success:function(html){
-            $(this).siblings("#likecnt").html(html);
-         }
-      });
-      
-   });
+	$(document).on("click",".likey",function(){
+		var num = $(this).attr("num");
+		var src = $(this).attr("src");
+		darkch = $("#darkmodes").val();
+		var cnt = 0;
+		if(src=="img/like/like02.png"){
+			if(darkch=="1"){
+				$(this).attr("src","img/like/like01_dark.png");
+				$(this).removeClass("likying");
+			}else{
+				$(this).attr("src","img/like/like01.png");
+				$(this).removeClass("likying");
+			}
+			cnt = -1;
+		}else{
+			$(this).attr("src","img/like/like02.png");
+			$(this).addClass("likying");
+			cnt = +1;
+		}
+		$.ajax({
+			type: "post", 
+			url: "board/likes/updatelike.jsp",
+			dataType: "html",
+			data:{
+				"num":num,
+				"likes":cnt
+			},
+			context: this,
+			success:function(html){
+				$(this).siblings("#likecnt").html(html);
+			}
+		});
+	});
 
    //메뉴 버튼
    $(document).on("click",".menubtn",function(){
       var css = $(this).siblings(".btns").css("display");
-      var posX = $(".menubtn").offset().left;
-      var posY = $(".menubtn").offset().top;
       if(css=="none"){
     	 $(this).siblings(".btns").css("display","inline-block");
     	 $(this).siblings(".btns").css("position","relative");
+    	 var thiscon = $(this).parent(".menu").parent(".board").parent(".bordercontainer");
+    	 thiscon.siblings(".bordercontainer").children(".board").children(".menu").children(".btns").css("display","none");
       }else{
     	  $(this).siblings(".btns").css("display","none");
       }
@@ -115,10 +137,7 @@ $(function(){
       var num = $(this).attr("idx");
       //해당 번호의 해시태그 가져오기
       var content = getNumContent(num);
-      var str = "<a href='main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num+"'>";
-      	str +="<pre class='content'>"+content+"</pre>";
-      	str +="</a>"
-      $(this).parent(".conpre").html(str);
+      $(this).parent(".conpre").html(content);
    });
    
    
@@ -132,7 +151,7 @@ $(function(){
    
    
    //알림
-   $(document).on("click",".alam",function(){
+   $(document).on("click",".alam, .alamDark",function(){
       $.ajax({
          type: "post", 
          url: "history/gethistory.jsp", 
@@ -174,26 +193,30 @@ $(function(){
    //좋아요 많은 순서대로
    $(".favorite").click(function(){
 	   sort = "like";
+	   searchText="";
+	   $(".searchtag").val("");
 	   minrow=0;
 	   maxrow=10;
 	   $(window).scrollTop(0);
 
 	   $("#list").html("");
-	   boardList(minrow,maxrow,sort);
+	   boardList(minrow,maxrow,sort,searchText,getId);
    });
    
    //최신순
    $(".showboard").click(function(){
 	   sort = "";
+	   searchText="";
+	   $(".searchtag").val("");
 	   minrow=0;
 	   maxrow=10;
 	   $(window).scrollTop(0);
 	   $("#list").html("");
-	   boardList(minrow,maxrow,sort);
+	   boardList(minrow,maxrow,sort,searchText,getId);
    });
    
    //리모컨 아이콘 마우스 올렸을 때
-   $(document).on("mouseover",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+   $(document).on("mouseover",".showboard, .favorite, .pagetopup, .alam, .setting,.alamDark, .showboardDark, .favoriteDark, .pagetopupDark, .settingDark",function(){
 	   var idx = $(this).attr("idx");
 	   $(this).css("cursor","pointer");
 	   var windowwidth = $(window).width();
@@ -210,7 +233,7 @@ $(function(){
 		   });
 	   }
    });
-   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, .setting, .alamDark, .showboardDark, .favoriteDark, .pagetopupDark, .settingDark",function(){
 	   var idx = $(this).attr("idx");
 	   var windowwidth = $(window).width();
 	   if(windowwidth>=766){
@@ -219,11 +242,12 @@ $(function(){
 		   });
 	   }
    });
-   $(".hashtag").click(function(){
-	  var hash = $(this).text();
-	  hash = hash.replace("#","%23");
-	  location.href="main.jsp?view=board/boardlist.jsp&search="+text+"";
-   });
+	$(document).on("click","a.hashtag",function(){
+		var hash = $.trim($(this).text());
+		hash = hash.replace("#","%23");
+		location.href="main.jsp?view=board/boardlist.jsp&search="+hash;
+	});
+
 });//$(function) 끝
 
 
@@ -240,14 +264,16 @@ function deletePreviewFolder(){
    });
 }
 //글 목록
-function boardList(minrow,maxrow,sort){
-   $.ajax({
+function boardList(minrow,maxrow,sort,searchText,getId){
+	$.ajax({
       type: "post", 
       url: "board/getboardlist.jsp",
       data:{
          "minrow":minrow,
          "maxrow":maxrow,
-         "sort":sort
+         "sort":sort,
+         "search":searchText,
+         "id":getId
       },
       dataType: "html",
       async: false,
