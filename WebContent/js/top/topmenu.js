@@ -7,7 +7,7 @@ $(function(){
          dataType: "html",
          async: false,
          success:function(data){
-            
+        	 location.replace("login/noonlogin.jsp");
          }
       });
    });

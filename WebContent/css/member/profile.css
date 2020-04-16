@@ -187,3 +187,37 @@ font: Open Sans 600, 300
 	height: 401px;
 	width: 401px;
 }
+
+.followpic{
+	margin: 10px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+}
+
+.followname{
+	cursor: pointer;
+	line-height: 100px;
+	margin-left: 5px;
+	font-size: 14pt;
+}
+
+.fbtn{
+	cursor: pointer;
+	float: right;
+	margin-top: 38px;
+}
+
+.propic {
+	animation-duration: 1.5s;
+	animation-name: slideup;
+}
+@keyframes slideup {
+  from {
+    margin-top: 1000px;
+  }
+
+  to {
+    margin-top: 0px;
+  }
+}
