@@ -97,7 +97,7 @@ $(function(){
 				$(".boardform>div").removeClass("dark-mode");
 				$(".boardform").addClass("board transform");
 				$(".conpre>pre>a").css("color","#000");
-				
+				$(".remoconcomment").removeClass("recomentdark");
 				
 				$(".topcontent>button").removeClass("searchbtndark ");
 				$(".topcontent>button").addClass("searchbtn");
@@ -126,6 +126,8 @@ $(function(){
 				});
 				
 				$(".btns").css("color","black");
+				
+				$(".recomentdark").text("라이트 모드");	
 			}else{
 				//dark 모드
 				$("#darkmodes").val("1");
@@ -136,6 +138,8 @@ $(function(){
 				$(".boarddetail>pre").addClass("dark-mode transform");
 				$(".howtotopdark").addClass("topdark transform");
 				$(".searchtag").css({"border-color":"#fff"});
+				
+				$(".remoconcomment").addClass("recomentdark");
 				
 				$(".likey").attr("src","img/like/like01_dark.png");
 				$(".likying").attr("src","img/like/like02.png");
