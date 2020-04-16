@@ -74,7 +74,7 @@
 		}
 %>
 		<div id="<%=bdto.getNum() %>" class="container bordercontainer">
-			<div class="row board">
+			<div class="row board boardform">
 				<!-- 프로필, 아이디, 작성일, 메뉴 -->
 <%
 				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter transform "+dark;

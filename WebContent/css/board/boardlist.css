@@ -3,7 +3,7 @@
 .board{
 	width:500px;
 	heigth:500px;
-	border: 1px solid gary;
+	border: 1px solid gray;
 	background-color: #ffffff;
 	margin :3px auto;
 	border: 1px solid #DBDBDB;
@@ -40,7 +40,6 @@ div.btnlist{
 div.boardcontent{
 	width:499px;
 	border-bottom: 1px solid #DBDBDB;
-	border-right: 1px solid #DBDBDB;
 	min-height:50px;
 	line-height: 47px;
 }

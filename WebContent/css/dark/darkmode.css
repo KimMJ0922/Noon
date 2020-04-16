@@ -30,3 +30,13 @@
 .searchtransform{
 	transition:0.6s;
 }
+.boarddark{
+	width:500px;
+	heigth:500px;
+	background-color: #2f2f2f;
+	margin :3px auto;
+	border-left:1px solid #0e0e0e;
+	border-right:1px solid #0e0e0e;
+	border-top: 1px solid #DBDBDB;
+	border-bottom: 1px solid #DBDBDB;
+}

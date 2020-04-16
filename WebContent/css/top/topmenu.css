@@ -8,6 +8,7 @@
     width: 300px;
     position: relative;
     top: 24px;
+    color: #000;
     border-style: solid;
     transition: 0.4s;	
 }
