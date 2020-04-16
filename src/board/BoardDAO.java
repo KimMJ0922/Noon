@@ -273,6 +273,28 @@ public class BoardDAO {
 		}
 		return dto;
 	}
-	
+	public String getBoardWriter(String num) { 
+		String writer = ""; 
+		Connection conn = null; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null; 
+		String sql = "select id from boardtb where num = ?"; 
+		conn = db.getConnection(); 
+		try { 
+			pstmt = conn.prepareStatement(sql); 
+			pstmt.setString(1, num); 
+			rs = pstmt.executeQuery(); 
+			if(rs.next()) { 
+				writer = rs.getString(1); 
+			} 
+		} catch (SQLException e) { 
+			// TODO Auto-generated catch block 
+			e.printStackTrace(); 
+		}finally { 
+			db.dbClose(rs, pstmt, conn); 
+		} 
+		 
+		return writer; 
+	} 
 	
 }
