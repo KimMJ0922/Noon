@@ -151,7 +151,7 @@ $(function(){
    
    
    //알림
-   $(document).on("click",".alam",function(){
+   $(document).on("click",".alam, .alamDark",function(){
       $.ajax({
          type: "post", 
          url: "history/gethistory.jsp", 
@@ -216,7 +216,7 @@ $(function(){
    });
    
    //리모컨 아이콘 마우스 올렸을 때
-   $(document).on("mouseover",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+   $(document).on("mouseover",".showboard, .favorite, .pagetopup, .alam, .setting,.alamDark, .showboardDark, .favoriteDark, .pagetopupDark, .settingDark",function(){
 	   var idx = $(this).attr("idx");
 	   $(this).css("cursor","pointer");
 	   var windowwidth = $(window).width();
@@ -233,7 +233,7 @@ $(function(){
 		   });
 	   }
    });
-   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, .setting",function(){
+   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, .setting, .alamDark, .showboardDark, .favoriteDark, .pagetopupDark, .settingDark",function(){
 	   var idx = $(this).attr("idx");
 	   var windowwidth = $(window).width();
 	   if(windowwidth>=766){

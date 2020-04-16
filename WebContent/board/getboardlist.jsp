@@ -74,7 +74,13 @@
 		}
 %>
 		<div id="<%=bdto.getNum() %>" class="container bordercontainer">
-			<div class="row board">
+<%
+			String board = "board";
+			if(darkmode.equals("1")){
+				board = "boarddark";
+			}
+%>
+			<div class="row <%=board%>">
 				<!-- 프로필, 아이디, 작성일, 메뉴 -->
 <%
 				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter transform "+dark;
