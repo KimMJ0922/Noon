@@ -1,3 +1,7 @@
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
   .carousel {
  	width:680px;
  	max-height:638px;
@@ -209,3 +213,4 @@ display: inline-flex;
 float:right;
 color:#3366ff;
 }
+

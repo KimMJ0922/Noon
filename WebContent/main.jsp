@@ -20,6 +20,7 @@
 <!-- css폴더 안에 있는 파일 목록 -->
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <%
 	String dark_se="";
@@ -180,6 +181,9 @@ $(function(){
 });		
 </script>
 <style>
+*{
+font-family: 'Noto Sans KR', sans-serif;
+}
 .row>.boardlist {
 	background: #DBDBDB;
 	border: 1px solid #000;

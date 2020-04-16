@@ -8,6 +8,7 @@
 <title>회원 수정</title>
 <link rel= "stylesheet" type="text/css" href="css/member/MyProfilestyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.10/css/all.css'>
+<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Noto+Sans+KR&display=swap" rel="stylesheet">
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
