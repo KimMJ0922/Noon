@@ -52,7 +52,7 @@
 				<P><a href="main.jsp">NOON</a></P>
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs topcontent">
-				<input type="text" name="searchtag" class="searchtag" placeholder="#을 붙여서 해시태그검색">
+				<input type="text" name="searchtag" class="searchtag" placeholder="#을 붙여서 해시태그검색" style="color:black;">
 				<button class="searchbtn"><img id="searchimg" alt="돋보기" src="img/icon/search.png" style="margin-left: -10px;width: 47px;"></button>
 			</div>
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">

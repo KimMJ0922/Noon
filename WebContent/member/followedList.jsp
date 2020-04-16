@@ -7,6 +7,8 @@
 	request.setCharacterEncoding("utf-8");
 	String fromid = request.getParameter("id");
 	MemberFollowDao db = new MemberFollowDao();
+	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	String loginId = mdto.getId();
 	List<MemberDto> list = db.followedFriend(fromid);
 	if(list.size()==0){%>
 		<div>
@@ -23,7 +25,13 @@
 			<div class="col-md-12 col-sm-4 col-xs-6 propic">
 				<img src="<%=imgsrc%>" class="followpic" alt="프로필사진">
 				<a class="showProfile" class="followname"><%=dto.getName() %>(<%=dto.getId() %>)</a>
-				<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn following' id="fbtn">언팔로우</a>
+<%
+				if(fromid.equals(loginId)){
+%>
+					<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn following' id="fbtn">언팔로우</a>
+<%
+				}
+%>
 			</div>
 		</div>
 	<%}
