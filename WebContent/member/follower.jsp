@@ -13,7 +13,15 @@
 <script type="text/javascript">
 </script>
 </head>
+<%
+	String id = request.getParameter("id");
+	MemberDto dto = new MemberDto();
+	if(id==null||id.equals("")){
+		id = dto.getId();
+	}
+%>
 <body>
+	
 	<div class="row">
 		<div class="col-md-6">
 			<h2>팔로우</h2>
@@ -30,5 +38,6 @@
 	</div>
 	<!-- 모달창이 들어갈 div -->
 	<div class="profileModal"></div>
+	<input type="hidden" id="searchId" value="<%=id%>">
 </body>
 </html>

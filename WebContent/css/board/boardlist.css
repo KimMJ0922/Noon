@@ -199,6 +199,8 @@ pre{
     border-radius: 50px;
     max-height: 55px;
     max-width: 55px;
+    min-width: 55px;
+    min-height: 55px;
 }
 /*작성일*/
 .boardwriter>.boardwriteday{
