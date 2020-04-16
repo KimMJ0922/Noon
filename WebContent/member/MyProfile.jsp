@@ -22,31 +22,6 @@
   	%>
  <script src="js/member/MyProfilescript.js"></script>
  <script src="js/member/followList.js"></script>
-<style>
-.topmain{
-	width:100%;
-	background-color: #FAFAFA;
-	max-height: 120px;
-	border-bottom: 1px solid #DBDBDB;
-}
-</style>
-<script type="text/javascript">
-$(function () {
-	$('#view').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},600);
-	
-    $(".custom-nav a").click(function () {
-        var url = $(this).attr("href");
-        $("#view").animate({
-            "opacity": "0",
-            //"top": "10px"
-        },600, function () {
-            document.location.href = url;
-        });
-        
-        return false;
-    });
-});
-</script>
 </head>
 <body>
 <%
