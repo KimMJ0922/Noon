@@ -68,6 +68,11 @@ $(function () {
 		<a href="main.jsp?view=member/MyProfile.jsp&content=../board/boardlist.jsp&id=<%=id%>">
 			<i class="fa fa-credit-card"> 게시물</i>
 		</a> 
+		<%if(dto1.getType().equals("관리자")){ %>
+		<a href="main.jsp?view=member/admin_page.jsp">
+			<i class="fa fa-tv"> 회원관리</i>
+		</a> 
+		<%} %>
 		<a href="main.jsp?view=member/MyProfile.jsp&content=follower.jsp&id=<%=id%>">
 			<i class="fa fa-tv"> 팔로워</i>
 		</a> 
