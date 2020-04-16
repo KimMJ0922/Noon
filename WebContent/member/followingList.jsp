@@ -25,9 +25,9 @@
 				<img src="<%=imgsrc%>" class="followpic" alt="프로필사진">
 				<a class="showProfile" class="followname"><%=dto.getName() %>(<%=dto.getId() %>)</a>
 				<%if(followed==true){ %>
-					<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn following fbtn'>언팔로우</a>
+					<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn following' id="fbtn">언팔로우</a>
 				<%}else{ %>
-					<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn follow fbtn'>팔로우</a>
+					<a fromid='<%=fromid %>' toid='<%=dto.getId() %>' class='pro-btn follow' id="fbtn">팔로우</a>
 				<%} %>
 			</div>
 		</div>

@@ -120,7 +120,7 @@
 	border-radius: 20px;
 }
 ..slidein{
-	margin-left: 500px;
+	opacity: 0;
 }
 /* .slidein:nth-child(1){
 	animation-duration: 1.5s;
