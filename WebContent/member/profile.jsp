@@ -22,7 +22,8 @@
 	    	/*$(this).css("visibility", "visible").animate({
 	    		"margin-left" : "0px"
 	    	},2000);*/
-	    	$(this).css({"visibility":"hidden"});
+	    	$(this).css({"margin-left":"500px","opacity": "0.0"}).delay(i*300).animate({"margin-left": "0px", opacity:1.0},500);
+	    	
 	    });
 	});
 	function getData(){

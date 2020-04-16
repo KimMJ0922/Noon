@@ -5,12 +5,12 @@ $(function(){
 	
 	$(".update").click(function(){
 		$(this).parent().addClass("hidden");
-		$(this).parent().next().removeClass("hidden");
+		$(this).parent().parent().next().removeClass("hidden");
 	});
 	
 	$(".cancel").click(function(){
 		$(this).parent().addClass("hidden");
-		$(this).parent().prev().removeClass("hidden");
+		$(this).parent().prev().children().removeClass("hidden");
 	});
 	
 	$(".submit").click(function(){
