@@ -187,7 +187,7 @@ $(function(){
    });
    
    //리모컨 아이콘 마우스 올렸을 때
-   $(document).on("mouseover",".showboard, .favorite, .pagetopup, .alam, .setting,.alamDark, .showboardDark, .favoriteDark, .pagetopupDark, .settingDark",function(){
+   $(document).on("mouseover",".lightmode,.darkmode ,.showboard, .favorite, .pagetopup, .alam, .setting,.alamDark, .showboardDark, .favoriteDark, .pagetopupDark, .settingDark",function(){
 	   var idx = $(this).attr("idx");
 	   $(this).css("cursor","pointer");
 	   var windowwidth = $(window).width();
@@ -204,7 +204,9 @@ $(function(){
 		   });
 	   }
    });
-   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, .setting, .alamDark, .showboardDark, .favoriteDark, .pagetopupDark, .settingDark",function(){
+   $(document).on("mouseout",".showboard, .favorite, .pagetopup, .alam, "+
+		   					 ".setting, .alamDark, .showboardDark, .favoriteDark, "+
+		   					 ".pagetopupDark, .settingDark, .lightmode, .darkmode",function(){
 	   var idx = $(this).attr("idx");
 	   var windowwidth = $(window).width();
 	   if(windowwidth>=766){

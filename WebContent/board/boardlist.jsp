@@ -28,6 +28,16 @@
 	if(id==null){
 		id="";
 	}
+	
+	String dark = (String)session.getAttribute("dark_check");
+	String mod = "라이트 모드";
+	if(dark.equals("1")){
+		dark="recomentdark";
+		mod = "다크 모드";
+	}else{
+		dark="";
+	}
+	
 %>
 	<input type="hidden" id="searchText" value="<%=search %>">
 	<input type="hidden" id="getId" value="<%=id %>">
@@ -39,11 +49,11 @@
 		</div>
 	<div class="remocon">
 		<a><div class="showboard remoconlist" idx="0" id="showboard"></div></a>
-		<div class="remoconcomment">최신순</div>
+		<div class="remoconcomment <%=dark%>">최신순</div>
 		<a><div class="favorite remoconlist" idx="1" id="favorite"></div></a>
-		<div class="remoconcomment" >좋아요순</div>
+		<div class="remoconcomment <%=dark%>" >좋아요순</div>
 		<a><div class="alam remoconlist" idx="2" id="alam"></div></a>
-		<div class="remoconcomment">알림</div>
+		<div class="remoconcomment <%=dark%>">알림</div>
 		<div class="alambox">
 			<div  class="alamul">
 				<span class="alamli">
@@ -55,13 +65,13 @@
 			</div>
 		</div>
 		<a href="#"><div class="pagetopup remoconlist" idx="3" id="pagetopup"></div></a>
-		<div class="remoconcomment">맨위로</div>
+		<div class="remoconcomment <%=dark%>">맨위로</div>
 		<a href="main.jsp?view=member/MyProfile.jsp&content=profile.jsp&id=<%=id%>">
 			<div class="setting remoconlist" idx="4" id="setting"></div>
 		</a>
-		<div class="remoconcomment" >설정</div>
+		<div class="remoconcomment <%=dark%>" >설정</div>
 		<a><div class="lightmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
-		<div class="remoconcomment">다크모드</div>
+		<div class="remoconcomment <%=dark%>"><%=mod %></div>
 	</div>
 <%
 	}
