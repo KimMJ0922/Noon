@@ -1996,7 +1996,7 @@ pre code {
 	}
 	.alambox:after, .alambox:before {
 		top: 100%;
-		left: 50%;
+	    left: 38%;
 		border: solid transparent;
 		content: " ";
 		height: 0;

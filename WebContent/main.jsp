@@ -135,6 +135,7 @@ $(function(){
 				$(".boarddetail>pre").addClass("dark-mode transform");
 				$(".howtotopdark").addClass("topdark transform");
 				$(".searchtag").css({"border-color":"#fff"});
+				
 				$(".likey").attr("src","img/like/like01_dark.png");
 				$(".likying").attr("src","img/like/like02.png");
 				$(".boardform").addClass("boarddark transform");
