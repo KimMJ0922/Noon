@@ -86,7 +86,7 @@
 				<!-- 프로필, 아이디, 작성일, 메뉴 -->
 <%
 				String classText = "col-md-8 col-sm-8 col-xs-8 boardwriter transform "+dark;
-				if(bdto.getId().equals(mdto.getId())){
+				if(bdto.getId().equals(mdto.getId())||mdto.getType().equals("관리자")){
 					classText = "col-md-6 col-sm-6 col-xs-6 boardwriter transform "+dark;
 				}
 %>
@@ -156,7 +156,7 @@
 								BoardImgDTO bidto = bilist.get(j);
 								if(bdto.getNum().equals(bidto.getNum())){
 									ch++;
-									if(ch>=4){
+									if(ch>4){
 										cnt++;
 									}else{
 %>

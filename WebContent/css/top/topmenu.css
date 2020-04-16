@@ -67,17 +67,14 @@
 	text-align: right;
 }
  a:link {
-     font-weight: bold;
 	 color: #4c6ebd;
      text-decoration: none;
 }
  a:visited {     
-	font-weight: bold;
     color: #4c6ebd;
     text-decoration: none;
 }
  a:hover {
-  	font-weight: bold;
     color: #4c6ebd;
     text-decoration: none
 }
