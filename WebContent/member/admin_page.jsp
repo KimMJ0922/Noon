@@ -11,7 +11,6 @@
 	MemberDao dao=new MemberDao();
 	List<MemberDto> list = new Vector<MemberDto>();
 	String id = request.getParameter("id");
-	System.out.println(id);
 	if(id==null||id.equals("")){
 		id="";
 		list = dao.getadmindata();
