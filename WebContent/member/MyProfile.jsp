@@ -68,7 +68,7 @@ $(function () {
 			<i class="fa fa-credit-card"> 게시물</i>
 		</a> 
 		<%if(dto1.getType().equals("관리자")){ %>
-		<a href="main.jsp?view=member/admin_page.jsp">
+		<a href="main.jsp?view=member/admin_content.jsp">
 			<i class="fa fa-tv"> 회원관리</i>
 		</a> 
 		<%} %>
