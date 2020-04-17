@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +7,6 @@
 <title>ImageEditor</title>
 <link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.3/tui-color-picker.css" rel="stylesheet">
 <link type="text/css" href="css/tui-image-editor.css" rel="stylesheet">
-
 <style>
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans);
 html, body {
@@ -14,7 +15,10 @@ html, body {
 }
 </style>
 </head>
-
+<%
+	request.setCharacterEncoding("utf-8");
+	String input = request.getParameter("input");
+%>
 <body>
 	<div id="tui-image-editor-container"></div>
 </body>
@@ -29,8 +33,8 @@ html, body {
 	var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 		includeUI: {
 			loadImage: {
-				path: 'img/sampleImage2.png',
-				name: 'SampleImage'
+				path: '<%=input%>',
+				name: 'UploadImage'
 			},
 			theme: whiteTheme,
 			initMenu: 'filter',
