@@ -38,9 +38,7 @@ table{
 clear: both;
 }
 </style>
-<div class="search_admin">
-<input type="text" style="border-radius: 5px;" placeholder="검색하쉴"></div>
-<table class="table table-hover">
+<table class="table">
 		<caption>회원 정보</caption>
 		<thead>
 			<th>아이디</th>
@@ -50,7 +48,6 @@ clear: both;
 			<th>다운</th>
 			<th>삭제</th>
 		</thead>
-		
 <%
 	for(int i=1;i<list.size();i++){
 		MemberDto dto=list.get(i);
@@ -64,8 +61,7 @@ clear: both;
 			<td width="200px"><%=name %></td>
 			<td width="150px"><%=type %></td>
 			<td width="50px">
-        		<button type="button" class="up" id="<%=id%>" memeber="<%=type%>">
-          		<span class="glyphicon glyphicon-arrow-up up" id=""></span>
+        		<button class="glyphicon glyphicon-arrow-up up" type="button" id="<%=id%>" memeber="<%=type%>">
        	 		</button>
        	 	</td>
        	 	<!-- 등급 다운 -->

@@ -62,10 +62,7 @@ $(function(){
 				list();
 			}
 		});
-
-
-
-
+		
 		$("#searchId").keyup(function(){
 			var text = $(this).val();
 			searchList(text);
