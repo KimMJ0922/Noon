@@ -76,6 +76,27 @@
 	width:330px;
 	text-align: left;
 }
+/* 	modal */
+.findmodal {
+  display: none; 
+  position: fixed; 
+  z-index: 100; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+.findmodal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #888;
+  width: 80%;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -83,12 +104,20 @@ $(function(){
 			videoId:'Wimkqo8gDZ0',
 			start:2
 	}
-	
-	
 	$("#wrapper").tubular(options);
+	
+	//모달 실행
+	$("#mymodalbtn").click(function(){
+		$("#myfindmodal").css({"display":"block"});
+	});
+	//모달창 닫힘
+	$(".findmodal").click(function(){
+		$(this).css({"display":"none"});
+	});
 });
 </script>
-<titlea>메인 로그인 페이지</title>
+
+<title>메인 로그인 페이지</title>
 </head>
 <%
 	String loginok = (String)session.getAttribute("loginok");
@@ -126,13 +155,18 @@ $(function(){
 					<input class="main_input" id="password" name="pass" type="password" placeholder="비밀번호"><br>
 					<input class="main_submit" type="submit" value="로그인"><br>
 				
-					<p class="main_serc"><a href="../member/memberform.jsp"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
+					<p class="main_serc"><a href="../member/memberform.jsp"style="margin-left:10px;">회원가입</a><a id="mymodalbtn" style="float:right;">아이디/비밀번호 찾기</a></p>
 					<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;" <%=(idcheck!=null?"checked":"")%>> 아이디 저장</p>
 			  	</form>
 			</div>
 		  </div>
 		</div>
 	</div>
+</div>
+<div id="myfindmodal" class="findmodal">
+	<div class="findmodal-content">
+   		 <jsp:include page="../member/findMemberInfo.jsp"/>
+ 	</div>
 </div>
 </body>
 </html>

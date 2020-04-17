@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="../js/member/findMemberInfo.js"></script>
 <link rel= "stylesheet" type="text/css" href="../css/member/findMemberInfo.css">
-<link rel= "stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <meta charset="UTF-8">
 </head>
 <body>
