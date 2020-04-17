@@ -50,7 +50,6 @@ clear: both;
 			<th>다운</th>
 			<th>삭제</th>
 		</thead>
-		
 <%
 	for(int i=1;i<list.size();i++){
 		MemberDto dto=list.get(i);
