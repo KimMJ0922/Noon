@@ -209,13 +209,41 @@ public class BoardDAO {
 			pstmt.setString(2, num);
 			pstmt.execute();
 			
-			sql = "select likes from boardtb where num = ?";
+			sql = "select id, likes from boardtb where num = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
+			String id = "";
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				likecnt = rs.getInt(1);
+				id = rs.getString(1);
+				likecnt = rs.getInt(2);
 			}
+			
+			sql = "select sum(likes) from boardtb where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			int cnt = 0;
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			sql = "select type from membertb where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			String type = "";
+			if(rs.next()) {
+				type = rs.getString(1);
+			}
+			if(cnt>=3000&&!type.equals("관리자")) {
+				sql = "update membertb set type='우수회원' where id = ?";
+			}else if(cnt<3000&&!type.equals("관리자")){
+				sql = "update membertb set type='일반회원' where id = ?";
+			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.execute();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
