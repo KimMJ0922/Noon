@@ -58,7 +58,6 @@
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-xs-6 myinfo">
-
 						<img src="<%=profilesrc %>" alt="프로필 사진">
 					</div>
 					<div class="col-md-9 col-sm-8 col-xs-6 myinfo">
