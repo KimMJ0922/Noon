@@ -38,7 +38,7 @@ table{
 clear: both;
 }
 </style>
-<table class="table table-hover">
+<table class="table">
 		<caption>회원 정보</caption>
 		<thead>
 			<th>아이디</th>
