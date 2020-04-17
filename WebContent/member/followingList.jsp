@@ -12,6 +12,7 @@
 	MemberDto mdto = (MemberDto)session.getAttribute("dto");
 	String loginId = mdto.getId();
 	if(list.size()==0){%>
+	
 		<div>
 			<h2>팔로우 구걸 좀 해라!</h2>
 		</div>
@@ -50,5 +51,6 @@
 %>
 			</div>
 		</div>
+	</div>
 	<%}
 %>
