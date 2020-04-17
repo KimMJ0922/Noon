@@ -221,14 +221,13 @@ font-family: 'Noto Sans KR', sans-serif;
 %>
 <body>
 
-	<div class="container topmain" style="padding:0; margin:0;">
+	<div class="container topmain" style="padding:0; margin:0; overflow: hidden;">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 ">
 				<jsp:include page="top/topmenu.jsp"/>
 			</div>
 		</div>
 	</div>
-
 	<div class="container">
 		<div class="row">
 <%
