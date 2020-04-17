@@ -81,6 +81,10 @@
 <script type="text/javascript" src="member/js/tui-image-editor.js"></script>
 <script type="text/javascript" src="member/js/black-theme.js"></script>
 <script>
+	$(".tui-image-editor-download-btn").click(function(e){
+		e.stopPropagation();
+		e.preventDefault();
+	});
 	var path = $(".pic").attr("src");
 	// Image editor
 	var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
