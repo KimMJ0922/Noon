@@ -37,7 +37,7 @@ border-radius: 5px;
 		<thead>
 			<th>아이디</th>
 			<th>이름</th>
-			<th>회원등급</td>
+			<th>회원등급</th>
 			<th>업</th>
 			<th>다운</th>
 			<th>삭제</th>

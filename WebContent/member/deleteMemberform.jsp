@@ -11,7 +11,7 @@
 	<div style="text-align: -webkit-center; padding-top: 100px;">
 		<h1 class="font1" style="font-size: 10pt">회원탈퇴</h1>
 		<h3>정말로 탈퇴 하시겠습니까?</h3>
-		</h2>
+		
 		<label id="password" style="display: block;">비밀번호</label> <input
 			type="password" id="deletePass" class="form-control"
 			style="margin-bottom: 10px; width: 300px">
