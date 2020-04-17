@@ -13,12 +13,6 @@
 	}else if(type.equals("우수회원")){
 		type="관리자";
 		dao.updateType(id, type);
-	}else if(type.equals("관리자")){
-		%>
-		<script>
-		alert("관리자 이상은 올라갈수 없습니다.");
-		</script>
-		<%
 	}
 
 	

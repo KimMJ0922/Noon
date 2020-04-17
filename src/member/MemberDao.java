@@ -301,4 +301,23 @@ public class MemberDao {
 		}
 		
 	}
+	
+	public void admindelete(String id) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="delete from membertb where id=?";
+		
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.getMessage();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+	}
 }

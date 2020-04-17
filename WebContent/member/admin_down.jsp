@@ -1,12 +1,19 @@
+<%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String id=request.getParameter("id");
+	String type=request.getParameter("type");
+	MemberDao dao=new MemberDao();
+	
+	if(type.equals("우수회원")){
+		type="일반회원";
+		dao.updateType(id, type);
+	}else if(type.equals("관리자")){
+		type="우수회원";
+		dao.updateType(id, type);
+	}
 
-</body>
-</html>
+	
+%>
