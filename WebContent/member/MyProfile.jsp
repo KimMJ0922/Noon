@@ -43,7 +43,7 @@
 		<a href="main.jsp?view=member/MyProfile.jsp&content=../board/boardlist.jsp&id=<%=id%>">
 			<i class="fa fa-credit-card"> 게시물</i>
 		</a> 
-		<%if(dto1.getType().equals("관리자")){ %>
+		<%if(dto1.getType().equals("관리자")&&id.equals(dto1.getId())){ %>
 		<a href="main.jsp?view=member/MyProfile.jsp&content=admin_content.jsp">
 			<i class="fa fa-tv"> 회원관리</i>
 		</a> 

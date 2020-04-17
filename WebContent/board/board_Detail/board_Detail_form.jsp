@@ -245,5 +245,6 @@
 <%
 	}
 %>
+<input type="hidden" id="darkChack" value="<%=dark %>">
 </body>
 </html>

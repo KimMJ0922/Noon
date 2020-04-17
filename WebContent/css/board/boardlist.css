@@ -216,7 +216,7 @@ pre{
     color: white;
 }
 /* 보드 프로필 이미지 */
-.boardwriter>img{
+.boardwriter>.boardprofile{
 	margin: 12px;
     margin-right: 14px;
     border-radius: 50px;
@@ -224,6 +224,15 @@ pre{
     max-width: 55px;
     min-width: 55px;
     min-height: 55px;
+}
+/*회원 등급 이미지*/
+.typeImg{
+	width: 20px;
+    height: 20px;
+    position: relative;
+    top: -24px;
+    right: 27px;
+    transform: rotate( 48deg );
 }
 /*작성일*/
 .boardwriter>.boardwriteday{
@@ -312,6 +321,8 @@ img.detail{
 }
 a.showProfile{
 	cursor:pointer;
+	position: relative;
+    left: -30px;
 }
 .alamLi{
 	margin-top:10px;

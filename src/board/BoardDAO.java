@@ -54,14 +54,14 @@ public class BoardDAO {
 		if(sort.equals("like")) {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
+					 "from ( select b.*,m.profilpic,m.type from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}else if(!search.equals("")){
 			sql = "select * " + 
 					"from( " + 
 					"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
 					"from ( " + 
-					"select b.*,m.profilpic,bh.hashtag " + 
+					"select b.*,m.profilpic,bh.hashtag,m.type " + 
 					"from boardtb b, membertb m, BOARDHASHTAGTB bh " + 
 					"where b.id = m.id and bh.num = b.num and bh.hashtag = ? " + 
 					"order by writeday desc " + 
@@ -71,12 +71,12 @@ public class BoardDAO {
 		}else if(!id.equals("")){
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id and b.id = ? order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic,m.type from boardtb b, membertb m where b.id = m.id and b.id = ? order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}else {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic,m.type from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		} 
 				
@@ -110,6 +110,7 @@ public class BoardDAO {
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
 				dto.setProfilepic(rs.getString("profilpic"));
+				dto.setType(rs.getString("type"));
 				
 				list.add(dto);
 			}
@@ -209,13 +210,41 @@ public class BoardDAO {
 			pstmt.setString(2, num);
 			pstmt.execute();
 			
-			sql = "select likes from boardtb where num = ?";
+			sql = "select id, likes from boardtb where num = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
+			String id = "";
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				likecnt = rs.getInt(1);
+				id = rs.getString(1);
+				likecnt = rs.getInt(2);
 			}
+			
+			sql = "select sum(likes) from boardtb where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			int cnt = 0;
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			sql = "select type from membertb where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			String type = "";
+			if(rs.next()) {
+				type = rs.getString(1);
+			}
+			if(cnt>=3000&&!type.equals("관리자")) {
+				sql = "update membertb set type='우수회원' where id = ?";
+			}else if(cnt<3000&&!type.equals("관리자")){
+				sql = "update membertb set type='일반회원' where id = ?";
+			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.execute();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
