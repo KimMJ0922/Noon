@@ -8,4 +8,4 @@
 	int followCnt = db.followCnt(id);
 	int followerCnt = db.followerCnt(id);
 %>
-<%="\"followCnt\":"+followCnt+",\"followerCnt\":"+followerCnt%>
+<%="{\"followCnt\":"+followCnt+",\"followerCnt\":"+followerCnt+"}"%>

@@ -1,5 +1,20 @@
 /*active button class onclick*/
 $(function(){
+	
+	$('#view').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},600);
+	
+	$(".custom-nav a").click(function () {
+		var url = $(this).attr("href");
+		$("#view").animate({
+			"opacity": "0",
+			//"top": "10px"
+		},600, function () {
+			document.location.href = url;
+		});
+		
+		return false;
+	});
+	
 	var minrow = 0;
 	var maxrow = 10;
 	
@@ -67,15 +82,15 @@ function updatePic(){
 }
 
 function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result);
-        };
+		reader.onload = function (e) {
+			$('#preview').attr('src', e.target.result);
+		};
 
-        reader.readAsDataURL(input.files[0]);
-    }
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
 //회원이 작성한 글
@@ -83,18 +98,18 @@ function memberBoardList(minrow, maxrow){
 	var text = $.trim($(".searchtag").val());
 	var id = $("#getId").val();
 	$.ajax({
-        type: "post", 
-        url: "board/memberboard/getmemberboardlist.jsp", 
-        dataType: "html",
-        async: false,
-        data:{
-           "id":id,
-           "minrow":minrow,
-           "maxrow":maxrow
-        },
-        success:function(data){
-        }
-     });
+		type: "post", 
+		url: "board/memberboard/getmemberboardlist.jsp", 
+		dataType: "html",
+		async: false,
+		data:{
+		   "id":id,
+		   "minrow":minrow,
+		   "maxrow":maxrow
+		},
+		success:function(data){
+		}
+	 });
 }
 
 function deleteMember(){

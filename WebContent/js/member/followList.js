@@ -4,7 +4,10 @@ $(function(){
 	followedList(id, cnt);
 	followingList(id, cnt);
 	var loginid = $("#loginid").text();
-	followcnt(loginid);
+	if(loginid == id)
+		followcnt(loginid);
+	else
+		followcnt(id);
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
@@ -21,6 +24,7 @@ $(function(){
 				},
 				success:function(data){
 					cnt=1;
+					followcnt(loginid);
 					followingList(id, cnt);
 					followedList(id, cnt);
 				}
@@ -38,6 +42,7 @@ $(function(){
 				},
 				success:function(data){
 					cnt=1;
+					followcnt(loginid);
 					followedList(id, cnt);
 					followingList(id, cnt);
 				}
@@ -84,11 +89,8 @@ function followcnt(id){
 			"id":id
 		},
 		success:function(data){
-			console.log("타니");
-			console.log(data);
-			console.log(data.followcnt);
-			$("#followtitle").text("FOLLOW : "+data.followcnt);
-			$("#followertitle").text("FOLLOWER : "+data.followcnt);
+			$("#followtitle").text("FOLLOW "+data.followCnt);
+			$("#followertitle").text("FOLLOWER "+data.followerCnt);
 		}
 	});
 }
