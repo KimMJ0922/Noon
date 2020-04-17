@@ -77,10 +77,6 @@ function update(data,type){
 	});
 }
 
-function updatePic(){
-	
-}
-
 function readURL(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
