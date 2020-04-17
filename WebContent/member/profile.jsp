@@ -161,11 +161,12 @@
 		      <div class="modal-body" style="height: 88%;">
 		        <!-- <div class="profilePic" style="text-align: center;">
 					<img id="preview" src="http://placehold.it/180" style="width: 180px;height: 180px; margin-bottom: 10px;" />
+					<input type="file" class="form-control" name="photo" id="photo" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
 					<div class="filebox">
-						<input type="file" class="form-control" name="photo" id="photo" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
 					</div>
 				</div> -->
-				<div id="tui-image-editor-container"></div>
+				<div id="tui-image-editor-container" style="height: 95%;margin: 0px;"></div>
+				<input type="file" class="form-control" name="photo" id="photo" accept="image/gif, image/jpeg, image/png, image/jpg" style="margin-top: 10px;">
 		      </div>
 		      <div class="modal-footer">
 		        <input type="submit" class="btn btn-pimary" value="변경">

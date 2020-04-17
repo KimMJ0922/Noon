@@ -81,11 +81,12 @@
 <script type="text/javascript" src="member/js/tui-image-editor.js"></script>
 <script type="text/javascript" src="member/js/black-theme.js"></script>
 <script>
+	var path = $(".pic").attr("src");
 	// Image editor
 	var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
 		includeUI: {
 			loadImage: {
-				path: 'profile/default.png',
+				path: path,
 				name: 'UploadImage'
 			},
 			theme: blackTheme,
