@@ -71,11 +71,9 @@ $(function () {
 		<a href="main.jsp?view=member/admin_content.jsp">
 			<i class="fa fa-tv"> 회원관리</i>
 		</a> 
-		<%} %>
-		<a href="main.jsp?view=member/MyProfile.jsp&content=follower.jsp&id=<%=id%>">
-			<i class="fa fa-tv"> 팔로워</i>
-		</a> 
 <%
+		}else{
+			
 		if(id.equals(dto1.getId())){
 %>
 		<a href="main.jsp?view=member/MyProfile.jsp&content=deleteMemberform.jsp">
@@ -83,7 +81,12 @@ $(function () {
 		</a>
 <%
 		}
+	} 
 %>
+		<a href="main.jsp?view=member/MyProfile.jsp&content=follower.jsp&id=<%=id%>">
+			<i class="fa fa-tv"> 팔로워</i>
+		</a> 
+
 	</nav>
 	<div id="view" style="min-height: 550px; visibility: hidden; height: 500px">
 		<jsp:include page="<%=content %>">
