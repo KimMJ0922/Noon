@@ -41,7 +41,7 @@ $(function(){
 		}
 		update(data,type);
 		$(this).parent().addClass("hidden");
-		$(this).parent().prev().removeClass("hidden");
+		$(this).parent().prev().children().removeClass("hidden");
 	});
 });
 

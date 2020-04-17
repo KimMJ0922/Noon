@@ -126,6 +126,88 @@ public class MemberDao {
 		return dto;
 	}
 	
+	public List<MemberDto> getadmindata() {
+		List<MemberDto> list=new Vector<MemberDto>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from membertb";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberDto dto=new MemberDto();
+				String[] email = rs.getString("email").split("@");
+				String[] hp = rs.getString("hp").split("-");
+				dto.setAddr1(rs.getString("addr1"));
+				dto.setAddr2(rs.getString("addr2"));
+				dto.setEmail1(email[0]);
+				dto.setEmail2(email[1]);
+				dto.setHp1(hp[0]);
+				dto.setHp2(hp[1]);
+				dto.setHp3(hp[2]);
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setNum(rs.getString("num"));
+				dto.setPass(rs.getString("pass"));
+				dto.setSignupday(rs.getTimestamp("signupday"));
+				dto.setType(rs.getString("type"));
+				dto.setPic(rs.getString("profilpic"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
+	}
+	
+	
+	public List<MemberDto> getadmindata(String id) {
+		List<MemberDto> list=new Vector<MemberDto>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from membertb where id like ?||'%'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberDto dto=new MemberDto();
+				String[] email = rs.getString("email").split("@");
+				String[] hp = rs.getString("hp").split("-");
+				dto.setAddr1(rs.getString("addr1"));
+				dto.setAddr2(rs.getString("addr2"));
+				dto.setEmail1(email[0]);
+				dto.setEmail2(email[1]);
+				dto.setHp1(hp[0]);
+				dto.setHp2(hp[1]);
+				dto.setHp3(hp[2]);
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setNum(rs.getString("num"));
+				dto.setPass(rs.getString("pass"));
+				dto.setSignupday(rs.getTimestamp("signupday"));
+				dto.setType(rs.getString("type"));
+				dto.setPic(rs.getString("profilpic"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
+	}
+	
+	
+	
 	public void update(String data, String type, String id) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -199,5 +281,24 @@ public class MemberDao {
 		}finally {
 			db.dbClose(pstmt, conn);
 		}
+	}
+	
+	public void updateType(String id, String type) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="update membertb set type=? where id=?";
+		
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, type);
+			pstmt.setString(2, id);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.getMessage();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+		
 	}
 }

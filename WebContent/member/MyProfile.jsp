@@ -8,6 +8,7 @@
 <title>회원 수정</title>
 <link rel= "stylesheet" type="text/css" href="css/member/MyProfilestyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.10/css/all.css'>
+<link href="https://fonts.googleapis.com/css?family=Gothic+A1|Noto+Sans+KR&display=swap" rel="stylesheet">
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
@@ -20,6 +21,7 @@
   	}
   	%>
  <script src="js/member/MyProfilescript.js"></script>
+ <script src="js/member/followList.js"></script>
 <style>
 .topmain{
 	width:100%;
@@ -30,20 +32,19 @@
 </style>
 <script type="text/javascript">
 $(function () {
-	$('#view').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},800);
+	$('#view').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0},600);
 	
     $(".custom-nav a").click(function () {
         var url = $(this).attr("href");
         $("#view").animate({
             "opacity": "0",
             //"top": "10px"
-        },800, function () {
+        },600, function () {
             document.location.href = url;
         });
         
         return false;
     });
-    
 });
 </script>
 </head>
@@ -67,6 +68,11 @@ $(function () {
 		<a href="main.jsp?view=member/MyProfile.jsp&content=../board/boardlist.jsp&id=<%=id%>">
 			<i class="fa fa-credit-card"> 게시물</i>
 		</a> 
+		<%if(dto1.getType().equals("관리자")){ %>
+		<a href="main.jsp?view=member/MyProfile.jsp&content=admin_content.jsp">
+			<i class="fa fa-tv"> 회원관리</i>
+		</a> 
+		<%} %>
 		<a href="main.jsp?view=member/MyProfile.jsp&content=follower.jsp&id=<%=id%>">
 			<i class="fa fa-tv"> 팔로워</i>
 		</a> 

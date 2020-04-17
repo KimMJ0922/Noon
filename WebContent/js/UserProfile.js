@@ -2,7 +2,6 @@ $(function(){
 	$(document).on("click","a.showProfile",function(){
 		getProfile($(this).text());
 	});
-	
 	$(document).on("click",".follow,.following",function(){
 		var fromid = $(this).attr("fromid");
 		var toid = $(this).attr("toid");
@@ -36,7 +35,6 @@ $(function(){
 			});
 		}
 	});
-	
 });
 
 function getProfile(id){

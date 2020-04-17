@@ -191,22 +191,22 @@ font: Open Sans 600, 300
 
 .followpic{
 	margin: 10px;
-	width: 100px;
-	height: 100px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50px;
 }
 
 .followname{
-	cursor: pointer;
-	line-height: 100px;
+	line-height: 50px;
 	margin-left: 5px;
-	font-size: 14pt;
+	font-size: 13pt;
 }
 
 #fbtn{
 	cursor: pointer;
 	float: right;
-	margin-top: 38px;
+	margin-top: 18px;
+	margin-right: 8px;
 }
 
 .propic {
@@ -221,4 +221,12 @@ font: Open Sans 600, 300
   to {
     margin-top: 0px;
   }
+}
+
+.propic,.propic1{
+	border: 1px solid;
+	border-color: lightgray;
+	border-radius: 15px;
+	padding: 0px;
+	margin-bottom: 2px;
 }

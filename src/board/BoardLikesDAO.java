@@ -47,7 +47,17 @@ public class BoardLikesDAO {
 			if(!id.equals(dto.getId()) && likes != -1) {
 				hdao.insertHistory(dto.getNum(),dto.getId(),id,action);
 			}else if(!id.equals(dto.getId()) && likes == -1){
-				hdao.deleteHistory(dto.getNum(),dto.getId(),id,action);
+				sql = "select * from history where fromid=? and toid = ? and action like '%좋아요%'";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, dto.getId());
+				pstmt.setString(2, id);
+				rs = pstmt.executeQuery();
+				String num = "";
+				if(rs.next()) {
+					num = rs.getString(1);
+				}
+				
+				hdao.deleteHistory(num);
 			}
 			
 			

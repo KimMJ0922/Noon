@@ -21,5 +21,9 @@
 	BoardDAO bdao = new BoardDAO();
 	String action = "reply";
 	String toid = bdao.getBoardWriter(boardnum);
-	hdao.insertHistory(boardnum, name, toid, action);
+	if(!name.equals(toid)){
+		hdao.insertHistory(boardnum, name, toid, action);
+	}
+	
+	
 %>

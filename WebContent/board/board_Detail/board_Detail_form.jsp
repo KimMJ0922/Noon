@@ -1,3 +1,4 @@
+<%@page import="member.MemberFollowDao"%>
 <%@page import="format.DateFormat"%>
 <%@page import="member.MemberDto"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -15,570 +16,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/board/board_detail.js"></script>
+  <script type="text/javascript" src="js/member/followList.js"></script>
+  <link rel="stylesheet" href="css/board/board_detail.css"/>
+ <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet"> 
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
+  	MemberDto mdto = (MemberDto)session.getAttribute("dto");
   	
   	if(dark.equals("0")){
   		
   	}else if(dark.equals("1")){
   	%>
-  	  <link rel="stylesheet" href="board/board_Detail/dark_detail.css" />
+  	  <link rel="stylesheet" href="css/dark/dark_detail.css" />
+  	  
   	<%	
   	}
   	%>
 <meta charset="UTF-8">
 
 <title>상세 페이지</title>
-
-<style>
-
-  .carousel {
- 	width:680px;
- 	max-height:638px;
- 	background: gary;
-	}
-	
-.reboard{
-height:600px;
-}
-.detail_content{
-	margin-top:10px;
-	padding-top:10px;
-	border-top:1px solid gray;
-}
-#myCarousel>ol>li{
-	border:1px solid black;
-}
-#myCarousel>ol>li.active{
-	background: black;
-}
-.img_none_box{
-width: 475px;
-height:600px;
-/* background:rgba(128,128,128,0.2); */
-}
-
-.img_none{
-width: 475px;
-height:70px;
-color:white;
-padding-top:10px;
-line-height: 3;
-}
-.img_none span{
-margin-left:10px;
-}
-.img_none>img{
-width: 50px;
-height:50px;
-border-radius: 30px;
-margin-left:10px;
-}
-
-.img_on{
-width:475px;
-height:50px;
-color:white;
-padding-top:10px;
-line-height: 3;
-}
-.img_on span{
-margin-left:10px;
-}
-.img_on>img{
-width: 50px;
-height:50px;
-border-radius: 30px;
-margin-left:10px;
-}
-#reply_content{
-	width:470px;
-	height:420px;
-	margin-left:10px;
-	overflow: auto;
-	border-bottom: 1px solid rgba(128,128,128,0.5);
-}
-.reply_content_re{
-	width:410px;
-	margin-left:10px;
-	margin-top:20px;
-	margin-bottom:20px;	
-	float:left;
-}
-.reply_content_re:after{
-	clear: both;
-	display:block;
-	margin:0;
-	padding:0;
-	
-}
-
-.reply_content_re>img{
-	width:40px;
-	height:40px;
-	border-radius: 30px;
-}
-.reply_content_re>a{
-	color:black;
-}
-
-.reply_content_re_writer{
-	width:410px;
-	margin-right:10px;
-	margin-top:20px;
-	float:right;
-	margin-bottom:20px;	
-}
-.reply_content_re_writer>img{
-	width:40px;
-	height:40px;
-	border-radius: 30px;
-	float:right;
-}
-.reply_content_re_writer>a{
-	color:black;
-	float:right;
-}
-
-.reply_content_re_writer:after{
-	clear: both;
-	display:block;
-	margin:0;
-	padding:0;
-}
-#re_board_text{
-	width:390px;
-	border:none;
-	border:1px solid rgba(128,128,128,0.5);
-	right:85px;
-	bottom:0px;
-	position: absolute;
-	height: 70px;
-	resize: none;
-}
-#re_send{
-	right:7px;
-	bottom:0px;
-	position: absolute;
-	width:80px;
-	height: 70px;
-}
-.p_reply{
-	border-radius:5px;
-	width:350px;
-	margin-left:50px;
-	padding-left:5px;
-	min-height:45px;
-	background: #f7f7f7;
-}
-.p_reply_writer{
-	border-radius:5px;
-	width:350px;
-	margin-right:15px;
-	margin-top:10px;
-	min-height:45px;
-	background: #f7f7f7;
-	float:right;
-}
-.p_rebtn{
-border:none;
-background:none;
-float:right;
-font-size:12px;
-}
-.p_rebtn_writer{
-border:none;
-background:none;
-float:left;
-font-size:12px;
-
-}
-.p_rebtn_s{
-border:none;
-background:none;
-font-size:12px;
-}
-.p_rebtn_s_writer{
-border:none;
-background:none;
-font-size:12px;
-float:right;
-}
-.re_reply_textarea{
-	width:360px;
-	height:50px;
-	resize:none;
-	background: #f7f7f7;
-	border-radius: 5px;
-}
-
-.bar{
-background-image:none;
-background:none;
-}
-.re_re{
-	width:360px;
-	height:100px;
-	resize:none;
-	background: #f7f7f7;
-	border-radius: 5px;
-	display: block;
-}
-.likeyimg{
-	width: 30px;
-    height: 30px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-.myboardbtn{
-	background:none;
-	border:none;
-	padding:0;
-	margin:0;
-}
-.updatebtn{
-    position: relative;
-    right: 50px;
-}
-
-.delbtn{
-
-    position: relative;
-    top: -43px;
-
-}
-
-.btns{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: black;
-	
+<style type="text/css">
+.searchtag{
+	border-color: white;
 }
 </style>
-<script type="text/javascript">
-$(function(){
-	var boardnum = $("#re_board_text").attr("num");
-	//댓글 불러오기
-	getReply();
-	getReplyNum(boardnum);
-	getLikeNum(boardnum);
-	getLikeStatus(boardnum);
-	$("#re_send").click(function(){
-		var content = $("#re_board_text").val();
-		
-		if($.trim(content).length==0){
-			alert("댓글을 입력해주세요.");
-			return false;
-		}else{
-			$.ajax({
-				type:"post",
-				dataType:"html",
-				url:"board/board_Detail/board_Detail_reply_add.jsp",
-				data:{
-					"boardnum":boardnum,
-					"content":content
-				},
-				async: false,
-				success:function(data){
-					 $("#re_board_text").val("");
-					getReply(); 
-					getReplyNum(boardnum);
-				}
-			});
-		}
-	});
-	//삭제 버튼 눌렀을 때
-	$(document).on("click","#del_btn",function(){
-		var replynum=$(this).parent("div").attr("replynum");
-		var pclass = $(this).siblings("p:eq(0)").attr("class");
-		var content=$(this).siblings("."+pclass).children(".re_reply_textarea").val();
-		
-		var str=$(this).val();
-		if(str=="수정"){
-			if($.trim(content).length==0){
-				alert("댓글을 입력해주세요");
-				return false;
-			}else{
-				$.ajax({
-			        type:"post", 
-			        url:"board/board_Detail/board_Detail_reply_update.jsp", 
-			        dataType:"html",
-			        data:{
-			        	"replynum":replynum,
-			        	"content":content
-			        },
-			        async: false,
-			        success:function(data){
-			        	getReply();
-			        	getReplyNum(boardnum);
-					}
-				});
-			}
-		}else{
-			var replynum=$(this).parent("div").attr("replynum");
-			var ch = confirm("해당 댓글을 삭제하시겠습니까?");
-			if(ch==true){
-				deleteReply(replynum,boardnum);	
-				getReplyNum(boardnum);
-			}else{
-				return false;
-			}
-			
-		}
-		
-	}); 
-	
-	//수정버튼 눌렀을때
-	$(document).on("click","#up_btn",function(){
-		var replynum=$(this).parent("div").attr("replynum");
-		var pclass = $(this).siblings("p:eq(0)").attr("class");
-		var content=$(this).siblings("."+pclass).text();
-			
-		if($(this).val()=="수정취소"){
-			getReply();
-			getReplyNum(boardnum);
-		}else{
-			$(this).siblings("."+pclass).html("<textarea class='re_reply_textarea'>"+content+"</textarea>");
-			$(this).siblings("#del_btn").val("수정");
-			$(this).val("수정취소");
-		}
-	}); 
-	
-	
-	//답글 버튼 눌렀을때
-	$(document).on("click","#re_btn",function(){
-		var prtname=$(this).parent("p").siblings("a").attr("prtname");
-	
-		var a =$(this).parent("p").siblings("div");
-		a.html("<textarea class='re_re'>@"+prtname+"  </textarea>");
-		a.append("<input type='button' id='re_re_cc' style='border:none;background:none;font-size:12px;' value='취소'>");
-		a.append("<input type='button' id='re_re_add' style='border:none;background:none;font-size:12px;' value='답글 달기'>");
-	});
-	//답글-> 취소
-	$(document).on("click","#re_re_cc",function(){
-		var a =$(this).parent("div");
-		a.html("");
-	});
-	
-	$(document).on("click","#re_re_add",function(){
-		var content =$(this).siblings(".re_re").val();
-		var replynum = $(this).parent("div").attr("replynum");
-		var writer = $(this).parent("div").attr("writer");
-			 $.ajax({
-		        type:"post", 
-		        url:"board/board_Detail/board_Detail_replay_re_add.jsp", 
-		        dataType:"html",
-		        data:{
-		        	"content":content,
-		        	"replynum":replynum,
-		        	"boardnum":boardnum,
-		        	"writer":writer
-		        },
-		        async: false,
-		        success:function(data){
-		        	getReply();
-		        	getReplyNum(boardnum);
-				}
-			}); 
-	});
-	//모달 이미지 상세화면
-	$(document).on("click","#modal_img",function(){
-		var imgsrc=$(this).attr("src");
-		
-		$("#atfer_modal_img").attr("src",imgsrc);
-		
-		
-	});
-	//좋아요 아이콘 눌렀을 때
-	$(".likeyimg").click(function(){
-		var src = $(this).attr("src");
-		var cnt = 0;
-		if(src == "img/like/like01.png"){
-			$(this).attr("src","img/like/like02.png");
-			cnt++;
-		}else{
-			$(this).attr("src","img/like/like01.png");
-			cnt--;
-		}
-		
-		$.ajax({
-	        type:"post", 
-	        url:"board/likes/updatelike.jsp", 
-	        dataType:"html",
-	        data:{
-	        	"num":boardnum,
-	        	"likes":cnt
-	        },
-	        async: false,
-	        success:function(data){
-	        	$(".likycnt").html("좋아요 "+$.trim(data)+"개");
-			}
-		});
-		
-	});
-	
-	//글 삭제 버튼
-	$(document).on("click",".delbtn",function(){
-	      var num = $(this).attr("num");
-	      var ch = confirm("해당 글을 삭제하시겠습니까?");
-	      if(ch==true){
-	         $.ajax({
-	            type: "post", 
-	            url: "board/deleteboard.jsp", 
-	            dataType: "html",
-	            async: false,
-	            data:{
-	               "num":num
-	            },
-	            success:function(data){
-	            	location.replace("main.jsp");
-	            }
-	         });
-	      }else{
-	         return false;
-	      }
-	   }); 
-});//window.function 끝
-
-function deleteReply(replynum,boardnum){
-	$.ajax({
-        type:"post", 
-        url:"board/board_Detail/board_Detail_reply_delete.jsp", 
-        dataType:"html",
-        data:{
-        	"replynum":replynum,
-        	"boardnum":boardnum
-        },
-        async: false,
-        success:function(data){
-        	getReply();
-        	getReplyNum(boardnum);
-		}
-	});
-} 
-function getReply(){
-	var boardnum = $("#re_board_text").attr("num");
-	$.ajax({
-        type:"post", 
-        url:"board/board_Detail/board_Reply_get_data.jsp", 
-        dataType:"json",
-        data:{
-        	"boardnum":boardnum
-        },
-        async: false,
-        success:function(data){
-          	var str="";
-          	var id = $.trim($("#loginid").text());
-			
-        	var writernik = $(".writernik").children("b").text();
-        
-			$.each(data,function(i,item){
-				if(item.name==writernik){
-					str+="<div class='reply_content_re_writer' replynum='"+item.replynum+"'>"
-					if(item.profilepic==null||item.profilepic==""){
-						str+="<img src='profile/default.png'>";
-					}else{
-						str+="<img src='profile/"+item.name+"/"+item.profilepic+"'>";
-					}
-					
-					str+="<a href='#' style='margin-left:10px;' prtname='"+item.name+"'>"+" "+item.writeday+" "+item.name+"</a>";
-					if(item.name==id){
-						str+="<input class='p_rebtn_s_writer' id='del_btn' type='button' value='삭제' >";
-						str+="<input class='p_rebtn_s_writer' id='up_btn' type='button' value='수정'>";
-					}
-					if(item.sortnum>=1){
-					str+="<p class='p_reply_writer' style='width:250px;'>"+item.content+"</p>";
-					str+="<p style='float:right;margin-left:70px;'><input class='p_rebtn_writer' id='re_btn' type='button' value='답글'></p>";
-					}else{
-					str+="<p class='p_reply_writer'>"+item.content+"</p>"
-					str+="<p ><input class='p_rebtn_writer' id='re_btn' type='button' value='답글'></p>";
-					}
-					
-					str+="<div replynum='"+item.replynum+"' writer='"+item.name+"'></div>"
-				str+="</div>";
-				}else{
-					str+="<div class='reply_content_re' id='"+item.replynum+"' replynum='"+item.replynum+"'>"
-						if(item.profilepic==null||item.profilepic==""){
-							str+="<img src='profile/default.png'>";
-						}else{
-							str+="<img src='profile/"+item.name+"/"+item.profilepic+"'>";
-						}
-						str+="<a href='#' style='margin-right:10px;' prtname='"+item.name+"'>"+" "+item.name+" "+item.writeday+"</a>";
-						if(item.name==id){
-							str+="<input class='p_rebtn_s' id='up_btn' type='button' value='수정'>";
-							str+="<input class='p_rebtn_s' id='del_btn' type='button' value='삭제'>";
-						}
-						if(item.sortnum>=1){
-							str+="<p class='p_reply' style='width:250px;'>"+item.content+"</p>";
-							str+="<p style='float:left;margin-left:50px;'><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
-							}else{
-							str+="<p class='p_reply'>"+item.content+"</p>"
-							str+="<p><input class='p_rebtn' id='re_btn' type='button' value='답글'></p>";
-							}
-						
-						str+="<div replynum='"+item.replynum+"' writer='"+item.name+"'></div>"
-					str+="</div>";
-				}
-			});
-			
-			$("#reply_content").html(str);
-        }
-     });
-}
-
-function getReplyNum(boardnum){
-	$.ajax({
-        type:"post", 
-        url:"board/board_Detail/board_Detail_get_replynum.jsp", 
-        dataType:"json",
-        data:{
-        	"boardnum":boardnum
-        },
-        async: false,
-        success:function(data){
-        	$("#replycnt").html("댓글 "+data.replynum+"개");
-		}
-	});
-}
-
-function getLikeNum(boardnum){
-	$.ajax({
-        type:"post", 
-        url:"board/likes/getlikenum.jsp", 
-        dataType:"html",
-        data:{
-        	"num":boardnum
-        },
-        async: false,
-        success:function(data){
-        	$(".likycnt").html("좋아요 "+$.trim(data)+"개");
-		}
-	});
-}
-
-function getLikeStatus(boardnum){
-	$.ajax({
-        type:"post", 
-        url:"board/likes/getlikestatus.jsp", 
-        dataType:"html",
-        data:{
-        	"num":boardnum
-        },
-        async: false,
-        success:function(data){
-        	var id = $.trim(data);
-        	var loginid = $.trim($("#loginid").text());
-        	if(id == loginid){
-        		$(".likeyimg").attr("src","img/like/like02.png");
-        	}else{
-        		$(".likeyimg").attr("src","img/like/like01.png");
-        	}
-		}
-	});
-}
-  </script>
 </head>
 <%	
 	String num=request.getParameter("num");
@@ -589,7 +52,12 @@ function getLikeStatus(boardnum){
 	//회원 글 불러오기
 	BoardDAO Bdb=new BoardDAO();
 	BoardDTO dto=Bdb.getBoard(num);
-	
+	MemberFollowDao fdb = new MemberFollowDao();
+  	boolean followed = fdb.followed(mdto.getId(), dto.getId());
+	System.out.println("followed : "+followed);
+	System.out.println("mdtogetId : "+mdto.getId());
+	System.out.println("dtogetId : "+dto.getId());
+	System.out.println("bool : "+mdto.getId().equals(dto.getId()));
 	if(dto.getNum()==null||dto.getNum()==""){
 %>
 		<script>
@@ -607,7 +75,7 @@ function getLikeStatus(boardnum){
 	String url=request.getContextPath();
 
 	String profileimg = "profile/default.png";
-	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+	
 	String id = mdto.getId();
 	if(dto.getProfilepic()!=null&&dto.getProfilepic()!=""){
 		profileimg = "profile/"+id+"/"+dto.getProfilepic();
@@ -622,6 +90,8 @@ function getLikeStatus(boardnum){
 	
 	
 %>
+	<!-- 권한 구분 -->
+	<input type="hidden" id="types" value="<%=mdto.getType()%>"> 
 	<div class="container detail_box">
 		<div class="row">
 			<div class="col-md-7 col-sm-7 col-xs-12"  style="padding:0;">
@@ -670,7 +140,6 @@ function getLikeStatus(boardnum){
 						<span class="glyphicon glyphicon-chevron-left"></span>
 						<span class="sr-only">Previous</span>
 					</a>
-					
 					<a class="right carousel-control" id="dark_np" href="#myCarousel" data-slide="next" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-right"></span>
 						<span class="sr-only">Next</span>
@@ -699,14 +168,21 @@ function getLikeStatus(boardnum){
 				<div class="reboard">
 					<div class="img_on">
 					<img src="<%=profileimg %>" style="float:left">
-					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b><a href=""> 팔로우</a>
-					<%if(dto.getNickname().equals(id)){ %>
+					<span style="margin-top:10px;" class="writernik"><b style="color:skyblue"><%=dto.getNickname() %></b>
+					<%if(!mdto.getId().equals(dto.getId())){
+						if(followed==true){ %>
+							<a fromid='<%=mdto.getId() %>' toid='<%=dto.getId() %>' class='pro-btn following' id="fbtn">언팔로우</a>
+						<%}else{ %>
+							<a fromid='<%=mdto.getId() %>' toid='<%=dto.getId() %>' class='pro-btn follow' id="fbtn">팔로우</a>
+						<%}
+					}%>
+					<%if(dto.getNickname().equals(id) || mdto.getType().equals("관리자")){ %>
 						<div class="btns">
 							<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
 								<button type="submit" class="updatebtn myboardbtn">글수정</button>
 								<input type="hidden" name="num" value="<%=dto.getNum()%>">
 							</form>
-							<button type="button" class="delbtn myboardbtn" num="<%=dto.getNum()%>">삭제</button>
+							<button type="button" style="margin-left:5px; "class="delbtn myboardbtn" num="<%=dto.getNum()%>">삭제</button>
 						</div>
 					<%}else{%>
 					

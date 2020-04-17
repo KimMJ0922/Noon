@@ -90,7 +90,7 @@ $(function(){
 	$("#hashtagtext").keydown(function(e){
 		if(e.keyCode==13||e.keyCode==32){
 			var hash = $(this).val();
-			if(hash==""||hash==null||hash==" "){
+			if(hash==""||hash==null||hash==" "||hash.indexOf("#")>=0){
 				return false;
 			}
 			

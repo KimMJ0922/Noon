@@ -33,7 +33,7 @@ public class HistoryDAO {
 				dto.setAction(rs.getString("action"));
 				dto.setActionday(rs.getTimestamp("actionday"));
 				dto.setProfilepic(rs.getString("profilpic"));
-				
+				dto.setBoardnum(rs.getString("boardnum"));
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -54,9 +54,11 @@ public class HistoryDAO {
 			action = "좋아요를 눌렀습니다.";
 		}else if(action.equals("reply")) {
 			action = "댓글을 달았습니다.";
+		}else {
+			action = "팔로우 했습니다.";
 		}
 		
-		String sql = "insert into history values(?,?,?,?,sysdate)";
+		String sql = "insert into history values(?,?,?,?,sysdate,seq_history.nextval)";
 		
 		conn = db.getConnection();
 		
@@ -76,50 +78,18 @@ public class HistoryDAO {
 		
 	}
 	
-	public int getHistoryCount(String id){
+	public void deleteHistory(String num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select count(*) from history where toid = ?";
+		String sql = "delete from history where num = ?";
+		
 		conn = db.getConnection();
-		int cnt = 0;
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				cnt = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			db.dbClose(rs, pstmt, conn);
-		}
-		
-		return cnt;
-	}
-	
-	public void deleteHistory(String num, String fromid, String toid, String action) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		if(action.equals("like")) {
-			action = "좋아요를 눌렀습니다.";
-		}
-		
-		String sql = "delete from history where num=? and fromid = ? and toid = ? and action = ?";
-		
-		conn = db.getConnection();
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, num);
-			pstmt.setString(2, fromid);
-			pstmt.setString(3, toid);
-			pstmt.setString(4, action);
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

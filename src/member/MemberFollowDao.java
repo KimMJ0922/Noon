@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import history.HistoryDAO;
 import oracle.db.OracleConn;
 
 public class MemberFollowDao {
 	OracleConn db = new OracleConn();
-	
+	HistoryDAO hdao = new HistoryDAO();
 	public void insertFollow(String fromid, String toid) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -22,6 +23,10 @@ public class MemberFollowDao {
 			pstmt.setString(1, fromid);
 			pstmt.setString(2, toid);
 			pstmt.execute();
+			
+			String action = "fallow";
+			hdao.insertHistory("", fromid, toid, action);
+			
 		} catch (SQLException e) {
 			// TODO: handle exception
 		}finally {
@@ -58,6 +63,7 @@ public class MemberFollowDao {
 	public void deleteFollow(String fromid, String toid) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		String sql = "delete from followtb where fromid=? and toid=?";
 		
 		try {
@@ -65,6 +71,18 @@ public class MemberFollowDao {
 			pstmt.setString(1, fromid);
 			pstmt.setString(2, toid);
 			pstmt.execute();
+			
+			sql = "select * from history where fromid=? and toid = ? and action like '%팔로우%'";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, fromid);
+			pstmt.setString(2, toid);
+			rs = pstmt.executeQuery();
+			String num = "";
+			if(rs.next()) {
+				num = rs.getString(1);
+			}
+			
+			hdao.deleteHistory(num);
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -132,6 +150,28 @@ public class MemberFollowDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, toid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return cnt;
+	}
+	
+	public int followCnt(String fromid) {
+		int cnt = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from followtb where fromid=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, fromid);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				cnt = rs.getInt(1);

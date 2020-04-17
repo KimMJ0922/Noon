@@ -20,6 +20,7 @@
 <!-- css폴더 안에 있는 파일 목록 -->
 <link rel= "stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel= "stylesheet" type="text/css" href="css/dark/darkmode.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <%
 	String dark_se="";
@@ -96,7 +97,7 @@ $(function(){
 				$(".boardform>div").removeClass("dark-mode");
 				$(".boardform").addClass("board transform");
 				$(".conpre>pre>a").css("color","#000");
-				
+				$(".remoconcomment").removeClass("recomentdark");
 				
 				$(".topcontent>button").removeClass("searchbtndark ");
 				$(".topcontent>button").addClass("searchbtn");
@@ -125,6 +126,8 @@ $(function(){
 				});
 				
 				$(".btns").css("color","black");
+				
+				$(".status").html("라이트 모드");	
 			}else{
 				//dark 모드
 				$("#darkmodes").val("1");
@@ -135,6 +138,9 @@ $(function(){
 				$(".boarddetail>pre").addClass("dark-mode transform");
 				$(".howtotopdark").addClass("topdark transform");
 				$(".searchtag").css({"border-color":"#fff"});
+				
+				$(".remoconcomment").addClass("recomentdark");
+				$(".status").html("다크 모드");
 				
 				$(".likey").attr("src","img/like/like01_dark.png");
 				$(".likying").attr("src","img/like/like02.png");
@@ -181,6 +187,9 @@ $(function(){
 });		
 </script>
 <style>
+*{
+font-family: 'Noto Sans KR', sans-serif;
+}
 .row>.boardlist {
 	background: #DBDBDB;
 	border: 1px solid #000;
