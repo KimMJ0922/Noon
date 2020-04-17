@@ -28,7 +28,6 @@ border:none;
 background: none;
 }
 .search_admin{
-
 float: right;
 margin-right: 50px;
 margin-top:20px;
