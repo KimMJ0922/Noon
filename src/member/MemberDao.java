@@ -230,8 +230,12 @@ public class MemberDao {
 				sql = "update membertb set addr1=?,addr2=? where id=?";
 				pstmt = conn.prepareStatement(sql);
 				String addr[] = data.split("/");
+				String addr2 = "없음";
+				if(addr.length==2) {
+					addr2=addr[1];
+				}
 				pstmt.setString(1, addr[0]);
-				pstmt.setString(2, addr[1]);
+				pstmt.setString(2, addr2);
 				pstmt.setString(3, id);
 			}else if(type.equals("pass")) {
 				sql = "update membertb set pass=? where id=?";
