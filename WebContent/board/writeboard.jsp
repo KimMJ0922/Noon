@@ -38,7 +38,7 @@ $(function(){
 		<label for="hashtag"><h5>#입력해주세요</h5></label>
 		<div id="hashtag">
 			<div>
-				<input type="text" placeholder="이곳에 #태그를 입력후 엔터나 스페이스바를 눌러주세요." id="hashtagtext" name="hashtagtext">
+				<input type="text" placeholder="이곳에 단어를 입력후 엔터나 스페이스바를 눌러주세요." id="hashtagtext" name="hashtagtext">
 				<input type="hidden" id="taghidden" name="taghidden">
 			</div>
 			<div id="taglist"></div>

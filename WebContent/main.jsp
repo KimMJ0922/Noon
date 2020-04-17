@@ -127,7 +127,7 @@ $(function(){
 				
 				$(".btns").css("color","black");
 				
-				$(".recomentdark").text("라이트 모드");	
+				$(".status").html("라이트 모드");	
 			}else{
 				//dark 모드
 				$("#darkmodes").val("1");
@@ -140,6 +140,7 @@ $(function(){
 				$(".searchtag").css({"border-color":"#fff"});
 				
 				$(".remoconcomment").addClass("recomentdark");
+				$(".status").html("다크 모드");
 				
 				$(".likey").attr("src","img/like/like01_dark.png");
 				$(".likying").attr("src","img/like/like02.png");

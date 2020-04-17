@@ -1,3 +1,4 @@
+<%@page import="java.util.Vector"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Date"%>
 <%@page import="member.MemberDto"%>
@@ -6,10 +7,17 @@
     pageEncoding="UTF-8"%>
     
 <%
+	request.setCharacterEncoding("utf-8");
 	MemberDao dao=new MemberDao();
- 	List<MemberDto> list= dao.getadmindata();
+	List<MemberDto> list = new Vector<MemberDto>();
+	String id = request.getParameter("id");
+	if(id==null||id.equals("")){
+		id="";
+		list = dao.getadmindata();
+	}else{
+		list = dao.getadmindata(id);
+	}	
 %>
-
 <style>
 button{
 border:none;
@@ -23,8 +31,7 @@ margin-top:20px;
 border-radius: 5px;
 }
 </style>
-<div class="search_admin">
-<input type="text" style="border-radius: 5px;" placeholder="검색하쉴"></div>
+
 <table class="table table-hover">
 		<caption>회원 정보</caption>
 		<thead>
@@ -37,19 +44,15 @@ border-radius: 5px;
 		</thead>
 		
 <%
-	for(int i=1;i<list.size();i++){
-		MemberDto dto=list.get(i);
-		String id=dto.getId();
-		String name=dto.getName();
-		String type=dto.getType();
+	for(MemberDto dto : list){
 %>
 	
 <tbody>
-			<td width="200px"><%=id %></td>
-			<td width="200px"><%=name %></td>
-			<td width="150px"><%=type %></td>
+			<td width="200px"><%=dto.getId() %></td>
+			<td width="200px"><%=dto.getName() %></td>
+			<td width="150px"><%=dto.getType() %></td>
 			<td width="50px">
-        		<button type="button" class="up" id="<%=id%>" memeber="<%=type%>">
+        		<button type="button" class="up" id="<%=dto.getId()%>" memeber="<%=dto.getType()%>">
           		<span class="glyphicon glyphicon-arrow-up up" id=""></span>
        	 		</button>
        	 	</td>

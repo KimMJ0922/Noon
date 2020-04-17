@@ -71,7 +71,7 @@
 		</a>
 		<div class="remoconcomment <%=dark%>" >설정</div>
 		<a><div class="lightmode remoconlist" idx="5" id="darkmode" dark="0"></div></a>
-		<div class="remoconcomment <%=dark%>"><%=mod %></div>
+		<div class="remoconcomment <%=dark%> status"><%=mod %></div>
 	</div>
 <%
 	}
