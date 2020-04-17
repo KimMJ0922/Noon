@@ -49,7 +49,7 @@ clear: both;
 			<th>삭제</th>
 		</thead>
 <%
-	for(int i=1;i<list.size();i++){
+	for(int i=0;i<list.size();i++){
 		MemberDto dto=list.get(i);
 		String id=dto.getId();
 		String name=dto.getName();
@@ -61,7 +61,7 @@ clear: both;
 			<td width="200px"><%=name %></td>
 			<td width="150px"><%=type %></td>
 			<td width="50px">
-        		<button class="glyphicon glyphicon-arrow-up up" type="button" id="<%=id%>" memeber="<%=type%>">
+        		<button class="glyphicon glyphicon-arrow-up up" type="button" id="<%=id%>" member="<%=type%>">
        	 		</button>
        	 	</td>
        	 	<!-- 등급 다운 -->
