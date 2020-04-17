@@ -127,7 +127,19 @@ pre{
 	animation-duration: 0.5s;
 	animation-name: bounce;
 }
+.ani1{
+	animation-duration: 0.5s;
+	animation-name: bounce1;
+}
 @keyframes bounce{
+	from{
+		transform: scale(1.3);
+	}
+	to{
+		transform: scale(1);
+	}
+}
+@keyframes bounce1{
 	from{
 		transform: scale(1.3);
 	}

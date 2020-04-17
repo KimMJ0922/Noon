@@ -89,22 +89,24 @@ $(function(){
 		var num = $(this).attr("num");
 		var src = $(this).attr("src");
 		darkch = $("#darkmodes").val();
-		$(this).removeClass("ani");
 		var cnt = 0;
 		if(src=="img/like/like02.png"){
 			if(darkch=="1"){
 				$(this).attr("src","img/like/like01_dark.png");
 				$(this).removeClass("likying");
-				$(this).addClass("ani");
+				$(this).addClass("ani1");
+				$(this).removeClass("ani");
 			}else{
 				$(this).attr("src","img/like/like01.png");
 				$(this).removeClass("likying");
-				$(this).addClass("ani");
+				$(this).addClass("ani1");
+				$(this).removeClass("ani");
 			}
 			cnt = -1;
 		}else{
 			$(this).attr("src","img/like/like02.png");
 			$(this).addClass("likying");
+			$(this).removeClass("ani1");
 			$(this).addClass("ani");
 			cnt = +1;
 		}
