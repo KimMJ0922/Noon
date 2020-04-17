@@ -16,7 +16,6 @@
   	}else if(dark.equals("1")){
  %>
   	  <link rel="stylesheet" href="css/dark/admin_dark.css" />
-  	  
  <%	
   	}
  %>
