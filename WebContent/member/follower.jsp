@@ -6,6 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+  	String dark="";
+  	dark=(String)session.getAttribute("dark_check");
+  	MemberDto mdto = (MemberDto)session.getAttribute("dto");
+  	
+  	if(dark.equals("0")){
+  		
+  	}else if(dark.equals("1")){
+  	%>
+  	  <link rel="stylesheet" href="css/dark/dark_detail.css" />
+  	  
+  	<%	
+  	}
+  	%>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script	src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
 <link rel="stylesheet" href="css/member/profile.css">
