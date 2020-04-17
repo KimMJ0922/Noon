@@ -1,6 +1,46 @@
 @charset "UTF-8";
 .infoBox{
-	background-color: red;
-	width: 100px;
-	height: 100px;
+	border: 1px solid gray;
+	width: 600px;
+	height: 600px;
+	margin: 10% auto;
+}
+.findinfo{
+    background-color: gray;
+    text-align: center;
+    height: 100px;
+    cursor: pointer;
+    font-size: 15pt;
+    line-height: 48px;
+}
+.findinfo:nth-child(1) {
+	border-right:1px solid #000; 
+}
+.findbox{
+	width: 600px;
+	height: 500px;
+}
+.findid{
+	
+}
+.findpwd{
+	display: none;
+}
+.findidresult{
+	width:500px;
+	display: none;
+}
+.findpwdresult{
+	width:500px;
+	display: none;
+}
+.findinfobtn{
+	height:100px;
+	text-align: center;
+}
+.findlist{
+	height: 200px;
+}
+.infotransform{
+	transition:1s;
 }
