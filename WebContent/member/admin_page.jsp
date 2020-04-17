@@ -51,7 +51,7 @@ clear: both;
 		</thead>
 		
 <%
-	for(int i=1;i<list.size();i++){
+	for(int i=0;i<list.size();i++){
 		MemberDto dto=list.get(i);
 		String id=dto.getId();
 		String name=dto.getName();
