@@ -123,6 +123,18 @@ pre{
     cursor: pointer;
     margin-right: 10px;
 }
+.ani{
+	animation-duration: 0.5s;
+	animation-name: bounce;
+}
+@keyframes bounce{
+	from{
+		transform: scale(1.3);
+	}
+	to{
+		transform: scale(1);
+	}
+}
 #cnt{
 	width:100px;
 	height:100px;
