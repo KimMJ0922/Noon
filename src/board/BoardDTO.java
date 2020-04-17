@@ -12,8 +12,16 @@ public class BoardDTO {
 	private String reply;
 	private String profilepic;
 	private String hashtag;
+	private String type;
 	
 	
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getHashtag() {
 		return hashtag;
 	}

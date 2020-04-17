@@ -54,14 +54,14 @@ public class BoardDAO {
 		if(sort.equals("like")) {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
+					 "from ( select b.*,m.profilpic,m.type from boardtb b, membertb m where b.id = m.id order by likes desc,writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}else if(!search.equals("")){
 			sql = "select * " + 
 					"from( " + 
 					"select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT " + 
 					"from ( " + 
-					"select b.*,m.profilpic,bh.hashtag " + 
+					"select b.*,m.profilpic,bh.hashtag,m.type " + 
 					"from boardtb b, membertb m, BOARDHASHTAGTB bh " + 
 					"where b.id = m.id and bh.num = b.num and bh.hashtag = ? " + 
 					"order by writeday desc " + 
@@ -71,12 +71,12 @@ public class BoardDAO {
 		}else if(!id.equals("")){
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id and b.id = ? order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic,m.type from boardtb b, membertb m where b.id = m.id and b.id = ? order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		}else {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
-					 "from ( select b.*,m.profilpic from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
+					 "from ( select b.*,m.profilpic,m.type from boardtb b, membertb m where b.id = m.id order by writeday desc) a"+
 					 ") where rnum > ? and rnum <= ?";
 		} 
 				
@@ -110,6 +110,7 @@ public class BoardDAO {
 				dto.setWriteday(rs.getTimestamp("writeday"));
 				dto.setReply(rs.getString("reply"));
 				dto.setProfilepic(rs.getString("profilpic"));
+				dto.setType(rs.getString("type"));
 				
 				list.add(dto);
 			}

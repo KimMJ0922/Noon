@@ -135,11 +135,17 @@ $(function(){
 	$(".likeyimg").click(function(){
 		var src = $(this).attr("src");
 		var cnt = 0;
-		if(src == "img/like/like01.png"){
+		var dark = $("#darkChack").val();
+		if(src.indexOf("like01")>=0){
 			$(this).attr("src","img/like/like02.png");
 			cnt++;
 		}else{
-			$(this).attr("src","img/like/like01.png");
+			if(dark=="1"){
+				$(this).attr("src","img/like/like01_dark.png");
+			}else{
+				$(this).attr("src","img/like/like01.png");
+			}
+			
 			cnt--;
 		}
 		

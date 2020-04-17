@@ -30,7 +30,6 @@
   	}else if(dark.equals("1")){
   	%>
   	  <link rel="stylesheet" href="css/dark/dark_detail.css" />
-  	  
   	<%	
   	}
   	%>
@@ -246,5 +245,6 @@
 <%
 	}
 %>
+<input type="hidden" id="darkChack" value="<%=dark %>">
 </body>
 </html>
