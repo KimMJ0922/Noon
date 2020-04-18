@@ -86,18 +86,6 @@ function readURL(input) {
 
 		reader.readAsDataURL(input.files[0]);
 	}
-	var src = $("#preview").attr("src");
-	$.ajax({
-		type:"post",
-		url:"member/imageEditor/imageEditor.jsp",
-		dataType:"html",
-		data:{
-			"input":src
-		},
-		success:function(data){
-			alert("수정 완료");
-		}
-	});
 }
 
 //회원이 작성한 글
