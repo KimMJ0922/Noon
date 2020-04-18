@@ -95,13 +95,17 @@
 					
 <%
 					String typeImg = "";
+					String errorImg = "no_crown.png";
+					if(darkmode.equals("1")){
+						errorImg = "no_crown_dark.png";
+					}
 					if(bdto.getType().equals("관리자")){
 						typeImg = "img/icon/crown1.png";
 					}else if(bdto.getType().equals("우수회원")){
 						typeImg = "img/icon/crown2.png";
 					}
 %>
-					<img src="<%=typeImg%>" class="typeImg">
+					<img src="<%=typeImg%>" class="typeImg" onerror="this.src='img/icon/<%=errorImg%>'">
 					<a class="showProfile" style="cursor: pointer;"><%=bdto.getId() %></a>
 				</div><!-- boardwriter 아이디, 프로필 끝-->
 				

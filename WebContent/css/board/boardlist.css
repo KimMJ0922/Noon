@@ -233,6 +233,8 @@ pre{
     top: -24px;
     right: 27px;
     transform: rotate( 48deg );
+    margin: 0;
+    padding:0;
 }
 /*작성일*/
 .boardwriter>.boardwriteday{

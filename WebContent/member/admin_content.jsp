@@ -25,10 +25,12 @@
 		</script>
 <%
 	}else{
+		String dark = (String)session.getAttribute("dark_check");
+	
 %>
 	<body>
 		<div class="search_admin">
-			<input type="text" style="border-radius: 5px;" id="searchId" placeholder="검색할 아이디 입력">
+			<input type="text" style="border-radius: 5px;color:black" id="searchId" placeholder="검색할 아이디 입력">
 		</div>
 		<div class="admin_content">
 	

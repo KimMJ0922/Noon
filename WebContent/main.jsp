@@ -126,7 +126,14 @@ $(function(){
 				
 				$(".btns").css("color","black");
 				
-				$(".status").html("라이트 모드");	
+				$(".status").html("라이트 모드");
+				$(".typeImg").each(function(){
+					var src = $(this).attr("src");
+					if(src.indexOf("no_crown_dark.png")>=0){
+						$(this).attr("src","img/icon/no_crown.png");
+					}
+				});
+				
 			}else{
 				//dark 모드
 				$("#darkmodes").val("1");
@@ -173,6 +180,13 @@ $(function(){
 					"background-position": "center center"
 				});
 				$(".btns").css("color","black");
+				
+				$(".typeImg").each(function(){
+					var src = $(this).attr("src");
+					if(src.indexOf("no_crown.png")>=0){
+						$(this).attr("src","img/icon/no_crown_dark.png");
+					}
+				});
 				
 			}
 			$.ajax({

@@ -8,9 +8,17 @@
 	BoardDAO dao = new BoardDAO();
 	String con = dao.getNumContent(num);
 	String href = "main.jsp?view=board/board_Detail/board_Detail_form.jsp?num="+num;
+	
+	String dark = (String)session.getAttribute("dark_check");
+	String color = "color:black";
+	if(dark.equals("1")){
+		color = "color:white";
+	}
 %>
-<a href="<%=href%>">
-	<pre>
-		<%=con%>
+
+	<pre class="con">
+		<a href="<%=href%>" style="<%=color%>">
+			<%=con%>
+		</a>
 	</pre>
-</a>
+
