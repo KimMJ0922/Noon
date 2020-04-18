@@ -100,5 +100,10 @@
 	window.onresize = function() {
 		imageEditor.ui.resizeEditor();
 	}
+	$(".editor_submit").click(function(){
+		var canvas = $(".lower-canvas");
+		var imageURI = canvas[0].toDataURL("image/jpg");
+		$("#base64").val(imageURI);
+	});
 </script>
 </html>
