@@ -26,14 +26,14 @@
 <%
 	}else{
 %>
-		<body>
-			<div class="search_admin">
-				<input type="text" style="border-radius: 5px;" id="searchId" placeholder="검색할 아이디 입력">
-			</div>
-			<div class="admin_content">
-		
-			</div>
-		</body>
+	<body>
+		<div class="search_admin">
+			<input type="text" style="border-radius: 5px;" id="searchId" placeholder="검색할 아이디 입력">
+		</div>
+		<div class="admin_content">
+	
+		</div>
+	</body>
 <%
 	}
 %>
