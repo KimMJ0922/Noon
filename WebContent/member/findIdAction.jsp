@@ -15,7 +15,6 @@
 	if(pass==null || pass==""){
 		passs = dao.findPwd(id, email);
 		%><%=passs%><%
-// 				if(id==null || id=="")
 	}else {
 	//id 가 null일경우 id 찾는 메소드(findId) 실행
 		ids=dao.findId(pass, email);

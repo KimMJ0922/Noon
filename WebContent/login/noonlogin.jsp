@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 <head>
 
@@ -15,11 +16,13 @@
 <script type="text/javascript" src="../js/login/jquery.tubular.1.0.js"></script>
 <script type="text/javascript" src="../js/login/modernizr.js"></script>
 <script type="text/javascript" src="../js/login/noonlogin.js"></script>
+<script type="text/javascript" src="../js/member/findMemberInfo.js"></script>
 
 
 <link rel="stylesheet" href="../css/login/reset.css" media="screen" />
 <link rel="stylesheet" href="../css/login/noonlogin.css" media="screen" />
 <link rel="stylesheet" href="../css/login/css3_3d.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/member/findMemberInfo.css">
 
 <meta charset="UTF-8">
 
@@ -76,27 +79,7 @@
 	width:330px;
 	text-align: left;
 }
-/* 	modal */
-.findmodal {
-  display: none; 
-  position: fixed; 
-  z-index: 100; 
-  padding-top: 100px; 
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
-}
-.findmodal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 10px;
-  border: 1px solid #888;
-  width: 80%;
-}
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -105,21 +88,14 @@ $(function(){
 			start:2
 	}
 	$("#wrapper").tubular(options);
-	
-	//모달 실행
-	$("#mymodalbtn").click(function(){
-		$("#myfindmodal").css({"display":"block"});
-	});
-	//모달창 닫힘
-	$(".findmodal").click(function(){
-		$(this).css({"display":"none"});
-	});
+
 });
 </script>
 
 <title>메인 로그인 페이지</title>
 </head>
 <%
+	
 	String loginok = (String)session.getAttribute("loginok");
 	if(loginok!=null && loginok.equals("ok")){%>
 		<script>
