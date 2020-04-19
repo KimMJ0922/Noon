@@ -102,7 +102,7 @@
 	}
 	$(".editor_submit").click(function(){
 		var canvas = $(".lower-canvas");
-		var imageURI = canvas[0].toDataURL("image/jpg");
+		var imageURI = canvas[0].toDataURL("image/png");
 		$("#base64").val(imageURI);
 	});
 </script>

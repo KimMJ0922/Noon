@@ -1,3 +1,4 @@
+<%@page import="java.io.FileOutputStream"%>
 <%@page import="com.sun.org.apache.xerces.internal.impl.dv.util.Base64"%>
 <%@page import="java.awt.image.BufferedImage"%>
 <%@page import="javax.imageio.ImageIO"%>
@@ -12,6 +13,7 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	String BASE_64_PREFIX = "data:image/png;base64,";
 	MemberDao db = new MemberDao();
 	String id = (String)session.getAttribute("id");
 	
@@ -24,17 +26,15 @@
 	try{
 		multi = new MultipartRequest(request,createUserFolderPath,uploadSize,"utf-8",new DefaultFileRenamePolicy());
 		
+		String photo = multi.getFilesystemName("photo");
+		String path = createUserFolderPath+"\\"+photo;
 		String base64 = multi.getParameter("base64");
 		Base64 base = new Base64();
-		byte[] byteImg = base.decode(base64);
-		ByteArrayInputStream bis = new ByteArrayInputStream(byteImg);
-		BufferedImage image=ImageIO.read(bis);
-		bis.close();
-		String format = multi.getFilesystemName("photo");
-		format = format.substring(format.length()-3,format.length());
-		ImageIO.write(image, format, multi.getFile("photo"));
-		
-		String photo = multi.getFilesystemName("photo");
+		byte[] byteImg = base.decode(base64.substring(BASE_64_PREFIX.length()));
+		FileOutputStream fos = null;
+		fos = new FileOutputStream(path);
+		fos.write(byteImg, 0, byteImg.length);
+		fos.close();
 		
 		db.profilepic(id, photo);
 		MemberDto dto = db.getdata(id);
