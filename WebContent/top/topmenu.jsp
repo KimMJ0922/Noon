@@ -43,6 +43,7 @@
 	int followCnt = follow.followerCnt(id);
 %>
 <body>
+
 	<div class="container" style="width: 100%;">
 		<div class="row howtotopdark">
 			<div class="col-md-3 col-sm-6 col-xs-6 topcontent">

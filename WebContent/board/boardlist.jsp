@@ -30,10 +30,10 @@
 	}
 	
 	String dark = (String)session.getAttribute("dark_check");
-	String mod = "라이트 모드";
+	String mod = "다크 모드";
 	if(dark.equals("1")){
 		dark="recomentdark";
-		mod = "다크 모드";
+		mod = "라이트 모드";
 	}else{
 		dark="";
 	}
