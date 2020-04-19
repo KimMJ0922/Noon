@@ -27,6 +27,9 @@
 		multi = new MultipartRequest(request,createUserFolderPath,uploadSize,"utf-8",new DefaultFileRenamePolicy());
 		
 		String photo = multi.getFilesystemName("photo");
+		if(photo==null){
+			photo = "null.jpg";
+		}
 		String path = createUserFolderPath+"\\"+photo;
 		String base64 = multi.getParameter("base64");
 		Base64 base = new Base64();
