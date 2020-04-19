@@ -1,9 +1,5 @@
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="com.sun.org.apache.xerces.internal.impl.dv.util.Base64"%>
-<%@page import="java.awt.image.BufferedImage"%>
-<%@page import="javax.imageio.ImageIO"%>
-<%@page import="java.io.ByteArrayInputStream"%>
-<%@page import="java.io.FileWriter"%>
 <%@page import="member.MemberDto"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
