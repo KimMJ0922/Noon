@@ -1,7 +1,11 @@
 $(function(){
-	$(".newPassword").css({
-		"display":"none"
-	});
+	$(".findpwd>.findlist>#findid").val("");
+	$(".findpwd>.findlist>#email").val("");
+	$(".findid>.findlist>#email").val("");
+	$(".phone").val("");
+	$(".findid").css({"display":"block"});
+	
+
 	//전화번호 관련 유효성
 	$(document).on("keyup",".phone",function(e){
 		var text = $(this).val();
@@ -77,6 +81,7 @@ $(function(){
 				},
 				success:function(data){
 					alert("수정완료");
+					
 				}
 			});
 		}
@@ -86,10 +91,13 @@ $(function(){
 		$(".findid").css({"display":"none"});
 		$(".findresult").css({"display":"none"});
 		$(".findpwd").css({"display":"block"});
+		$(".newPassword").css({"display":"none"});
+		
 		//값 초기화
 		$(".findpwd>.findlist>#findid").val("");
 		$(".findpwd>.findlist>#email").val("");
 		$(".findid>.findlist>#email").val("");
+		$(".phone").val("");
 		$("#pwd").val("");
 		//아이디 비번 찾기 click css유지
 		$("#findPwd").css({"background-color":"#FFF",
@@ -102,10 +110,12 @@ $(function(){
 		$(".findpwd").css({"display":"none"});
 		$(".findresult").css({"display":"none"});
 		$(".findid").css({"display":"block"});
+		$(".newPassword").css({"display":"none"});
 		//값 초기화
 		$(".findpwd>.findlist>#findid").val("");
 		$(".findpwd>.findlist>#email").val("");
 		$(".findid>.findlist>#email").val("");
+		$(".phone").val("");
 		$("#pwd").val("");
 		//아이디 비번 찾기 click css유지
 		$("#findId").css({"background-color":"#FFF",
@@ -113,6 +123,7 @@ $(function(){
 		$("#findPwd").css({"background-color":"#44474a",
 							"color":"#fff"})
 	});
+
 	
 	//id 버튼 누르면 결과화면
 	$(".resultidbtn").click(function(){
@@ -148,11 +159,13 @@ $(function(){
 				if(id!="null"){
 					$(".findresult").css({"display":"block"});
 					$(".findid").css({"display":"none"});
-					$(".findresult").html("아이디는 :"+id);
+					$(".findresult").html("아이디는 :"+id+"입니다.");
 				}else{
 					$(".findresult").css({"display":"block"});
 					$(".findid").css({"display":"none"});
-					$(".findresult").html("회원정보가 일치하지 않습니다.");
+					$(".findresultmsg").html("회원정보가 일치하지 않습니다.");
+					$(".returnpwdbtn").css({"display":"none"});
+					$(".returnidbtn").css({"display":"block"});
 				}
 			}
 		});
@@ -196,7 +209,10 @@ $(function(){
 				}else{
 					$(".findresult").css({"display":"inline-block"});
 					$(".findpwd").css({"display":"none"});
-					$(".findresult").html("회원정보가 일치하지 않습니다.");
+					$(".findresultmsg").html("회원정보가 일치하지 않습니다.");
+					$(".returnidbtn").css({"display":"none"});
+					$(".returnpwdbtn").css({"display":"block"});
+					
 				}
 			}
 		
@@ -216,8 +232,50 @@ $(function(){
 		}
 	});
 	//취소 버튼 누르면 모든css 값 초기화후 모달창 닫힘
-	$(".resulcancelbtn").click(function(){
+	$(".resulcancelbtn,.resulbtnpass").click(function(){
+		
+		$(".findpwd>.findlist>#findid").val("");
+		$(".findpwd>.findlist>#email").val("");
+		$(".findid>.findlist>#email").val("");
+		$(".phone").val("");
+		$("#pwd").val("");
 		$(".findinfo").css({"background-color":"#44474a","color": "#fff"});
 		$(".findmodal").css({"display":"none"});
+		$(".newPassword").css({"display":"none"});
+		$("#newPassword").val("");
+		$("#newPasswordCheck").val("");
+		$(".findbox").css({"display":"block"});
+		
 	});
+	//돌아가기 버튼 누르면   값 초기화후 #findPwd display block
+	$(".returnpwdbtn").click(function(){
+		//값 초기화
+		$(".findpwd>.findlist>#findid").val("");
+		$(".findpwd>.findlist>#email").val("");
+		$(".findid>.findlist>#email").val("");
+		$(".phone").val("");
+		$("#pwd").val("");
+		//뒤로 가기
+		$(".findpwd").css({"display":"block"});
+		$(".findresult").css({"display":"none"});
+		
+	});
+	$(".returnidbtn").click(function(){
+		//값 초기화
+		$(".findpwd>.findlist>#findid").val("");
+		$(".findpwd>.findlist>#email").val("");
+		$(".findid>.findlist>#email").val("");
+		$(".phone").val("");
+		$("#pwd").val("");
+		//뒤로 가기
+		$(".findid").css({"display":"block"});
+		$(".findresult").css({"display":"none"});
+	});
+	$(".mymodalbtn").click(function(){
+		
+		
+		
+	});
+	
+	
 });

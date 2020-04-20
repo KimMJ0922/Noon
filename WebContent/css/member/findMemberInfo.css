@@ -25,7 +25,6 @@
 .findbox{
 	padding:0;
 	width: 600px;
-	height: 500px;
 }
 .findid{
 	
@@ -90,6 +89,36 @@
 .resulbtn:hover {
 	 background-color:#a8b5c7;
 }
-
-
-
+.findresultmsg{
+	font-size: 16pt;
+    height: 200px;
+    text-align: center;
+    line-height: 184px;
+}
+.returnpwdbtn,.returnidbtn{
+	width: 100%;
+    border: 0;
+    background-color: #64696d;
+    color: #fff;
+    height: 100%;
+}
+.findresult{
+	padding: 0;
+}
+.inputlinepass{
+	text-align: right;
+    width: 160px;
+    display: inline-block;
+    padding-right: 19px;
+    margin: 34px 0 0 0;
+}
+.resulbtnpass{
+	width: 100%;
+    border: 0;
+    background-color: #64696d;
+    color: #fff;
+    height: 100%;
+}
+.newPassword{
+	display: none;
+}

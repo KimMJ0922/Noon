@@ -49,15 +49,30 @@
 			</div>
 		</div>
 		<!--아이디/비밀번호 찾기 결과화면 -->
-		<div class="col-md-12 col-sm-12 col-xs-12 findbox findresult">
+		<div class="col-md-12 col-sm-12 col-xs-12 findresult">
+			<div class="findresultmsg">
+			
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12 findinfobtn">
+					<button type="button" class="returnpwdbtn">돌아가기</button>
+					<button type="button" class="returnidbtn">돌아가기</button>
+			</div>
 		</div>
 		<div class="newPassword">
-			새 비밀번호 : <input type="password" id="newPassword"><br>
-			새 비밀번호 확인 : <input type="password" id="newPasswordCheck"><br>
+		<div class="col-md-12 col-sm-12 col-xs-12 findlist">
+				<div class="inputlinepass">새 비밀번호 :</div> 
+				<input type="password" id="newPassword" style="width: 70%;">
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12 findlist" >
+				<div class="inputlinepass">새 비밀번호 확인 :</div> 
+				<input type="password"name="email" id="newPasswordCheck" style="width: 70%;">
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12 findinfobtn ">
+				<button type="button" class="resultpwdbtn resulbtnpass"id="newPassBtn">확인</button>
+			</div>
 			<p class="passCheck" style="display:none"></p>
 			<input type="hidden" id="hdCheck" value="no">
 			<input type="hidden" id="hdId">
-			<button type="button" id="newPassBtn">확인</button>
 		</div>
 	</div>
 </body>
