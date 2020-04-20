@@ -188,7 +188,7 @@ $(function(){
 				if(id!="null"){
 					$(".findresult").css({"display":"block"});
 					$(".findid").css({"display":"none"});
-					$(".findresult").html("<p class='idmsg'>회원님의 아이디는 :"+id+"입니다.</p>" +
+					$(".findresult").html("<p class='idmsg'>회원님의 아이디는 "+id+"입니다.</p>" +
 							"<div class='col-md-12 col-sm-12 col-xs-12 gologinbox'>" +
 								"<button type='button' class='gologin'>로그인 하기</button>" +
 							"</div>");
