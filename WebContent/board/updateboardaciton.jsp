@@ -52,7 +52,6 @@
 		imgdao.deleteImgBoard(num);
 
 		for(String fileName : fianlNames){
-			System.out.println(fileName);
 			imgdao.insertImgFileName(num, id+"/"+fileName);
 		}
 		//해당 게시글의 해시태그 먼저 지우기
