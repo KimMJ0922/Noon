@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 <head>
 
@@ -15,11 +16,13 @@
 <script type="text/javascript" src="../js/login/jquery.tubular.1.0.js"></script>
 <script type="text/javascript" src="../js/login/modernizr.js"></script>
 <script type="text/javascript" src="../js/login/noonlogin.js"></script>
+<script type="text/javascript" src="../js/member/findMemberInfo.js"></script>
 
 
 <link rel="stylesheet" href="../css/login/reset.css" media="screen" />
 <link rel="stylesheet" href="../css/login/noonlogin.css" media="screen" />
 <link rel="stylesheet" href="../css/login/css3_3d.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/member/findMemberInfo.css">
 
 <meta charset="UTF-8">
 
@@ -76,6 +79,7 @@
 	width:330px;
 	text-align: left;
 }
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -83,14 +87,15 @@ $(function(){
 			videoId:'Wimkqo8gDZ0',
 			start:2
 	}
-	
-	
 	$("#wrapper").tubular(options);
+
 });
 </script>
-<titlea>메인 로그인 페이지</title>
+
+<title>메인 로그인 페이지</title>
 </head>
 <%
+	
 	String loginok = (String)session.getAttribute("loginok");
 	if(loginok!=null && loginok.equals("ok")){%>
 		<script>
@@ -126,13 +131,18 @@ $(function(){
 					<input class="main_input" id="password" name="pass" type="password" placeholder="비밀번호"><br>
 					<input class="main_submit" type="submit" value="로그인"><br>
 				
-					<p class="main_serc"><a href="../member/memberform.jsp"style="margin-left:10px;">회원가입</a><a href="#" style="float:right;">아이디/비밀번호 찾기</a></p>
+					<p class="main_serc"><a href="../member/memberform.jsp"style="margin-left:10px;">회원가입</a><a id="mymodalbtn" style="float:right;">아이디/비밀번호 찾기</a></p>
 					<p class="check_id"><input type="checkbox" id="idcheck" name="idcheck" style="width:20px;height:20px;" <%=(idcheck!=null?"checked":"")%>> 아이디 저장</p>
 			  	</form>
 			</div>
 		  </div>
 		</div>
 	</div>
+</div>
+<div id="myfindmodal" class="findmodal">
+	<div class="findmodal-content">
+   		 <jsp:include page="../member/findMemberInfo.jsp"/>
+ 	</div>
 </div>
 </body>
 </html>
