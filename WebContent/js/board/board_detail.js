@@ -221,6 +221,7 @@ function getReply(){
         	var writernik = $(".writernik").children("b").text();
         
 			$.each(data,function(i,item){
+				//작성글의 글쓴이와 댓글쓸때의 글쓴이가 같으면
 				if(item.name==writernik){
 					str+="<div class='reply_content_re_writer' replynum='"+item.replynum+"'>"
 					if(item.profilepic==null||item.profilepic==""){
@@ -244,6 +245,7 @@ function getReply(){
 					
 					str+="<div replynum='"+item.replynum+"' writer='"+item.name+"'></div>"
 				str+="</div>";
+					//작성글의 글쓴이와 댓글쓸때의 글쓴이가 다르면
 				}else{
 					str+="<div class='reply_content_re' id='"+item.replynum+"' replynum='"+item.replynum+"'>"
 						if(item.profilepic==null||item.profilepic==""){

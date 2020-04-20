@@ -68,7 +68,7 @@
 		</a> 
 
 	</nav>
-	<div id="view" style="min-height: 550px; visibility: hidden; height: 500px">
+	<div id="view" style="min-height: 550px; visibility: hidden;">
 		<jsp:include page="<%=content %>">
 			<jsp:param value="<%=id %>" name="id"/>
 		</jsp:include>
