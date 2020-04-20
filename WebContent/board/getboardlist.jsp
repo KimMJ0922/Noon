@@ -193,7 +193,7 @@
 					<span class="conpre">
 <%
 					String nullch = bdto.getContent().substring(0,1);
-					if(nullch==null||nullch.equals("")){
+					if(nullch==null||nullch.equals("")||nullch.equals(" ")){
 %>
 							...
 							<button class="conmorebtn" idx="<%=bdto.getNum()%>">

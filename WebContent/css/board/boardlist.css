@@ -70,7 +70,7 @@ div.btns{
 div.imglist{
 	padding: 0;
     width: 500px;
-    min-height: 500px;
+    /* min-height: 500px; */
     max-height: 601px;
     border-bottom: 1px solid #DBDBDB;
 }
