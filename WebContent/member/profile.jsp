@@ -149,30 +149,22 @@
 	</div>
 	
 	<div id="myModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
+		<div class="modal-dialog"style="width: 90%; height: 90%;">
 	
-	    <!-- Modal content-->
-		<form action="member/updateProfilePic.jsp" enctype="multipart/form-data" method="post">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">프로필 사진 변경</h4>
-		      </div>
-		      <div class="modal-body">
-		        <div class="profilePic" style="text-align: center;">
-					<img id="preview" src="http://placehold.it/180" style="width: 180px;height: 180px; margin-bottom: 10px;" />
-					<div class="filebox">
-						<input type="file" class="form-control" name="photo" id="photo" accept="image/gif, image/jpeg, image/png, image/jpg" onchange="readURL(this);">
-					</div>
+		<!-- Modal content-->
+		<form action="member/updateProfilePic.jsp" enctype="multipart/form-data" method="post" style="height: 100%;">
+			<div class="modal-content" style="height: 100%;">
+				<div class="modal-header" style="padding: 10px 10px 5px 20px;">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">프로필 사진 변경</h4>
 				</div>
-		      </div>
-		      <div class="modal-footer">
-		        <input type="submit" class="btn btn-pimary" value="변경">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-		      </div>
-		    </div>
+				<div class="modal-body" style="height: 96%;padding:0px;">
+					<div id="tui-image-editor-container" style="height: 95%;margin: 0px;"></div>
+					<input type="hidden" name="base64" id="base64">
+				</div>
+			</div>
 		</form>
-	  </div>
+		</div>
 	</div>
 <%
 	}else{

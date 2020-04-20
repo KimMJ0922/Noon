@@ -9,6 +9,10 @@
 <link rel= "stylesheet" type="text/css" href="css/member/MyProfilestyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.10/css/all.css'>
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1|Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.3/tui-color-picker.css" rel="stylesheet">
+<link type="text/css" href="member/css/tui-image-editor.css" rel="stylesheet">
+
   <%
   	String dark="";
   	dark=(String)session.getAttribute("dark_check");
@@ -70,4 +74,36 @@
 		</jsp:include>
 	</div>
 </body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.0/fabric.js"></script>
+<script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
+<script type="text/javascript" src="https://uicdn.toast.com/tui-color-picker/v2.2.3/tui-color-picker.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+<script type="text/javascript" src="member/js/tui-image-editor.js"></script>
+<script type="text/javascript" src="member/js/black-theme.js"></script>
+<script>
+	var path = $(".pic").attr("src");
+	// Image editor
+	var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
+		includeUI: {
+			loadImage: {
+				path: path,
+				name: 'UploadImage'
+			},
+			theme: blackTheme,
+			initMenu: 'filter',
+			menuBarPosition: 'bottom'
+		},
+		cssMaxWidth: 700,
+		cssMaxHeight: 500,
+		usageStatistics: false
+	});
+	window.onresize = function() {
+		imageEditor.ui.resizeEditor();
+	}
+	$(".editor_submit").click(function(){
+		var canvas = $(".lower-canvas");
+		var imageURI = canvas[0].toDataURL("image/png");
+		$("#base64").val(imageURI);
+	});
+</script>
 </html>
