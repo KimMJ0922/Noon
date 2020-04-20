@@ -35,8 +35,9 @@
 	height:600px; 
 	background-color:rgba(255,255,255,0.7);
 	margin:0 auto;
-	margin-top:150px; 
+	margin-top:250px; 
 	text-align: center;
+	border-radius: 50px
 }
 
 .main_input{
