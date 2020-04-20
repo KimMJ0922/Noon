@@ -8,7 +8,16 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	MemberDao dao=new MemberDao();
- 	List<MemberDto> list= dao.getadmindata();
+	List<MemberDto> list= new Vector<MemberDto>();
+	String id = request.getParameter("id");
+	if(id==null||id.equals("")){
+		id="";
+		list = dao.getadmindata();
+	}else{
+		list = dao.getadmindata(id);
+	}	
+	
+ 	
  	String dark="";
  	dark=(String)session.getAttribute("dark_check");
 	if(dark.equals("0")){
@@ -16,7 +25,6 @@
   	}else if(dark.equals("1")){
  %>
   	  <link rel="stylesheet" href="css/dark/admin_dark.css" />
-  	  
  <%	
   	}
  %>
@@ -49,32 +57,31 @@ clear: both;
 			<th>삭제</th>
 		</thead>
 <%
-	for(int i=1;i<list.size();i++){
-		MemberDto dto=list.get(i);
-		String id=dto.getId();
-		String name=dto.getName();
-		String type=dto.getType();
+	for(MemberDto dto:list){
 %>
 	
-<tbody>
-			<td width="200px"><%=id %></td>
-			<td width="200px"><%=name %></td>
-			<td width="150px"><%=type %></td>
-			<td width="50px">
-        		<button class="glyphicon glyphicon-arrow-up up" type="button" id="<%=id%>" memeber="<%=type%>">
-       	 		</button>
-       	 	</td>
-       	 	<!-- 등급 다운 -->
-			<td width="50px">
-				<button  class="glyphicon glyphicon-arrow-down down" type="button" id="<%=id%>" member="<%=type%>">
-       	 		</button>
-			</td>
-			<!-- 회원 삭제 -->
-			<td width="50px">
-          		<button class="glyphicon glyphicon-trash del" type="button" id="<%=id%>" member="<%=type%>">
-       	 		</button>
-			</td>
-</tbody>
+	<tbody>
+		<td width="200px"><%=dto.getId() %></td>
+		<td width="200px"><%=dto.getName() %></td>
+		<td width="150px"><%=dto.getType() %></td>
+		<td width="50px">
+      		<button class="glyphicon glyphicon-arrow-up up" type="button" 
+      				id="<%=dto.getId()%>" member="<%=dto.getType()%>">
+     	 	</button>
+     	 </td>
+	    <!-- 등급 다운 -->
+		<td width="50px">
+			<button  class="glyphicon glyphicon-arrow-down down" type="button"
+					 id="<%=dto.getId()%>" member="<%=dto.getType()%>">
+	     	 </button>
+		</td>
+		<!-- 회원 삭제 -->
+		<td width="50px">
+       		<button class="glyphicon glyphicon-trash del" type="button"
+       				id="<%=dto.getId()%>" member="<%=dto.getType()%>">
+    	 	</button>
+		</td>
+	</tbody>
 <%} %>
 
 </table>
