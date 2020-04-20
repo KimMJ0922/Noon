@@ -89,8 +89,8 @@ $(function(){
 	
 	//해시태그
 	$("#hashtagtext").keydown(function(e){
-		if(e.keyCode==13||e.keyCode==32){
-			var hash = $(this).val();
+		if(e.keyCode==13){
+			var hash = $.trim($(this).val());
 			if(hash==""||hash==null||hash==" "||hash.indexOf("#")>=0){
 				return false;
 			}
@@ -102,9 +102,9 @@ $(function(){
 					return false;
 				}
 			}
-			$("#taglist").append("<div class='tag'>#"+hash+"<span class='glyphicon glyphicon-remove delhashbtn' idx='"+cnt+"'></span></div>");
+			$("#taglist").append("<div class='tag'>#"+$.trim(hash)+"<span class='glyphicon glyphicon-remove delhashbtn' idx='"+cnt+"'></span></div>");
 			$(this).val("");
-			hashlist[cnt] = hash;
+			hashlist[cnt] = $.trim(hash);
 			cnt++;
 		}
 	});

@@ -26,10 +26,9 @@
 	String sort = request.getParameter("sort");
 	String search = request.getParameter("search");
 	String id = request.getParameter("id");
-	if(search==null){
+	if(search==null||search.equals("")){
 		search="";
 	}
-	
 	if(id==null){
 		id = "";
 	}

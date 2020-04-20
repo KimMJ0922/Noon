@@ -64,7 +64,7 @@ $(function(){
 	 
 	//해시태그 
 	$("#hashtagtext").keydown(function(e){ 
-		if(e.keyCode==13||e.keyCode==32){ 
+		if(e.keyCode==13){ 
 			var hash = $(this).val(); 
 			if(hash==""||hash==null||hash==" "||hash.indexOf("#")>=0){ 
 				return false; 

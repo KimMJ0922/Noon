@@ -50,7 +50,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		String sql = "";
 		String plussql = "";
-
+		System.out.println(search);
 		if(sort.equals("like")) {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
