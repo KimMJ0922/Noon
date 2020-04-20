@@ -52,4 +52,22 @@ public class ImgFileDelete {
 		}
 	}
 	
+	//회원 탈퇴 시 이미지 지우기
+	public void userImgFileDelete(String prviewFolderPath, String userFolderPath) {
+		File previewFoloder = new File(prviewFolderPath);
+		File[] previewFileList = previewFoloder.listFiles();
+		
+		File userFoloder = new File(userFolderPath);
+		File[] userFileList = userFoloder.listFiles();
+		
+		for(int i=0;i<userFileList.length;i++) {
+			userFileList[i].delete();
+		}
+		
+		for(int j=0;j<previewFileList.length;j++) {
+			previewFileList[j].delete();
+		}
+		userFoloder.delete();
+		previewFoloder.delete();
+	}
 }

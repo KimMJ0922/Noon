@@ -53,10 +53,6 @@
 	BoardDTO dto=Bdb.getBoard(num);
 	MemberFollowDao fdb = new MemberFollowDao();
   	boolean followed = fdb.followed(mdto.getId(), dto.getId());
-	System.out.println("followed : "+followed);
-	System.out.println("mdtogetId : "+mdto.getId());
-	System.out.println("dtogetId : "+dto.getId());
-	System.out.println("bool : "+mdto.getId().equals(dto.getId()));
 	if(dto.getNum()==null||dto.getNum()==""){
 %>
 		<script>
@@ -77,7 +73,7 @@
 	
 	String id = mdto.getId();
 	if(dto.getProfilepic()!=null&&dto.getProfilepic()!=""){
-		profileimg = "profile/"+id+"/"+dto.getProfilepic();
+		profileimg = "profile/"+dto.getId()+"/"+dto.getProfilepic();
 	}
 %>
 <body>

@@ -128,12 +128,17 @@
 								   background-position: center center;
 					 			  "
 					></button>
-
 					<div class="btns">
-						<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
-							<button type="submit" class="updatebtn myboardbtn">수정</button>
-							<input type="hidden" name="num" value="<%=bdto.getNum()%>">
-						</form>
+<%
+						if(bdto.getId().equals(mdto.getId())){
+%>
+							<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
+								<button type="submit" class="updatebtn myboardbtn">수정</button>
+								<input type="hidden" name="num" value="<%=bdto.getNum()%>">
+							</form>
+<%
+						}
+%>
 						<button type="button" class="delbtn myboardbtn" num="<%=bdto.getNum()%>">삭제</button>
 					</div><!-- btns 끝 -->
 				</div><!-- menu 끝 -->

@@ -55,6 +55,7 @@ $(function(){
 			}
 		});
 	});
+	
 	$(window).on("keydown","submit",function(e){
 		if(e.keyCode==13){
 			$(window).off("submit");
