@@ -72,12 +72,11 @@
 	String day = df.dateFormat(dto.getWriteday());
 	//이미지 url
 	String url=request.getContextPath();
-
 	String profileimg = "profile/default.png";
-	
 	String id = mdto.getId();
+	
 	if(dto.getProfilepic()!=null&&dto.getProfilepic()!=""){
-		profileimg = "profile/"+id+"/"+dto.getProfilepic();
+		profileimg = "profile/"+dto.getId()+"/"+dto.getProfilepic();
 	}
 %>
 <body>
@@ -94,31 +93,34 @@
 	<div class="container detail_box">
 		<div class="row">
 			<div class="col-md-7 col-sm-7 col-xs-12"  style="padding:0;">
-<%
+<%				//이미지가 하나라도 있을때
 				if(Ilist.size()!=0){
 					thumbnail=Ilist.get(0);
 %>
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 						<!-- Indicators -->
+						<%if(Ilist.size()==1){ %>
+						
+						<%}else{ %>
 	    				<ol class="carousel-indicators">
 <%
 							for(int i=0;i<Ilist.size();i++){
 								if(i==0){
-%>
+%>									
 									<li data-target="#myCarousel" data-slide-to="<%=i %>" class="active" ></li>
 <%
 								}else{
 %>
 									<li data-target="#myCarousel" data-slide-to="<%=i%>"></li>
 <%
-								}
-							}
+								}// 케러샐 여러개 액티브 다음것들
+							}// 케러샐 개수 여러개일때 첫번째 액티브
+						}//케러셀 개수 표기 이미지가 1개일때
 %>
 		   				</ol>
 		   				<div class="carousel-inner">
 		   					<div class="item active">
 		   						<img id="modal_img" src="<%=url %>/save/<%=thumbnail %>" alt="Los Angeles" style="width:680px;min-height:638px;max-height:638px;" data-toggle="modal" data-target="#modal">
-							
 		   					</div><!-- class="item active" 끝 -->
 <%
 							for(int i=1;i<Ilist.size();i++){
@@ -126,15 +128,17 @@
 %>
 								<div class="item">
 									<img id="modal_img" src="<%=url %>/save/<%=imgs %>" alt="Chicago" style="width:680px;min-height:638px;max-height:638px;" data-toggle="modal" data-target="#modal">
-								
 								</div><!-- class="item"끝  -->	
 <%
 							}
 %>		   					
 		   				</div><!-- class="carousel-inner" 끝 -->
 					</div><!-- class="carousel slide" 끝 -->
-					
 					<!-- Left and right controls -->
+<%
+						for(int i=0;i<Ilist.size();i++){
+								if(i!=0){
+%>
 					<a class="left carousel-control" id="dark_np" href="#myCarousel" data-slide="prev" style="background-image: none;">
 						<span class="glyphicon glyphicon-chevron-left"></span>
 						<span class="sr-only">Previous</span>
@@ -144,6 +148,9 @@
 						<span class="sr-only">Next</span>
 					</a>
 <%
+					}
+						}
+
 				//해당 게시글에 사진이 없을 때
 				}else{
 %>					
