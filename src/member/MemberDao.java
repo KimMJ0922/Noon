@@ -306,17 +306,17 @@ public class MemberDao {
 		
 	}
 	//아이디 찾기
-	 public String findId(String pass, String email){
+	 public String findId(String email, String phone){
 		 	String id="";
 		 	Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs = null;
-			String sql="select id from membertb where pass =? and email = ?";
+			String sql="select id from membertb where hp =? and email = ?";
 			
 			conn=db.getConnection();
 			try {
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, pass);
+				pstmt.setString(1, phone);
 				pstmt.setString(2, email);
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
@@ -333,11 +333,11 @@ public class MemberDao {
 	 }
 	 //비번찾기
 	 public String findPwd(String id, String email){
-		 	String pass="";
+		 	String findId="";
 		 	Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs = null;
-			String sql="select pass from membertb where id =? and email = ?";
+			String sql="select id from membertb where id =? and email = ?";
 			
 			conn=db.getConnection();
 			try {
@@ -346,14 +346,14 @@ public class MemberDao {
 				pstmt.setString(2, email);
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
-					pass=rs.getString(1);
+					findId=rs.getString(1);
 				}
 			} catch (Exception e) {
 				e.getMessage();
 			}finally {
 				db.dbClose(rs, pstmt, conn);
 			}
-			return pass;
+			return findId;
 	 }
 	
 	public void admindelete(String id) {
@@ -373,5 +373,24 @@ public class MemberDao {
 			db.dbClose(pstmt, conn);
 		}
 		
+	}
+	
+	public void changePassword(String id, String pass) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="update membertb set pass = ? where id=?";
+		
+		conn=db.getConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, pass);
+			pstmt.setString(2, id);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.getMessage();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
 	}
 }

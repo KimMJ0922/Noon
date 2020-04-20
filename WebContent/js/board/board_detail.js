@@ -135,7 +135,7 @@ $(function(){
 	$(".likeyimg").click(function(){
 		var src = $(this).attr("src");
 		var cnt = 0;
-		var dark = $("#darkChack").val();
+		var dark = $("#darkCheck").val();
 		if(src.indexOf("like01")>=0){
 			$(this).attr("src","img/like/like02.png");
 			cnt++;
@@ -307,6 +307,7 @@ function getLikeNum(boardnum){
 }
 
 function getLikeStatus(boardnum){
+	var darkCheck = $("#darkCheck").val();
 	$.ajax({
         type:"post", 
         url:"board/likes/getlikestatus.jsp", 
@@ -321,7 +322,11 @@ function getLikeStatus(boardnum){
         	if(id == loginid){
         		$(".likeyimg").attr("src","img/like/like02.png");
         	}else{
-        		$(".likeyimg").attr("src","img/like/like01.png");
+        		if(darkCheck=="1"){
+        			$(".likeyimg").attr("src","img/like/like01_dark.png");
+        		}else{
+        			$(".likeyimg").attr("src","img/like/like01.png");
+        		}
         	}
 		}
 	});

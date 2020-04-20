@@ -24,6 +24,7 @@
 	if(search==null){
 		search="";
 	}
+
 	String id = request.getParameter("id");
 	if(id==null){
 		id="";

@@ -1,3 +1,4 @@
+<%@page import="member.MemberDto"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="imgfile.MoveFile"%>
@@ -9,11 +10,15 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	BoardDAO bdao = new BoardDAO();
 	String num = request.getParameter("num");
-	String id = (String)session.getAttribute("id");
+	MemberDto dto = (MemberDto)session.getAttribute("dto");
+	String id = dto.getId();
+
 	//임시 폴더 경로
 	String previewFolderPath = getServletContext().getRealPath("/preview/"+id);
 	String userFolderPath = getServletContext().getRealPath("/save/"+id);
+	
 	//임시 폴더 생성
 	ImgFolderCreate ifc = new ImgFolderCreate();
 	ifc.createFolder(previewFolderPath);

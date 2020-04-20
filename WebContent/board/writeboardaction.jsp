@@ -29,7 +29,7 @@
 	List<String> fianlFileName = 
 	ptuf.previewToUserFolder(prviewFolderPath,createUserFolderPath,ch);
 	
-	int uploadSize = 1024*1024*2;
+	int uploadSize = 1024*1024*5;
 	String imgName = "";
 	MultipartRequest multi = null;
 

@@ -16,7 +16,7 @@
 <script type="text/javascript" src="../js/login/jquery.tubular.1.0.js"></script>
 <script type="text/javascript" src="../js/login/modernizr.js"></script>
 <script type="text/javascript" src="../js/login/noonlogin.js"></script>
-<script type="text/javascript" src="../js/member/findMemberInfo.js"></script>
+
 
 
 <link rel="stylesheet" href="../css/login/reset.css" media="screen" />

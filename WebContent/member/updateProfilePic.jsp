@@ -17,7 +17,7 @@
 	ImgFolderCreate ifc = new ImgFolderCreate();
 	ifc.createFolder(createUserFolderPath);
 	
-	int uploadSize = 1024*1024*2;
+	int uploadSize = 1024*1024*5;
 	MultipartRequest multi = null;
 	try{
 		multi = new MultipartRequest(request,createUserFolderPath,uploadSize,"utf-8",new DefaultFileRenamePolicy());

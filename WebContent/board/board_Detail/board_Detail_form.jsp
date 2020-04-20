@@ -53,10 +53,6 @@
 	BoardDTO dto=Bdb.getBoard(num);
 	MemberFollowDao fdb = new MemberFollowDao();
   	boolean followed = fdb.followed(mdto.getId(), dto.getId());
-	System.out.println("followed : "+followed);
-	System.out.println("mdtogetId : "+mdto.getId());
-	System.out.println("dtogetId : "+dto.getId());
-	System.out.println("bool : "+mdto.getId().equals(dto.getId()));
 	if(dto.getNum()==null||dto.getNum()==""){
 %>
 		<script>
@@ -214,7 +210,13 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
 				<div class="detail_content">
-					<p><img class="likeyimg" src="img/like/like01.png"></p><!--  아이콘 자리 -->
+<%
+						String imgSrc = "img/like/like01.png";
+						if(dark.equals("1")){
+							imgSrc = "img/like/like01_dark.png";
+						}
+%>
+					<p><img class="likeyimg" src="<%=imgSrc%>"></p><!--  아이콘 자리 -->
 					<p><b class="likycnt">좋아요 0개</b></p>
 					<p><b id="replycnt">댓글 0개</b></p>
 					<!-- 글 내용 -->
@@ -252,6 +254,6 @@
 <%
 	}
 %>
-<input type="hidden" id="darkChack" value="<%=dark %>">
+<input type="hidden" id="darkCheck" value="<%=dark %>">
 </body>
 </html>

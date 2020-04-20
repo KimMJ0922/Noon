@@ -26,10 +26,9 @@
 	String sort = request.getParameter("sort");
 	String search = request.getParameter("search");
 	String id = request.getParameter("id");
-	if(search==null){
+	if(search==null||search.equals("")){
 		search="";
 	}
-	
 	if(id==null){
 		id = "";
 	}
@@ -128,12 +127,17 @@
 								   background-position: center center;
 					 			  "
 					></button>
-
 					<div class="btns">
-						<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
-							<button type="submit" class="updatebtn myboardbtn">수정</button>
-							<input type="hidden" name="num" value="<%=bdto.getNum()%>">
-						</form>
+<%
+						if(bdto.getId().equals(mdto.getId())){
+%>
+							<form class="updatefrm" method="post" action="main.jsp?view=board/updateboard.jsp">
+								<button type="submit" class="updatebtn myboardbtn">수정</button>
+								<input type="hidden" name="num" value="<%=bdto.getNum()%>">
+							</form>
+<%
+						}
+%>
 						<button type="button" class="delbtn myboardbtn" num="<%=bdto.getNum()%>">삭제</button>
 					</div><!-- btns 끝 -->
 				</div><!-- menu 끝 -->
@@ -193,7 +197,7 @@
 					<span class="conpre">
 <%
 					String nullch = bdto.getContent().substring(0,1);
-					if(nullch==null||nullch.equals("")){
+					if(nullch==null||nullch.equals("")||nullch.equals(" ")){
 %>
 							...
 							<button class="conmorebtn" idx="<%=bdto.getNum()%>">

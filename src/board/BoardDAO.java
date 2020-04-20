@@ -50,7 +50,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		String sql = "";
 		String plussql = "";
-
+		System.out.println(search);
 		if(sort.equals("like")) {
 			sql = "select * from("+
 					 "select a.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT "+
@@ -324,6 +324,29 @@ public class BoardDAO {
 		} 
 		 
 		return writer; 
-	} 
+	}
 	
+	public String getNumWriter(String num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select id from boardtb where num = ?";
+		String id = "";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getString("id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return id;
+	}
 }

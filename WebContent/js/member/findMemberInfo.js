@@ -1,6 +1,87 @@
 $(function(){
-	
-//비밀번호찾기 누르면 나머지 display:none
+	$(".newPassword").css({
+		"display":"none"
+	});
+	//전화번호 관련 유효성
+	$(document).on("keyup",".phone",function(e){
+		var text = $(this).val();
+		var idx = $(this).attr("idx");
+		var regexp = /^[0-9]*$/;
+		
+		if(!regexp.test(text)){
+			alert("숫자만 입력해주세요.");
+			var leng = $(this).val().length;
+			var sub = $(this).val().substring(0,leng-1);
+			$(this).val(sub);
+			return false;
+		}
+		if(e.keyCode!=8){
+			if(idx=="0"){
+				text = $(this).val();
+				if(text.length>=3){
+					$(".phone:eq(1)").focus();
+				}
+			}else if(idx=="1"){
+				text = $(this).val();
+				if(text.length>=4){
+					$(".phone:eq(2)").focus();
+				}
+			}
+		}
+	});
+	//새 비밀번호
+	$(document).on("keyup","#newPassword, #newPasswordCheck",function(){
+		var pass = $("#newPassword").val();
+		var passCheck = $("#newPasswordCheck").val();
+		
+		//영문 대.소문자, 숫자 _,-만 입력 가능하고 5에서 20자리를 입력했는지 체크
+		var RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/;
+		if(!RegExp.test(pass)||!RegExp.test(passCheck)){
+			$("#hdCheck").val("no");
+			$(".passCheck").css({
+				"display":"block"
+			});
+			$(".passCheck").text("영문 대문자와 소문자, 숫자, 특수문자를 하나 이상 포함하여 8~16자입니다.");
+			return false;
+		}
+		
+		if(pass != passCheck){
+			$("#hdCheck").val("no");
+			$(".passCheck").css({
+				"display":"block"
+			});
+			$(".passCheck").text("입력한 비밀번호와 비밀번호 확인이 맞지 않습니다.");
+		}else{
+			$("#hdCheck").val("yes");
+			$(".passCheck").css({
+				"display":"none"
+			});
+		}
+		
+	});
+	$(document).on("click","#newPassBtn",function(){
+		var check = $("#hdCheck").val();
+		var id = $("#hdId").val();
+		var pass = $("#newPassword").val();
+		if(check=="no"){
+			alert("비밀번호를 확인해주세요");
+			return false;
+		}else{
+			$.ajax({
+				type:"get",
+				url:"../member/newpassword.jsp",
+				dataType:"html",
+				data:{
+					"id":id,
+					"pass":pass
+				},
+				success:function(data){
+					alert("수정완료");
+				}
+			});
+		}
+	});
+	//비밀번호찾기 누르면 나머지 display:none
 	$("#findPwd").click(function(){
 		$(".findid").css({"display":"none"});
 		$(".findresult").css({"display":"none"});
@@ -32,22 +113,38 @@ $(function(){
 		$("#findPwd").css({"background-color":"#44474a",
 							"color":"#fff"})
 	});
-//	id 버튼 누르면 결과화면
+	
+	//id 버튼 누르면 결과화면
 	$(".resultidbtn").click(function(){
-		
 		var email=$(".findid>.findlist>#email").val();
-		var pass=$("#pwd").val();
+		var phone = "";
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		$(".phone").each(function(){
+			phone = phone + $(this).val() + "-";
+		});
+		phone = phone.substring(0,phone.length-1);
+		if(email.length==0||email.indexOf(" ")>=0){
+			alert("이메일을 확인해주세요.");
+			return false;
+		}else if(!regExp.test(email)){
+			alert("이메일을 확인해주세요.");
+			return false;
+		}
+		if(phone.length==0||phone.indexOf(" ")>=0){
+			alert("전화번호를 확인해주세요.");
+			return false;
+		}
+		
 		$.ajax({
 			type:"get",
-			url:"../WebContent/member/findIdAction.jsp",
+			url:"../member/findIdAction.jsp",
 			dataType:"html",
 			data:{
 				"email":email,
-				"pass":pass
+				"phone":phone
 			},
 			success:function(data){
 				var id = $.trim(data);
-				console.log(data);
 				if(id!="null"){
 					$(".findresult").css({"display":"block"});
 					$(".findid").css({"display":"none"});
@@ -62,25 +159,40 @@ $(function(){
 	});
 	
 //	pwd 버튼 누르면 결과화면
-	
 	$(".resultpwdbtn").click(function(){
 		var id=$("#findid").val();
 		var email=$(".findpwd>.findlist>#email").val();
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+		if(id.length==0||id.indexOf(" ")>=0){
+			alert("아이디를 확인해주세요.");
+			return false;
+		}
+		
+		if(email.length==0||email.indexOf(" ")>=0){
+			alert("이메일을 확인해주세요.");
+			return false;
+		}else if(!regExp.test(email)){
+			alert("이메일을 확인해주세요.");
+			return false;
+		}
+		
 		$.ajax({
 			type:"get",
-			url:"../WebContent/member/findIdAction.jsp",
+			url:"../member/findpasscheck.jsp",
 			dataType:"html",
 			data:{
 				"id":id,
 				"email":email
 			},
 			success:function(data){
-				var pass = $.trim(data);
-				console.log(pass)
-				if(pass!=""){
-					$(".findresult").css({"display":"inline-block"});
+				var findId = $.trim(data);
+				if(id==findId){
 					$(".findpwd").css({"display":"none"});
-					$(".findresult").html("비밀번호는 :"+pass);
+					$(".newPassword").css({
+						"display":"inline-block"
+					});
+					$("#hdId").val(id);
 				}else{
 					$(".findresult").css({"display":"inline-block"});
 					$(".findpwd").css({"display":"none"});
