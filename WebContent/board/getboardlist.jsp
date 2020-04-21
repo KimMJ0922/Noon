@@ -53,7 +53,7 @@
 	List<BoardHashTagDTO> hashlist = bhtdao.getHashTags(minrow, maxrow, sort,search,id);
 	List<BoardImgDTO> bilist = bidao.getImglist(minrow, maxrow, sort,search,id);
 	List<String> bllist = bldao.getLikeList(minrow, maxrow, mdto.getId(), sort,search,id);
-	
+	List<BoardReplyDTO> brlist = dao.getBoardReply();
 	if(maxrow.equals("10")&&list.size()==0){
 %>
 	<div class="nolist">
@@ -246,7 +246,16 @@
 %>
 					<img class="likey <%=likying %>" src="<%=defaultLikeIcon%>" num="<%=bdto.getNum()%>">
 					<span id="likecnt"><%=bdto.getLikes() %></span>
-					<span>댓글 : <%=bdto.getReply() %></span>
+<%
+					String reply = "0";
+					for(BoardReplyDTO brdto : brlist){
+						if(brdto.getNum().equals(bdto.getNum())){
+							reply = brdto.getCount();
+							break;
+						}
+					}
+%>
+					<span>댓글 : <%=reply %></span>
 				</div><!-- boardlike_reply 끝 -->
 				
 				<div class="col-md-12 col-sm-12 col-xs-12 hashtags <%=dark%>">
