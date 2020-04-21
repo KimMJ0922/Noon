@@ -13,7 +13,7 @@
 	List<MemberDto> list = db.followedFriend(fromid);
 	if(list.size()==0){%>
 		<div>
-			<h2>팔로우 좀 해라!</h2>
+			<h2>팔로우가 없습니다.</h2>
 		</div>
 	<%}
 	for(MemberDto dto : list){
