@@ -233,7 +233,6 @@ font-family: 'Noto Sans KR', sans-serif;
 			</div>
 		</div>
 	</div>
-
 	<div class="container">
 		<div class="row">
 <%

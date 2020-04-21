@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("utf-8");
 	String boardnum = request.getParameter("boardnum");
 	ReplyDAO dao = new ReplyDAO();
-	String replynum = dao.getReplyNum(boardnum);
+	String replynum = dao.getReplyCount(boardnum);
 	JSONObject ob=new JSONObject();
 	ob.put("replynum",replynum);
 %>

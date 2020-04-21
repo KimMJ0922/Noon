@@ -14,7 +14,7 @@
 	if(list.size()==0){%>
 	
 		<div>
-			<h2>팔로우 구걸 좀 해라!</h2>
+			<h2>팔로워가 없습니다.</h2>
 		</div>
 	<%}
 	for(MemberDto dto : list){

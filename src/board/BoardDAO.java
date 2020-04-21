@@ -349,4 +349,68 @@ public class BoardDAO {
 		
 		return id;
 	}
+	
+	public void memberOutUpdate() {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BoardReplyDTO> list = new Vector<BoardReplyDTO>();
+		String sql = "select boardnum,count(*) cnt from BOARD_DETAIL_REPLY group by boardnum"; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardReplyDTO dto = new BoardReplyDTO();
+				
+				dto.setNum(rs.getString("boardnum"));
+				dto.setCount(rs.getString("cnt"));
+				
+				list.add(dto);
+			}
+			sql = "update boardtb set reply = 0";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.execute();
+			for(BoardReplyDTO dto : list) {
+				sql = "update boardtb set reply = ? where num = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, dto.getCount());
+				pstmt.setString(2, dto.getNum());
+				pstmt.execute();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+	}
+	
+	public List<BoardReplyDTO> getBoardReply() {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BoardReplyDTO> list = new Vector<BoardReplyDTO>();
+		String sql = "select boardnum,count(*) cnt from BOARD_DETAIL_REPLY group by boardnum"; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardReplyDTO dto = new BoardReplyDTO();
+				
+				dto.setNum(rs.getString("boardnum"));
+				dto.setCount(rs.getString("cnt"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
 }
