@@ -1,3 +1,4 @@
+<%@page import="reply.ReplyDAO"%>
 <%@page import="member.MemberFollowDao"%>
 <%@page import="format.DateFormat"%>
 <%@page import="member.MemberDto"%>
@@ -47,10 +48,12 @@
 	//이미지 불러오기
 	BoardImgDAO Idb=new BoardImgDAO();
 	List<String> Ilist= Idb.getNumImglist(num);
-	
+
 	//회원 글 불러오기
 	BoardDAO Bdb=new BoardDAO();
 	BoardDTO dto=Bdb.getBoard(num);
+	ReplyDAO rdao = new ReplyDAO();
+	String replycnt = rdao.getReplyCount(num);
 	MemberFollowDao fdb = new MemberFollowDao();
   	boolean followed = fdb.followed(mdto.getId(), dto.getId());
 	if(dto.getNum()==null||dto.getNum()==""){
@@ -218,7 +221,7 @@
 %>
 					<p><img class="likeyimg" src="<%=imgSrc%>"></p><!--  아이콘 자리 -->
 					<p><b class="likycnt">좋아요 0개</b></p>
-					<p><b id="replycnt">댓글 0개</b></p>
+					<p><b id="replycnt">댓글 <%=replycnt %>개</b></p>
 					<!-- 글 내용 -->
 					<%
 						if(Ilist.size()==0){

@@ -93,7 +93,7 @@ $(function(){
 });
 </script>
 
-<title>메인 로그인 페이지</title>
+<title>Noon</title>
 </head>
 <%
 	

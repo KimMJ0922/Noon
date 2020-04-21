@@ -216,4 +216,27 @@ public class ReplyDAO {
 		}
 	}
 	
+	public String getReplyCount(String num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String cnt = "";
+		String sql = "select count(*) cnt from board_detail_reply where boardnum = ?";
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cnt = rs.getString(1);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return cnt;
+	}
 }
